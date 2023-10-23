@@ -1,5 +1,4 @@
 #include <iostream>
-#include <vector>
 using namespace std;
 
 int main() {
@@ -17,5 +16,4 @@ int main() {
             n /= i;
         }
     }
-    cout << endl << sum;
-}
+    cout << sum << endl;
