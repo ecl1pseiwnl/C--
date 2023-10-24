@@ -1,4 +1,3 @@
 ﻿  TestingEveryCodeHere.cpp
-C:\Users\ADMIN\source\repos\testing code\testing code\TestingEveryCodeHere.cpp(10,18): warning C4244: '+=': conversion from '__int64' to 'int', possible loss of data
-C:\Users\ADMIN\source\repos\testing code\testing code\TestingEveryCodeHere.cpp(13,18): warning C4244: '-=': conversion from '__int64' to 'int', possible loss of data
+C:\Users\ADMIN\source\repos\testing code\testing code\TestingEveryCodeHere.cpp(16,21): warning C4244: '+=': conversion from 'double' to 'int', possible loss of data
   testing code.vcxproj -> C:\Users\ADMIN\source\repos\testing code\x64\Debug\testing code.exe
