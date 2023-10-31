@@ -1,15 +1,22 @@
 #include <iostream> 
 using namespace std;
 
+long long RutGon(long long n) {
+	long long sum = 0;
+	while (n > 0 || sum > 9) {
+		if (n == 0) {
+			n = sum;
+			sum = 0;
+		}
+		sum += n % 10;
+		n /= 10;
+	}
+    return sum;
+}
+
 int main() {
 	long long n;
 	cin >> n;
-	long long tong = 0;
-	while (n != 0) {
-		n % 10;
-		tong += n;
-		n /= 10;
-	}
-	cout << tong;
+	cout << RutGon(n);
 	return 0;
 }
