@@ -17,7 +17,7 @@ int main() {
 		if (minx > x) {
 			minx = x;
 		}
-		if (miny > y) {
+		if (miny > y) {	
 			miny = y;
 		}
 	}
