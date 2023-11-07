@@ -2,7 +2,6 @@
 #include <string>
 #include <vector>
 
-
 using namespace std;
 
 struct pr {
@@ -19,15 +18,12 @@ int main() {
 		cin >> v[i].x >> v[i].y;
 		v[i].x--;
 		v[i].y--;
-		
 		v[i].z = -1;
 		v[i].w = v[i].y - v[i].x + 1; 
-
 	}
 	int n = s.length();
 	for (int i = 0; i < v.size();) { 
-		char h = s[v[i].x]; 
-		char t = s[v[i].y]; 
+		char h = s[v[i].x], t = s[v[i].y];
 			if (v[i].x < n && v[i].y < n) {
 				for (int j = 0; j < v[i].w / 2; j++) {
 					if (h != t) {
@@ -38,7 +34,6 @@ int main() {
 					t = s[v[i].y--];
 					v[i].z = 1;
 				}
-				
 			}
 			else {
 				v[i].z = 0;

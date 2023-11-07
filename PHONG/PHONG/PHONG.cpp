@@ -1,13 +1,21 @@
 #include <iostream>
+#include <vector>
+#include <algorithm>
 
 using namespace std;
+
+struct phong {
+	int s, f, dem;
+};
 
 int main() {
 	int n;
 	cin >> n;
-	int s, f;
-	int dem = 0;
-	for (int i = 1; i <= n; i++) {
-		cin >> s >> f;
+	vector<phong> v;
+	for (int i = 0; i < n; i++) {
+		cin >> v[i].s >> v[i].f;
+	}
+	for (int i = 0; i < v.size(); i++) {
+		
 	}
 }
