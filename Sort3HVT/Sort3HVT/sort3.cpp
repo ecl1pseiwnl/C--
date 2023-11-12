@@ -2,9 +2,8 @@
 #include <algorithm>
 using namespace std;
 
-int a[1000];
-
 int main() {
+	int a[1000];
 	for (int i = 0; i < 3; i++) {
 		cin >> a[i];
 	}
