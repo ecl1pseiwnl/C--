@@ -34,8 +34,8 @@ void snt() {
 		if (i == 0 || i == 1) a[i] = 0;
 	}
 	for (int i = 2; i <= sqrt(N); i++) {
-		for (int j = i * i; i < N; j += i) {
-			a[i] = 0;
+		for (int j = i * i; j < N; j += i) {
+			a[j] = 0;
 		}
 	}
 }
