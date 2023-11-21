@@ -19,3 +19,14 @@ int main2() {
 	double n = sqrt(2*x + 1 / 4 - 1 / 2);
 	cout << round(n) << endl;
 }
+
+int main3() {
+	int n;
+	cin >> n;
+	for (int i = 1; i <= n; i++) {
+		if (i * (i - 1) / 2 >= n) {
+			cout << i - 1;
+			break;
+		}
+	}
+}

@@ -4,7 +4,6 @@ using namespace std;
 
 int main() {
     int n, k;
-    int m;
     cin >> n >> k;
     long long tongsp = 0;
     int dem = 0;

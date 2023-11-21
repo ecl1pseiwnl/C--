@@ -1,16 +1,28 @@
 #include <iostream>
 using namespace std;
-int main() {
-    long long n;
-    cin >> n;
-    long long tong = 0;
-    for (int i = 1; i < n; i++) {
+
+int tinhTongUoc(int n) {
+    int tong = 0;
+    for (int i = 1; i <= n / 2; ++i) {
         if (n % i == 0) {
             tong += i;
         }
     }
-    if (tong > n) {
+    return tong;
+}
+
+bool laSoPhongPhu(int n) {
+    return n < tinhTongUoc(n);
+}
+
+int main() {
+    int n;
+    cin >> n;
+    if (laSoPhongPhu(n)) {
         cout << "1";
     }
-    else cout << "0";
+    else {
+        cout << "0";
+    }
+    return 0;
 }

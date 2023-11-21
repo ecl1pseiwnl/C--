@@ -1,23 +1,23 @@
 #include <iostream>
+#include <cmath>
 
 using namespace std;
 
 int main() {
-    long long n;
+    int n;
     cin >> n;
-    int sum = 0;
-    for (long long i = 1; i < n; ++i) {
+    int m = 1;
+    for (int i = 2; i <= sqrt(n); i++) {
         if (n % i == 0) {
-            sum += i;
-            if (n / i == i) {
-                sum -= i;
+            m += i;
+            if (n / i != i) {
+                m += (n / i);
             }
         }
     }
-    if (sum == n) {
+    if (m == n) {
         cout << "YES";
     }
-    else {
-        cout << "NO";
-    }
+    else cout << "NO";
+    return 0;
 }
