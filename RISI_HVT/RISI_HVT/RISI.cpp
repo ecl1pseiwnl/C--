@@ -14,3 +14,16 @@ int main() {
     }
     cout << dem;
 }
+
+//cach 2:
+int main2() {
+    int n, k, dem = 0;
+    cin >> n >> k;
+    long long tongsp = k;
+    while (tongsp < n) {
+        k = k * 2;
+        tongsp += k;
+        dem++;
+    }
+    cout << dem;
+}
