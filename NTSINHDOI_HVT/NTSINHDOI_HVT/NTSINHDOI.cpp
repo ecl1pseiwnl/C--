@@ -1,4 +1,4 @@
-#include <iostream> 
+#include <iostream>
 using namespace std;
 
 int snt(int n) {
@@ -13,8 +13,7 @@ int snt(int n) {
 int main() {
 	int n;
 	cin >> n;
-	if (n == 2) cout << "-1";
-	if (n < 10 && snt(n) == 0) {
+	if ((n < 10 && snt(n) == 0)|| n == 2) {
 		cout << "-1";
 	}
 	else {

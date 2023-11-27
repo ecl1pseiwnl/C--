@@ -1,2 +1,1 @@
-﻿  NTSINHDOI.cpp
-  NTSINHDOI_HVT.vcxproj -> C:\Users\ADMIN\source\repos\NTSINHDOI_HVT\x64\Debug\NTSINHDOI_HVT.exe
+﻿LINK : fatal error LNK1168: cannot open C:\Users\ADMIN\source\repos\NTSINHDOI_HVT\x64\Debug\NTSINHDOI_HVT.exe for writing
