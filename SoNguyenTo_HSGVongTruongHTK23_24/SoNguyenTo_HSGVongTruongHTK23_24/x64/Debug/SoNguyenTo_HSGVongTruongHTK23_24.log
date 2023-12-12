@@ -1,2 +1,3 @@
 ﻿  SoNguyenTo.cpp
+C:\Users\ADMIN\source\repos\SoNguyenTo_HSGVongTruongHTK23_24\SoNguyenTo_HSGVongTruongHTK23_24\SoNguyenTo.cpp(5,15): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
   SoNguyenTo_HSGVongTruongHTK23_24.vcxproj -> C:\Users\ADMIN\source\repos\SoNguyenTo_HSGVongTruongHTK23_24\x64\Debug\SoNguyenTo_HSGVongTruongHTK23_24.exe

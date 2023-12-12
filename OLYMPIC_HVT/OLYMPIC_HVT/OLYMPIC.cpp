@@ -1,20 +1,19 @@
 #include <iostream>
 using namespace std;
-typedef long long ll;
 
-const ll N = 100002;
-double a[N];
+const int N = 100002;
+int a[N];
 
 int main() {
-    ll n, m;
+    int n, m;
     cin >> n >> m;
     for (long long i = 1; i <= n; i++) {
         cin >> a[i];
     }
     while (m--) {
-        long long l, r, a1 = 0, a2 = 0, a3 = 0;
+        int l, r, a1 = 0, a2 = 0, a3 = 0;
         cin >> l >> r;
-        for (long long i = l; i <= r; i++) {
+        for (int i = l; i <= r; i++) {
             if (a[i] == 1) {
                 a1++;
 
@@ -26,7 +25,8 @@ int main() {
             else {
                 a3++;
             }
-        } cout << a1 << " " << a2 << " " << a3 << endl;
+        } 
+        cout << a1 << " " << a2 << " " << a3 << endl;
     }
     return 0;
 }
