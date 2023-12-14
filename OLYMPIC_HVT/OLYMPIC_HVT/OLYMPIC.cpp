@@ -1,32 +1,21 @@
 #include <iostream>
 using namespace std;
 
-const int N = 100002;
-int a[N];
+const int maxN = 1e5+5;
+int a[maxN], a1[maxN], a2[maxN], a3[maxN];
 
 int main() {
     int n, m;
     cin >> n >> m;
-    for (long long i = 1; i <= n; i++) {
+    for (int i = 1; i <= n; i++) {
         cin >> a[i];
+        a1[i] = a1[i - 1] + (a[i] == 1);
+        a2[i] = a2[i - 1] + (a[i] == 2);
+        a3[i] = a3[i - 1] + (a[i] == 3);
     }
     while (m--) {
-        int l, r, a1 = 0, a2 = 0, a3 = 0;
+        int l, r;
         cin >> l >> r;
-        for (int i = l; i <= r; i++) {
-            if (a[i] == 1) {
-                a1++;
-
-            }
-            else if (a[i] == 2) {
-                a2++;
-
-            }
-            else {
-                a3++;
-            }
-        } 
-        cout << a1 << " " << a2 << " " << a3 << endl;
+        cout << a1[r] - a1[l - 1] << " " << a2[r] - a2[l - 1] << " " << a3[r] - a3[l - 1] << endl;
     }
-    return 0;
 }
