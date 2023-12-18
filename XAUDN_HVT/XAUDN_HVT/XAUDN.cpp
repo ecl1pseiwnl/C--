@@ -8,7 +8,7 @@ int main() {
 	cin.tie(NULL);
 
 	string s;
-	cin >> s;
+	getline(cin, s);
 	reverse(s.begin(), s.end());
 	cout << s;
 	return 0;

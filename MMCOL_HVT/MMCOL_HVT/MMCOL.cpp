@@ -13,9 +13,9 @@ int main() {
 		}
 	}
 	cout << endl;
-	for (int i = 0; i < m;i++) {
+	for (int i = 0; i < n;i++) {
 		int minCol = INT_MAX, maxCol = INT_MIN, minY = 0, maxY = 0;
-		for (int j = 0; j < n;j++) {
+		for (int j = 0; j < m;j++) {
 			if (minCol > a[j][i]) {
 				minCol = a[j][i];
 				minY = j + 1;
