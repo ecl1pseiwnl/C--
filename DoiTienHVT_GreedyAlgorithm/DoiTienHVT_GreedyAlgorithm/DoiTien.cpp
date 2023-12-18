@@ -2,6 +2,8 @@
 using namespace std;
 
 int main() {
+	ios_base::sync_with_stdio(false);
+	cin.tie(NULL);
 	long long n, dem = 0;
 	cin >> n;
 	int a[3] = {50 ,20 ,10 };
