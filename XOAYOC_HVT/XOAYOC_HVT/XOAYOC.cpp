@@ -7,7 +7,7 @@ int main() {
     cin.tie(NULL);
     int n, m, cnt = 1;
     cin >> n >> m;
-    int h1 = 0, h2 = m - 1, c1 = 0, c2 = m - 1;
+    int h1 = 0, h2 = n - 1, c1 = 0, c2 = m - 1;
     while (h1 <= h2 && c1 <= c2) {
         for (int i = c1; i <= c2; i++) {
             a[h1][i] = cnt;

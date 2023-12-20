@@ -1,0 +1,4 @@
+﻿  YENNGUA.cpp
+C:\Users\ADMIN\source\repos\YENNGUA_HVT\YENNGUA_HVT\YENNGUA.cpp(24): warning C4715: 'dk1': not all control paths return a value
+C:\Users\ADMIN\source\repos\YENNGUA_HVT\YENNGUA_HVT\YENNGUA.cpp(44): warning C4715: 'dk2': not all control paths return a value
+  YENNGUA_HVT.vcxproj -> C:\Users\ADMIN\source\repos\YENNGUA_HVT\x64\Debug\YENNGUA_HVT.exe
