@@ -2,50 +2,39 @@
 using namespace std;
 int a[102][102];
 
-int dk1(int a[102][102], int n, int m) {
-	for (int i = 0; i < n; i++) {
-		int maxRow = a[i][0], minColIndex = 0;
-		for (int j = 0; j < m; j++) {
-			if (maxRow < a[i][j]) {
-				maxRow = a[i][j];
-				minColIndex = j;
-			}
-		}
-		int k, dem = 0;
-		for (k = 0; k < n; k++) {
-			if (maxRow < a[k][minColIndex]) {
-				++dem;
-			}
-		}
-		if (dem == n - 1) {
-			return maxRow;
+bool yenngua(int a[102][102], int r, int c, int n, int m) {
+	int maxRow = a[r][0];
+	for (int i = 0; i < m; i++) {
+		if (maxRow < a[r][i]) {
+			maxRow = a[r][i];
 		}
 	}
-}
-int dk2(int a[102][102], int n, int m) {
+
+	int minCol = a[0][c];
 	for (int i = 0; i < n; i++) {
-		int maxCol = a[0][i], minRowIndex = 0;
-		for (int j = 0; j < m; j++) {
-			if (maxCol < a[i][j]) {
-				maxCol = a[i][j];
-				minRowIndex = j;
-			}
-		}
-		int k, dem = 0;
-		for (k = 0; k < n; k++) {
-			if (maxCol < a[minRowIndex][k]) {
-				++dem;
-			}
-		}
-		if (dem == n - 1) {
-			return maxCol;
+		if (minCol > a[i][c]) {
+			minCol = a[i][c];
 		}
 	}
+	int minRow = a[r][0];
+	for (int i = 0; i < m; i++) {
+		if (minRow > a[r][i]) {
+			minRow = a[r][i];
+		}
+	}
+	int maxCol = a[0][c];
+	for (int i = 0; i < n; i++) {
+		if (maxCol < a[i][c]) {
+			maxCol = a[i][c];
+		}
+	}
+
+	return (a[r][c] == maxRow && a[r][c] == minCol) || (a[r][c] == minRow && a[r][c] == maxCol);
 }
 
 int main() {
 	ios_base::sync_with_stdio(false);
-	cin.tie(0);
+	cin.tie(NULL); cout.tie(NULL);
 	int n, m;
 	cin >> n >> m;
 	for (int i = 0; i < n; i++) {
@@ -55,11 +44,8 @@ int main() {
 	}
 	for (int i = 0; i < n; i++) {
 		for (int j = 0; j < m; j++) {
-			if (dk1(a, n, m) == a[i][j]) {
-				cout << i + 1 << " " << j + 1 << endl;
-			}
-			else if (dk2(a, n, m) == a[i][j]) {
-				cout << i + 1 << " " << j + 1 << endl;
+			if (yenngua(a, i, j, n, m)) {
+				cout << i+1 << " " << j+1 << endl;
 			}
 		}
 	}
