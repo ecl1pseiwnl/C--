@@ -1,0 +1,3 @@
+﻿  COUNTPRI.cpp
+C:\Users\ADMIN\source\repos\COUNTPRI_HVT\COUNTPRI_HVT\COUNTPRI.cpp(5,22): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+  COUNTPRI_HVT.vcxproj -> C:\Users\ADMIN\source\repos\COUNTPRI_HVT\x64\Debug\COUNTPRI_HVT.exe
