@@ -1,0 +1,3 @@
+﻿  PagesNumbering.cpp
+C:\Users\ADMIN\source\repos\PagesNumbering_CodeLearn\PagesNumbering_CodeLearn\PagesNumbering.cpp(10,18): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+  PagesNumbering_CodeLearn.vcxproj -> C:\Users\ADMIN\source\repos\PagesNumbering_CodeLearn\x64\Debug\PagesNumbering_CodeLearn.exe

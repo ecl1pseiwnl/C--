@@ -1,8 +1,2 @@
 ﻿  COWSORT.cpp
-C:\Users\ADMIN\source\repos\COWSORT_HVT\COWSORT_HVT\COWSORT.cpp(6,19): error C2131: expression did not evaluate to a constant
-  C:\Users\ADMIN\source\repos\COWSORT_HVT\COWSORT_HVT\COWSORT.cpp(6,17):
-  failure was caused by a read of a variable outside its lifetime
-  C:\Users\ADMIN\source\repos\COWSORT_HVT\COWSORT_HVT\COWSORT.cpp(6,17):
-  see usage of 'n'
-  
-C:\Users\ADMIN\source\repos\COWSORT_HVT\COWSORT_HVT\COWSORT.cpp(8,7): warning C4552: '>>': result of expression not used
+  COWSORT_HVT.vcxproj -> C:\Users\ADMIN\source\repos\COWSORT_HVT\x64\Debug\COWSORT_HVT.exe

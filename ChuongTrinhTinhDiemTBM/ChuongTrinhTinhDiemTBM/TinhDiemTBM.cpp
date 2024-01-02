@@ -4,6 +4,8 @@
 using namespace std;
 
 int main() {
+	ios_base::sync_with_stdio(false);
+	cin.tie(NULL); cout.tie(NULL);
 	double SoLuongDiemThuongXuyen, DiemKiemTraGiuaKi, DiemKiemTraCuoiKi, DiemThuongXuyen, TBM = 0;
 	int dem = 0;
 

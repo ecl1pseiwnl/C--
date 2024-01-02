@@ -2,8 +2,10 @@
 #include <cmath>
 #include <iomanip>
 using namespace std;
-int main() {
 
+int main() {
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL); cout.tie(NULL);
     int n;
     cin >> n;
     double a[1000];
@@ -14,6 +16,7 @@ int main() {
     }
     double tbc = sum / n;
     cout << fixed << setprecision(2) << tbc << endl;
+
     double t = abs(a[0] - tbc);
     double x = a[0];
     for (int i = 1; i < n; ++i) {

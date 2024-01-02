@@ -1,0 +1,17 @@
+﻿  CoVua.cpp
+C:\Users\ADMIN\source\repos\CoVua\CoVua\CoVua.cpp(11,6): error C2086: 'int x1': redefinition
+  C:\Users\ADMIN\source\repos\CoVua\CoVua\CoVua.cpp(8,6):
+  see declaration of 'x1'
+  
+C:\Users\ADMIN\source\repos\CoVua\CoVua\CoVua.cpp(11,24): error C2086: 'int x2': redefinition
+  C:\Users\ADMIN\source\repos\CoVua\CoVua\CoVua.cpp(8,10):
+  see declaration of 'x2'
+  
+C:\Users\ADMIN\source\repos\CoVua\CoVua\CoVua.cpp(13,6): error C2086: 'int y1': redefinition
+  C:\Users\ADMIN\source\repos\CoVua\CoVua\CoVua.cpp(8,14):
+  see declaration of 'y1'
+  
+C:\Users\ADMIN\source\repos\CoVua\CoVua\CoVua.cpp(13,24): error C2086: 'int y2': redefinition
+  C:\Users\ADMIN\source\repos\CoVua\CoVua\CoVua.cpp(8,18):
+  see declaration of 'y2'
+  
