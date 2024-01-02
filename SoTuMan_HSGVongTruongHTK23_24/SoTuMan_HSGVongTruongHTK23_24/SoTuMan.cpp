@@ -2,7 +2,7 @@
 #include <cmath>
 using namespace std;
 
-int a[10001];
+int a[10];
 
 int main() {
 	int n, s = 0, t;
@@ -13,13 +13,11 @@ int main() {
 	}
 	while (n != 0) {
 		t = n % 10;
-		cout << t << endl;
 		s += a[t];
 		n /= 10;
 	}
-	cout << s << endl;
 	if (s == m) {
-		cout << "1";
+		cout << n << " la so Armstrong";
 	}
-	else cout << "0";
+	else cout << n << " khong la so Armstrong";
 }
