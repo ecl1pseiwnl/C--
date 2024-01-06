@@ -6,21 +6,20 @@ int main() {
 	ios_base::sync_with_stdio(false);
 	cin.tie(NULL); cout.tie(NULL);
 
-	int dem = 0;
 	char x;
-	string s;
 	cin >> x;
+
+	string s;
 	cin.ignore();
 	getline(cin, s);
-	for (auto a : s) {
-		if (a == x) {
-			dem++;
-		}
-	}
-	cout << dem << endl;
-	for (int i = 0; i <= s.size();i++) {
+
+	int dem = 0;
+	string d;
+	for (int i = 0; i < s.size();i++) {
 		if (s[i] == x) {
-			cout << i << ' ';
+			dem++;
+			d += to_string(i) + " ";
 		}
 	}
+	cout << dem << endl << d;
 }

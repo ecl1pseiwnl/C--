@@ -1,14 +1,11 @@
-#include <iostream>
-
+#include <bits/stdc++.h>
 using namespace std;
+typedef long long ll;
 
 int main() {
-	long long n;
-	cin >> n;
-	long long sum = 0;
-	for (int i = 1; i <= n; i++) {
-		sum += i;
-	}
-	cout << sum;
-	return 0;
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL); cout.tie(NULL);
+    ll n;
+    cin >> n;
+    cout << (n * (n + 1)) / 2;
 }
