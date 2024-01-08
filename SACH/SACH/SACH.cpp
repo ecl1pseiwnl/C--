@@ -44,3 +44,40 @@ int main() {
 		cout <<"\n" << v[i].z;
 	}
 }
+
+//Cach 2
+bool check(string s, int x, int y) {
+	int l = x - 1, r = y - 1;
+	while (l <= r) {
+		if (s[l] != s[r]) {
+			return false;
+		}
+		else {
+			l++;
+			r--;
+		}
+	}
+	return true;
+}
+
+int main() {
+	//freopen("SACH.inp", "r", stdin);
+	//freopen("SACH.out", "w", stdout);
+	ios_base::sync_with_stdio(false);
+	cin.tie(NULL); cout.tie(NULL);
+	string s;
+	getline(cin, s);
+	int n;
+	cin >> n;
+	while (n--) {
+		int x, y;
+		cin >> x >> y;
+		if (check(s, x, y)) {
+			cout << "1" << endl;
+		}
+		else {
+			cout << "0" << endl;
+		}
+	}
+	return 0;
+}

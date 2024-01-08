@@ -1,8 +1,8 @@
 #include <bits/stdc++.h>
 using namespace std;
 typedef long long ll;
-// cach 1: O(logn)
-const ll N = 1e14;
+// cach 1: O(logn) ko hieu qua vi rang buoc den 10^14
+const ll N = 1e8;
 ll a[N];
 
 void sang() {
@@ -62,7 +62,7 @@ int snt(int N) {
     return 1;
 }
 
-int main2() {
+int main3() {
     int N, s = 0;
     cin >> N;
     for (int i = 2; i <= N; i++) {
@@ -71,4 +71,13 @@ int main2() {
         }
     }
     cout << s;
+}
+
+// Cach 4:
+int main4() {
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL); cout.tie(NULL);
+    ll n;
+    cin >> n;
+    
 }
