@@ -9,17 +9,15 @@ typedef pair<int, int> pi;
 int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL); cout.tie(NULL);
-    string s, ans;
     char x;
     cin >> x;
+    string s;
     cin.ignore();
     getline(cin, s);
-    remove(s.begin(), s.end(), x);
-    for (int i = 0; i < s.size() - 1; i++) {
-        if (i >= s.size() - 2) {
-            break;
+
+    for (int i = 0; i < s.size(); i++) {
+        if (s[i] != x) {
+            cout << s[i];
         }
-        ans += s[i];
     }
-    cout << ans;
 }
