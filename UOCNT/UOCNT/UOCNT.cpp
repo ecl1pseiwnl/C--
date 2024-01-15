@@ -1,83 +1,30 @@
 #include <bits/stdc++.h>
 using namespace std;
 typedef long long ll;
-// cach 1: O(logn) ko hieu qua vi rang buoc den 10^14
-const ll N = 1e8;
-ll a[N];
-
-void sang() {
-    for (ll i = 2; i <= N; i++) {
-        a[i] = 1;
-    }
-    a[0] = a[1] = 0;
-    for (ll i = 2; i <= sqrt(N); i++) {
-        if (a[i] == 1) {
-            for (ll j = i * i; j < N; j += i) {
-                a[j] = 0;
-            }
-        }
-    }
-}
+typedef vector<int> vi;
+typedef pair<int, int> pi;
+#define endl "\n"
+#define mp make_pair
+#define pb push_back
 
 int main() {
     ios_base::sync_with_stdio(false);
-    cin.tie(NULL); cout.tie(NULL);
-    ll n, s = 0;
+    cin.tie(NULL);
+    ll n, s = 0, i = 2;
     cin >> n;
-    sang();
-    for (ll i = 2; i <= sqrt(n); i++) {
-        if (n % i == 0 && a[i] == 1) {
-            s += i;
-        }
-    }
-    cout << s;
-}
-// Cach 2
-int main2() {
-    ios_base::sync_with_stdio(false);
-    cin.tie(NULL); cout.tie(NULL);
-    long long n;
-    cin >> n;
-    int cnt;
-    long long sum = 0;
-    for (int i = 2; i <= n; i++) {
-        cnt = 0;
+    set<int> se;
+    while (i <= sqrt(n)) {
         while (n % i == 0) {
-            cnt++;
-            if (cnt == 1) {
-                sum += i;
-            }
+            se.insert(i);
             n /= i;
         }
+        i++;
     }
-    cout << sum << endl;
-}
-
-// cach 3:
-int snt(int N) {
-    if (N < 2) return 0;
-    for (int i = 2; i * i <= N; i++) {
-        if (N % i == 0) return 0;
+    if (n != 1) {
+        se.insert(n);
     }
-    return 1;
-}
-
-int main3() {
-    int N, s = 0;
-    cin >> N;
-    for (int i = 2; i <= N; i++) {
-        if (N % i == 0 && snt(N)) {
-            s += i;
-        }
+    for (auto x : se) {
+        s += x;
     }
     cout << s;
-}
-
-// Cach 4:
-int main4() {
-    ios_base::sync_with_stdio(false);
-    cin.tie(NULL); cout.tie(NULL);
-    ll n;
-    cin >> n;
-    
 }

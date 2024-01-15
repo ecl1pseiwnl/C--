@@ -10,9 +10,10 @@ int main() {
     cin >> s1 >> s2;
     cin.ignore();
     getline(cin, s);
-    //while (s.find(s1) {
-    //    s.replace(s.find(s1), s1.length(), s2);
-    //}
-    
+    while (s.find(s1) != string::npos) {
+        int k = s.find(s1);
+        s.erase(k, s1.size());
+        s.insert(k, s2);
+    }
     cout << s;
 }
