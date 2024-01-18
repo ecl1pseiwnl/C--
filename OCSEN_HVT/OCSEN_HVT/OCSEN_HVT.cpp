@@ -5,17 +5,7 @@ typedef long long ll;
 int main() {
 	ios_base::sync_with_stdio(false);
 	cin.tie(NULL); cout.tie(NULL);
-	ll a, b, v, cnt = 0, s = 0;
+	ll a, b, v, cnt = 0, s = 1;
 	cin >> a >> b >> v;
-	while (v) {
-		if (s < v) {
-			s += a;
-			cnt++;
-			if (s == v) {
-				cout << cnt;
-				break;
-			}
-			s -= b;
-		}
-	}
+	cout << (v >= a ? (ll)ceil((double)(v - a) / (a - b)) + 1 : 1);
 }

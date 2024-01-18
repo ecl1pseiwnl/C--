@@ -1,5 +1,2 @@
 ﻿  horse_HVT.cpp
-C:\Users\ADMIN\source\repos\horse_HVT\horse_HVT\horse_HVT.cpp(21,5): error C2562: 'print': 'void' function returning a value
-  C:\Users\ADMIN\source\repos\horse_HVT\horse_HVT\horse_HVT.cpp(14,6):
-  see declaration of 'print'
-  
+  horse_HVT.vcxproj -> C:\Users\ADMIN\source\repos\horse_HVT\x64\Debug\horse_HVT.exe
