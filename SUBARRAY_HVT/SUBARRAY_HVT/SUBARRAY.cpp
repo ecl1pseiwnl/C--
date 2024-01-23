@@ -10,25 +10,31 @@ typedef map<int, int> mp;
 #define pb push_back
 
 int main() {
-	ios_base::sync_with_stdio(false);
-	cin.tie(NULL);
-	int n, k, cnt = 0;
-	cin >> n >> k;
-	vi v(n);
-	for (int i = 0; i < n; i++) {
-		cin >> v[i];
-	}
-	vi dp(n, 1);
-	for (int i = 0; i < n; i++) {
-		for (int j = 0; j < i; j++) {
-			if (v[i] + v[j] >= k) {
-				dp[i] = max(dp[i], dp[j] + 1);
-			}
-		}
-	}
-	for (auto x : dp) {
-		cout << x << ' ';
-	}
-	cout << endl;
-	cout << *min_element(dp.begin(), dp.end());
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL); cout.tie(NULL);
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+    int n;
+    long long s, sum = 0;
+    cin >> n >> s;
+    int a[1000], minn = n, pos = 0;
+    for (int i = 0; i < n; i++)
+    {
+        cin >> a[i];
+        sum += a[i];
+        pos++;
+        while (sum >= s)
+        {
+            minn = min(minn, pos);
+            pos--;
+            sum -= a[i - pos];
+        }
+        if (a[i] >= s)
+        {
+            cout << 1;
+            return 0;
+        }
+    }
+    cout << minn;
+    return 0;
 }
