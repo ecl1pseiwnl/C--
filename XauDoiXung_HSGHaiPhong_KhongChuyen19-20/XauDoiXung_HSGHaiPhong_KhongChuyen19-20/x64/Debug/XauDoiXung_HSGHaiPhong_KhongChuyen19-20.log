@@ -1,0 +1,3 @@
+﻿  XauDoiXung_HSGHaiPhong_KhongChuyen19-20.cpp
+C:\Users\ADMIN\source\repos\XauDoiXung_HSGHaiPhong_KhongChuyen19-20\XauDoiXung_HSGHaiPhong_KhongChuyen19-20\XauDoiXung_HSGHaiPhong_KhongChuyen19-20.cpp(13,15): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+  XauDoiXung_HSGHaiPhong_KhongChuyen19-20.vcxproj -> C:\Users\ADMIN\source\repos\XauDoiXung_HSGHaiPhong_KhongChuyen19-20\x64\Debug\XauDoiXung_HSGHaiPhong_KhongChuyen19-20.exe
