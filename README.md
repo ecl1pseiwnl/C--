@@ -1,1 +1,1 @@
-Đây là những project bài tập của ecl1pse và đcm nó ngấn đào lắm đừng có hy vọng gì nhiều từ nó =)))))
+Repo này được sử dụng để lưu trữ bài làm, code mẫu để ôn thi HSG tin học của ecl1pseiwnl và vài cái code nhìn rất ngu =)))))
