@@ -12,18 +12,18 @@ typedef map<int, int> mii;
 int main() {
 	ios_base::sync_with_stdio(false);
 	cin.tie(NULL);
-	int n, res;
+	int n;
 	cin >> n;
-	res = n;
-	cout << n << " ";
-	while (res != 1 && res >= 0) {
-		if (res % 2 == 1) {
-			res = res * 3 + 1;
+	while (n != 1 && n > 0) {
+		cout << n << " ";
+		if (n % 2 == 0) {
+			n /= 2;
 		}
 		else {
-			res = res / 2;
+			n *= 3;
+			n += 1;
 		}
-		cout << res << " ";
 	}
+	cout << "1";
 	return 0;
 }
