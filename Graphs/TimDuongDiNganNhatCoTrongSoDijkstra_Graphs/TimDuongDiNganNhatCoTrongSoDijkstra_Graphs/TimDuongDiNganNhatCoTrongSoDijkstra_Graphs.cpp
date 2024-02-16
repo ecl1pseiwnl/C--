@@ -48,7 +48,7 @@ void dijkstra(int s, int t) {
 			}
 		}
 	}
-	cout << d[en] << endl;
+	cout << d[t] << endl;
 	vi path;
 	while (1) {
 		path.pb(t);

@@ -1,18 +1,18 @@
 ﻿  TimDuongDiNganNhatCoTrongSoDijkstra_Graphs.cpp
-C:\Users\ADMIN\source\repos\TimDuongDiNganNhatCoTrongSoDijkstra_Graphs\TimDuongDiNganNhatCoTrongSoDijkstra_Graphs\TimDuongDiNganNhatCoTrongSoDijkstra_Graphs.cpp(12,16): warning C4244: 'initializing': conversion from 'double' to 'll', possible loss of data
-C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.33130\include\utility(250,16): warning C4244: 'initializing': conversion from '_Ty' to '_Ty1', possible loss of data
-C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.33130\include\utility(250,16): warning C4244:         with
-C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.33130\include\utility(250,16): warning C4244:         [
-C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.33130\include\utility(250,16): warning C4244:             _Ty=ll
-C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.33130\include\utility(250,16): warning C4244:         ]
-C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.33130\include\utility(250,16): warning C4244:         and
-C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.33130\include\utility(250,16): warning C4244:         [
-C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.33130\include\utility(250,16): warning C4244:             _Ty1=int
-C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.33130\include\utility(250,16): warning C4244:         ]
+C:\Users\ADMIN\source\repos\Graphs\TimDuongDiNganNhatCoTrongSoDijkstra_Graphs\TimDuongDiNganNhatCoTrongSoDijkstra_Graphs\TimDuongDiNganNhatCoTrongSoDijkstra_Graphs.cpp(12,16): warning C4244: 'initializing': conversion from 'double' to 'll', possible loss of data
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.39.33519\include\utility(250,16): warning C4244: 'initializing': conversion from '_Ty' to '_Ty1', possible loss of data
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.39.33519\include\utility(250,16): warning C4244:         with
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.39.33519\include\utility(250,16): warning C4244:         [
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.39.33519\include\utility(250,16): warning C4244:             _Ty=ll
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.39.33519\include\utility(250,16): warning C4244:         ]
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.39.33519\include\utility(250,16): warning C4244:         and
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.39.33519\include\utility(250,16): warning C4244:         [
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.39.33519\include\utility(250,16): warning C4244:             _Ty1=int
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.39.33519\include\utility(250,16): warning C4244:         ]
   (compiling source file 'TimDuongDiNganNhatCoTrongSoDijkstra_Graphs.cpp')
-  C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.33130\include\utility(250,16):
+  C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.39.33519\include\utility(250,16):
   the template instantiation context (the oldest one first) is
-  	C:\Users\ADMIN\source\repos\TimDuongDiNganNhatCoTrongSoDijkstra_Graphs\TimDuongDiNganNhatCoTrongSoDijkstra_Graphs\TimDuongDiNganNhatCoTrongSoDijkstra_Graphs.cpp(46,12):
+  	C:\Users\ADMIN\source\repos\Graphs\TimDuongDiNganNhatCoTrongSoDijkstra_Graphs\TimDuongDiNganNhatCoTrongSoDijkstra_Graphs\TimDuongDiNganNhatCoTrongSoDijkstra_Graphs.cpp(46,12):
   	see reference to function template instantiation 'std::pair<int,int>::pair<_Ty&,int&,0>(_Other1,_Other2) noexcept' being compiled
           with
           [
@@ -20,7 +20,7 @@ C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.3313
               _Other1=ll &,
               _Other2=int &
           ]
-  		C:\Users\ADMIN\source\repos\TimDuongDiNganNhatCoTrongSoDijkstra_Graphs\TimDuongDiNganNhatCoTrongSoDijkstra_Graphs\TimDuongDiNganNhatCoTrongSoDijkstra_Graphs.cpp(46,11):
+  		C:\Users\ADMIN\source\repos\Graphs\TimDuongDiNganNhatCoTrongSoDijkstra_Graphs\TimDuongDiNganNhatCoTrongSoDijkstra_Graphs\TimDuongDiNganNhatCoTrongSoDijkstra_Graphs.cpp(46,11):
   		see the first reference to 'std::pair<int,int>::pair' in 'dijkstra'
   
-  TimDuongDiNganNhatCoTrongSoDijkstra_Graphs.vcxproj -> C:\Users\ADMIN\source\repos\TimDuongDiNganNhatCoTrongSoDijkstra_Graphs\x64\Debug\TimDuongDiNganNhatCoTrongSoDijkstra_Graphs.exe
+  TimDuongDiNganNhatCoTrongSoDijkstra_Graphs.vcxproj -> C:\Users\ADMIN\source\repos\Graphs\TimDuongDiNganNhatCoTrongSoDijkstra_Graphs\x64\Debug\TimDuongDiNganNhatCoTrongSoDijkstra_Graphs.exe
