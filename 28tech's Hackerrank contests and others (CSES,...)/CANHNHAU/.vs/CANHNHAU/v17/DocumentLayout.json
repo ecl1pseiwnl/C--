@@ -1,0 +1,37 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\ADMIN\\source\\repos\\CANHNHAU\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{7C2A443E-25DA-402C-99C4-984DF0F2E254}|CANHNHAU\\CANHNHAU.vcxproj|C:\\Users\\ADMIN\\source\\repos\\CANHNHAU\\CANHNHAU\\CANHNHAU.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{7C2A443E-25DA-402C-99C4-984DF0F2E254}|CANHNHAU\\CANHNHAU.vcxproj|solutionrelative:CANHNHAU\\CANHNHAU.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "CANHNHAU.cpp",
+              "DocumentMoniker": "C:\\Users\\ADMIN\\source\\repos\\CANHNHAU\\CANHNHAU\\CANHNHAU.cpp",
+              "RelativeDocumentMoniker": "CANHNHAU\\CANHNHAU.cpp",
+              "ToolTip": "C:\\Users\\ADMIN\\source\\repos\\CANHNHAU\\CANHNHAU\\CANHNHAU.cpp",
+              "RelativeToolTip": "CANHNHAU\\CANHNHAU.cpp",
+              "ViewState": "AQIAAA4AAAAAAAAAAAAwwBwAAAAfAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-02-20T12:20:54.078Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

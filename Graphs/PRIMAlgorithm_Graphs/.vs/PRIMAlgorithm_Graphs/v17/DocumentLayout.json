@@ -1,0 +1,37 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\ADMIN\\source\\repos\\PRIMAlgorithm_Graphs\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{6806E039-71D9-480D-AB67-91DA27638689}|PRIMAlgorithm_Graphs\\PRIMAlgorithm_Graphs.vcxproj|C:\\Users\\ADMIN\\source\\repos\\PRIMAlgorithm_Graphs\\PRIMAlgorithm_Graphs\\PRIMAlgorithm_Graphs.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{6806E039-71D9-480D-AB67-91DA27638689}|PRIMAlgorithm_Graphs\\PRIMAlgorithm_Graphs.vcxproj|solutionrelative:PRIMAlgorithm_Graphs\\PRIMAlgorithm_Graphs.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "PRIMAlgorithm_Graphs.cpp",
+              "DocumentMoniker": "C:\\Users\\ADMIN\\source\\repos\\PRIMAlgorithm_Graphs\\PRIMAlgorithm_Graphs\\PRIMAlgorithm_Graphs.cpp",
+              "RelativeDocumentMoniker": "PRIMAlgorithm_Graphs\\PRIMAlgorithm_Graphs.cpp",
+              "ToolTip": "C:\\Users\\ADMIN\\source\\repos\\PRIMAlgorithm_Graphs\\PRIMAlgorithm_Graphs\\PRIMAlgorithm_Graphs.cpp",
+              "RelativeToolTip": "PRIMAlgorithm_Graphs\\PRIMAlgorithm_Graphs.cpp",
+              "ViewState": "AQIAABsAAAAAAAAAAAAQwCUAAAARAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-02-19T12:13:30.028Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
