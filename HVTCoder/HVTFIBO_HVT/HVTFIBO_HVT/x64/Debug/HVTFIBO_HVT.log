@@ -1,0 +1,3 @@
+﻿  HVTFIBO_HVT.cpp
+C:\Users\ADMIN\source\repos\HVTCoder\HVTFIBO_HVT\HVTFIBO_HVT\HVTFIBO_HVT.cpp(12,21): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+  HVTFIBO_HVT.vcxproj -> C:\Users\ADMIN\source\repos\HVTCoder\HVTFIBO_HVT\x64\Debug\HVTFIBO_HVT.exe
