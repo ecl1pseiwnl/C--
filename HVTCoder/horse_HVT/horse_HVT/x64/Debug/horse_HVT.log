@@ -1,1 +1,2 @@
-﻿  horse_HVT.vcxproj -> C:\Users\ADMIN\source\repos\horse_HVT\x64\Debug\horse_HVT.exe
+﻿  horse_HVT.cpp
+C:\Users\ADMIN\source\repos\HVTCoder\horse_HVT\horse_HVT\horse_HVT.cpp(44,1): error C4716: 'backtrack': must return a value

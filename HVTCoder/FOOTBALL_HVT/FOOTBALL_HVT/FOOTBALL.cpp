@@ -1,6 +1,4 @@
-#include <iostream>
-#include <vector>
-#include <algorithm>
+#include<bits/stdc++.h>
 using namespace std;
 int a[102][102];
 
@@ -31,11 +29,8 @@ int main() {
 		}
 		v.push_back(TotalScore);
 	}
-	for (int i = 0; i < n; i++) {
-		if (highestScore < v[i]) {
-			highestScore = v[i];
-		}
-	}
+	sort(v.begin(), v.end(),greater<int>());
+	highestScore = v[0];
 	for (int i = 0; i < n; i++) {
 		int sum = 0;
 		for (int j = 0; j < n; j++) {
@@ -74,4 +69,5 @@ int main() {
 			cout << i + 1 << ' ';
 		}
 	}
+	return 0;
 }
