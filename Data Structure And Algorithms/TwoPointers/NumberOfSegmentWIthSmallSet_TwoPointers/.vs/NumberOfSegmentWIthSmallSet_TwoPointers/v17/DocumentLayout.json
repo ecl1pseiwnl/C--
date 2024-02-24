@@ -1,0 +1,37 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\ADMIN\\source\\repos\\NumberOfSegmentWIthSmallSet_TwoPointers\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{38CA06DA-5FB6-45B2-818F-B606B1A2301B}|NumberOfSegmentWIthSmallSet_TwoPointers\\NumberOfSegmentWIthSmallSet_TwoPointers.vcxproj|C:\\Users\\ADMIN\\source\\repos\\NumberOfSegmentWIthSmallSet_TwoPointers\\NumberOfSegmentWIthSmallSet_TwoPointers\\NumberOfSegmentWIthSmallSet_TwoPointers.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{38CA06DA-5FB6-45B2-818F-B606B1A2301B}|NumberOfSegmentWIthSmallSet_TwoPointers\\NumberOfSegmentWIthSmallSet_TwoPointers.vcxproj|solutionrelative:NumberOfSegmentWIthSmallSet_TwoPointers\\NumberOfSegmentWIthSmallSet_TwoPointers.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "NumberOfSegmentWIthSmallSet_TwoPointers.cpp",
+              "DocumentMoniker": "C:\\Users\\ADMIN\\source\\repos\\NumberOfSegmentWIthSmallSet_TwoPointers\\NumberOfSegmentWIthSmallSet_TwoPointers\\NumberOfSegmentWIthSmallSet_TwoPointers.cpp",
+              "RelativeDocumentMoniker": "NumberOfSegmentWIthSmallSet_TwoPointers\\NumberOfSegmentWIthSmallSet_TwoPointers.cpp",
+              "ToolTip": "C:\\Users\\ADMIN\\source\\repos\\NumberOfSegmentWIthSmallSet_TwoPointers\\NumberOfSegmentWIthSmallSet_TwoPointers\\NumberOfSegmentWIthSmallSet_TwoPointers.cpp",
+              "RelativeToolTip": "NumberOfSegmentWIthSmallSet_TwoPointers\\NumberOfSegmentWIthSmallSet_TwoPointers.cpp",
+              "ViewState": "AQIAAA8AAAAAAAAAAAAAACEAAAAKAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-02-24T08:15:49.914Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

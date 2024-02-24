@@ -1,0 +1,37 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\ADMIN\\source\\repos\\MergingArrays_TwoPointer\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{2E1ECBA9-7318-43D2-BEB6-471952CE8E1C}|MergingArrays_TwoPointer\\MergingArrays_TwoPointer.vcxproj|C:\\Users\\ADMIN\\source\\repos\\MergingArrays_TwoPointer\\MergingArrays_TwoPointer\\MergingArrays_TwoPointer.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{2E1ECBA9-7318-43D2-BEB6-471952CE8E1C}|MergingArrays_TwoPointer\\MergingArrays_TwoPointer.vcxproj|solutionrelative:MergingArrays_TwoPointer\\MergingArrays_TwoPointer.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "MergingArrays_TwoPointer.cpp",
+              "DocumentMoniker": "C:\\Users\\ADMIN\\source\\repos\\MergingArrays_TwoPointer\\MergingArrays_TwoPointer\\MergingArrays_TwoPointer.cpp",
+              "RelativeDocumentMoniker": "MergingArrays_TwoPointer\\MergingArrays_TwoPointer.cpp",
+              "ToolTip": "C:\\Users\\ADMIN\\source\\repos\\MergingArrays_TwoPointer\\MergingArrays_TwoPointer\\MergingArrays_TwoPointer.cpp",
+              "RelativeToolTip": "MergingArrays_TwoPointer\\MergingArrays_TwoPointer.cpp",
+              "ViewState": "AQIAAAYAAAAAAAAAAAAAABsAAAAXAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-02-24T05:13:09.558Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
