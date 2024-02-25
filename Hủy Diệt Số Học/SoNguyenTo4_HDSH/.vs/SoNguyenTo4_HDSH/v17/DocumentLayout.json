@@ -1,0 +1,37 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\ADMIN\\source\\repos\\SoNguyenTo4_HDSH\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{487081E7-6C87-473C-B859-7DD69E7604D1}|SoNguyenTo4_HDSH\\SoNguyenTo4_HDSH.vcxproj|C:\\Users\\ADMIN\\source\\repos\\SoNguyenTo4_HDSH\\SoNguyenTo4_HDSH\\SoNguyenTo4_HDSH.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{487081E7-6C87-473C-B859-7DD69E7604D1}|SoNguyenTo4_HDSH\\SoNguyenTo4_HDSH.vcxproj|solutionrelative:SoNguyenTo4_HDSH\\SoNguyenTo4_HDSH.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "SoNguyenTo4_HDSH.cpp",
+              "DocumentMoniker": "C:\\Users\\ADMIN\\source\\repos\\SoNguyenTo4_HDSH\\SoNguyenTo4_HDSH\\SoNguyenTo4_HDSH.cpp",
+              "RelativeDocumentMoniker": "SoNguyenTo4_HDSH\\SoNguyenTo4_HDSH.cpp",
+              "ToolTip": "C:\\Users\\ADMIN\\source\\repos\\SoNguyenTo4_HDSH\\SoNguyenTo4_HDSH\\SoNguyenTo4_HDSH.cpp",
+              "RelativeToolTip": "SoNguyenTo4_HDSH\\SoNguyenTo4_HDSH.cpp",
+              "ViewState": "AQIAAAMAAAAAAAAAAAAAABMAAAAKAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-02-25T14:41:28.709Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
