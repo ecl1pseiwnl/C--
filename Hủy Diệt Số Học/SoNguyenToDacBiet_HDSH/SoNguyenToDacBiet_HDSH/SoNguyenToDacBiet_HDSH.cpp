@@ -10,7 +10,7 @@ typedef map<int, int> mii;
 #define mp make_pair
 #define pb push_back
 
-const int N = 1e8 + 7;
+const int N = 1e7 + 7;
 int a[N];
 
 void snt() {
@@ -27,14 +27,11 @@ void snt() {
 
 bool tong(int n) {
 	int sum = 0;
-	for (int i = 1; i < n; i++) {
-		if (a[i]) {
-			sum += i;
-		}
+	while (n) {
+		sum += n % 10;
+		n /= 10;
 	}
-	if (sum == n) {
-		return true;
-	}
+	return a[sum];
 }
 
 int main() {
@@ -45,7 +42,7 @@ int main() {
 	snt();
 	for (int i = l; i <= r; i++) {
 		if (a[i] && tong(i)) {
-			cout << i;
+			cout << i << " ";
 		}
 	}
 	return 0;
