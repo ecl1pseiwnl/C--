@@ -1,0 +1,37 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\ADMIN\\source\\repos\\KiemTraDuongDi\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{40C0ED57-DC2D-4580-821E-389CFF501359}|KiemTraDuongDi\\KiemTraDuongDi.vcxproj|C:\\Users\\ADMIN\\source\\repos\\KiemTraDuongDi\\KiemTraDuongDi\\KiemTraDuongDi.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{40C0ED57-DC2D-4580-821E-389CFF501359}|KiemTraDuongDi\\KiemTraDuongDi.vcxproj|solutionrelative:KiemTraDuongDi\\KiemTraDuongDi.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "KiemTraDuongDi.cpp",
+              "DocumentMoniker": "C:\\Users\\ADMIN\\source\\repos\\KiemTraDuongDi\\KiemTraDuongDi\\KiemTraDuongDi.cpp",
+              "RelativeDocumentMoniker": "KiemTraDuongDi\\KiemTraDuongDi.cpp",
+              "ToolTip": "C:\\Users\\ADMIN\\source\\repos\\KiemTraDuongDi\\KiemTraDuongDi\\KiemTraDuongDi.cpp",
+              "RelativeToolTip": "KiemTraDuongDi\\KiemTraDuongDi.cpp",
+              "ViewState": "AQIAAAkAAAAAAAAAAAAAABsAAAAgAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-02-27T14:27:15.494Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
