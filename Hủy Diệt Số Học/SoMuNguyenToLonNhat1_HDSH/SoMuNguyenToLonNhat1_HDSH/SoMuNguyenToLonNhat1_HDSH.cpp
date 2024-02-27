@@ -13,6 +13,24 @@ typedef map<int, int> mii;
 int main() {
 	ios_base::sync_with_stdio(false);
 	cin.tie(NULL);
-	ll n;
-	cin >> n;
+    ll n, i = 2, maxv = INT_MIN;
+    map<ll, ll> m;
+    cin >> n;
+    while (i <= sqrt(n)) {
+        while (n % i == 0) {
+            m[i]++;
+            n /= i;
+        }
+        i++;
+    }
+    if (n != 1) {
+        m[n]++;
+    }
+    for (auto& it : m) {
+        if (maxv < it.second) {
+            maxv = it.second;
+        }
+    }
+    cout << maxv;
+    return 0;
 }
