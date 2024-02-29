@@ -1,0 +1,37 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\ADMIN\\source\\repos\\SoMuLonNhat_HDSH\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{D97B90B2-9030-4E5C-AF05-93B654ACB58E}|SoMuLonNhat_HDSH\\SoMuLonNhat_HDSH.vcxproj|C:\\Users\\ADMIN\\source\\repos\\SoMuLonNhat_HDSH\\SoMuLonNhat_HDSH\\SoMuLonNhat_HDSH.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{D97B90B2-9030-4E5C-AF05-93B654ACB58E}|SoMuLonNhat_HDSH\\SoMuLonNhat_HDSH.vcxproj|solutionrelative:SoMuLonNhat_HDSH\\SoMuLonNhat_HDSH.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "SoMuLonNhat_HDSH.cpp",
+              "DocumentMoniker": "C:\\Users\\ADMIN\\source\\repos\\SoMuLonNhat_HDSH\\SoMuLonNhat_HDSH\\SoMuLonNhat_HDSH.cpp",
+              "RelativeDocumentMoniker": "SoMuLonNhat_HDSH\\SoMuLonNhat_HDSH.cpp",
+              "ToolTip": "C:\\Users\\ADMIN\\source\\repos\\SoMuLonNhat_HDSH\\SoMuLonNhat_HDSH\\SoMuLonNhat_HDSH.cpp",
+              "RelativeToolTip": "SoMuLonNhat_HDSH\\SoMuLonNhat_HDSH.cpp",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA4AAAAPAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-02-28T07:46:06.882Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
