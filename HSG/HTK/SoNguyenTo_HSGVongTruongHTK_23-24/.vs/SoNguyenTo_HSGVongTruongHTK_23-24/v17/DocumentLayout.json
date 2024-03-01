@@ -1,0 +1,37 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\ADMIN\\source\\repos\\SoNguyenTo_HSGVongTruongHTK_23-24\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{E6CDAFEE-9B80-452F-B39F-B9A57A88035B}|SoNguyenTo_HSGVongTruongHTK_23-24\\SoNguyenTo_HSGVongTruongHTK_23-24.vcxproj|C:\\Users\\ADMIN\\source\\repos\\SoNguyenTo_HSGVongTruongHTK_23-24\\SoNguyenTo_HSGVongTruongHTK_23-24\\SoNguyenTo_HSGVongTruongHTK_23-24.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{E6CDAFEE-9B80-452F-B39F-B9A57A88035B}|SoNguyenTo_HSGVongTruongHTK_23-24\\SoNguyenTo_HSGVongTruongHTK_23-24.vcxproj|solutionrelative:SoNguyenTo_HSGVongTruongHTK_23-24\\SoNguyenTo_HSGVongTruongHTK_23-24.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "SoNguyenTo_HSGVongTruongHTK_23-24.cpp",
+              "DocumentMoniker": "C:\\Users\\ADMIN\\source\\repos\\SoNguyenTo_HSGVongTruongHTK_23-24\\SoNguyenTo_HSGVongTruongHTK_23-24\\SoNguyenTo_HSGVongTruongHTK_23-24.cpp",
+              "RelativeDocumentMoniker": "SoNguyenTo_HSGVongTruongHTK_23-24\\SoNguyenTo_HSGVongTruongHTK_23-24.cpp",
+              "ToolTip": "C:\\Users\\ADMIN\\source\\repos\\SoNguyenTo_HSGVongTruongHTK_23-24\\SoNguyenTo_HSGVongTruongHTK_23-24\\SoNguyenTo_HSGVongTruongHTK_23-24.cpp",
+              "RelativeToolTip": "SoNguyenTo_HSGVongTruongHTK_23-24\\SoNguyenTo_HSGVongTruongHTK_23-24.cpp",
+              "ViewState": "AQIAABYAAAAAAAAAAAAuwCsAAAANAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-03-01T10:12:40.741Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

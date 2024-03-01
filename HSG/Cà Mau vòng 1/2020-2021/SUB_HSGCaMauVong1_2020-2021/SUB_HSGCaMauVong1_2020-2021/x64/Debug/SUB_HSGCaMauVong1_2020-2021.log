@@ -1,0 +1,10 @@
+﻿  SUB_HSGCaMauVong1_2020-2021.cpp
+C:\Users\ADMIN\source\repos\SUB_HSGCaMauVong1_2020-2021\SUB_HSGCaMauVong1_2020-2021\SUB_HSGCaMauVong1_2020-2021.cpp(18,8): error C2131: expression did not evaluate to a constant
+  C:\Users\ADMIN\source\repos\SUB_HSGCaMauVong1_2020-2021\SUB_HSGCaMauVong1_2020-2021\SUB_HSGCaMauVong1_2020-2021.cpp(18,8):
+  failure was caused by a read of a variable outside its lifetime
+  C:\Users\ADMIN\source\repos\SUB_HSGCaMauVong1_2020-2021\SUB_HSGCaMauVong1_2020-2021\SUB_HSGCaMauVong1_2020-2021.cpp(18,8):
+  see usage of 'n'
+  
+C:\Users\ADMIN\source\repos\SUB_HSGCaMauVong1_2020-2021\SUB_HSGCaMauVong1_2020-2021\SUB_HSGCaMauVong1_2020-2021.cpp(19,2): error C2530: 'it': references must be initialized
+C:\Users\ADMIN\source\repos\SUB_HSGCaMauVong1_2020-2021\SUB_HSGCaMauVong1_2020-2021\SUB_HSGCaMauVong1_2020-2021.cpp(19,15): error C2143: syntax error: missing ';' before ':'
+C:\Users\ADMIN\source\repos\SUB_HSGCaMauVong1_2020-2021\SUB_HSGCaMauVong1_2020-2021\SUB_HSGCaMauVong1_2020-2021.cpp(19,18): error C2143: syntax error: missing ';' before ')'
