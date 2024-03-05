@@ -10,23 +10,32 @@ typedef map<int, int> mii;
 #define mp make_pair
 #define pb push_back
 
-int tong(int n) {
-	int sum = 0;
+bool cp(int n) {
+	int can = sqrt(n);
+	if (1ll * can * can == n) {
+		return true;
+	}
+	return false;
+}
+
+int sum(int n) {
+	int s = 0, tmp;
 	while (n != 0) {
-		sum += n % 10;
+		tmp = n % 10;
+		s += tmp;
 		n /= 10;
 	}
-	return sum;
+	return s;
 }
 
 int reverse(int n) {
-	int res = 0, s;
+	int ans = 0;
 	while (n != 0) {
-		s = n % 10;
-		res = res * 10 + s;
+		int temp = n % 10;
+		ans = ans * 10 + temp;
 		n /= 10;
 	}
-	return res;
+	return ans;
 }
 
 int main() {
@@ -34,8 +43,12 @@ int main() {
 	cin.tie(NULL);
 	int l, r, cnt = 0;
 	cin >> l >> r;
-	int a = sqrt(l), b = sqrt(r);
-	
+	for (int i = l; i <= r; i++) {
+		if (cp(sum(i) + sum(reverse(i))) && (sum(i) + sum(reverse(i))) % 3 == 0) {
+			cout << i << endl;
+			cnt++;
+		}
+	}
 	cout << cnt;
 	return 0;
 }
