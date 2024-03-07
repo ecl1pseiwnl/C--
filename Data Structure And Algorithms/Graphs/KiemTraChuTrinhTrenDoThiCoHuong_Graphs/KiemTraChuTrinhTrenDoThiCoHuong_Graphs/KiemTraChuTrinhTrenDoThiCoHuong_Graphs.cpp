@@ -18,7 +18,7 @@ bool dfs(int u) {
 	for (auto x : adj[u]) {
 		if (color[x] == 0) {
 			parent[x] = u;
-			if (dfs(x)) return true;;
+			if (dfs(x)) return true;
 		}
 		else if (color[x] == 1) return true;
 	}

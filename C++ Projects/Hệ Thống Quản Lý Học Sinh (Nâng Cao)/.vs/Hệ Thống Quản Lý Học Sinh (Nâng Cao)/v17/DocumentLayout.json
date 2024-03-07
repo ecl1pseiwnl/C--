@@ -1,0 +1,53 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\ADMIN\\source\\repos\\C\u002B\u002B Projects\\H\u1EC7 Th\u1ED1ng Qu\u1EA3n L\u00FD H\u1ECDc Sinh (N\u00E2ng Cao)\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{FB16B3E2-9891-44F1-B0A7-298110764503}|H\u1EC7 Th\u1ED1ng Qu\u1EA3n L\u00FD H\u1ECDc Sinh (N\u00E2ng Cao)\\H\u1EC7 Th\u1ED1ng Qu\u1EA3n L\u00FD H\u1ECDc Sinh (N\u00E2ng Cao).vcxproj|C:\\Users\\ADMIN\\source\\repos\\C\u002B\u002B Projects\\H\u1EC7 Th\u1ED1ng Qu\u1EA3n L\u00FD H\u1ECDc Sinh (N\u00E2ng Cao)\\H\u1EC7 Th\u1ED1ng Qu\u1EA3n L\u00FD H\u1ECDc Sinh (N\u00E2ng Cao)\\classes.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{FB16B3E2-9891-44F1-B0A7-298110764503}|H\u1EC7 Th\u1ED1ng Qu\u1EA3n L\u00FD H\u1ECDc Sinh (N\u00E2ng Cao)\\H\u1EC7 Th\u1ED1ng Qu\u1EA3n L\u00FD H\u1ECDc Sinh (N\u00E2ng Cao).vcxproj|solutionrelative:H\u1EC7 Th\u1ED1ng Qu\u1EA3n L\u00FD H\u1ECDc Sinh (N\u00E2ng Cao)\\classes.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FB16B3E2-9891-44F1-B0A7-298110764503}|H\u1EC7 Th\u1ED1ng Qu\u1EA3n L\u00FD H\u1ECDc Sinh (N\u00E2ng Cao)\\H\u1EC7 Th\u1ED1ng Qu\u1EA3n L\u00FD H\u1ECDc Sinh (N\u00E2ng Cao).vcxproj|C:\\Users\\ADMIN\\source\\repos\\C\u002B\u002B Projects\\H\u1EC7 Th\u1ED1ng Qu\u1EA3n L\u00FD H\u1ECDc Sinh (N\u00E2ng Cao)\\H\u1EC7 Th\u1ED1ng Qu\u1EA3n L\u00FD H\u1ECDc Sinh (N\u00E2ng Cao)\\H\u1EC7 Th\u1ED1ng Qu\u1EA3n L\u00FD H\u1ECDc Sinh (N\u00E2ng Cao).cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{FB16B3E2-9891-44F1-B0A7-298110764503}|H\u1EC7 Th\u1ED1ng Qu\u1EA3n L\u00FD H\u1ECDc Sinh (N\u00E2ng Cao)\\H\u1EC7 Th\u1ED1ng Qu\u1EA3n L\u00FD H\u1ECDc Sinh (N\u00E2ng Cao).vcxproj|solutionrelative:H\u1EC7 Th\u1ED1ng Qu\u1EA3n L\u00FD H\u1ECDc Sinh (N\u00E2ng Cao)\\H\u1EC7 Th\u1ED1ng Qu\u1EA3n L\u00FD H\u1ECDc Sinh (N\u00E2ng Cao).cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "classes.cpp",
+              "DocumentMoniker": "C:\\Users\\ADMIN\\source\\repos\\C\u002B\u002B Projects\\H\u1EC7 Th\u1ED1ng Qu\u1EA3n L\u00FD H\u1ECDc Sinh (N\u00E2ng Cao)\\H\u1EC7 Th\u1ED1ng Qu\u1EA3n L\u00FD H\u1ECDc Sinh (N\u00E2ng Cao)\\classes.cpp",
+              "RelativeDocumentMoniker": "H\u1EC7 Th\u1ED1ng Qu\u1EA3n L\u00FD H\u1ECDc Sinh (N\u00E2ng Cao)\\classes.cpp",
+              "ToolTip": "C:\\Users\\ADMIN\\source\\repos\\C\u002B\u002B Projects\\H\u1EC7 Th\u1ED1ng Qu\u1EA3n L\u00FD H\u1ECDc Sinh (N\u00E2ng Cao)\\H\u1EC7 Th\u1ED1ng Qu\u1EA3n L\u00FD H\u1ECDc Sinh (N\u00E2ng Cao)\\classes.cpp",
+              "RelativeToolTip": "H\u1EC7 Th\u1ED1ng Qu\u1EA3n L\u00FD H\u1ECDc Sinh (N\u00E2ng Cao)\\classes.cpp",
+              "ViewState": "AQIAAFoAAAAAAAAAAAAAAHUAAAACAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-03-05T15:16:37.373Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "H\u1EC7 Th\u1ED1ng Qu\u1EA3n L\u00FD H\u1ECDc Sinh (N\u00E2ng Cao).cpp",
+              "DocumentMoniker": "C:\\Users\\ADMIN\\source\\repos\\C\u002B\u002B Projects\\H\u1EC7 Th\u1ED1ng Qu\u1EA3n L\u00FD H\u1ECDc Sinh (N\u00E2ng Cao)\\H\u1EC7 Th\u1ED1ng Qu\u1EA3n L\u00FD H\u1ECDc Sinh (N\u00E2ng Cao)\\H\u1EC7 Th\u1ED1ng Qu\u1EA3n L\u00FD H\u1ECDc Sinh (N\u00E2ng Cao).cpp",
+              "RelativeDocumentMoniker": "H\u1EC7 Th\u1ED1ng Qu\u1EA3n L\u00FD H\u1ECDc Sinh (N\u00E2ng Cao)\\H\u1EC7 Th\u1ED1ng Qu\u1EA3n L\u00FD H\u1ECDc Sinh (N\u00E2ng Cao).cpp",
+              "ToolTip": "C:\\Users\\ADMIN\\source\\repos\\C\u002B\u002B Projects\\H\u1EC7 Th\u1ED1ng Qu\u1EA3n L\u00FD H\u1ECDc Sinh (N\u00E2ng Cao)\\H\u1EC7 Th\u1ED1ng Qu\u1EA3n L\u00FD H\u1ECDc Sinh (N\u00E2ng Cao)\\H\u1EC7 Th\u1ED1ng Qu\u1EA3n L\u00FD H\u1ECDc Sinh (N\u00E2ng Cao).cpp",
+              "RelativeToolTip": "H\u1EC7 Th\u1ED1ng Qu\u1EA3n L\u00FD H\u1ECDc Sinh (N\u00E2ng Cao)\\H\u1EC7 Th\u1ED1ng Qu\u1EA3n L\u00FD H\u1ECDc Sinh (N\u00E2ng Cao).cpp",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAcAAAABAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-03-05T15:16:09.478Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

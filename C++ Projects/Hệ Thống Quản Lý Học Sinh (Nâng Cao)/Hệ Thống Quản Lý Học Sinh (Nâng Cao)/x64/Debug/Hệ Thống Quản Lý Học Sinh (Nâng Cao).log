@@ -1,0 +1,7 @@
+﻿  Hệ Thống Quản Lý Học Sinh (Nâng Cao).cpp
+  classes.cpp
+  Generating Code...
+C:\Users\ADMIN\source\repos\Hệ Thống Quản Lý Học Sinh (Nâng Cao)\Hệ Thống Quản Lý Học Sinh (Nâng Cao)\classes.cpp(101,1): error C4716: 'Student::getGPA_Plan1': must return a value
+C:\Users\ADMIN\source\repos\Hệ Thống Quản Lý Học Sinh (Nâng Cao)\Hệ Thống Quản Lý Học Sinh (Nâng Cao)\classes.cpp(107,1): error C4716: 'Student::getGPA_Plan3': must return a value
+C:\Users\ADMIN\source\repos\Hệ Thống Quản Lý Học Sinh (Nâng Cao)\Hệ Thống Quản Lý Học Sinh (Nâng Cao)\classes.cpp(104,1): error C4716: 'Student::getGPA_Plan2': must return a value
+C:\Users\ADMIN\source\repos\Hệ Thống Quản Lý Học Sinh (Nâng Cao)\Hệ Thống Quản Lý Học Sinh (Nâng Cao)\classes.cpp(110,1): error C4716: 'Student::getGPA_Plan4': must return a value
