@@ -25,7 +25,7 @@ void inp() {
 }
 
 bool dfs(int u) {
-	temp.pb(u);
+	s.insert(u);
 	color[u] = 1;
 	for (auto it : v[u]) {
 		if (color[it] == 0) {
@@ -48,13 +48,13 @@ int main() {
 	for (int i = 1; i <= n; i++) {
 		if (color[i] == 0) {
 			if (dfs(i)) {
-				int check = temp.size();
-				temp.clear();
-				if (maxv < check) {
-					maxv = check;
-				}
+				temp.pb(s.size());
+				s.clear();
 			}
 		}
+	}
+	for (int i = 0; i < temp.size(); i++) {
+		maxv = max(maxv, temp[i]);
 	}
 	cout << maxv;
 	return 0;
