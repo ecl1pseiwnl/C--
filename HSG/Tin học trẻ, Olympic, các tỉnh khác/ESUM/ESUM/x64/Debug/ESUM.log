@@ -1,3 +1,0 @@
-﻿  ESUM.cpp
-C:\Users\ADMIN\source\repos\ESUM\ESUM\ESUM.cpp(6,20): warning C4244: 'initializing': conversion from 'double' to 'll', possible loss of data
-  ESUM.vcxproj -> C:\Users\ADMIN\source\repos\ESUM\x64\Debug\ESUM.exe

@@ -1,5 +1,0 @@
-﻿  ChinhPhuong_HDSH.cpp
-C:\Users\ADMIN\source\repos\ChinhPhuong_HDSH\ChinhPhuong_HDSH\ChinhPhuong_HDSH.cpp(18,7): warning C4244: 'initializing': conversion from 'double' to 'll', possible loss of data
-C:\Users\ADMIN\source\repos\ChinhPhuong_HDSH\ChinhPhuong_HDSH\ChinhPhuong_HDSH.cpp(18,20): warning C4244: 'initializing': conversion from 'double' to 'll', possible loss of data
-C:\Users\ADMIN\source\repos\ChinhPhuong_HDSH\ChinhPhuong_HDSH\ChinhPhuong_HDSH.cpp(22,13): warning C4244: 'initializing': conversion from 'll' to 'int', possible loss of data
-  ChinhPhuong_HDSH.vcxproj -> C:\Users\ADMIN\source\repos\ChinhPhuong_HDSH\x64\Debug\ChinhPhuong_HDSH.exe

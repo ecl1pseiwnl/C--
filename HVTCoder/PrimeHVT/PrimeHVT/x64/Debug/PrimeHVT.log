@@ -1,3 +1,0 @@
-﻿  Prime.cpp
-C:\Users\ADMIN\source\repos\PrimeHVT\PrimeHVT\Prime.cpp(19,13): warning C4244: 'argument': conversion from '__int64' to 'long', possible loss of data
-  PrimeHVT.vcxproj -> C:\Users\ADMIN\source\repos\PrimeHVT\x64\Debug\PrimeHVT.exe

@@ -1,4 +1,0 @@
-﻿  SoNguyenToDacBiet_HDSH.cpp
-C:\Users\ADMIN\source\repos\Hủy Diệt Số Học\SoNguyenToDacBiet_HDSH\SoNguyenToDacBiet_HDSH\SoNguyenToDacBiet_HDSH.cpp(13,19): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-C:\Users\ADMIN\source\repos\Hủy Diệt Số Học\SoNguyenToDacBiet_HDSH\SoNguyenToDacBiet_HDSH\SoNguyenToDacBiet_HDSH.cpp(43,13): warning C4244: 'initializing': conversion from 'll' to 'int', possible loss of data
-  SoNguyenToDacBiet_HDSH.vcxproj -> C:\Users\ADMIN\source\repos\Hủy Diệt Số Học\SoNguyenToDacBiet_HDSH\x64\Debug\SoNguyenToDacBiet_HDSH.exe

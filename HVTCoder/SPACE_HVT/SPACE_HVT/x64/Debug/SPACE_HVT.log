@@ -1,3 +1,0 @@
-﻿  SPACE_HVT.cpp
-C:\Users\ADMIN\source\repos\SPACE_HVT\SPACE_HVT\SPACE_HVT.cpp(18,13): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-  SPACE_HVT.vcxproj -> C:\Users\ADMIN\source\repos\SPACE_HVT\x64\Debug\SPACE_HVT.exe

@@ -1,4 +1,0 @@
-﻿  ROBOT_HSGCaMauVong1_2021-2022.cpp
-C:\Users\ADMIN\source\repos\ROBOT_HSGCaMauVong1_2021-2022\ROBOT_HSGCaMauVong1_2021-2022\ROBOT_HSGCaMauVong1_2021-2022.cpp(25,31): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
-C:\Users\ADMIN\source\repos\ROBOT_HSGCaMauVong1_2021-2022\ROBOT_HSGCaMauVong1_2021-2022\ROBOT_HSGCaMauVong1_2021-2022.cpp(32,10): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-  ROBOT_HSGCaMauVong1_2021-2022.vcxproj -> C:\Users\ADMIN\source\repos\ROBOT_HSGCaMauVong1_2021-2022\x64\Debug\ROBOT_HSGCaMauVong1_2021-2022.exe

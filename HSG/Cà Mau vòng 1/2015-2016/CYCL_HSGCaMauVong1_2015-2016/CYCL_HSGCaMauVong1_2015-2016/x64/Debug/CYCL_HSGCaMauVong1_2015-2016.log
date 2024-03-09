@@ -1,7 +1,0 @@
-﻿  CYCL_HSGCaMauVong1_2015-2016.cpp
-C:\Users\ADMIN\source\repos\HSG\Cà Mau vòng 1\2015-2016\CYCL_HSGCaMauVong1_2015-2016\CYCL_HSGCaMauVong1_2015-2016\CYCL_HSGCaMauVong1_2015-2016.cpp(51,19): warning C4267: 'argument': conversion from 'size_t' to '_Ty', possible loss of data
-C:\Users\ADMIN\source\repos\HSG\Cà Mau vòng 1\2015-2016\CYCL_HSGCaMauVong1_2015-2016\CYCL_HSGCaMauVong1_2015-2016\CYCL_HSGCaMauVong1_2015-2016.cpp(51,19): warning C4267:         with
-C:\Users\ADMIN\source\repos\HSG\Cà Mau vòng 1\2015-2016\CYCL_HSGCaMauVong1_2015-2016\CYCL_HSGCaMauVong1_2015-2016\CYCL_HSGCaMauVong1_2015-2016.cpp(51,19): warning C4267:         [
-C:\Users\ADMIN\source\repos\HSG\Cà Mau vòng 1\2015-2016\CYCL_HSGCaMauVong1_2015-2016\CYCL_HSGCaMauVong1_2015-2016\CYCL_HSGCaMauVong1_2015-2016.cpp(51,19): warning C4267:             _Ty=int
-C:\Users\ADMIN\source\repos\HSG\Cà Mau vòng 1\2015-2016\CYCL_HSGCaMauVong1_2015-2016\CYCL_HSGCaMauVong1_2015-2016\CYCL_HSGCaMauVong1_2015-2016.cpp(51,19): warning C4267:         ]
-  CYCL_HSGCaMauVong1_2015-2016.vcxproj -> C:\Users\ADMIN\source\repos\HSG\Cà Mau vòng 1\2015-2016\CYCL_HSGCaMauVong1_2015-2016\x64\Debug\CYCL_HSGCaMauVong1_2015-2016.exe

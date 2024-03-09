@@ -1,3 +1,0 @@
-﻿  TwoSum_TwoPointers.cpp
-C:\Users\ADMIN\source\repos\TwoSum_TwoPointers\TwoSum_TwoPointers\TwoSum_TwoPointers.cpp(24,15): warning C4244: 'initializing': conversion from 'll' to 'int', possible loss of data
-  TwoSum_TwoPointers.vcxproj -> C:\Users\ADMIN\source\repos\TwoSum_TwoPointers\x64\Debug\TwoSum_TwoPointers.exe

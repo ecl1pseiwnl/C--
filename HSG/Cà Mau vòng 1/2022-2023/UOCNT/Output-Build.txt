@@ -1,5 +1,0 @@
-﻿Build started...
-1>------ Build started: Project: UOCNT, Configuration: Debug x64 ------
-1>UOCNT.vcxproj -> C:\Users\ADMIN\source\repos\UOCNT\x64\Debug\UOCNT.exe
-========== Build: 1 succeeded, 0 failed, 0 up-to-date, 0 skipped ==========
-========== Build started at 7:31 PM and took 00.575 seconds ==========

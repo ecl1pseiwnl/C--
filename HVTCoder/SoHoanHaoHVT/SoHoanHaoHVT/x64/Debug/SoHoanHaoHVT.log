@@ -1,3 +1,0 @@
-﻿  SoHoanHao.cpp
-C:\Users\ADMIN\source\repos\SoHoanHaoHVT\SoHoanHaoHVT\SoHoanHao.cpp(11,20): warning C4244: '+=': conversion from '__int64' to 'int', possible loss of data
-  SoHoanHaoHVT.vcxproj -> C:\Users\ADMIN\source\repos\SoHoanHaoHVT\x64\Debug\SoHoanHaoHVT.exe

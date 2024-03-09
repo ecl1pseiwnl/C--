@@ -1,3 +1,0 @@
-﻿  UOCNT.cpp
-C:\Users\ADMIN\source\repos\UOCNT\UOCNT\UOCNT.cpp(4,14): warning C4244: 'initializing': conversion from 'double' to 'll', possible loss of data
-C:\Users\ADMIN\source\repos\UOCNT\UOCNT\UOCNT.cpp(5,4): error C2148: total size of array must not exceed 0x7fffffff bytes
