@@ -1,0 +1,37 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\ADMIN\\source\\repos\\nkrez-VNOI-OJ_DynamicProgramming\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{42031723-11E8-4673-9439-E7D285661E9F}|nkrez-VNOI-OJ_DynamicProgramming\\nkrez-VNOI-OJ_DynamicProgramming.vcxproj|C:\\Users\\ADMIN\\source\\repos\\nkrez-VNOI-OJ_DynamicProgramming\\nkrez-VNOI-OJ_DynamicProgramming\\nkrez-VNOI-OJ_DynamicProgramming.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{42031723-11E8-4673-9439-E7D285661E9F}|nkrez-VNOI-OJ_DynamicProgramming\\nkrez-VNOI-OJ_DynamicProgramming.vcxproj|solutionrelative:nkrez-VNOI-OJ_DynamicProgramming\\nkrez-VNOI-OJ_DynamicProgramming.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "nkrez-VNOI-OJ_DynamicProgramming.cpp",
+              "DocumentMoniker": "C:\\Users\\ADMIN\\source\\repos\\nkrez-VNOI-OJ_DynamicProgramming\\nkrez-VNOI-OJ_DynamicProgramming\\nkrez-VNOI-OJ_DynamicProgramming.cpp",
+              "RelativeDocumentMoniker": "nkrez-VNOI-OJ_DynamicProgramming\\nkrez-VNOI-OJ_DynamicProgramming.cpp",
+              "ToolTip": "C:\\Users\\ADMIN\\source\\repos\\nkrez-VNOI-OJ_DynamicProgramming\\nkrez-VNOI-OJ_DynamicProgramming\\nkrez-VNOI-OJ_DynamicProgramming.cpp",
+              "RelativeToolTip": "nkrez-VNOI-OJ_DynamicProgramming\\nkrez-VNOI-OJ_DynamicProgramming.cpp",
+              "ViewState": "AQIAAAcAAAAAAAAAAAAwwCAAAAAKAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-03-08T12:13:37.917Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
