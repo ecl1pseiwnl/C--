@@ -14,7 +14,6 @@ bool cmp(pair<char, int>& a, pair<char, int>& b) {
 }
 
 int main() {
-
     ios_base::sync_with_stdio(false);
     cin.tie(nullptr);
     int n, m;
