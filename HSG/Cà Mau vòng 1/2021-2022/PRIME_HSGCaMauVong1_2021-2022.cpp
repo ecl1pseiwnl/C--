@@ -10,41 +10,39 @@ typedef map<int, int> mii;
 #define mp make_pair
 #define pb push_back
 
-const int N = 1e7 + 7;
-int a[N];
-
-void snt() {
-	memset(a, 1, sizeof(a));
-	a[0] = a[1] = 0;
-	for (int i = 2; i <= sqrt(N); i++) {
-		if (a[i]) {
-			for (int j = i * i; j <= N; j += i) {
-				a[j] = 0;
-			}
-		}
-	}
+vector<bool> snt(int n) {
+    vector<bool> p(n+1,true);
+    p[0] = p[1] = false;
+    for (int i = 2; i <= sqrt(n);i++) {
+        if (p[i]) {
+            for (int j = i*i; j <= n; j+= i) {
+                p[j] = false;
+            }
+        }
+    }
+    return p;
 }
 
 int main() {
-	ios_base::sync_with_stdio(false);
-	cin.tie(NULL);
-	snt();
-	int n, cnt = 0;
-	cin >> n;
-	int A[n];
-	for (int& it : A) cin >> it;
-	int l = 0, r = 0;
-	while (l < n) {
-		if (a[A[l]] == 0) {
-			l++;
-		}
-		else if (a[A[l]]) {
-			if (a[a[r]]) {
-				cnt++;
-			}
-			else {
-				r++;
-			}
-		}
-	}
+    ios_base::sync_with_stdio(false);
+    cin.tie(nullptr);
+    int n, cnt = 0;
+    cin >> n;
+    vector<int> a(n);
+    for (int i = 0; i < n; i++) cin >> a[i];
+    int m = *max_element(a.begin(),a.end());
+    vector<bool> pr = snt(m);
+    int r, l;
+    for (l = 0; l < n;) {
+        if (pr[a[l]]) {
+            for (r = l + 1; r < n; r++) {
+                if (a[r] == a[l]) {
+                    cnt++;
+                }
+            }
+        }
+        l++;
+    }
+    cout << cnt;
+    return 0;
 }
