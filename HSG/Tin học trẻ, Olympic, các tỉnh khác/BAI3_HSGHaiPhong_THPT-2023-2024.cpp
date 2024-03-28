@@ -17,12 +17,16 @@ int main() {
     cin >> n;
     int a[n];
     for (int i = 0; i < n; i++) cin >> a[i];
-    for (int i = 0; i < n; i++) {
-        int sum = a[i];
-        for (int j = i + 1; j < n; j++) {
-            sum += a[j];
-            maxv = max(sum, maxv);
+    int l = 0, r = l + 1;
+    while (l < n - 1) {
+        int sum = a[l];
+        while(r < n) {
+            sum += a[r];
+            maxv = max(sum,maxv);
+            r++;
         }
+        l++;
+        r = l + 1;
     }
     cout << maxv;
     return 0;
