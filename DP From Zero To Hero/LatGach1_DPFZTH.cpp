@@ -3,7 +3,7 @@ using namespace std;
 typedef long long ll;
 typedef vector<int> vi;
 typedef pair<int, int> pi;
-typedef set<int> se;
+typedef set<int> si;
 typedef map<int, int> mii;
 #define MOD 1000000007
 #define endl "\n"
