@@ -27,7 +27,7 @@ void inp() {
     }
 }
 
-void dfs(int u) {
+void bfs(int u) {
     queue<int> q;
     q.push(u);
     visited[u] = true;
@@ -47,7 +47,7 @@ void dfs(int u) {
 void pathh(int x, int y) {
     memset(visited, false, sizeof(visited));
     memset(par, 0, sizeof(par));
-    dfs(x);
+    bfs(x);
     if (!visited[y]) {
         cout << "-1";
     }

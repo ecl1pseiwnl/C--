@@ -11,58 +11,49 @@ typedef map<int, int> mii;
 #define pb push_back
 
 const int N = 1005;
-int n, m, x, y, par[N];
+int n, m,par[N];
 vector<int> v[N];
 bool visited[N];
 
 void inp() {
-    cin >> n >> m >> x >> y;
+    cin >> n >> m;
     for (int i = 0; i < m; i++) {
         int x, y;
         cin >> x >> y;
         v[x].pb(y);
         v[y].pb(x);
     }
-    for (int i = 1; i <= n; i++) {
-        sort(v[i].begin(), v[i].end());
-    }
+    memset(visited,false,sizeof(visited));
 }
 
-void dfs(int u) {
+bool dfs(int u) {
     visited[u] = true;
     for (auto it : v[u]) {
         if (!visited[it]) {
             par[it] = u;
-            dfs(it);
+            if (dfs(it)) {
+                return true;
+            }
+        }
+        else if (it != par[u]) {
+            return true;
         }
     }
-}
-
-void pathh(int x, int y) {
-    memset(visited, false, sizeof(visited));
-    memset(par, 0, sizeof(par));
-    dfs(x);
-    if (!visited[y]) {
-        cout << "-1";
-    }
-    else {
-        vi path;
-        while (y != x) {
-            path.pb(y);
-            y = par[y];
-        }
-        path.pb(x);
-        reverse(path.begin(), path.end());
-        for (auto it : path) {
-            cout << it << " ";
-        }
-    }
+    return false;
 }
 
 int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(nullptr);
     inp();
-    pathh(x, y);
+    for (int i = 1; i <= n; i++) {
+        if (!visited[i]) {
+            if (dfs(i)) {
+                cout << "1";
+                return 0;
+            }
+        }
+    }
+    cout << "0";
     return 0;
 }
