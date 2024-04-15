@@ -12,7 +12,7 @@ typedef map<int, int> mii;
 const int N = 10005;
 int n, d[N], ans, a[N];
 
-void dfs(int u) {
+void dfs(int n) {
     d[n] = 1;
     for (int i = 2; i <= sqrt(n); i++) {
         if (n % i == 0) {
