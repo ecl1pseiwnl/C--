@@ -3,26 +3,31 @@ using namespace std;
 typedef long long ll;
 typedef vector<int> vi;
 typedef pair<int, int> pi;
-#define endl "\n"
+typedef set<int> si;
+typedef map<int, int> mii;
+#define MOD 10000000007
+#define endl "\n";
 #define mp make_pair
 #define pb push_back
-ll l, r;
-vector<bool> a(r - 1, true);
 
-void sang(ll l, ll r) {
-    a[1] = a[0] = false;
-    for (ll i = 2; i <= sqrt(r); i++) {
-        for (ll j = max(i * i, (l * i - 1) / i * i); j <= r; j += i) {
-            a[j - l] = false;
+const int N = 1e7+7;
+bool a[N];
+
+void snt() {
+    memset(a,true,sizeof(a));
+    a[0] = a[1] = false;
+    for (int i = 2; i*i <= N; i++) {
+        if (a[i]) {
+            for (int j = i*i; j <= N; j+=i) {
+                a[j] = false;
+            }
         }
     }
 }
 
 bool check(int n) {
     while (n > 0) {
-        if (a[n] == false) {
-            return false;
-        }
+        if (a[n] == false) return false;
         n % 10;
         n /= 10;
     }
@@ -31,12 +36,14 @@ bool check(int n) {
 
 int main() {
     ios_base::sync_with_stdio(false);
-    cin.tie(NULL); cout.tie(NULL);
+    cin.tie(nullptr);
+    snt();
+    int l,r;
     cin >> l >> r;
-    sang(l, r);
-    for (ll i = l; i <= r; i++) {
-        if (check(a[i]) == true) {
+    for (int i = l; i <= r; i++) {
+        if (a[i] && check(i)) {
             cout << i << endl;
         }
     }
+    return 0;
 }
