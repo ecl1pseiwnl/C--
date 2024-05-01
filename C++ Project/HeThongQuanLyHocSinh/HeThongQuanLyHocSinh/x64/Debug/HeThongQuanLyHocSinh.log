@@ -1,2 +1,29 @@
 ﻿  HeThongQuanLyHocSinh.cpp
-  HeThongQuanLyHocSinh.vcxproj -> C:\Users\ADMIN\source\repos\C++ Project\HeThongQuanLyHocSinh\x64\Debug\HeThongQuanLyHocSinh.exe
+C:\Users\ADMIN\source\repos\C++ Project\HeThongQuanLyHocSinh\HeThongQuanLyHocSinh\HeThongQuanLyHocSinh.cpp(99,3): error C2360: initialization of 'check' is skipped by 'case' label
+  C:\Users\ADMIN\source\repos\C++ Project\HeThongQuanLyHocSinh\HeThongQuanLyHocSinh\HeThongQuanLyHocSinh.cpp(76,9):
+  see declaration of 'check'
+  
+C:\Users\ADMIN\source\repos\C++ Project\HeThongQuanLyHocSinh\HeThongQuanLyHocSinh\HeThongQuanLyHocSinh.cpp(121,3): error C2360: initialization of 'check' is skipped by 'case' label
+  C:\Users\ADMIN\source\repos\C++ Project\HeThongQuanLyHocSinh\HeThongQuanLyHocSinh\HeThongQuanLyHocSinh.cpp(76,9):
+  see declaration of 'check'
+  
+C:\Users\ADMIN\source\repos\C++ Project\HeThongQuanLyHocSinh\HeThongQuanLyHocSinh\HeThongQuanLyHocSinh.cpp(129,3): error C2360: initialization of 'check' is skipped by 'case' label
+  C:\Users\ADMIN\source\repos\C++ Project\HeThongQuanLyHocSinh\HeThongQuanLyHocSinh\HeThongQuanLyHocSinh.cpp(76,9):
+  see declaration of 'check'
+  
+C:\Users\ADMIN\source\repos\C++ Project\HeThongQuanLyHocSinh\HeThongQuanLyHocSinh\HeThongQuanLyHocSinh.cpp(137,3): error C2360: initialization of 'check' is skipped by 'case' label
+  C:\Users\ADMIN\source\repos\C++ Project\HeThongQuanLyHocSinh\HeThongQuanLyHocSinh\HeThongQuanLyHocSinh.cpp(76,9):
+  see declaration of 'check'
+  
+C:\Users\ADMIN\source\repos\C++ Project\HeThongQuanLyHocSinh\HeThongQuanLyHocSinh\HeThongQuanLyHocSinh.cpp(139,3): error C2360: initialization of 'check' is skipped by 'case' label
+  C:\Users\ADMIN\source\repos\C++ Project\HeThongQuanLyHocSinh\HeThongQuanLyHocSinh\HeThongQuanLyHocSinh.cpp(76,9):
+  see declaration of 'check'
+  
+C:\Users\ADMIN\source\repos\C++ Project\HeThongQuanLyHocSinh\HeThongQuanLyHocSinh\HeThongQuanLyHocSinh.cpp(141,3): error C2360: initialization of 'check' is skipped by 'case' label
+  C:\Users\ADMIN\source\repos\C++ Project\HeThongQuanLyHocSinh\HeThongQuanLyHocSinh\HeThongQuanLyHocSinh.cpp(76,9):
+  see declaration of 'check'
+  
+C:\Users\ADMIN\source\repos\C++ Project\HeThongQuanLyHocSinh\HeThongQuanLyHocSinh\HeThongQuanLyHocSinh.cpp(149,3): error C2361: initialization of 'check' is skipped by 'default' label
+  C:\Users\ADMIN\source\repos\C++ Project\HeThongQuanLyHocSinh\HeThongQuanLyHocSinh\HeThongQuanLyHocSinh.cpp(76,9):
+  see declaration of 'check'
+  

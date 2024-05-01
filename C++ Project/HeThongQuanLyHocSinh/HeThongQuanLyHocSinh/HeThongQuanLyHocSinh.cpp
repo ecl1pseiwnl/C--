@@ -69,17 +69,19 @@ int main() {
 				cout << numberOfClasses << " classes have been added \n";
 			}
 			else if (numberOfClasses == 1) {
-				cout << numberOfClasses << " classes has been added \n";
+				cout << numberOfClasses << " class has been added \n";
 			}
 			break;
 		case 2:
+			bool check = false;
 			cout << "Please insert class's ordinal number you want to search: \n"; cin >> classid;
 			cout << "Please choose one of these options\n 1. Search by ID\n 2. Search by name \n"; cin >> searchStudentOptions;
 			if (searchStudentOptions == 1) {
 				cout << "Please insert a student's ID you want to search\n";  cin >> studentSearchID;
 				for (int i = 1; i < sizeof(Class[classid]); i++) {
 					if (Class[classid].s[i].studentID.find(studentSearchID) != string::npos) {
-
+						check = true;
+						Class[classid].s[i].SPrint();
 					}
 				}
 			}
@@ -87,10 +89,12 @@ int main() {
 				cout << "Please insert a student's name you want to search\n";  cin.ignore(); getline(cin, studentSearchName);
 				for (int i = 1; i < sizeof(Class[classid]); i++) {
 					if (Class[classid].s[i].name.find(studentSearchName) != string::npos) {
+						check = true;
 						Class[classid].s[i].SPrint();
 					}
 				}
 			}
+			if (!check) cout << "This student does not existed\n";
 			break;
 		case 3:
 			cout << "Please insert class's ordinal number you want to search: \n"; cin >> classid;
@@ -101,6 +105,7 @@ int main() {
 					if (Class[classid].t[i].teacherID.find(teacherSearchID) != string::npos) {
 						Class[classid].t[i].TPrint();
 					}
+					else cout << "This teacher does not existed\n";
 				}
 			}
 			else if (searchStudentOptions == 2) {
@@ -109,6 +114,7 @@ int main() {
 					if (Class[classid].t[i].name.find(teacherSearchName) != string::npos) {
 						Class[classid].t[i].TPrint();
 					}
+					else cout << "This teacher does not existed\n";
 				}
 			}
 			break;

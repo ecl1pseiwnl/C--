@@ -27,7 +27,7 @@ struct Student {
 		cin.ignore(); 
 		getline(cin, name);
 		cout << "Student's gender: "; 
-		cin >> name;
+		cin >> gender;
 		cout << "Student's birthday (DDD/MMM/YYY): "; 
 		cin >> birthday;
 		cout << "Student's nationality: "; 
