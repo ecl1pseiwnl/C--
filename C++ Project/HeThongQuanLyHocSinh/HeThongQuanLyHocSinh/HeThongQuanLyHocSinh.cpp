@@ -1,3 +1,11 @@
+/*
+			   _ _                _                _
+	  ___  ___| / |_ __  ___  ___(_)_      ___ __ | |
+	 / _ \/ __| | | '_ \/ __|/ _ \ \ \ /\ / / '_ \| |
+	|  __/ (__| | | |_) \__ \  __/ |\ V  V /| | | | |
+	 \___|\___|_|_| .__/|___/\___|_| \_/\_/ |_| |_|_|
+				  |_|
+*/
 #include <iostream>
 #include <vector>
 #include <string>
@@ -5,13 +13,14 @@
 #include "Functions.cpp"
 using namespace std;
 
-int numberOfClasses, numberOfStudents, classid, searchStudentOptions, searchTeacherOptions, options;
-string  studentSearchID, studentSearchName, teacherSearchID, teacherSearchName, s1 = "System has been shut down", s2 = "\nThank you for using this system", s3 = "Made by ecl1pseiwnl.";
+int numberOfClasses, numberOfStudents,numberOfTeachers, classid, searchStudentOptions, searchTeacherOptions, options;
+string s1 = "System has been shut down", s2 = "\nThank you for using this system", s3 = "Made by ecl1pseiwnl.";
 struct classes {
 	string className, classID, classMajor;
-	Teacher t[3];
+	Teacher t[12];
 	Student s[46];
 };
+vector<classes> Class(21);
 void textDisplay(const string text, int typeSpeed, int pauseDur, bool clearConsole) {
 	for (int i = 0; i < text.size(); i++) {
 		cout << text[i] << flush;
@@ -22,7 +31,83 @@ void textDisplay(const string text, int typeSpeed, int pauseDur, bool clearConso
 		system("cls");
 	}
 }
-vector<classes> Class(21);
+
+bool cmp1(Student a, Student b) {
+	return a.gpa > b.gpa;
+}
+bool cmp2(Student a, Student b) {
+	return a.gpa < b.gpa;
+}
+
+void sortHighToLowStudent(Student a[], int numberOfStudents) {
+	vector<Student> v;
+	for (int i = 1; i <= numberOfStudents; i++) {
+		v.push_back(a[i]);
+	}
+	sort(v.begin(), v.end(), cmp1);
+	for (auto it : v) {
+		it.SPrint();
+	}
+}
+void sortLowToHighStudent(Student a[], int numberOfStudents) {
+	vector<Student> v;
+	for (int i = 1; i <= numberOfStudents; i++) {
+		v.push_back(a[i]);
+	}
+	sort(v.begin(), v.end(), cmp2);
+	for (auto it : v) {
+		it.SPrint();
+	}
+}
+
+void SearchTeacher(Teacher a[], int Options, int classid) {
+	string searchID, searchName;
+	bool check = false;
+	if (Options == 1) {
+		cout << "Please insert a teacher's ID you want to search\n";  cin >> searchID;
+		for (int i = 1; i < sizeof(Class[classid]); i++) {
+			if (Class[classid].t[i].teacherID.find(searchID) != string::npos) {
+				Class[classid].t[i].TPrint();
+				check = true;
+			}
+		}
+	}
+	else if (Options == 2) {
+		cout << "Please insert a teacher's name you want to search\n";  cin.ignore(); getline(cin, searchName);
+		for (int i = 1; i < sizeof(Class[classid]); i++) {
+			if (Class[classid].t[i].name.find(searchName) != string::npos) {
+				Class[classid].t[i].TPrint();
+				check = true;
+			}
+		}
+	}
+	if (!check) cout << "This teacher does not existed\n";
+}
+
+void SearchStudent(Student a[], int Options, int classid) {
+	string searchID, searchName;
+	bool check = false;
+	if (searchStudentOptions == 1) {
+		cout << "Please insert a student's ID you want to search\n";  cin >> searchID;
+		for (int i = 1; i < sizeof(Class[classid]); i++) {
+			if (Class[classid].s[i].studentID.find(searchID) != string::npos) {
+				check = true;
+				Class[classid].s[i].SPrint();
+			}
+		}
+		if (!check) cout << "This student does not existed\n";
+	}
+	else if (searchStudentOptions == 2) {
+		cout << "Please insert a student's name you want to search\n";  cin.ignore(); getline(cin, searchName);
+		for (int i = 1; i < sizeof(Class[classid]); i++) {
+			if (Class[classid].s[i].name.find(searchName) != string::npos) {
+				check = true;
+				Class[classid].s[i].SPrint();
+			}
+		}
+		if (!check) cout << "This student does not existed\n";
+	}
+}
 
 int main() {
 	while (true) {
@@ -44,7 +129,9 @@ int main() {
 		cout << "--------------------------------------------------------------------------\n";
 		switch (options) {
 		case 1:
+		{
 			cout << "Please insert number of classes you want to add: "; cin >> numberOfClasses;
+			cout << "Please insert number of teachers of that class you want to add: "; cin >> numberOfTeachers;
 			for (int i = 0; i < numberOfClasses; i++) {
 				cout << "Class No." << i + 1 << "'s ID: "; cin >> Class[i + 1].classID;
 				cout << "Class No." << i + 1 << "'s name: ";
@@ -54,14 +141,14 @@ int main() {
 				getline(cin, Class[i + 1].classMajor);
 				cout << "--------------------------------------------------------------------------\n";
 				cout << "Please insert teacher's information: \n";
-				for (int j = 0; j < 2; j++) {
-					Class[i + 1].t[j + 1].TInput();
+				for (int i = 1; i <= numberOfTeachers; i++) {
+					Class[i + 1].t[i + 1].TInput();
 				}
 				cout << "-------------------------------------------------------\n";
 				cout << "Please insert number of students you want to add: \n"; cin >> numberOfStudents;
 				cout << "Please insert student's information: \n";
-				for (int k = 0; k < numberOfStudents; k++) {
-					Class[i + 1].s[k + 1].SInput();
+				for (int j = 0; j < numberOfStudents; j++) {
+					Class[i + 1].s[j + 1].SInput();
 				}
 			}
 			cout << "------------------------------------------------------\n";
@@ -72,82 +159,77 @@ int main() {
 				cout << numberOfClasses << " class has been added \n";
 			}
 			break;
+		}
 		case 2:
-			bool check = false;
+		{
 			cout << "Please insert class's ordinal number you want to search: \n"; cin >> classid;
 			cout << "Please choose one of these options\n 1. Search by ID\n 2. Search by name \n"; cin >> searchStudentOptions;
-			if (searchStudentOptions == 1) {
-				cout << "Please insert a student's ID you want to search\n";  cin >> studentSearchID;
-				for (int i = 1; i < sizeof(Class[classid]); i++) {
-					if (Class[classid].s[i].studentID.find(studentSearchID) != string::npos) {
-						check = true;
-						Class[classid].s[i].SPrint();
-					}
-				}
-			}
-			else if (searchStudentOptions == 2) {
-				cout << "Please insert a student's name you want to search\n";  cin.ignore(); getline(cin, studentSearchName);
-				for (int i = 1; i < sizeof(Class[classid]); i++) {
-					if (Class[classid].s[i].name.find(studentSearchName) != string::npos) {
-						check = true;
-						Class[classid].s[i].SPrint();
-					}
-				}
-			}
-			if (!check) cout << "This student does not existed\n";
+			SearchStudent(Class[classid].s, searchStudentOptions, classid);
 			break;
+		}
 		case 3:
+		{
 			cout << "Please insert class's ordinal number you want to search: \n"; cin >> classid;
 			cout << "Please choose one of these options\n 1. Search by ID\n 2. Search by name \n"; cin >> searchTeacherOptions;
-			if (searchTeacherOptions == 1) {
-				cout << "Please insert a teacher's ID you want to search\n";  cin >> teacherSearchID;
-				for (int i = 1; i < sizeof(Class[classid]); i++) {
-					if (Class[classid].t[i].teacherID.find(teacherSearchID) != string::npos) {
-						Class[classid].t[i].TPrint();
-					}
-					else cout << "This teacher does not existed\n";
-				}
-			}
-			else if (searchStudentOptions == 2) {
-				cout << "Please insert a teacher's name you want to search\n";  cin.ignore(); getline(cin, teacherSearchName);
-				for (int i = 1; i < sizeof(Class[classid]); i++) {
-					if (Class[classid].t[i].name.find(teacherSearchName) != string::npos) {
-						Class[classid].t[i].TPrint();
-					}
-					else cout << "This teacher does not existed\n";
-				}
-			}
+			SearchTeacher(Class[classid].t, searchTeacherOptions, classid);
 			break;
+		}
 		case 4:
+		{
 			cout << "Please insert class's ordinal number you want to search: \n"; cin >> classid;
 			for (int i = 1; i < sizeof(Class[classid].s); i++) {
-				if (Class[classid].s[i].name == "") continue;
-				Class[classid].s[i].SPrint();
-				cout << "\n";
+				if (Class[classid].s[i].name != "") {
+					Class[classid].s[i].SPrint();
+					cout << "\n";
+				}
 			}
 			break;
+		}
 		case 5:
+		{
 			cout << "Please insert class's ordinal number you want to search: \n"; cin >> classid;
 			for (int i = 1; i < sizeof(Class[classid].s); i++) {
-				if (Class[classid].t[i].name == "") continue;
-				Class[classid].t[i].TPrint();
-				cout << "\n";
+				if (Class[classid].t[i].name != "") {
+					Class[classid].t[i].TPrint();
+					cout << "\n";
+				}
 			}
 			break;
+		}
 		case 6:
+		{
+			cout << "Please insert class's ordinal number you want to search: \n"; cin >> classid;
+			int tmp = sizeof(Class[classid].s);
+			sortHighToLowStudent(Class[classid].s, tmp);
 			break;
+		}
 		case 7:
+		{
+			cout << "Please insert class's ordinal number you want to search: \n"; cin >> classid;
+			int temp = sizeof(Class[classid].s);
+			sortLowToHighStudent(Class[classid].s, temp);
 			break;
-		case 0:
+		}
+		case 1017:
+		{
 			system("cls");
-			textDisplay(s1, 100, 75, false);
-			textDisplay(s2, 100, 75, true);
-			textDisplay(s3, 100, 75, true);
+			system("Color 0A");
+			textDisplay("Welcome, my owner", 100, 75, true);
+			break;
+		}
+		case 0:
+		{
+			system("cls");
+			textDisplay(s1, 75, 75, false);
+			textDisplay(s2, 75, 75, true);
+			textDisplay(s3, 75, 75, true);
 			exit(0);
 			break;
-			cout << "\n";
-		default:
+		}
+		default: {
 			cout << "\n\nError! Please insert again a number from 0 to 7!\n\n\n";
+			break;
+		}
 		}
 	}
 	return 0;
