@@ -6,8 +6,7 @@
 using namespace std;
 
 int numberOfClasses, numberOfStudents, classid, searchStudentOptions, searchTeacherOptions, options;
-string  studentSearchID, studentSearchName, teacherSearchID, teacherSearchName;
-bool check = true;
+string  studentSearchID, studentSearchName, teacherSearchID, teacherSearchName, s1 = "System has been shut down", s2 = "\nThank you for using this system", s3 = "Made by ecl1pseiwnl.";
 struct classes {
 	string className, classID, classMajor;
 	Teacher t[3];
@@ -23,14 +22,14 @@ void textDisplay(const string text, int typeSpeed, int pauseDur, bool clearConso
 		system("cls");
 	}
 }
-vector<classes> Class(20);
-
+vector<classes> Class(21);
 
 int main() {
-	while (check) {
-		cout << "======================================================\n";
+	while (true) {
+		system("color 0E");
+		cout << "===========================================================================\n";
 		cout << "        Managing Students and Teachers system\n";
-		cout << "======================================================\n";
+		cout << "===========================================================================\n";
 		cout << "Please choose an option\n";
 		cout << "1. Add classes\n";
 		cout << "2. Search a student's information\n";
@@ -38,29 +37,33 @@ int main() {
 		cout << "4. List of students from a class\n";
 		cout << "5. List of teachers from a class\n";
 		cout << "6. List the highest to the lowest GPA of a class\n";
-		cout << "7. Find the lowest to the highest GPA of a class\n";
+		cout << "7. List the lowest to the highest GPA of a class\n";
 		cout << "0. Exit \n";
-		cout << "======================================================\n";
+		cout << "==========================================================================\n";
 		cout << "Your option: "; cin >> options;
-		cout << "------------------------------------------------------\n";
+		cout << "--------------------------------------------------------------------------\n";
 		switch (options) {
 		case 1:
-			cout << "Please insert number of classes you want to add: \n"; cin >> numberOfClasses;
+			cout << "Please insert number of classes you want to add: "; cin >> numberOfClasses;
 			for (int i = 0; i < numberOfClasses; i++) {
-				cout << "Class NO " << i + 1 << "'s Name: "; cin >> Class[i + 1].className;
-				cout << "Class NO " << i + 1 << "'s major: "; cin.ignore(); getline(cin, Class[i + 1].classMajor);
-				cout << "Class NO " << i + 1 << "'s ID: "; cin >> Class[i + 1].classID;
+				cout << "Class No." << i + 1 << "'s ID: "; cin >> Class[i + 1].classID;
+				cout << "Class No." << i + 1 << "'s name: ";
+				cin.ignore();
+				getline(cin, Class[i + 1].className);
+				cout << "Class No." << i + 1 << "'s major: ";
+				getline(cin, Class[i + 1].classMajor);
+				cout << "--------------------------------------------------------------------------\n";
 				cout << "Please insert teacher's information: \n";
-				for (int j = 0; j < 3; j++) {
+				for (int j = 0; j < 2; j++) {
 					Class[i + 1].t[j + 1].TInput();
 				}
+				cout << "-------------------------------------------------------\n";
 				cout << "Please insert number of students you want to add: \n"; cin >> numberOfStudents;
 				cout << "Please insert student's information: \n";
 				for (int k = 0; k < numberOfStudents; k++) {
 					Class[i + 1].s[k + 1].SInput();
 				}
 			}
-
 			cout << "------------------------------------------------------\n";
 			if (numberOfClasses > 1) {
 				cout << numberOfClasses << " classes have been added \n";
@@ -112,6 +115,7 @@ int main() {
 		case 4:
 			cout << "Please insert class's ordinal number you want to search: \n"; cin >> classid;
 			for (int i = 1; i < sizeof(Class[classid].s); i++) {
+				if (Class[classid].s[i].name == "") continue;
 				Class[classid].s[i].SPrint();
 				cout << "\n";
 			}
@@ -119,6 +123,7 @@ int main() {
 		case 5:
 			cout << "Please insert class's ordinal number you want to search: \n"; cin >> classid;
 			for (int i = 1; i < sizeof(Class[classid].s); i++) {
+				if (Class[classid].t[i].name == "") continue;
 				Class[classid].t[i].TPrint();
 				cout << "\n";
 			}
@@ -129,12 +134,14 @@ int main() {
 			break;
 		case 0:
 			system("cls");
-			string s1 ="System has been shut down", s2 = "\nThank you for using this system", s3 = "Made by ecl1pseiwnl.";
 			textDisplay(s1, 100, 75, false);
 			textDisplay(s2, 100, 75, true);
 			textDisplay(s3, 100, 75, true);
-			check = 0;
+			exit(0);
 			break;
+			cout << "\n";
+		default:
+			cout << "\n\nError! Please insert again a number from 0 to 7!\n\n\n";
 		}
 	}
 	return 0;
