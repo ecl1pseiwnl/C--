@@ -44,7 +44,8 @@ struct Student {
 };
 
 struct Teacher {
-	string teacherID, name, major, gender, nationality, birthday, current_Class[100] = { "" };
+	string teacherID, name, major, gender, nationality, birthday;
+	vector<string> current_Class;
 	int numberOfClasses;
 	void TPrint() {
 		cout << "-----------------------------------" << name << "-----------------------------------\n";
@@ -82,7 +83,7 @@ struct Teacher {
 			string temp;
 			cin.ignore();
 			getline(cin,temp);
-			current_Class[i] = temp;
+			current_Class.push_back(temp);
 		}
 		cout << "-----------------------------------------------------------------------\n";
 	}
