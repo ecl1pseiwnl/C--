@@ -128,7 +128,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="HeThongQuanLyHocSinh.cpp" />
-    <ClCompile Include="Functions.cpp" />
+    <ClCompile Include="FunctionsAndDatabase.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

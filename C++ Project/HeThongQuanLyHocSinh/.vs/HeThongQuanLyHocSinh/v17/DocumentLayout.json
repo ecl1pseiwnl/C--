@@ -7,8 +7,8 @@
       "RelativeMoniker": "D:0:0:{A6478F51-5017-4E25-AB9E-27A75EB48796}|HeThongQuanLyHocSinh\\HeThongQuanLyHocSinh.vcxproj|solutionrelative:HeThongQuanLyHocSinh\\HeThongQuanLyHocSinh.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A6478F51-5017-4E25-AB9E-27A75EB48796}|HeThongQuanLyHocSinh\\HeThongQuanLyHocSinh.vcxproj|C:\\Users\\ADMIN\\source\\repos\\C\u002B\u002B Project\\HeThongQuanLyHocSinh\\HeThongQuanLyHocSinh\\Functions.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{A6478F51-5017-4E25-AB9E-27A75EB48796}|HeThongQuanLyHocSinh\\HeThongQuanLyHocSinh.vcxproj|solutionrelative:HeThongQuanLyHocSinh\\Functions.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{A6478F51-5017-4E25-AB9E-27A75EB48796}|HeThongQuanLyHocSinh\\HeThongQuanLyHocSinh.vcxproj|C:\\Users\\ADMIN\\source\\repos\\C\u002B\u002B Project\\HeThongQuanLyHocSinh\\HeThongQuanLyHocSinh\\FunctionsAndDatabase.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{A6478F51-5017-4E25-AB9E-27A75EB48796}|HeThongQuanLyHocSinh\\HeThongQuanLyHocSinh.vcxproj|solutionrelative:HeThongQuanLyHocSinh\\FunctionsAndDatabase.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     }
   ],
   "DocumentGroupContainers": [
@@ -28,7 +28,7 @@
               "RelativeDocumentMoniker": "HeThongQuanLyHocSinh\\HeThongQuanLyHocSinh.cpp",
               "ToolTip": "C:\\Users\\ADMIN\\source\\repos\\C\u002B\u002B Project\\HeThongQuanLyHocSinh\\HeThongQuanLyHocSinh\\HeThongQuanLyHocSinh.cpp",
               "RelativeToolTip": "HeThongQuanLyHocSinh\\HeThongQuanLyHocSinh.cpp",
-              "ViewState": "AQIAAJwAAAAAAAAAAADwv6UAAAAjAAAA",
+              "ViewState": "AQIAAA0BAAAAAAAAAADwvyEBAAA0AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2024-05-01T08:37:20.525Z",
               "EditorCaption": ""
@@ -36,12 +36,12 @@
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "Functions.cpp",
-              "DocumentMoniker": "C:\\Users\\ADMIN\\source\\repos\\C\u002B\u002B Project\\HeThongQuanLyHocSinh\\HeThongQuanLyHocSinh\\Functions.cpp",
-              "RelativeDocumentMoniker": "HeThongQuanLyHocSinh\\Functions.cpp",
-              "ToolTip": "C:\\Users\\ADMIN\\source\\repos\\C\u002B\u002B Project\\HeThongQuanLyHocSinh\\HeThongQuanLyHocSinh\\Functions.cpp",
-              "RelativeToolTip": "HeThongQuanLyHocSinh\\Functions.cpp",
-              "ViewState": "AQIAAFQAAAAAAAAAAAAAAFoAAAAAAAAA",
+              "Title": "FunctionsAndDatabase.cpp",
+              "DocumentMoniker": "C:\\Users\\ADMIN\\source\\repos\\C\u002B\u002B Project\\HeThongQuanLyHocSinh\\HeThongQuanLyHocSinh\\FunctionsAndDatabase.cpp",
+              "RelativeDocumentMoniker": "HeThongQuanLyHocSinh\\FunctionsAndDatabase.cpp",
+              "ToolTip": "C:\\Users\\ADMIN\\source\\repos\\C\u002B\u002B Project\\HeThongQuanLyHocSinh\\HeThongQuanLyHocSinh\\FunctionsAndDatabase.cpp",
+              "RelativeToolTip": "HeThongQuanLyHocSinh\\FunctionsAndDatabase.cpp",
+              "ViewState": "AQIAADAAAAAAAAAAAAAAADgAAAAUAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2024-05-01T08:38:39.137Z",
               "EditorCaption": ""
