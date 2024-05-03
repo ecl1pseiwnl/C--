@@ -11,13 +11,12 @@ using namespace std;
 
 int numberOfClasses, numberOfStudents, numberOfTeachers, classid, searchStudentOptions, searchTeacherOptions, options, temp, cnt, tempIndex;
 double midTerm, finalTerm, tempGPA;
-
 string classID, s1 = "System has been shut down", s2 = "\nThank you for using this system", s3 = "Made by ecl1pseiwnl.", ID;
 struct classes {
 	string className, classID, classMajor;
 	vector<Teacher> TList;
 	vector<Student> SList;
-	Teacher t[12];
+	Teacher t[23];
 	Student s[46];
 };
 vector<classes> Class(21);
@@ -41,14 +40,22 @@ bool cmp2(Student a, Student b) {
 }
 
 void sortHighToLowStudent(int classid) {
-	sort(Class[classid].SList.begin(), Class[classid].SList.end(), cmp1);
+	vector<Student> v;
 	for (auto it : Class[classid].SList) {
+		v.push_back(it);
+	}
+	sort(v.begin(), v.end(), cmp1);
+	for (auto it : v) {
 		it.SPrint();
 	}
 }
 void sortLowToHighStudent(int classid) {
-	sort(Class[classid].SList.begin(), Class[classid].SList.end(), cmp2);
+	vector<Student> v;
 	for (auto it : Class[classid].SList) {
+		v.push_back(it);
+	}
+	sort(v.begin(), v.end(), cmp2);
+	for (auto it : v) {
 		it.SPrint();
 	}
 }
@@ -123,13 +130,14 @@ int main() {
 		cout << "1. Add classes\n";
 		cout << "2. Search a student's information\n";
 		cout << "3. Search a teacher's information\n";
-		cout << "4. List of students from a class\n";
-		cout << "5. List of teachers from a class\n";
-		cout << "6. List the highest to the lowest GPA of a class\n";
-		cout << "7. List the lowest to the highest GPA of a class\n";
-		cout << "8. Calculate GPA\n";
-		cout << "9. Add/Edit student's GPA\n";
-		cout << "10. Extract a class's information to a file\n";
+		cout << "4. List of classes\n";
+		cout << "5. List of students from a class\n";
+		cout << "6. List of teachers from a class\n";
+		cout << "7. List the highest to the lowest GPA of a class\n";
+		cout << "8. List the lowest to the highest GPA of a class\n";
+		cout << "9. Calculate GPA\n";
+		cout << "10. Add/Edit student's GPA\n";
+		cout << "11. Extract a class's information to a file\n";
 		cout << "0. Exit \n";
 		cout << "==========================================================================\n";
 		cout << "Your option: "; cin >> options;
@@ -139,25 +147,31 @@ int main() {
 			{
 				cout << "Please insert number of classes you want to add: "; cin >> numberOfClasses;
 				cout << "Please insert number of teachers of that class you want to add: "; cin >> numberOfTeachers;
-				for (int i = 0; i < numberOfClasses; i++) {
-					cout << "Class No." << i + 1 << "'s ID: "; cin >> Class[i + 1].classID;
-					cout << "Class No." << i + 1 << "'s name: ";
-					cin.ignore();
-					getline(cin, Class[i + 1].className);
-					cout << "Class No." << i + 1 << "'s major: ";
-					getline(cin, Class[i + 1].classMajor);
-					cout << "--------------------------------------------------------------------------\n";
-					cout << "Please insert teacher's information: \n";
-					for (int j = 0; j < numberOfTeachers; j++) {
-						Class[i + 1].t[j + 1].TInput();
-						Class[i + 1].TList.push_back(Class[i + 1].t[j + 1]);
+				for (int i = 1; i <= numberOfClasses; i++) {
+					if (Class[i].classID == "") {
+						cout << "Class No." << i << "'s ID: "; cin >> Class[i].classID;
+						cout << "Class No." << i << "'s name: ";
+						cin.ignore();
+						getline(cin, Class[i].className);
+						cout << "Class No." << i << "'s major: ";
+						getline(cin, Class[i].classMajor);
+						cout << "--------------------------------------------------------------------------\n";
+						cout << "Please insert teacher's information: \n";
+						for (int j = 1; j <= numberOfTeachers; j++) {
+							Class[i].t[j].TInput();
+							Class[i].TList.push_back(Class[i].t[j]);
+						}
+						cout << "-------------------------------------------------------\n";
+						cout << "Please insert number of students you want to add: \n"; cin >> numberOfStudents;
+						cout << "Please insert student's information: \n";
+						for (int k = 1; k <= numberOfStudents; k++) {
+							Class[i].s[k].SInput();
+							Class[i].SList.push_back(Class[i].s[k]);
+						}
 					}
-					cout << "-------------------------------------------------------\n";
-					cout << "Please insert number of students you want to add: \n"; cin >> numberOfStudents;
-					cout << "Please insert student's information: \n";
-					for (int k = 0; k < numberOfStudents; k++) {
-						Class[i + 1].s[k + 1].SInput();
-						Class[i + 1].SList.push_back(Class[i + 1].s[k + 1]);
+					else {
+						numberOfClasses++;
+						continue;
 					}
 				}
 				cout << "------------------------------------------------------\n";
@@ -185,13 +199,30 @@ int main() {
 			}
 			case 4:
 			{
+				int check = 0;
+				cout << "\n\n\n======================================================\n";
+				for (auto it : Class) {
+					if (it.classID == "") {
+						continue;
+					}
+					else {
+						check++;
+						cout << "Class ID: " << it.classID << "\n" << "Class's name: " << it.className << "\n" << "Class's major: " << it.classMajor << "\n" << "Students: " << it.SList.size() << "\n";
+						cout << "------------------------------------------------------\n\n\n";
+					}
+				}
+				if (!check) cout << "\n\nCan not find any class!\n\n\n";
+				break;
+			}
+			case 5:
+			{
 				cout << "Please insert class's ordinal number you want to search: \n"; cin >> classid;
 				for (auto it : Class[classid].SList) {
 					it.SPrint();
 				}
 				break;
 			}
-			case 5:
+			case 6:
 			{
 				cout << "Please insert class's ordinal number you want to search: \n"; cin >> classid;
 				for (auto it : Class[classid].TList) {
@@ -199,19 +230,19 @@ int main() {
 				}
 				break;
 			}
-			case 6:
+			case 7:
 			{
 				cout << "Please insert class's ordinal number you want to search: \n"; cin >> classid;
 				sortHighToLowStudent(classid);
 				break;
 			}
-			case 7:
+			case 8:
 			{
 				cout << "Please insert class's ordinal number you want to search: \n"; cin >> classid;
 				sortLowToHighStudent(classid);
 				break;
 			}
-			case 8: 
+			case 9: 
 			{
 				int numberOfGrades;
 				cout << "Please insert how many grades you want to calculate (Not include midterm & finalterm): \n"; cin >> numberOfGrades;
@@ -229,7 +260,7 @@ int main() {
 				cout << "Your current semester's GPA: " << fixed << setprecision(1) << (tempGPA + (finalTerm * 3) + (midTerm * 2)) / cnt << "\n";
 				break;
 			}
-			case 9:
+			case 10:
 			{
 				double GPA;
 				cout << "Please insert ID of the class you want to add/edit GPA: \n"; cin >> classID;
@@ -254,7 +285,7 @@ int main() {
 				cout << "\n\n\nCan not find the class/student from the given IDs!\n\n\n";
 				break;
 			}
-			case 10:
+			case 11:
 			{
 				bool check = false;
 				string fileName = "", t;
@@ -280,6 +311,7 @@ int main() {
 					File << "Class's ID: " + Class[tempIndex].classID + "\n";
 					File << "Class's name: " +Class[tempIndex].className + "\n";
 					File << "Class's major: " + Class[tempIndex].classMajor + "\n";
+					File << "-------------------------------------------------------\n";
 					File << "====================Teachers===========================\n";
 					for (auto it : Class[tempIndex].TList) {
 						File << "Teacher's ID: " + it.teacherID + "\n";
@@ -292,25 +324,88 @@ int main() {
 					}
 					File << "===================Students===========================\n";
 					for (auto it : Class[tempIndex].SList) {
+						string x = to_string(it.gpa), tmp;
+						tmp = tmp + x[0] + x[1] + x[2] + x[3];
 						File << "Student's ID: " + it.studentID + "\n";
 						File << "Student's name: " + it.name + "\n";
 						File << "Student's gender: " + it.gender + "\n";
 						File << "Student's birthday: " + it.birthday + "\n";
 						File << "Student's nationality: " + it.nationality + "\n";
 						File << "Student's major: " + it.major + "\n";
-						File << "Student's GPA: " + to_string(it.gpa) + "\n";
+						File << "Student's GPA: " + tmp + "\n";
 						File << "------------------------------------------------------\n";
 					}
 					File.close();
-					cout << "Class's information has been extracted to file!\n\n\n\n";
+					cout << "\n\n      Class's information has been extracted to file!\n";
+					cout << "  Please check the code file to see the file\n";
+					cout << "  -	Teachers: " << Class[tempIndex].TList.size() << "\n";
+					cout << "  -	Students: " << Class[tempIndex].SList.size() << "\n\n\n\n";
 				}
 				break;
 			}
-			case int(1017) :
+			case 1017:
 			{
 				system("cls");
 				system("Color 0A");
-				textDisplay("Welcome, you just glitched things or you typed the secret number lmao", 500, 75, true);
+				textDisplay("Welcome, you just glitched things or you typed the secret number lmao", 250, 75, true);
+				break;
+			}
+			case 2008:
+			{
+				for (int i = 1; i < 21; i++) {
+					Class[i].classID = to_string(i) + to_string(i) + to_string(i);
+					Class[i].classMajor = to_string(i) + to_string(i) + to_string(i) + to_string(i);
+					Class[i].className = to_string(i) + to_string(i) + to_string(i) + to_string(i) + to_string(i);
+				}
+				for (int i = 1; i < 21; i++) {
+					Class[i].s[i].studentID = to_string(i);
+					Class[i].s[i].name = to_string(i) + to_string(i);
+					Class[i].s[i].gender = to_string(i) + to_string(i) + to_string(i);
+					Class[i].s[i].birthday = to_string(i) + "2";
+					Class[i].s[i].major = to_string(i);
+					Class[i].s[i].nationality = to_string(i) + "3";
+					Class[i].s[i].gpa = i + 1;
+					Class[i].SList.push_back(Class[i].s[i]);
+				}
+				for (int i = 1; i < 21; i++) {
+					Class[i].t[i].teacherID = to_string(i);
+					Class[i].t[i].name = to_string(i) + to_string(i);
+					Class[i].t[i].gender = to_string(i) + to_string(i) + to_string(i);
+					Class[i].t[i].birthday = to_string(i) + "2";
+					Class[i].t[i].major = to_string(i);
+					Class[i].t[i].nationality = to_string(i) + "3";
+					Class[i].TList.push_back(Class[i].t[i]);
+				}
+				system("cls");
+				cout << "Command has been executed\n\n\n";
+				break;
+			}
+			case 1710:
+			{
+				for (int i = 1; i < 21; i++) {
+					Class[i].classID = "";
+					Class[i].classMajor = "";
+					Class[i].className = "";
+				}
+				for (int i = 1; i < 21; i++) {
+					Class[i].s[i].studentID = "";
+					Class[i].s[i].name = "";
+					Class[i].s[i].gender = "";
+					Class[i].s[i].birthday = "";
+					Class[i].s[i].major = "";
+					Class[i].s[i].nationality = "";
+					Class[i].s[i].gpa = 0;
+				}
+				for (int i = 1; i < 21; i++) {
+					Class[i].t[i].teacherID = "";
+					Class[i].t[i].name = "";
+					Class[i].t[i].gender = ""; 
+					Class[i].t[i].birthday = "";
+					Class[i].t[i].major = "";
+					Class[i].t[i].nationality = "";
+				}
+				system("cls");
+				cout << "Command has been executed\n\n\n";
 				break;
 			}
 			case 0:
@@ -322,8 +417,11 @@ int main() {
 				exit(0);
 				break;
 			}
-			default: {
-				cout << "\n\nError! Please insert again a number from 0 to 10!\n\n\n";
+			default: 
+			{
+				system("cls");
+				system("Color 04");
+				textDisplay("\n\nError! Please insert again a number from 0 to 11!\n\n\n\n\n\n\n\n", 50, 75, true);
 				break;
 			}
 		}
