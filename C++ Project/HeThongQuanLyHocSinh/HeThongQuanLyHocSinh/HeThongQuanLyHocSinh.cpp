@@ -111,7 +111,56 @@ void SearchStudent(int Options, int classid) {
 	}
 	if (!check) cout << "This student does not existed\n";
 }
-
+void fillClass() {
+	for (int i = 1; i < 21; i++) {
+		Class[i].classID = to_string(i) + to_string(i) + to_string(i);
+		Class[i].classMajor = to_string(i) + to_string(i) + to_string(i) + to_string(i);
+		Class[i].className = to_string(i) + to_string(i) + to_string(i) + to_string(i) + to_string(i);
+	}
+	for (int i = 1; i < 21; i++) {
+		Class[i].s[i].studentID = to_string(i);
+		Class[i].s[i].name = to_string(i) + to_string(i);
+		Class[i].s[i].gender = to_string(i) + to_string(i) + to_string(i);
+		Class[i].s[i].birthday = to_string(i) + "2";
+		Class[i].s[i].major = to_string(i);
+		Class[i].s[i].nationality = to_string(i) + "3";
+		Class[i].s[i].gpa = i + 1;
+		Class[i].SList.push_back(Class[i].s[i]);
+	}
+	for (int i = 1; i < 21; i++) {
+		Class[i].t[i].teacherID = to_string(i);
+		Class[i].t[i].name = to_string(i) + to_string(i);
+		Class[i].t[i].gender = to_string(i) + to_string(i) + to_string(i);
+		Class[i].t[i].birthday = to_string(i) + "2";
+		Class[i].t[i].major = to_string(i);
+		Class[i].t[i].nationality = to_string(i) + "3";
+		Class[i].TList.push_back(Class[i].t[i]);
+	}
+}
+void delClass() {
+	for (int i = 1; i < 21; i++) {
+		Class[i].classID = "";
+		Class[i].classMajor = "";
+		Class[i].className = "";
+	}
+	for (int i = 1; i < 21; i++) {
+		Class[i].s[i].studentID = "";
+		Class[i].s[i].name = "";
+		Class[i].s[i].gender = "";
+		Class[i].s[i].birthday = "";
+		Class[i].s[i].major = "";
+		Class[i].s[i].nationality = "";
+		Class[i].s[i].gpa = 0;
+	}
+	for (int i = 1; i < 21; i++) {
+		Class[i].t[i].teacherID = "";
+		Class[i].t[i].name = "";
+		Class[i].t[i].gender = "";
+		Class[i].t[i].birthday = "";
+		Class[i].t[i].major = "";
+		Class[i].t[i].nationality = "";
+	}
+}
 
 
 
@@ -352,58 +401,14 @@ int main() {
 			}
 			case 2008:
 			{
-				for (int i = 1; i < 21; i++) {
-					Class[i].classID = to_string(i) + to_string(i) + to_string(i);
-					Class[i].classMajor = to_string(i) + to_string(i) + to_string(i) + to_string(i);
-					Class[i].className = to_string(i) + to_string(i) + to_string(i) + to_string(i) + to_string(i);
-				}
-				for (int i = 1; i < 21; i++) {
-					Class[i].s[i].studentID = to_string(i);
-					Class[i].s[i].name = to_string(i) + to_string(i);
-					Class[i].s[i].gender = to_string(i) + to_string(i) + to_string(i);
-					Class[i].s[i].birthday = to_string(i) + "2";
-					Class[i].s[i].major = to_string(i);
-					Class[i].s[i].nationality = to_string(i) + "3";
-					Class[i].s[i].gpa = i + 1;
-					Class[i].SList.push_back(Class[i].s[i]);
-				}
-				for (int i = 1; i < 21; i++) {
-					Class[i].t[i].teacherID = to_string(i);
-					Class[i].t[i].name = to_string(i) + to_string(i);
-					Class[i].t[i].gender = to_string(i) + to_string(i) + to_string(i);
-					Class[i].t[i].birthday = to_string(i) + "2";
-					Class[i].t[i].major = to_string(i);
-					Class[i].t[i].nationality = to_string(i) + "3";
-					Class[i].TList.push_back(Class[i].t[i]);
-				}
+				fillClass();
 				system("cls");
 				cout << "Command has been executed\n\n\n";
 				break;
 			}
 			case 1710:
 			{
-				for (int i = 1; i < 21; i++) {
-					Class[i].classID = "";
-					Class[i].classMajor = "";
-					Class[i].className = "";
-				}
-				for (int i = 1; i < 21; i++) {
-					Class[i].s[i].studentID = "";
-					Class[i].s[i].name = "";
-					Class[i].s[i].gender = "";
-					Class[i].s[i].birthday = "";
-					Class[i].s[i].major = "";
-					Class[i].s[i].nationality = "";
-					Class[i].s[i].gpa = 0;
-				}
-				for (int i = 1; i < 21; i++) {
-					Class[i].t[i].teacherID = "";
-					Class[i].t[i].name = "";
-					Class[i].t[i].gender = ""; 
-					Class[i].t[i].birthday = "";
-					Class[i].t[i].major = "";
-					Class[i].t[i].nationality = "";
-				}
+				delClass();
 				system("cls");
 				cout << "Command has been executed\n\n\n";
 				break;
