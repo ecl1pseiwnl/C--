@@ -10,7 +10,7 @@ typedef map<int, int> mii;
 #define mp make_pair
 #define pb push_back
 
-const int N = 1e4+5;
+const int N = 5*1e4+5;
 int n, q, a[N], ma[4*N], mi[4*N];
 void build(int id, int l, int r) {
     if (l == r) {

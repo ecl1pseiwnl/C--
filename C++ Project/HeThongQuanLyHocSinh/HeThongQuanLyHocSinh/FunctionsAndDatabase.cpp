@@ -12,7 +12,7 @@ using namespace std;
 
 struct Student {
 	string studentID, name, major, gender, nationality, birthday;
-	double gpa;
+	double gpa = 0;
 
 	void SPrint() {
 		cout << "-----------------------------------" << name << "-----------------------------------\n";
@@ -50,7 +50,7 @@ struct Student {
 struct Teacher {
 	string teacherID, name, major, gender, nationality, birthday;
 	vector<string> current_Class;
-	int numberOfClasses;
+	int numberOfClasses = 0;
 	void TPrint() {
 		cout << "-----------------------------------" << name << "-----------------------------------\n";
 		cout << "Teacher's ID: " << teacherID << "\n";
