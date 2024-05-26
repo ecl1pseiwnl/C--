@@ -1,13 +1,13 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\ADMIN\\source\\repos\\C\u002B\u002B Project\\HeThongQuanLyHocSinh\\",
+  "WorkspaceRootPath": "C:\\Users\\PC\\source\\repos\\C\u002B\u002B Project\\HeThongQuanLyHocSinh\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{A6478F51-5017-4E25-AB9E-27A75EB48796}|HeThongQuanLyHocSinh\\HeThongQuanLyHocSinh.vcxproj|C:\\Users\\ADMIN\\source\\repos\\C\u002B\u002B Project\\HeThongQuanLyHocSinh\\HeThongQuanLyHocSinh\\HeThongQuanLyHocSinh.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "AbsoluteMoniker": "D:0:0:{A6478F51-5017-4E25-AB9E-27A75EB48796}|HeThongQuanLyHocSinh\\HeThongQuanLyHocSinh.vcxproj|C:\\Users\\PC\\source\\repos\\C\u002B\u002B Project\\HeThongQuanLyHocSinh\\HeThongQuanLyHocSinh\\HeThongQuanLyHocSinh.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{A6478F51-5017-4E25-AB9E-27A75EB48796}|HeThongQuanLyHocSinh\\HeThongQuanLyHocSinh.vcxproj|solutionrelative:HeThongQuanLyHocSinh\\HeThongQuanLyHocSinh.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A6478F51-5017-4E25-AB9E-27A75EB48796}|HeThongQuanLyHocSinh\\HeThongQuanLyHocSinh.vcxproj|C:\\Users\\ADMIN\\source\\repos\\C\u002B\u002B Project\\HeThongQuanLyHocSinh\\HeThongQuanLyHocSinh\\FunctionsAndDatabase.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "AbsoluteMoniker": "D:0:0:{A6478F51-5017-4E25-AB9E-27A75EB48796}|HeThongQuanLyHocSinh\\HeThongQuanLyHocSinh.vcxproj|C:\\Users\\PC\\source\\repos\\C\u002B\u002B Project\\HeThongQuanLyHocSinh\\HeThongQuanLyHocSinh\\FunctionsAndDatabase.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{A6478F51-5017-4E25-AB9E-27A75EB48796}|HeThongQuanLyHocSinh\\HeThongQuanLyHocSinh.vcxproj|solutionrelative:HeThongQuanLyHocSinh\\FunctionsAndDatabase.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     }
   ],
@@ -24,11 +24,11 @@
               "$type": "Document",
               "DocumentIndex": 0,
               "Title": "HeThongQuanLyHocSinh.cpp",
-              "DocumentMoniker": "C:\\Users\\ADMIN\\source\\repos\\C\u002B\u002B Project\\HeThongQuanLyHocSinh\\HeThongQuanLyHocSinh\\HeThongQuanLyHocSinh.cpp",
+              "DocumentMoniker": "C:\\Users\\PC\\source\\repos\\C\u002B\u002B Project\\HeThongQuanLyHocSinh\\HeThongQuanLyHocSinh\\HeThongQuanLyHocSinh.cpp",
               "RelativeDocumentMoniker": "HeThongQuanLyHocSinh\\HeThongQuanLyHocSinh.cpp",
-              "ToolTip": "C:\\Users\\ADMIN\\source\\repos\\C\u002B\u002B Project\\HeThongQuanLyHocSinh\\HeThongQuanLyHocSinh\\HeThongQuanLyHocSinh.cpp",
+              "ToolTip": "C:\\Users\\PC\\source\\repos\\C\u002B\u002B Project\\HeThongQuanLyHocSinh\\HeThongQuanLyHocSinh\\HeThongQuanLyHocSinh.cpp",
               "RelativeToolTip": "HeThongQuanLyHocSinh\\HeThongQuanLyHocSinh.cpp",
-              "ViewState": "AQIAADQBAAAAAAAAAAAAwEsBAAAFAAAA",
+              "ViewState": "AQIAADIAAAAAAAAAAAASwEMAAAAMAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2024-05-01T08:37:20.525Z",
               "EditorCaption": ""
@@ -37,14 +37,13 @@
               "$type": "Document",
               "DocumentIndex": 1,
               "Title": "FunctionsAndDatabase.cpp",
-              "DocumentMoniker": "C:\\Users\\ADMIN\\source\\repos\\C\u002B\u002B Project\\HeThongQuanLyHocSinh\\HeThongQuanLyHocSinh\\FunctionsAndDatabase.cpp",
+              "DocumentMoniker": "C:\\Users\\PC\\source\\repos\\C\u002B\u002B Project\\HeThongQuanLyHocSinh\\HeThongQuanLyHocSinh\\FunctionsAndDatabase.cpp",
               "RelativeDocumentMoniker": "HeThongQuanLyHocSinh\\FunctionsAndDatabase.cpp",
-              "ToolTip": "C:\\Users\\ADMIN\\source\\repos\\C\u002B\u002B Project\\HeThongQuanLyHocSinh\\HeThongQuanLyHocSinh\\FunctionsAndDatabase.cpp",
+              "ToolTip": "C:\\Users\\PC\\source\\repos\\C\u002B\u002B Project\\HeThongQuanLyHocSinh\\HeThongQuanLyHocSinh\\FunctionsAndDatabase.cpp",
               "RelativeToolTip": "HeThongQuanLyHocSinh\\FunctionsAndDatabase.cpp",
               "ViewState": "AQIAACcAAAAAAAAAAAAAADQAAAAYAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-05-01T08:38:39.137Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-05-01T08:38:39.137Z"
             }
           ]
         }
