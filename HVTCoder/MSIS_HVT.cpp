@@ -18,7 +18,7 @@ int main() {
     for (int i = 1; i <= n; i++) cin >> a[i];
     for (int i = 1; i <= n; i++) {
         int tmp = a[i];
-        for (int j = min(i-10, 1); j < i; j++) {
+        for (int j = 1; j < i; j++) {
             if (a[j] < a[i]) {
                 tmp += a[j];
             }
