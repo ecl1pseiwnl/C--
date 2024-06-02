@@ -18,20 +18,25 @@ int n,m, par[N], sz[N];
 vector<int> v[N];
 
 void make_set() {
-    for (int i = 1; i <= n; i++) par[i] = i, sz[i] = 1;
+    for (int i = 1; i <= n; i++) {
+        par[i] = i;
+        sz[i] = 1;
+    }
 }
 
-int find(int u) {
+int find_set(int u) {
     if (u == par[u]) return u;
-    return par[u] == find(par[u]);
+    int p = find_set(par[u]);
+    return p;
 }
 
 bool Union(int a, int b) {
-    a = find(a), b = find(b);
+    a = find_set(a);
+    b = find_set(b);
     if (a == b) return false;
     if (sz[a] < sz[b]) swap(a,b);
     par[b] = a;
-    sz[a] + sz[b];
+    sz[a] += sz[b];
     return true;
 }
 
