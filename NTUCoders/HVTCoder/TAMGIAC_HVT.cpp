@@ -13,6 +13,18 @@ typedef vector<mii> viii;
 #define endl "\n"
 #define MOD 10000007
 
+bool check(int a, int b, int c) {
+    int a2 = a*a, b2 = b*b, c2 = c*c;
+    if (a != b || a != c || b != c) {
+        if (a != b && b != c) {
+            if ((a2 != b2 + c2 )|| (b2 != a2 + c2) || (c2 = a2 + b2)) {
+                return true;
+            }
+        }
+    }
+    return false;
+}
+
 int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(nullptr); cout.tie(nullptr);
@@ -25,7 +37,9 @@ int main() {
             cout << "deu";
         } else if (a == b || a == c || b == c) {
             cout << "can";
-        } else cout << "thuong";
+        } else if (check(a,b,c)) {
+            cout << "thuong";
+        }
     } else cout << "0";
     return 0;
 }
