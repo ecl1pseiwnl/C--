@@ -127,6 +127,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="DatabaseQueries.cpp" />
     <ClCompile Include="HeThongQuanLyHocSinh.cpp" />
     <ClCompile Include="FunctionsAndDatabase.cpp" />
   </ItemGroup>
