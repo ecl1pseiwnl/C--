@@ -10,22 +10,24 @@
 //  8 8888            8888     ,88'  8 8888         8 8888        `8b.  ;8.`8888 8 8888         
 //  8 888888888888     `8888888P'    8 888888888888 8 8888         `Y8888P ,88P' 8 888888888888 
 //
-#include "FunctionsAndDatabase.cpp"
+#include "Functions.cpp"
+#include "MySQL_Queries.cpp"
 using namespace std;
 
-int numberOfClasses, numberOfStudents, numberOfTeachers, classid, searchStudentOptions, searchTeacherOptions, options, temp, cnt, tempIndex;
+int numberOfClasses, numberOfStudents, numberOfTeachers, searchStudentOptions, searchTeacherOptions, options, temp, cnt, tempIndex, classid, classID;
 double midTerm, finalTerm, tempGPA;
-string classID, s1 = "System has been shut down", s2 = "\nThank you for using this system", s3 = "Made by ecl1pseiwnl.", ID;
+string s1 = "System has been shut down", s2 = "\nThank you for using this system", s3 = "Made by ecl1pseiwnl.", ID;
 
 struct classes {
-	string className, classID, classMajor;
+	int classID = NULL, ordinal_number = NULL;
+	string className, classMajor;
 	vector<Teacher> TList;
 	vector<Student> SList;
 	Teacher t[23];
 	Student s[46];
 };
-vector<classes> Class(21);
-
+vector<Admins> Admin(26);
+vector<classes> Class(80);
 // ------------------------------------------------------------------------------------------------------------
 
 void textDisplay(const string text, int typeSpeed, int pauseDur, bool clearConsole) {
@@ -67,6 +69,8 @@ void sortLowToHighStudent(int classid) {
 		it.SPrint();
 	}
 }
+
+
 
 void SearchTeacher(int Options, int classid) {
 	string searchID, searchName;
@@ -114,10 +118,26 @@ void SearchStudent(int Options, int classid) {
 	return cout << "This student does not existed\n", void();
 }
 
-void dev_options() {
+bool SearchClass(int ID) {
+	for (int i = 1; i <= 79; i++) {
+		if (Class[i].ordinal_number == ID) return true;
+	}
+	return false;
+}
+
+void dev_options(string user, string password) {
+	bool temp = false;
+	for (auto it : Admin) {
+		if (it.username == user && it.password == password) {
+			temp = true;
+		}
+	}
+	if (temp == false) {
+		system("cls");
+		return textDisplay("Access Denied",75,200,true), void();
+	}
 	system("cls");
 	int ops;
-	bool temp = true;
 	while (temp) {
 		cout << "===========================================================================\n";
 		cout << "		         Developer Settings\n";
@@ -131,24 +151,24 @@ void dev_options() {
 		cout << "Your option: "; cin >> ops;
 		cout << "--------------------------------------------------------------------------\n";
 		switch (ops) {
-		case 1:
-		{
-
-		}
-		case 2:
-		{
-
-		}
-		case 3:
-		{
-
-		}
-		case 0:
-		{
-			system("cls");
-			temp = false;
-			break;
-		}
+			case 1:
+			{
+				break;
+			}
+			case 2:
+			{
+				break;
+			}
+			case 3:
+			{
+				break;
+			}
+			case 0:
+			{
+				system("cls");
+				temp = false;
+				break;
+			}
 		}
 	}
 }
@@ -157,7 +177,7 @@ void addClass() {
 	cout << "Please insert number of classes you want to add: "; cin >> numberOfClasses;
 	cout << "Please insert number of teachers of that class you want to add: "; cin >> numberOfTeachers;
 	for (int i = 1; i <= numberOfClasses; i++) {
-		if (Class[i].classID == "") {
+		if (Class[i].classID == NULL) {
 			cout << "Class No." << i << "'s ID: "; cin >> Class[i].classID;
 			cout << "Class No." << i << "'s name: ";
 			cin.ignore();
@@ -194,34 +214,36 @@ void addClass() {
 
 void fillClass() {
 	for (int i = 1; i < 21; i++) {
-		Class[i].classID = to_string(i) + to_string(i) + to_string(i);
+		Class[i].classID = i*i*i;
+		Class[i].ordinal_number = i;
 		Class[i].classMajor = to_string(i) + to_string(i) + to_string(i) + to_string(i);
 		Class[i].className = to_string(i) + to_string(i) + to_string(i) + to_string(i) + to_string(i);
-	}
-	for (int i = 1; i < 21; i++) {
-		Class[i].s[i].studentID = to_string(i);
-		Class[i].s[i].name = to_string(i) + to_string(i);
-		Class[i].s[i].gender = to_string(i) + to_string(i) + to_string(i);
-		Class[i].s[i].birthday = to_string(i) + "2";
-		Class[i].s[i].major = to_string(i);
-		Class[i].s[i].nationality = to_string(i) + "3";
-		Class[i].s[i].gpa = i + 1;
-		Class[i].SList.push_back(Class[i].s[i]);
-	}
-	for (int i = 1; i < 21; i++) {
-		Class[i].t[i].teacherID = to_string(i);
-		Class[i].t[i].name = to_string(i) + to_string(i);
-		Class[i].t[i].gender = to_string(i) + to_string(i) + to_string(i);
-		Class[i].t[i].birthday = to_string(i) + "2";
-		Class[i].t[i].major = to_string(i);
-		Class[i].t[i].nationality = to_string(i) + "3";
-		Class[i].TList.push_back(Class[i].t[i]);
+		for (int j = 1; j < 46; j++) {
+			Class[i].s[j].studentID = to_string(i);
+			Class[i].s[j].name = to_string(i) + to_string(i);
+			Class[i].s[j].gender = to_string(i) + to_string(i) + to_string(i);
+			Class[i].s[j].birthday = to_string(i) + "2";
+			Class[i].s[j].major = to_string(i);
+			Class[i].s[j].nationality = to_string(i) + "3";
+			Class[i].s[j].gpa = i + 1;
+			Class[i].SList.push_back(Class[i].s[j]);
+		}
+		for (int k = 1; k < 21; k++) {
+			Class[i].t[k].teacherID = to_string(i);
+			Class[i].t[k].name = to_string(i) + to_string(i);
+			Class[i].t[k].gender = to_string(i) + to_string(i) + to_string(i);
+			Class[i].t[k].birthday = to_string(i) + "2";
+			Class[i].t[k].major = to_string(i);
+			Class[i].t[k].nationality = to_string(i) + "3";
+			Class[i].TList.push_back(Class[i].t[k]);
+		}
 	}
 }
 
 void delClass() {
 	for (int i = 1; i < 21; i++) {
-		Class[i].classID = "";
+		Class[i].classID = NULL;
+		Class[i].ordinal_number = NULL;
 		Class[i].classMajor = "";
 		Class[i].className = "";
 		for (int j = 1; j < 46; j++) {
@@ -253,6 +275,7 @@ void delClass() {
 
 int main() {
 	while (true) {
+		Admin[1].LoadAdminInfo();
 		system("color 0E");
 		cout << "===========================================================================\n";
 		cout << "                  Managing Students and Teachers system\n";
@@ -283,32 +306,46 @@ int main() {
 			case 2:
 			{
 				cout << "Please insert class's ordinal number you want to search: \n"; cin >> classid;
-				cout << "Please choose one of these options\n 1. Search by ID\n 2. Search by name \n"; cin >> searchStudentOptions;
-				cout << endl;
-				SearchStudent(searchStudentOptions, classid);
-				cout << "\n\n\n";
+				if (SearchClass(classid) == true) {
+					cout << "Please choose one of these options\n 1. Search by ID\n 2. Search by name \n"; cin >> searchStudentOptions;
+					cout << endl;
+					cout << "------------------------------------------------------\n";
+					SearchStudent(searchStudentOptions, classid);
+					cout << "\n\n\n";
+				}
+				else if (SearchClass(classid) == false) {
+					cout << "The class with ID '" << classid << "' does not exist!\n";
+					cout << "------------------------------------------------------\n";
+				}
 				break;
 			}
 			case 3:
 			{
 				cout << "Please insert class's ordinal number you want to search: \n"; cin >> classid;
-				cout << "Please choose one of these options\n 1. Search by ID\n 2. Search by name \n"; cin >> searchTeacherOptions;
-				cout << endl;
-				SearchTeacher(searchTeacherOptions, classid);
-				cout << "\n\n\n";
+				if (SearchClass(classid) == true) {
+					cout << "Please choose one of these options\n 1. Search by ID\n 2. Search by name \n"; cin >> searchTeacherOptions;
+					cout << endl;
+					cout << "------------------------------------------------------\n";
+					SearchTeacher(searchTeacherOptions, classid);
+					cout << "\n\n\n";;
+				}
+				else if (SearchClass(classid) == false) {
+					cout << "The class with ID '" << classid << "' does not exist!\n";
+					cout << "------------------------------------------------------\n";
+				}
 				break;
 			}
 			case 4:
 			{
-				int check = 0;
+				bool check = false;
 				cout << "\n\n\n======================================================\n";
 				for (auto it : Class) {
-					if (it.classID == "") {
+					if (it.classID == NULL) {
 						continue;
 					}
 					else {
-						check++;
-						cout << "Class ID: " << it.classID << "\n" << "Class's name: " << it.className << "\n" << "Class's major: " << it.classMajor << "\n" << "Students: " << it.SList.size() << "\n";
+						check = true;
+						cout << "Class's ordinal number: " << it.ordinal_number << "\n" << "Class ID: " << it.classID << "\n" << "Class's name: " << it.className << "\n" << "Class's major: " << it.classMajor << "\n" << "Students: " << it.SList.size() << "\n";
 						cout << "------------------------------------------------------\n\n\n";
 					}
 				}
@@ -318,33 +355,58 @@ int main() {
 			case 5:
 			{
 				cout << "Please insert class's ordinal number you want to search: \n"; cin >> classid;
-				for (auto it : Class[classid].SList) {
-					it.SPrint();
+				cout << "------------------------------------------------------\n";
+				if (SearchClass(classid) == true) {
+					for (auto it : Class[classid].SList) {
+						it.SPrint();
+					}
+					cout << "\n\n\n";
 				}
-				cout << "\n\n\n";
+				else if (SearchClass(classid) == false) {
+					cout << "The class with ID '" << classid << "' does not exist!\n";
+					cout << "------------------------------------------------------\n";
+				}
 				break;
 			}
 			case 6:
 			{
 				cout << "Please insert class's ordinal number you want to search: \n"; cin >> classid;
-				for (auto it : Class[classid].TList) {
-					it.TPrint();
+				if (SearchClass(classid) == true) {
+					for (auto it : Class[classid].TList) {
+						it.TPrint();
+					}
+					cout << "\n\n\n";
 				}
-				cout << "\n\n\n";
+				else if (SearchClass(classid) == false) {
+					cout << "The class with ID '" << classid << "' does not exist!\n";
+					cout << "------------------------------------------------------\n";
+				}
 				break;
 			}
 			case 7:
 			{
 				cout << "Please insert class's ordinal number you want to search: \n"; cin >> classid;
-				sortHighToLowStudent(classid);
-				cout << "\n\n\n";
+				if (SearchClass(classid) == true) {
+					sortHighToLowStudent(classid);
+					cout << "\n\n\n";
+				}
+				else if (SearchClass(classid) == false) {
+					cout << "The class with ID '" << classid << "' does not exist!\n";
+					cout << "------------------------------------------------------\n";
+				}
 				break;
 			}
 			case 8:
 			{
 				cout << "Please insert class's ordinal number you want to search: \n"; cin >> classid;
-				sortLowToHighStudent(classid);
-				cout << "\n\n\n";
+				if (SearchClass(classid) == true) {
+					sortLowToHighStudent(classid);
+					cout << "\n\n\n";
+				}
+				else if (SearchClass(classid) == false) {
+					cout << "The class with ID '" << classid << "' does not exist!\n";
+					cout << "------------------------------------------------------\n";
+				}
 				break;
 			}
 			case 9: 
@@ -418,7 +480,7 @@ int main() {
 				else {
 					fileName += ".txt";
 					ofstream File(fileName);
-					File << "Class's ID: " + Class[tempIndex].classID + "\n";
+					File << "Class's ID: " + to_string(Class[tempIndex].classID) + "\n";
 					File << "Class's name: " +Class[tempIndex].className + "\n";
 					File << "Class's major: " + Class[tempIndex].classMajor + "\n";
 					File << "-------------------------------------------------------\n";
@@ -435,7 +497,7 @@ int main() {
 					File << "===================Students===========================\n";
 					for (auto it : Class[tempIndex].SList) {
 						string x = to_string(it.gpa), tmp;
-						tmp = tmp + x[0] + x[1] + x[2] + x[3];
+						tmp += x[0] + x[1] + x[2] + x[3] + x[4];
 						File << "Student's ID: " + it.studentID + "\n";
 						File << "Student's name: " + it.name + "\n";
 						File << "Student's gender: " + it.gender + "\n";
@@ -485,7 +547,11 @@ int main() {
 			}
 			case 322:
 			{
-				dev_options();
+				system("cls");
+				string username, password;
+				cout << "\nUsername: "; cin >> username; cout << endl;
+				cout << "Password: "; cin >> password; cout << endl;
+				dev_options(username,password);
 				break;
 			}
 			default: 

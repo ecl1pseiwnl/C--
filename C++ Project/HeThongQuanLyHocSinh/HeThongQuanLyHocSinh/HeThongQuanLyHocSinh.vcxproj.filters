@@ -18,10 +18,10 @@
     <ClCompile Include="HeThongQuanLyHocSinh.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="FunctionsAndDatabase.cpp">
+    <ClCompile Include="Functions.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="DatabaseQueries.cpp">
+    <ClCompile Include="MySQL_Queries.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

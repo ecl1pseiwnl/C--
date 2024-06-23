@@ -127,9 +127,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="DatabaseQueries.cpp" />
+    <ClCompile Include="MySQL_Queries.cpp" />
     <ClCompile Include="HeThongQuanLyHocSinh.cpp" />
-    <ClCompile Include="FunctionsAndDatabase.cpp" />
+    <ClCompile Include="Functions.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
