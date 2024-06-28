@@ -7,7 +7,7 @@ typedef vector<int> vi;
 typedef vector<pi> vii;
 typedef vector<mii> viii;
 #define ms(a,n) memset(a, n,sizeof(a))
-#define name "BAI1"
+#define name "TASK"
 #define fi first
 #define sec second
 #define mp make_pair
@@ -16,11 +16,25 @@ typedef vector<mii> viii;
 #define MOD 10000007
 
 int main() {
-    freopen(name ".INP","r",stdin);
-    freopen(name ".OUT","w",stdout);
     ios_base::sync_with_stdio(false);
     cin.tie(nullptr); cout.tie(nullptr);
-    ll n,a,b;
-    cin >> n >> a >> b;
+    int n, k, ans = 0;
+    cin >> n >> k;
+    int a[n];
+    for (int i = 0; i < n; i++) cin >> a[i];
+    sort(a,a+n);
+    int l = 0, r = n-1;
+    while(l <= r) {
+        if (a[l] + a[r] <= k) {
+            ans++;
+            l++;
+            r--;
+        }
+        else {
+            ans++;
+            r--;
+        }
+    }
+    cout << ans;
     return 0;
 }
