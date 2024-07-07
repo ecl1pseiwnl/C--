@@ -1,12 +1,4 @@
 #pragma once
-#include <iostream>
-#include <string>
-#include <vector>
-#include <algorithm>
-#include <iomanip>
-#include <Windows.h>
-#include <fstream>
-#include <sstream>
 #include "MySQL_Queries.cpp"
 
 using namespace std;

@@ -42,8 +42,9 @@ int main() {
 	inp();
 	for (int i = 1; i <= n; i++) {
 		if (!visited[i]) {
+            temp.pb(i);
 			dfs(i);
-			a.pb(tmp.size()+1);
+			a.pb(tmp.size());
             tmp.clear();
 		}
 	}
