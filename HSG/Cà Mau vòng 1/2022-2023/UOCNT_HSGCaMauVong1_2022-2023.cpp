@@ -10,7 +10,7 @@ typedef pair<int, int> pi;
 int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
-    ll n, s = 0, i = 2;
+    ll n, s = 0, i = ;
     cin >> n;
     set<int> se;
     while (i <= sqrt(n)) {
@@ -23,8 +23,6 @@ int main() {
     if (n != 1) {
         se.insert(n);
     }
-    for (auto x : se) {
-        s += x;
-    }
-    cout << s;
+    ll ans = accumulate(se.begin(),se.end(),0LL);
+    cout << ans;
 }

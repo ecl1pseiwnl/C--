@@ -26,9 +26,9 @@ struct edge{
 };
 
 const int N = 1e5+7;
-int n,m,q, par[N], sz[N];
+int n,m,q, par[N], sz[N], visited[N];
 vector<edge> v;
-set<int, greater<int>> ans;
+vi ans;
 
 void makeset() {
     for (int i = 1; i <= n; i++) {
@@ -64,14 +64,20 @@ signed main() {
         e.y = y;
         v.pb(e);
     }
+    ms(visited,0);
     makeset();
     for (int i = 0; i < m; i++) {
         edge e = v[i];
         Union(e.x,e.y);
     }
     for (int i = 1; i <= n; i++) {
-        ans.insert(sz[find_set(par[i])]);
+        int x = find_set(i);
+        if(!visited[x]) {
+            visited[x] = 1;
+            ans.pb(sz[x]);
+        }
     }
+    sort(ans.begin(),ans.end(),greater<int>());
     while(q--) {
         int x, i = 0;
         cin >> x;
