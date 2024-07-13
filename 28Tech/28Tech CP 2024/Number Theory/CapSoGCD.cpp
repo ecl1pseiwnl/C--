@@ -21,39 +21,25 @@ const int MOD = 1e9+7;
 const int INF_INT = 2e9;
 const ll INF_LL = 2e18;
 
-const int N = 1e7+7;
-int a[N];
-
-void snt() {
-    ms(a,1);
-    a[1] = a[0] = 0;
-    for (int i = 2; i*i <= N; i++) {
-        if (a[i]) {
-            for (int j = i*i; j<=N; j+=i) {
-                a[j] = 0;
+signed main() {
+    cin.tie(nullptr)->sync_with_stdio(false);
+    int n;
+    cin >> n;
+    vi v(n);
+    for (auto &it : v) cin >> it;
+    int maxv = *max_element(all(v));
+    vi a(maxv+1);
+    for (int i = 0; i < n; i++) {
+        for (int j = 1; j <= sqrt(v[i]); j++) {
+            if (v[i] % j == 0) {
+                a[j]++;
+                if (j != v[i] / j) {
+                    a[v[i]/j]++;
+                }
             }
         }
     }
-}
-
-signed main() {
-    cin.tie(nullptr)->sync_with_stdio(false);
-    snt();
-    int n;
-    cin >> n;
-    vector<int> v;
-    for (int i = 0; i < n; i++) {
-        int x;
-        cin >> x;
-        if (a[x]) v.pb(x);
+    for (int i = maxv; i >= 1; i--) {
+        if (a[i] > 1) return cout << i, 0;
     }
-    sort(all(v));
-    int cnt = 0;
-    for (int i = 0; i < v.size(); i++) {
-        for (int j = i+1; j < v.size(); j++) {
-            if (v[i] == v[j]) cnt++;
-        }
-    }
-    cout << cnt;
-    return 0;
 }
