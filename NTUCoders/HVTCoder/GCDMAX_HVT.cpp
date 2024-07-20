@@ -23,15 +23,7 @@ int main() {
     while(t--) {
         int n, maxv = INT_MIN;
         cin >> n;
-        for (int i = 1; i <= n; i++) {
-            for (int j = i; j <= n; j++) {
-                if (i < j) {
-                    int g = __gcd(i,j);
-                    maxv = max(maxv,g);
-                }
-            }
-        }
-        cout << maxv << endl;
+        cout << floor(n/2) << endl;
     }
     return 0;
 }
