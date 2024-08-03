@@ -21,36 +21,28 @@ ll lcm(ll x, ll y) { return 1ll*(x / __gcd(x,y))*y;}
 const int MOD = 1e9+7;
 const int32_t INF32 = 0x3f3f3f3f;
 const int64_t INF64 = 0x3f3f3f3f3f3f3f3f;
-#define int long long
-const int N = 1e5+10;
-int l[N], r[N];
 
 signed main() {
     cin.tie(nullptr)->sync_with_stdio(false);
-    int n,m;
-    cin >> n >> m;
-    vector<ll> a(n+1);
-    for (int i = 1; i <= n; i++) {
-        cin >> a[i];
+    int temp = 0;
+    string s;
+    cin >> s;
+    deque<char> q;
+    for (auto &it : s) {
+        if(!q.empty() && q.back() != it) {
+            temp++;
+        }
+        q.push_back(it);
+        if (temp == 2) {
+            q.pop_back();
+            q.pop_back();
+            q.pop_back();
+            temp = 0;
+        }
     }
-    for (int i = 1; i <= n; i++) {
-        l[i] = max(0LL,a[i-1] - a[i]);
-    }
-    for (int i = n; i >= 1; i--) {
-        r[i] = max(0LL,a[i+1] - a[i]);
-    }
-    for (int i = 1; i <= n; i++) {
-        l[i] += l[i-1];
-    }
-    for (int i = n; i >= 1; i--) {
-        r[i] += r[i+1];
-    }
-    while(m--) {
-        int s,t;
-        cin >> s >> t;
-        if (s>t) {
-            cout << r[t] - r[s] << endl;
-        } else cout << l[t] - l[s] << endl;
+    while(!q.empty()) {
+            auto it = q.front(); q.pop_back();
+            cout << it;
     }
     return 0;
 }
