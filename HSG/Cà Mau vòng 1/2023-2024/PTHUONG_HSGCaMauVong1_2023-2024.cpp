@@ -1,42 +1,78 @@
 #include <bits/stdc++.h>
 using namespace std;
+void __print(int x) {cerr << x;}
+void __print(long x) {cerr << x;}
+void __print(long long x) {cerr << x;}
+void __print(unsigned x) {cerr << x;}
+void __print(unsigned long x) {cerr << x;}
+void __print(unsigned long long x) {cerr << x;}
+void __print(float x) {cerr << x;}
+void __print(double x) {cerr << x;}
+void __print(long double x) {cerr << x;}
+void __print(char x) {cerr << '\'' << x << '\'';}
+void __print(const char *x) {cerr << '\"' << x << '\"';}
+void __print(const string &x) {cerr << '\"' << x << '\"';}
+void __print(bool x) {cerr << (x ? "true" : "false");}
+template<typename T, typename V>
+void __print(const pair<T, V> &x) {cerr << '{'; __print(x.first); cerr << ','; __print(x.second); cerr << '}';}
+template<typename T>
+void __print(const T &x) {int f = 0; cerr << '{'; for (auto &i: x) cerr << (f++ ? "," : ""), __print(i); cerr << "}";}
+void _print() {cerr << "]\n";}
+template <typename T, typename... V>
+void _print(T t, V... v) {__print(t); if (sizeof...(v)) cerr << ", "; _print(v...);}
+#ifndef ONLINE_JUDGE
+#define debug(x...) cerr << "[" << #x << "] = ["; _print(x)
+#else
+#define debug(x...)
+#endif
 typedef long long ll;
+typedef pair<int,int> pi;
+typedef map<int,int> mii;
 typedef vector<int> vi;
-typedef pair<int, int> pi;
-typedef set<int> si;
-typedef map<int, int> mii;
-#define MOD 1000000007
-#define endl "\n"
+typedef vector<pi> vii;
+typedef vector<mii> viii;
+ll __lcm(ll x, ll y) { return 1ll*(x / __gcd(x,y))*y;}
+#define ms(a,n) memset(a, n,sizeof(a))
+#define all(x) (x).begin(),(x).end()
+#define ins insert
+#define sz(x) (int)(x.size())
+#define name "data"
+#define fi first
+#define sec second
 #define mp make_pair
+#define ep emplace_back
 #define pb push_back
+#define endl "\n"
+const int MOD = 1e9+7;
+const int32_t IINF = 0x3f3f3f3f;
+const int64_t LLINF = 0x3f3f3f3f3f3f3f3f;
 
-int ptich(int n) {
-	int s = 0;
-	for (int i = 1; i <= sqrt(n); i++) {
-		if (n % i == 0) {
-			s += i;
-		}
-	}
-	for (int i = sqrt(n); i >= 1; i--) {
-		if (n % i == 0 && n / i != i) {
-			s += n / i;
-		}
-	}
-	return s;
+const int N = 1e7+7;
+vector<int> a(N,1);
+void sang() {
+    for (int i = 2; i*i <= N; i++) {
+        for (int j = i*i; j <= N; j+=i) {
+            a[j] += i;
+            if (i*i != j) a[j] += j/i;
+        }
+    }
+    for (int i = 2; i <= N; i++) a[i] += i;
 }
 
-int main() {
-	ios_base::sync_with_stdio(false);
-	cin.tie(NULL);
-	int n;
-	cin >> n;
-	priority_queue < pair<int, int>, vector<pair<int, int>>> q;
-	for (int i = 0; i < n; i++) {
-		int x;
-		cin >> x;
-		q.push({ ptich(x),x });
-	}
-	auto it = q.top();
-	cout << it.second;
-	return 0;
+signed main() {
+    cin.tie(nullptr)->sync_with_stdio(false);
+    sang();
+    int n, maxv = 0, ans = 0;
+    cin >> n;
+    vi v(n);
+    for (auto &it : v) cin >> it;
+    for (auto it : v) {
+        int k  = a[it];
+        if (maxv < k) {
+            maxv = k;
+            ans = it;
+        }
+    }
+    cout << ans;
+    return 0;
 }

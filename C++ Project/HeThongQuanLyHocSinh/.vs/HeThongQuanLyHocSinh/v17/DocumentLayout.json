@@ -3,12 +3,12 @@
   "WorkspaceRootPath": "C:\\Users\\PC\\source\\repos\\C\u002B\u002B Project\\HeThongQuanLyHocSinh\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{A6478F51-5017-4E25-AB9E-27A75EB48796}|HeThongQuanLyHocSinh\\HeThongQuanLyHocSinh.vcxproj|C:\\Users\\PC\\source\\repos\\C\u002B\u002B Project\\HeThongQuanLyHocSinh\\HeThongQuanLyHocSinh\\Functions.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{A6478F51-5017-4E25-AB9E-27A75EB48796}|HeThongQuanLyHocSinh\\HeThongQuanLyHocSinh.vcxproj|solutionrelative:HeThongQuanLyHocSinh\\Functions.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{A6478F51-5017-4E25-AB9E-27A75EB48796}|HeThongQuanLyHocSinh\\HeThongQuanLyHocSinh.vcxproj|C:\\Users\\PC\\source\\repos\\C\u002B\u002B Project\\HeThongQuanLyHocSinh\\HeThongQuanLyHocSinh\\HeThongQuanLyHocSinh.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{A6478F51-5017-4E25-AB9E-27A75EB48796}|HeThongQuanLyHocSinh\\HeThongQuanLyHocSinh.vcxproj|solutionrelative:HeThongQuanLyHocSinh\\HeThongQuanLyHocSinh.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A6478F51-5017-4E25-AB9E-27A75EB48796}|HeThongQuanLyHocSinh\\HeThongQuanLyHocSinh.vcxproj|C:\\Users\\PC\\source\\repos\\C\u002B\u002B Project\\HeThongQuanLyHocSinh\\HeThongQuanLyHocSinh\\Functions.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{A6478F51-5017-4E25-AB9E-27A75EB48796}|HeThongQuanLyHocSinh\\HeThongQuanLyHocSinh.vcxproj|solutionrelative:HeThongQuanLyHocSinh\\Functions.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A6478F51-5017-4E25-AB9E-27A75EB48796}|HeThongQuanLyHocSinh\\HeThongQuanLyHocSinh.vcxproj|C:\\Users\\PC\\source\\repos\\C\u002B\u002B Project\\HeThongQuanLyHocSinh\\HeThongQuanLyHocSinh\\MySQL_Queries.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
@@ -22,7 +22,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Bookmark",
@@ -30,26 +30,26 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
               "Title": "HeThongQuanLyHocSinh.cpp",
               "DocumentMoniker": "C:\\Users\\PC\\source\\repos\\C\u002B\u002B Project\\HeThongQuanLyHocSinh\\HeThongQuanLyHocSinh\\HeThongQuanLyHocSinh.cpp",
               "RelativeDocumentMoniker": "HeThongQuanLyHocSinh\\HeThongQuanLyHocSinh.cpp",
               "ToolTip": "C:\\Users\\PC\\source\\repos\\C\u002B\u002B Project\\HeThongQuanLyHocSinh\\HeThongQuanLyHocSinh\\HeThongQuanLyHocSinh.cpp",
               "RelativeToolTip": "HeThongQuanLyHocSinh\\HeThongQuanLyHocSinh.cpp",
-              "ViewState": "AQIAALkBAAAAAAAAAAAAAP4BAAApAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAsAAAACAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2024-05-01T08:37:20.525Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "Functions.cpp",
               "DocumentMoniker": "C:\\Users\\PC\\source\\repos\\C\u002B\u002B Project\\HeThongQuanLyHocSinh\\HeThongQuanLyHocSinh\\Functions.cpp",
               "RelativeDocumentMoniker": "HeThongQuanLyHocSinh\\Functions.cpp",
               "ToolTip": "C:\\Users\\PC\\source\\repos\\C\u002B\u002B Project\\HeThongQuanLyHocSinh\\HeThongQuanLyHocSinh\\Functions.cpp",
               "RelativeToolTip": "HeThongQuanLyHocSinh\\Functions.cpp",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA4AAAARAAAA",
+              "ViewState": "AQIAAGYAAAAAAAAAAAAAAEsAAAAvAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2024-05-01T08:38:39.137Z",
               "EditorCaption": ""
@@ -64,8 +64,7 @@
               "RelativeToolTip": "HeThongQuanLyHocSinh\\MySQL_Queries.cpp",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAMAAAARAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-06-20T19:01:38.213Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-06-20T19:01:38.213Z"
             }
           ]
         }
