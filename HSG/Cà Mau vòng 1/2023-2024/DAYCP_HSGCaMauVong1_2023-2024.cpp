@@ -58,26 +58,22 @@ bool cp(int x) {
     return false;
 }
 
-int sol(const vector<int>& arr) {
-    if (arr.empty()) return 0;
-    vector<int> lis;
-    for (int num : arr) {
-        auto it = lower_bound(lis.begin(), lis.end(), num);
-        if (it == lis.end()) {
-            lis.push_back(num);
+int sol(const vi &a) {
+    if (a.empty()) return 0;
+    vi ans;
+    for (auto it : a) {
+        auto t = upper_bound(all(ans),it);
+        if (t == ans.end()) {
+            ans.ep(it);
         } else {
-            *it = num;
+            *t = it;
         }
     }
-    return lis.size();
+    return ans.size();
 }
 
 signed main() {
     cin.tie(nullptr)->sync_with_stdio(false);
-    if (fopen(name ".inp", "r")) {
-        freopen(name ".inp","r",stdin);
-        freopen(name ".out","w",stdout);
-    }
     cin >> n;
     vi v;
     for (int i = 0; i < n; i++) {

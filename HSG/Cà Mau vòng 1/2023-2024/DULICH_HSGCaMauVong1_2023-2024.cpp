@@ -88,9 +88,8 @@ signed main() {
         edge e;
         e.x = x;
         e.y = y;
-        v.pb(e);
+        v.ep(e);
     }
-    ms(visited,0);
     makeset();
     for (int i = 0; i < m; i++) {
         edge e = v[i];
@@ -100,17 +99,16 @@ signed main() {
         int x = find_set(i);
         if(!visited[x]) {
             visited[x] = 1;
-            ans.pb(sz[x]);
+            ans.ep(sz[x]);
         }
     }
-    sort(ans.begin(),ans.end(),greater<int>());
+    sort(all(ans),greater<int>());
     while(q--) {
-        int x, i = 0;
-        cin >> x;
-        ll sum = 0;
+        int x, i = 0; cin >> x;
+        ll s = 0;
         for (auto it : ans) {
-            sum += it;
-            if (sum >= x) {
+            s += it;
+            if (s >= x) {
                 cout << i << " ";
                 break;
             }
@@ -119,3 +117,4 @@ signed main() {
     }
     return 0;
 }
+

@@ -51,24 +51,23 @@ signed main() {
     cin.tie(nullptr)->sync_with_stdio(false);
     int n;
     cin >> n;
-    vi a(n);
+    if (n == 0) return cout << "0 0", 0;
+    vector<ll> a(n);
     for (auto &it : a) cin >> it;
-    ll maxv = INT_MIN,curv = 0, curl = 0, maxl = 0;
-    for (int i = 0; i < n; i++) {
+    ll maxv = LONG_LONG_MIN,curv = 0, curl = 0, maxl = 0;
+    for (auto it : a) {
         if (curv <= 0) {
-            curv = a[i];
+            curv = it;
             curl = 1;
         } else {
-            curv += a[i];
-            curl++;
+            curv += it;
+            ++curl;
         }
         if (curv > maxv) {
             maxv = curv;
             maxl = curl;
-        } else if (curv == maxv) {
-            if (curl > maxl) {
-                maxl = curl;
-            }
+        } else if (curv == maxv && curl > maxl) {
+            maxl = curl;
         }
     }
     cout << maxv << " " << maxl;
