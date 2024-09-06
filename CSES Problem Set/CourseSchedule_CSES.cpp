@@ -47,39 +47,48 @@ const int MOD = 1e9+7;
 const int32_t IINF = 0x3f3f3f3f;
 const int64_t LLINF = 0x3f3f3f3f3f3f3f3f;
 
-const int N = 1e5+7;
-int n, maxv, b[N];
+const int N = 2e5+7;
+int n,m, deg[N];
+vi v[N], topo, visited(N,0);
 
-bool cp(int x) {
-    int s = sqrt(x);
-    if (s*s == x) {
-        return true;
+void inp() {
+    cin >> n >> m;
+    for (int i = 0; i < m; i++) {
+        int x,y;
+        cin >> x >> y;
+        deg[y]++;
+        v[x].pb(y);
     }
-    return false;
 }
 
-int sol(const vi &a) {
-    if (a.empty()) return 0;
-    vi ans;
-    for (auto it : a) {
-        auto t = upper_bound(all(ans),it);
-        if (t == ans.end()) {
-            ans.ep(it);
+void bfs() {
+    queue<int> q;
+    for (int i = 1; i<= n;i++) {
+        if (deg[i] == 0) q.push(i);
+    }
+    while(!q.empty()) {
+        auto it = q.front();
+        q.pop();
+        topo.pb(it);
+        for (auto a : v[it]) {
+            deg[a]--;
+            if (deg[a] == 0) q.push(a);
         }
     }
-    return ans.size();
+    if (topo.empty() || topo.size() < n) {
+        return cout << "IMPOSSIBLE", void();
+    } else {
+        for (auto it : topo) cout << it << " ";
+    }
 }
 
 signed main() {
     cin.tie(nullptr)->sync_with_stdio(false);
-    cin >> n;
-    vi v;
-    for (int i = 0; i < n; i++) {
-        int x; cin >> x;
-        if (cp(x)) {
-            v.ep(x);
-        }
+    if (fopen(name ".inp", "r")) {
+        freopen(name ".inp","r",stdin);
+        freopen(name ".out","w",stdout);
     }
-    cout << sol(v);
+    inp();
+    bfs();
     return 0;
 }

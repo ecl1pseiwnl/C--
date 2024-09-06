@@ -50,6 +50,6 @@ signed main() {
     prep();
     ll n,k;
     cin >> n >> k;
-    cout << C(n,k);
+    cout << C(k+n-1,n-1);
     return 0;
 }

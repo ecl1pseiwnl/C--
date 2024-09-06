@@ -48,38 +48,60 @@ const int32_t IINF = 0x3f3f3f3f;
 const int64_t LLINF = 0x3f3f3f3f3f3f3f3f;
 
 const int N = 1e5+7;
-int n, maxv, b[N];
+int n,m,par[N];
+vector<pi> v[N];
 
-bool cp(int x) {
-    int s = sqrt(x);
-    if (s*s == x) {
-        return true;
+void inp() {
+    cin >> n >> m;
+    for (int i = 0, x,y,z; i < m; i++) {
+        cin >> x >> y >> z;
+        v[x].pb({y,z});
+        v[y].pb({x,z});
     }
-    return false;
 }
 
-int sol(const vi &a) {
-    if (a.empty()) return 0;
-    vi ans;
-    for (auto it : a) {
-        auto t = upper_bound(all(ans),it);
-        if (t == ans.end()) {
-            ans.ep(it);
+void dij(int s, int t) {
+    vector<ll> d(n+1,LLINF);
+    d[s] = 0;
+    par[s] = 1;
+    priority_queue<pi,vector<pi>,greater<pi>> q;
+    q.push({0,s});
+    while(!q.empty()) {
+        auto [i,j] = q.top();
+        q.pop();
+        if (i > d[j]) {
+            continue;
+        }
+        for (auto [x,y] : v[j]) {
+            if (d[x] > d[j] + y) {
+                d[x] = d[j] + y;
+                q.push({d[x],x});
+                par[x] = j;
+            }
         }
     }
-    return ans.size();
+    if (d[n] == LLINF) {
+        cout << "-1";
+    } else {
+        vi ans;
+        while(1) {
+            ans.pb(t);
+            if (t == 1) break;
+            t = par[t];
+        }
+        reverse(all(ans));
+        for (auto it : ans) cout << it << " ";
+    }
 }
 
 signed main() {
     cin.tie(nullptr)->sync_with_stdio(false);
-    cin >> n;
-    vi v;
-    for (int i = 0; i < n; i++) {
-        int x; cin >> x;
-        if (cp(x)) {
-            v.ep(x);
-        }
+    if (fopen(name ".inp", "r")) {
+        freopen(name ".inp","r",stdin);
+        freopen(name ".out","w",stdout);
     }
-    cout << sol(v);
+    inp();
+    dij(1,n);
     return 0;
 }
+
