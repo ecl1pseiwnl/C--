@@ -33,6 +33,22 @@ void DFS(int u) {
 	}
 }
 
+void DFSKhuDeQuy(int u) { // Lưu ý khử đệ quy DFS khi và chỉ khi N đạt tới 10^7
+    stack<int> st;
+    st.push(u);
+    while(!st.empty()) {
+        auto it = st.top();
+        st.pop();
+        visited[it] = true;
+        for (auto x : v[it]) {
+            if (!visited[x]) {
+                st.push(x);
+            }
+            else continue;
+        }
+    }
+}
+
 int main() {
 	ios_base::sync_with_stdio(false);
 	cin.tie(NULL);

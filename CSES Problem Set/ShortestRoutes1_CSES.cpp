@@ -47,8 +47,38 @@ const int MOD = 1e9+7;
 const int32_t IINF = 0x3f3f3f3f;
 const int64_t LLINF = 0x3f3f3f3f3f3f3f3f;
 
-const int N = 250007, M = 500;
-ll n,m,q, dis[M+7][M+7];
+const int N = 2*1e5+7;
+int n,m;
+vector<pi> v[N];
+
+void inp() {
+    cin >> n >> m;
+    for (int i = 1, x,y,z; i <= m; i++) {
+        cin >> x >> y >> z;
+        v[x].pb({y,z});
+    }
+}
+
+void djk(int s) {
+    vector<ll> d(n+1, LLINF);
+    d[s] = 0;
+    priority_queue<pair<ll,ll>,vector<pair<ll,ll>>,greater<pair<ll,ll>>> q;
+    q.push({0,s});
+    while(!q.empty()) {
+        auto [len,vert] = q.top();
+        q.pop();
+        if (len > d[vert]) continue;
+        for (auto [x,w] : v[vert]) {
+            if (d[x] > d[vert] + w) {
+                d[x] = d[vert] + w;
+                q.push({d[x],x});
+            }
+        }
+    }
+    for (int i = 1; i <= n; i++) {
+        cout << d[i] << " ";
+    }
+}
 
 signed main() {
     cin.tie(nullptr)->sync_with_stdio(false);
@@ -56,28 +86,7 @@ signed main() {
         freopen(name ".inp","r",stdin);
         freopen(name ".out","w",stdout);
     }
-    cin >> n >> m >> q;
-    for (int i = 1; i <= n+1; i++) {
-        for (int j = 1; j <= n+1; j++) {
-            dis[i][j] = LLINF;
-        }
-        dis[i][i] = 0;
-    }
-    for (ll i = 0,x,y,z; i < m; i++) {
-        cin >> x >> y >> z;
-        dis[x][y] = min(dis[x][y],z);
-        dis[y][x] = min(dis[y][x],z);
-    }
-    for (int k = 1; k <= n+1; k++) {
-        for (int i = 1; i <= n+1; i++) {
-            for (int j = 1; j <= n+1; j++) {
-                dis[i][j] = min(dis[i][j], dis[i][k]+dis[k][j]);
-            }
-        }
-    }
-    for (int i = 0,a,b; i < q; i++) {
-        cin >> a >> b;
-        cout << ((dis[a][b]>= LLINF)? -1 : dis[a][b]) << endl;
-    }
+    inp();
+    djk(1);
     return 0;
 }
