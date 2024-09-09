@@ -47,30 +47,40 @@ const int MOD = 1e9+7;
 const int32_t IINF = 0x3f3f3f3f;
 const int64_t LLINF = 0x3f3f3f3f3f3f3f3f;
 
+struct num{
+    int x,y;
+};
+
+vector<num> v;
+
+bool cmp(num a, num b) {
+    if (a.y == b.y) {
+        return a.x < b.x;
+    }
+    return a.y < b.y;
+}
+
 signed main() {
     cin.tie(nullptr)->sync_with_stdio(false);
     if (fopen(name ".inp", "r")) {
         freopen(name ".inp","r",stdin);
         freopen(name ".out","w",stdout);
     }
-    int n,x;
-    cin >> n >> x;
-    vector<pi> v;
-    for (int i = 0,x; i < n; i++) {
-        cin >> x;
-        v.pb({x,i+1});
+    int n;
+    cin >> n;
+    for (int i = 0; i < n; i++) {
+        int a,b;
+        cin >> a >> b;
+        v.pb({a,b});
     }
-    int l = 0, r = n-1;
-    sort(all(v));
-    while(l < r) {
-        if (v[l].first + v[r].first > x) {
-            r--;
-        } else if (v[l].first + v[r].first < x) {
-            l++;
-        } else if (v[l].first + v[r].first == x) {
-            return cout << v[l].second << " " << v[r].second, 0;
+    sort(all(v),cmp);
+    int ans = 1, upd = v[0].y;
+    for (int i = 1; i < v.size(); i++) {
+        if (v[i].x >= upd) {
+            ans++;
+            upd = v[i].y;
         }
     }
-    cout << "IMPOSSIBLE";
+    cout << ans;
     return 0;
 }

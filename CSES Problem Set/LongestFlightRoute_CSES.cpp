@@ -47,30 +47,46 @@ const int MOD = 1e9+7;
 const int32_t IINF = 0x3f3f3f3f;
 const int64_t LLINF = 0x3f3f3f3f3f3f3f3f;
 
+const int N = 2e5+7;
+int n,m;
+vi v[N], dp(N,-1), par(N);
+
+int dfs(int u) {
+    if (u == n) return 1;
+    if (dp[u] == -1) {
+        dp[u] = INT_MIN;
+        for (auto it : v[u]) {
+            int d = 1 + dfs(it);
+            if (d > dp[u]) {
+                dp[u] = d;
+                par[u] = it;
+            }
+        }
+    }
+    return dp[u];
+}
+
 signed main() {
     cin.tie(nullptr)->sync_with_stdio(false);
     if (fopen(name ".inp", "r")) {
         freopen(name ".inp","r",stdin);
         freopen(name ".out","w",stdout);
     }
-    int n,x;
-    cin >> n >> x;
-    vector<pi> v;
-    for (int i = 0,x; i < n; i++) {
-        cin >> x;
-        v.pb({x,i+1});
+    cin >> n >> m;
+    for (int i = 0; i < m; i++) {
+        int x,y;
+        cin >> x >> y;
+        v[x].pb(y);
     }
-    int l = 0, r = n-1;
-    sort(all(v));
-    while(l < r) {
-        if (v[l].first + v[r].first > x) {
-            r--;
-        } else if (v[l].first + v[r].first < x) {
-            l++;
-        } else if (v[l].first + v[r].first == x) {
-            return cout << v[l].second << " " << v[r].second, 0;
+    int ans = dfs(1);
+    if (ans >= 0) {
+        cout << ans << endl;
+        int res = 1;
+        while(res != n) {
+            cout << res << " ";
+            res = par[res];
         }
-    }
-    cout << "IMPOSSIBLE";
+        cout << res;
+    } else cout << "IMPOSSIBLE";
     return 0;
 }

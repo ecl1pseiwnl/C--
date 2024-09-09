@@ -47,30 +47,42 @@ const int MOD = 1e9+7;
 const int32_t IINF = 0x3f3f3f3f;
 const int64_t LLINF = 0x3f3f3f3f3f3f3f3f;
 
+const int N = 1005;
+int n,m,cnt = 0,dx[4] = {-1,0,0,1}, dy[4] = {0,-1,1,0};
+char a[N][N];
+bool visited[N][N];
+
+void dfs(int i, int j) {
+	visited[i][j] = true;
+	for (int k = 0; k < 4; k++) {
+		int i1 = i + dx[k], j1 = j + dy[k];
+		if (i1 >= 1 && i1 <= n && j1 >= 1 && j1 <= m && a[i1][j1] == '.' && !visited[i1][j1]) {
+			dfs(i1, j1);
+		}
+	}
+}
+
 signed main() {
     cin.tie(nullptr)->sync_with_stdio(false);
     if (fopen(name ".inp", "r")) {
         freopen(name ".inp","r",stdin);
         freopen(name ".out","w",stdout);
     }
-    int n,x;
-    cin >> n >> x;
-    vector<pi> v;
-    for (int i = 0,x; i < n; i++) {
-        cin >> x;
-        v.pb({x,i+1});
-    }
-    int l = 0, r = n-1;
-    sort(all(v));
-    while(l < r) {
-        if (v[l].first + v[r].first > x) {
-            r--;
-        } else if (v[l].first + v[r].first < x) {
-            l++;
-        } else if (v[l].first + v[r].first == x) {
-            return cout << v[l].second << " " << v[r].second, 0;
+    ms(visited,false);
+    cin >> n >> m;
+    for (int i = 1; i <= n; i++) {
+        for (int j = 1; j <= m; j++) {
+            cin >> a[i][j];
         }
     }
-    cout << "IMPOSSIBLE";
+    for (int i = 1; i <= n; i++) {
+        for (int j = 1; j <= m; j++) {
+            if (a[i][j] == '.' && !visited[i][j]) {
+                dfs(i,j);
+                cnt++;
+            }
+        }
+    }
+    cout << cnt;
     return 0;
 }

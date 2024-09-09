@@ -53,24 +53,16 @@ signed main() {
         freopen(name ".inp","r",stdin);
         freopen(name ".out","w",stdout);
     }
-    int n,x;
-    cin >> n >> x;
-    vector<pi> v;
-    for (int i = 0,x; i < n; i++) {
-        cin >> x;
-        v.pb({x,i+1});
-    }
-    int l = 0, r = n-1;
+    int n, temp;
+    cin >> n;
+    vi v(n);
+    for (auto &it : v) cin >> it;
     sort(all(v));
-    while(l < r) {
-        if (v[l].first + v[r].first > x) {
-            r--;
-        } else if (v[l].first + v[r].first < x) {
-            l++;
-        } else if (v[l].first + v[r].first == x) {
-            return cout << v[l].second << " " << v[r].second, 0;
-        }
+    temp = v[n/2];
+    ll ans = 0;
+    for (const auto &it : v) {
+        ans += abs(temp - it);
     }
-    cout << "IMPOSSIBLE";
+    cout << ans;
     return 0;
 }

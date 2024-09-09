@@ -47,30 +47,27 @@ const int MOD = 1e9+7;
 const int32_t IINF = 0x3f3f3f3f;
 const int64_t LLINF = 0x3f3f3f3f3f3f3f3f;
 
+ll be(ll a, ll b) {
+    ll ans = 1;
+    for(;b >0; b/=2) {
+        if (b&1) ans =ans * a % MOD;
+        a = a*a % MOD;
+    }
+    return ans;
+}
+
 signed main() {
     cin.tie(nullptr)->sync_with_stdio(false);
     if (fopen(name ".inp", "r")) {
         freopen(name ".inp","r",stdin);
         freopen(name ".out","w",stdout);
     }
-    int n,x;
-    cin >> n >> x;
-    vector<pi> v;
-    for (int i = 0,x; i < n; i++) {
-        cin >> x;
-        v.pb({x,i+1});
+    int n;
+    cin >> n;
+    while(n--) {
+        ll a,b;
+        cin >> a >> b;
+        cout << be(a,b) % MOD << endl;
     }
-    int l = 0, r = n-1;
-    sort(all(v));
-    while(l < r) {
-        if (v[l].first + v[r].first > x) {
-            r--;
-        } else if (v[l].first + v[r].first < x) {
-            l++;
-        } else if (v[l].first + v[r].first == x) {
-            return cout << v[l].second << " " << v[r].second, 0;
-        }
-    }
-    cout << "IMPOSSIBLE";
     return 0;
 }

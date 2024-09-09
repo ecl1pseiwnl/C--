@@ -47,19 +47,6 @@ const int MOD = 1e9+7;
 const int32_t IINF = 0x3f3f3f3f;
 const int64_t LLINF = 0x3f3f3f3f3f3f3f3f;
 
-struct num{
-    int x,y;
-};
-
-vector<num> v;
-
-bool cmp(num a, num b) {
-    if (a.y == b.y) {
-        return a.x < b.x;
-    }
-    return a.y < b.y;
-}
-
 signed main() {
     cin.tie(nullptr)->sync_with_stdio(false);
     if (fopen(name ".inp", "r")) {
@@ -68,19 +55,20 @@ signed main() {
     }
     int n;
     cin >> n;
-    for (int i = 0; i < n; i++) {
-        int a,b;
+    vector<pi> v;
+    for (int i=1,a,b; i <= n; i++) {
         cin >> a >> b;
-        v.pb({a,b});
+        v.pb({a,1});
+        v.pb({b,-1});
     }
-    sort(all(v),cmp);
-    int ans = 1, upd = v[0].y;
-    for (int i = 1; i < v.size(); i++) {
-        if (v[i].x > upd) {
-            ans++;
-            upd = v[i].y;
-        }
+    sort(all(v));
+    ll ans = 0, cur = 0;
+    for (auto [x,y] : v) {
+        cur += y;
+        ans = max(ans,cur);
     }
     cout << ans;
     return 0;
 }
+
+

@@ -47,30 +47,47 @@ const int MOD = 1e9+7;
 const int32_t IINF = 0x3f3f3f3f;
 const int64_t LLINF = 0x3f3f3f3f3f3f3f3f;
 
+const int N = 1e5+7;
+int n, m, visited[N], dp[N];
+vi v[N], rev;
+
+void inp() {
+    cin >> n >> m;
+    for (int i = 1; i <= m; i++) {
+        int x,y;
+        cin >> x >> y;
+        v[x].pb(y);
+        v[y].pb(x);
+    }
+}
+
+void dfs(int u) {
+    visited[u] = 1;
+    for (auto it : v[u]) {
+        if (!visited[it]) dfs(it);
+    }
+    rev.pb(u);
+    visited[u] = 2;
+}
+
 signed main() {
     cin.tie(nullptr)->sync_with_stdio(false);
     if (fopen(name ".inp", "r")) {
         freopen(name ".inp","r",stdin);
         freopen(name ".out","w",stdout);
     }
-    int n,x;
-    cin >> n >> x;
-    vector<pi> v;
-    for (int i = 0,x; i < n; i++) {
-        cin >> x;
-        v.pb({x,i+1});
+    inp();
+    ms(dp,-1);
+    for (int i = 1; i <= n; i++) {
+        if (!visited[i]) dfs(i);
     }
-    int l = 0, r = n-1;
-    sort(all(v));
-    while(l < r) {
-        if (v[l].first + v[r].first > x) {
-            r--;
-        } else if (v[l].first + v[r].first < x) {
-            l++;
-        } else if (v[l].first + v[r].first == x) {
-            return cout << v[l].second << " " << v[r].second, 0;
+    int ans = 0;
+    for (auto x : rev) {
+        for (auto y : v[x]) {
+            dp[x] = max(dp[x], dp[y] + 1);
         }
+        ans = max(ans,dp[x]);
     }
-    cout << "IMPOSSIBLE";
+    cout << ans;
     return 0;
 }

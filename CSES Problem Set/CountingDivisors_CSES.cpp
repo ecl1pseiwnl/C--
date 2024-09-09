@@ -47,30 +47,35 @@ const int MOD = 1e9+7;
 const int32_t IINF = 0x3f3f3f3f;
 const int64_t LLINF = 0x3f3f3f3f3f3f3f3f;
 
+const int N = 1e6+7;
+vi a(N,1);
+
+void sang() {
+    for (int i = 2; i*i <= N; i++) {
+        for (int j = i*i; j <= N; j+=i) {
+            if (i*i != j) {
+                a[j] += 2;
+            } else a[j] += 1;
+        }
+    }
+    for (int i = 2; i <= N; i++) {
+        a[i] += 1;
+    }
+}
+
 signed main() {
     cin.tie(nullptr)->sync_with_stdio(false);
     if (fopen(name ".inp", "r")) {
         freopen(name ".inp","r",stdin);
         freopen(name ".out","w",stdout);
     }
-    int n,x;
-    cin >> n >> x;
-    vector<pi> v;
-    for (int i = 0,x; i < n; i++) {
+    sang();
+    int n;
+    cin >> n;
+    while(n--) {
+        int x;
         cin >> x;
-        v.pb({x,i+1});
+        cout << a[x] << endl;
     }
-    int l = 0, r = n-1;
-    sort(all(v));
-    while(l < r) {
-        if (v[l].first + v[r].first > x) {
-            r--;
-        } else if (v[l].first + v[r].first < x) {
-            l++;
-        } else if (v[l].first + v[r].first == x) {
-            return cout << v[l].second << " " << v[r].second, 0;
-        }
-    }
-    cout << "IMPOSSIBLE";
     return 0;
 }
