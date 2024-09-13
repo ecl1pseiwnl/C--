@@ -47,73 +47,41 @@ const int MOD = 1e9+7;
 const int32_t IINF = 0x3f3f3f3f;
 const int64_t LLINF = 0x3f3f3f3f3f3f3f3f;
 
-struct edge{
-    int x,y;
-};
+const int N = 2e5+7;
 
-const int N = 1e5+7;
-int n,m,q, par[N], sz[N], visited[N];
-vector<edge> v;
-vi ans;
+string s, k;
+int cnt = 0;
 
-void makeset() {
-    for (int i = 1; i <= n; i++) {
-        par[i] = i;
-        sz[i] = 1;
+int kmp(int sz) {
+    int temp = 0;
+    for (int i = 0; i < s.size(); i++) {
+        if (s[i] == k[0]) {
+            temp = 0;
+            for (int j = 0; j < sz; j++) {
+                debug(s[i],k[j],temp);
+                if (s[i] == k[j]) {
+                    temp++;
+                    i++;
+                } else {
+                    break;
+                }
+                debug(s[i],k[j],temp);
+            }
+            if (temp == sz) cnt++;
+        }
     }
-}
-
-int find_set(int u) {
-    if (u == par[u]) return u;
-    int p = find_set(par[u]);
-    return p;
-}
-
-void Union(int a, int b) {
-    a = find_set(a);
-    b = find_set(b);
-    if (a != b) {
-        if (sz[a] < sz[b]) swap(a,b);
-        par[b] = a;
-        sz[a] += sz[b];
-    }
+    return cnt;
 }
 
 signed main() {
     cin.tie(nullptr)->sync_with_stdio(false);
-    cin >> n >> m >> q;
-    for (int i = 0; i < m; i++) {
-        int x,y;
-        cin >> x >> y;
-        edge e;
-        e.x = x;
-        e.y = y;
-        v.ep(e);
+    if (fopen(name ".inp", "r")) {
+        freopen(name ".inp","r",stdin);
+        freopen(name ".out","w",stdout);
     }
-    makeset();
-    for (int i = 0; i < m; i++) {
-        edge e = v[i];
-        Union(e.x,e.y);
-    }
-    for (int i = 1; i <= n; i++) {
-        int x = find_set(i);
-        if(!visited[x]) {
-            visited[x] = 1;
-            ans.ep(sz[x]);
-        }
-    }
-    int sz = ans.size();
-    vi f(sz);
-    sort(all(ans),greater<int>());
-    f[0] = ans[0];
-    for (int i = 1; i < sz;i++) f[i] = f[i-1] + ans[i];
-    debug(f,ans);
-    while(q--) {
-        int x;
-        cin >> x;
-        auto it = lower_bound(all(f), x);
-        if (it != f.end()) cout << (it - f.begin()) << " ";
-    }
+    cin >> s >> k;
+    int sz = k.size();
+    int ans = kmp(sz);
+    cout << ans;
     return 0;
 }
-
