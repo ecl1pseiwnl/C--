@@ -47,27 +47,68 @@ const int MOD = 1e9+7;
 const int32_t IINF = 0x3f3f3f3f;
 const int64_t LLINF = 0x3f3f3f3f3f3f3f3f;
 
-const int N = 1e5+7;
-int n, m, visited[N], dp[N];
-vi v[N], rev;
+#define int long long
 
-void inp() {
-    cin >> n >> m;
-    for (int i = 1; i <= m; i++) {
-        int x,y;
-        cin >> x >> y;
-        v[x].pb(y);
-        v[y].pb(x);
+const int N = 2e5+7;
+struct edge{
+    int x,y,z;
+};
+vector<edge> v;
+int n,m,par[N],sz[N];
+
+void makeset() {
+    for (int i = 1; i<= n; i++) {
+        par[i] = i;
+        sz[i] = 1;
     }
 }
 
-void dfs(int u) {
-    visited[u] = 1;
-    for (auto it : v[u]) {
-        if (!visited[it]) dfs(it);
+int findset(int u) {
+    if (u == par[u]) return u;
+    return par[u] = findset(par[par[u]]);
+}
+
+bool uni(int a, int b) {
+    a = findset(a);
+    b = findset(b);
+    if (a == b) return 0;
+    if (sz[a] < sz[b]) swap(a,b);
+    par[b] = a;
+    sz[a] += sz[b];
+    return true;
+}
+
+void inp() {
+    cin >> n >> m;
+    for (int i = 0; i < m; i++) {
+        edge e;
+        cin >> e.x >> e.y >> e.z;
+        v.pb(e);
     }
-    rev.pb(u);
-    visited[u] = 2;
+    makeset();
+}
+
+bool cmp (edge a, edge b) {
+    return a.z < b.z;
+}
+
+void kruskal() {
+    int cnt = 0;
+    int d = 0;
+    sort(v.begin(),v.end(),cmp);
+    for (int i = 0; i < m; i++) {
+        if (cnt == n - 1) break;
+        edge e = v[i];
+        if (uni(e.x,e.y)) {
+            cnt++;
+            d += e.z;
+        }
+    }
+    if (cnt != n - 1) {
+        cout << "IMPOSSIBLE\n";
+    } else {
+        cout << d;
+    }
 }
 
 signed main() {
@@ -77,17 +118,6 @@ signed main() {
         freopen(name ".out","w",stdout);
     }
     inp();
-    ms(dp,-1);
-    for (int i = 1; i <= n; i++) {
-        if (!visited[i]) dfs(i);
-    }
-    int ans = 0;
-    for (auto x : rev) {
-        for (auto y : v[x]) {
-            dp[x] = max(dp[x], dp[y] + 1);
-        }
-        ans = max(ans,dp[x]);
-    }
-    cout << ans;
+    kruskal();
     return 0;
 }
