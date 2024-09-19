@@ -37,7 +37,7 @@ ll __lcm(ll x, ll y) { return 1ll*(x / __gcd(x,y))*y;}
 #define uniquev(v) sort(all(v)), (v).resize(unique(all(v)) - (v).begin())
 #define ins insert
 #define sz(x) (int)(x.size())
-#define name "TASK"
+#define name "data"
 #define fi first
 #define sec second
 #define mp make_pair
@@ -48,41 +48,9 @@ constexpr int MOD = 1e9+7;
 constexpr int32_t IINF = 0x3f3f3f3f;
 constexpr int64_t LLINF = 0x3f3f3f3f3f3f3f3f;
 
-#define int long long
-const int N = 1e5+7;
-int n, q, a[N], ma[4*N];
-
-void build(int id, int l, int r) {
-    if (l == r) {
-        ma[id] = a[l];
-        return;
-    }
-    int mid = (l+r)/2;
-    build(id*2,l,mid);
-    build(id*2+1,mid+1,r);
-    ma[id] = max(ma[id*2], ma[id*2+1]);
-}
-
-int get(int id, int l, int r,int u, int v) {
-	if (r < u || l > v) return INT_MIN;
-	if (u <= l && r <= v) return ma[id];
-	int mid = (l + r) / 2;
-	int t1 = get(id * 2, l, mid, u, v);
-    int t2 = get(id * 2 + 1, mid + 1, r, u, v);
-	return max(t1, t2);
-}
-
-void update(int id, int l, int r, int p, int val) {
-	if (p < l || p > r) return;
-	if (l == r) {
-        ma[id] = val;
-        return;
-	}
-	int mid = (l + r) / 2;
-	update(id * 2, l, mid, p, val);
-	update(id * 2 + 1, mid + 1, r, p, val);
-	ma[id] = max(ma[id*2],ma[id*2+1]);
-}
+const int N = 1005;
+bool a[N][N];
+int dp[N][N];
 
 signed main() {
     cin.tie(nullptr)->sync_with_stdio(false);
@@ -90,19 +58,26 @@ signed main() {
         freopen(name ".inp","r",stdin);
         freopen(name ".out","w",stdout);
     }
+    int n;
     cin >> n;
-    a[0] = 0;
-    for (int i = 1; i <= n; i++) cin >> a[i];
-    build(1,1,n);
-    cin >> q;
-    while(q--) {
-        int x,y,z;
-        cin >> x >> y >> z;
-        if (x == 2) {
-            cout << get(1,1,n,y,z) << "\n";
-        } else if (x == 1) {
-            update(1,1,n,y,z);
+    for (int i = 0; i < n; i++) {
+        string s;
+        cin >> s;
+        for (int j = 0; j < n; j++) {
+            a[i][j] = (s[j] == '.');
+            dp[i][j] = 0;
         }
     }
+    dp[0][0] = (a[0][0]) ? 1 : 0;
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++) {
+            if (!i && !j) continue;
+            if (a[i][j]) {
+                if (i >= 1) dp[i][j] = (dp[i][j] + dp[i-1][j]) % MOD;
+                if (j >= 1) dp[i][j] = (dp[i][j] + dp[i][j-1]) % MOD;
+            } else dp[i][j] = 0;
+        }
+    }
+    cout << dp[n-1][n-1];
     return 0;
 }
