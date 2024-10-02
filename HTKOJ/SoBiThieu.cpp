@@ -49,33 +49,21 @@ constexpr int32_t IINF = 0x3f3f3f3f;
 constexpr int64_t LLINF = 0x3f3f3f3f3f3f3f3f;
 
 signed main() {
-	ios_base::sync_with_stdio(false);
-	cin.tie(NULL);
-	string s;
-	getline(cin, s);
-	vector<char> v;
-	vi u;
-	for (int i = 0; i < s.size(); i++) {
-		if (s[i] >= '0' && s[i] <= '9') {
-			int temp = s[i] - '0';
-			u.pb(temp);
-		}
-		else if (s[i] >= 'A' && s[i] <= 'Z') {
-			v.pb(s[i]);
-		}
-	}
-	for (int i = 0; i < v.size(); i++) {
-		if (v[i] >= 'A' && v[i] <= 'Q') {
-			cout << char(v[i] + u[i]);
-		}
-		else if (v[i] >= 'R' && v[i] <= 'Z') {
-			if (v[i] + u[i] <= 90) {
-				cout << char(v[i] + u[i]);
-			}
-			else if (v[i] + u[i] > 90) {
-				cout << char(65 + abs(91 - v[i] - u[i]));
-			}
-		}
-	}
-	return 0;
+    cin.tie(nullptr)->sync_with_stdio(false);
+    if (fopen(name ".inp", "r")) {
+        freopen(name ".inp","r",stdin);
+        freopen(name ".out","w",stdout);
+    }
+    int n;
+    cin >> n;
+    ll s = 0;
+    for (int i = 1; i < n; i++) {
+        int x; cin >> x;
+        s += x;
+    }
+    for (int i = 1; i <= n; i++) {
+        s -= i;
+    }
+    cout << abs(s);
+    return 0;
 }

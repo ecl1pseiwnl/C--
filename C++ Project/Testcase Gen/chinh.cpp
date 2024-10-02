@@ -48,32 +48,26 @@ constexpr int MOD = 1e9+7;
 constexpr int32_t IINF = 0x3f3f3f3f;
 constexpr int64_t LLINF = 0x3f3f3f3f3f3f3f3f;
 
-const int N = 1e7+7;
-vector<int> a(N,1);
-void sang() {
-    for (int i = 2; i*i <= N; i++) {
-        for (int j = i*i; j <= N; j+=i) {
-            a[j] += i;
-            if (i*i != j) a[j] += j/i;
-        }
-    }
-    for (int i = 2; i <= N; i++) a[i] += i;
-}
-
 signed main() {
     cin.tie(nullptr)->sync_with_stdio(false);
-    sang();
-    int n, maxv = 0, ans = 0;
-    cin >> n;
-    vi v(n);
-    for (auto &it : v) cin >> it;
-    for (auto it : v) {
-        int k  = a[it];
-        if (maxv < k) {
-            maxv = k;
-            ans = it;
+    int n,m;
+    int a,b;
+    int s1 = 0, s2 =0;
+    cin >> n >> m;
+    for (int i = 1; i < n; i++) {
+        if (n % i == 0) {
+            s1 += i;
         }
     }
-    cout << ans;
+    for (int i = 1; i < m; i++) {
+        if (m % i == 0) {
+            s2 += i;
+        }
+    }
+    if (s1 == m && s2 == n) {
+        cout << "YES";
+    } else {
+        cout << "NO";
+    }
     return 0;
 }

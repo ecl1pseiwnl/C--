@@ -49,8 +49,7 @@ constexpr int32_t IINF = 0x3f3f3f3f;
 constexpr int64_t LLINF = 0x3f3f3f3f3f3f3f3f;
 
 signed main() {
-	ios_base::sync_with_stdio(false);
-	cin.tie(NULL);
+    cin.tie(nullptr)->sync_with_stdio(false);
 	string s;
 	getline(cin, s);
 	vector<char> v;
