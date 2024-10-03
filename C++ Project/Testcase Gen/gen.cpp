@@ -26,15 +26,15 @@ const int INF_INT = 2e9;
 const ll INF_LL = 2e18;
 
 void makefile(ofstream &inp) {
-    int n = rand(1,1e5);
-    int m = rand(1,1e5);
-    inp << n << " " << m;
+    int a = rand(0,1e9);
+    int b = rand(0,1e9);
+    int c = rand(0,1e9);
+    inp << a << " " << b << " " << c;
 }
 
 signed main() {
     cin.tie(nullptr)->sync_with_stdio(false);
-    int test = 50;
-
+    int test = 30;
     string input,output;
     for (int i = 1; i <= test; i++) {
         system(("mkdir test" + to_string(i)).c_str());

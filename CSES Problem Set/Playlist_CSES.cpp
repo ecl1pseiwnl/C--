@@ -48,22 +48,31 @@ constexpr int MOD = 1e9+7;
 constexpr int32_t IINF = 0x3f3f3f3f;
 constexpr int64_t LLINF = 0x3f3f3f3f3f3f3f3f;
 
-ll binpow(ll n, ll k, ll m) {
-    ll ans = 1;
-    for (;k>0;k/=2) {
-        if (k & 1)  {
-            ans = ans * n % m;
-        }
-        n = n * n % m;
-    }
-    return ans;
-}
+const int N = 2e5+7;
+int v[N], n, ans;
 
 signed main() {
     cin.tie(nullptr)->sync_with_stdio(false);
-    ll a,b,c;
-    cin >> a >> b >> c;
-    ll t = binpow(b,c,MOD-1);
-    cout << binpow(a,t,MOD);
+    if (fopen(name ".inp", "r")) {
+        freopen(name ".inp","r",stdin);
+        freopen(name ".out","w",stdout);
+    }
+    cin >> n;
+    for (int i = 0; i < n; i++) cin >> v[i];
+    int j = 0, maxv = 0;
+    map<int,int> m;
+    for (int i = 0; i < n; i++) {
+        if (m.find(v[i]) == m.end()) {
+            m.ins({v[i],i});
+        } else {
+            if (m[v[i]] >= j) {
+                j = m[v[i]] + 1;
+                debug(m[v[i]]);
+            }
+            m[v[i]] = i;
+        }
+        maxv = max(maxv,i - j + 1);
+    }
+    cout << maxv;
     return 0;
 }
