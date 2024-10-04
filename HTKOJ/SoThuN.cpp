@@ -1,5 +1,4 @@
 #include <bits/stdc++.h>
-#include <windows.h>
 using namespace std;
 void __print(int x) {cerr << x;}
 void __print(long x) {cerr << x;}
@@ -32,63 +31,31 @@ typedef map<int,int> mii;
 typedef vector<int> vi;
 typedef vector<pi> vii;
 typedef vector<mii> viii;
-ll lcm(ll x, ll y) { return 1ll*(x / __gcd(x,y))*y;}
+ll __lcm(ll x, ll y) { return 1ll*(x / __gcd(x,y))*y;}
 #define ms(a,n) memset(a, n,sizeof(a))
-#define all(x) (x).begin(),(x).end
+#define all(x) (x).begin(),(x).end()
+#define uniquev(v) sort(all(v)), (v).resize(unique(all(v)) - (v).begin())
 #define ins insert
 #define sz(x) (int)(x.size())
 #define name "TASK"
 #define fi first
 #define sec second
 #define mp make_pair
+#define ep emplace_back
 #define pb push_back
 #define endl "\n"
-#define rand(l, r) uniform_int_distribution< int64_t > (l, r)(rng)
-mt19937 rng(chrono::steady_clock::now().time_since_epoch().count());
-
-const int MOD = 1e9+7;
-const int INF_INT = 2e9;
-const ll INF_LL = 2e18;
-
-const int N = 1e9;
-vi cp;
-void sang() {
-    int a = sqrt(1), b = sqrt(1e9);
-    if (a*a < 1) ++a;
-    for (int i = a; i <= b; i++) {
-        cp.pb(i*i);
-    }
-}
-
-void makefile(ofstream &inp) {
-    int n = rand(1,1e5);
-    inp << n << "\n";
-    int sz = cp.size();
-    for (int i = 1; i <= n; i++) {
-        int tf = rand(1,100);
-        if (tf % 2 == 0) {
-            int x = cp[rand(1,sz)];
-            inp << x << " ";
-        } else {
-            int x = rand(1,1e9);
-            inp << x << " ";
-        }
-    }
-}
+constexpr int MOD = 1e9+7;
+constexpr int32_t IINF = 0x3f3f3f3f;
+constexpr int64_t LLINF = 0x3f3f3f3f3f3f3f3f;
 
 signed main() {
     cin.tie(nullptr)->sync_with_stdio(false);
-    int test = 20;
-    sang();
-    string input,output;
-    for (int i = 1; i <= test; i++) {
-        system(("mkdir test" + to_string(i)).c_str());
-        input = "test" + to_string(i) + ".INP";
-        output = "test" + to_string(i) + ".OUT";
-        ofstream Input(input.c_str());
-        makefile(Input);
-        Input.close();
-        system(("chinh.exe < " + input + " > " + output).c_str());
+    if (fopen(name ".inp", "r")) {
+        freopen(name ".inp","r",stdin);
+        freopen(name ".out","w",stdout);
     }
+    ll n;
+    cin >> n;
+    cout << 2 + (n-1) * 3;
     return 0;
 }

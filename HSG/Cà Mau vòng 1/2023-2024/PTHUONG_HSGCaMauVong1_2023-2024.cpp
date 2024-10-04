@@ -56,7 +56,6 @@ void sang() {
             if (i*i != j) a[j] += j/i;
         }
     }
-    for (int i = 2; i <= N; i++) a[i] += i;
 }
 
 signed main() {
@@ -64,13 +63,12 @@ signed main() {
     sang();
     int n, maxv = 0, ans = 0;
     cin >> n;
-    vi v(n);
-    for (auto &it : v) cin >> it;
-    for (auto it : v) {
-        int k  = a[it];
+    for (int i = 0; i < n; i++) {
+        int x; cin >> x;
+        int k  = a[x] + x;
         if (maxv < k) {
             maxv = k;
-            ans = it;
+            ans = x;
         }
     }
     cout << ans;

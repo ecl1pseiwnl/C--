@@ -13,32 +13,20 @@ typedef vector<mii> viii;
 #define endl "\n"
 #define MOD 10000007
 
-bool check(int a, int b, int c) {
-    int a2 = a*a, b2 = b*b, c2 = c*c;
-    if (a != b || a != c || b != c) {
-        if (a != b && b != c) {
-            if ((a2 != b2 + c2 )|| (b2 != a2 + c2) || (c2 = a2 + b2)) {
-                return true;
-            }
-        }
-    }
-    return false;
-}
-
 int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(nullptr); cout.tie(nullptr);
     ll a,b,c;
     cin >> a >> b >> c;
-    if (a < b + c || b < a + c || c < a + b) {
+    if ((a + b > c) && (a + c > b) && (b + c > a) && (a > 0 && b > 0 && c > 0)) {
         if (a*a == b*b + c*c || b*b == a*a + c*c || c*c == a*a + b*b) {
-            cout << "vuong";
-        } else if (a == b && b == c) {
-            cout << "deu";
+            return cout << "vuong", 0;
+        } else if (a == b && b == c || a == c && c == b) {
+            return cout << "deu",0;
         } else if (a == b || a == c || b == c) {
-            cout << "can";
-        } else if (check(a,b,c)) {
-            cout << "thuong";
+            return cout << "can", 0;
+        } else {
+            return cout << "thuong",0;
         }
     } else cout << "0";
     return 0;

@@ -48,22 +48,39 @@ constexpr int MOD = 1e9+7;
 constexpr int32_t IINF = 0x3f3f3f3f;
 constexpr int64_t LLINF = 0x3f3f3f3f3f3f3f3f;
 
-ll binpow(ll n, ll k, ll m) {
-    ll ans = 1;
-    for (;k>0;k/=2) {
-        if (k & 1)  {
-            ans = ans * n % m;
-        }
-        n = n * n % m;
+const int N = 1e5+7;
+int n, maxv, b[N];
+
+bool cp(int x) {
+    int s = sqrt(x);
+    if (s*s == x) {
+        return true;
     }
-    return ans;
+    return false;
+}
+
+int sol(const vi &a) {
+    if (a.empty()) return 0;
+    vi ans;
+    for (auto it : a) {
+        auto t = upper_bound(all(ans),it);
+        if (t == ans.end()) {
+            ans.ep(it);
+        }
+    }
+    return ans.size();
 }
 
 signed main() {
     cin.tie(nullptr)->sync_with_stdio(false);
-    ll a,b,c;
-    cin >> a >> b >> c;
-    ll t = binpow(b,c,MOD-1);
-    cout << binpow(a,t,MOD);
+    cin >> n;
+    vi v;
+    for (int i = 0; i < n; i++) {
+        int x; cin >> x;
+        if (cp(x)) {
+            v.ep(x);
+        }
+    }
+    cout << sol(v);
     return 0;
 }
