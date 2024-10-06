@@ -56,12 +56,12 @@ signed main() {
     for (auto &it : a) cin >> it;
     ll maxv = LONG_LONG_MIN,curv = 0, curl = 0, maxl = 0;
     for (auto it : a) {
-        if (curv <= 0) {
+        if (curv + it >= it) {
+            curv += it;
+            curl++;
+        } else {
             curv = it;
             curl = 1;
-        } else {
-            curv += it;
-            ++curl;
         }
         if (curv > maxv) {
             maxv = curv;

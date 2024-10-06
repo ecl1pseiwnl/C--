@@ -48,39 +48,38 @@ constexpr int MOD = 1e9+7;
 constexpr int32_t IINF = 0x3f3f3f3f;
 constexpr int64_t LLINF = 0x3f3f3f3f3f3f3f3f;
 
-const int N = 1e5+7;
-int n, maxv, b[N];
-
-bool cp(int x) {
-    int s = sqrt(x);
-    if (s*s == x) {
-        return true;
-    }
-    return false;
-}
-
-int sol(const vi &a) {
-    if (a.empty()) return 0;
-    vi ans;
-    for (auto it : a) {
-        auto t = upper_bound(all(ans),it);
-        if (t == ans.end()) {
-            ans.ep(it);
-        }
-    }
-    return ans.size();
-}
-
 signed main() {
-    cin.tie(nullptr)->sync_with_stdio(false);
-    cin >> n;
-    vi v;
-    for (int i = 0; i < n; i++) {
-        int x; cin >> x;
-        if (cp(x)) {
-            v.ep(x);
+    cin.tie(0)->sync_with_stdio(0);
+    ll n;cin>>n;
+    vector<ll> a(n);
+    for (auto &x:a) cin>>x;
+    ll max_sum = a[0];
+    ll max_length = 1;
+    ll current_sum = a[0];
+    ll current_length = 1;
+
+    for (ll i = 1; i < n; i++)
+    {
+        if (current_sum + a[i] >= a[i])
+        {
+            current_sum += a[i];
+            current_length++;
+        } else
+        {
+            current_sum = a[i];
+            current_length = 1;
+        }
+
+        if (current_sum > max_sum)
+        {
+            max_sum = current_sum;
+            max_length = current_length;
+        }
+        else if (current_sum == max_sum and current_length > max_length)
+        {
+            max_length = current_length;
         }
     }
-    cout << sol(v);
+    cout << max_sum << " " << max_length;
     return 0;
 }

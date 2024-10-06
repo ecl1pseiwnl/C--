@@ -50,41 +50,24 @@ const int MOD = 1e9+7;
 const int INF_INT = 2e9;
 const ll INF_LL = 2e18;
 
-const int N = 1e9;
-vi cp;
-void sang() {
-    int a = sqrt(1), b = sqrt(1e9);
-    if (a*a < 1) ++a;
-    for (int i = a; i <= b; i++) {
-        cp.pb(i*i);
-    }
-}
 
 void makefile(ofstream &inp) {
-    int n = rand(1,1e5);
+    int n = rand(2e3+1,1e5);
     inp << n << "\n";
-    int sz = cp.size();
-    for (int i = 1; i <= n; i++) {
-        int tf = rand(1,100);
-        if (tf % 2 == 0) {
-            int x = cp[rand(1,sz)];
-            inp << x << " ";
-        } else {
-            int x = rand(1,1e9);
-            inp << x << " ";
-        }
+    for (int i = 1; i<=n; i++) {
+        int x = rand(-1e9,1e9);
+        inp << x << " ";
     }
 }
 
 signed main() {
     cin.tie(nullptr)->sync_with_stdio(false);
-    int test = 20;
-    sang();
+    int test = 15, temp = 35;
     string input,output;
     for (int i = 1; i <= test; i++) {
-        system(("mkdir test" + to_string(i)).c_str());
-        input = "test" + to_string(i) + ".INP";
-        output = "test" + to_string(i) + ".OUT";
+        system(("mkdir test" + to_string(i+temp)).c_str());
+        input = "test" + to_string(i+temp) + ".INP";
+        output = "test" + to_string(i+temp) + ".OUT";
         ofstream Input(input.c_str());
         makefile(Input);
         Input.close();
