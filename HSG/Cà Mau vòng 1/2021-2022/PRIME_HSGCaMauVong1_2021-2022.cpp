@@ -39,21 +39,17 @@ void snt() {
 signed main() {
     cin.tie(nullptr)->sync_with_stdio(false);
     snt();
-    int n;
+    ll n, ans = 0;
     cin >> n;
-    vector<int> v;
-    for (int i = 0; i < n; i++) {
-        int x;
-        cin >> x;
-        if (a[x]) v.pb(x);
+    vi v(n);
+    unordered_map<int,int> cnt;
+    for (auto& it : v) {
+        cin >> it;
+        cnt[it]++;
     }
-    sort(all(v));
-    int cnt = 0;
-    for (int i = 0; i < v.size(); i++) {
-        for (int j = i+1; j < v.size(); j++) {
-            if (v[i] == v[j]) cnt++;
-        }
+    for (auto [x,y] : cnt) {
+        if (a[x] && y > 1) ans += y*(y-1)/2;
     }
-    cout << cnt;
+    cout << ans;
     return 0;
 }
