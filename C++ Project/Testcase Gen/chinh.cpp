@@ -34,7 +34,6 @@ typedef vector<mii> viii;
 ll __lcm(ll x, ll y) { return 1ll*(x / __gcd(x,y))*y;}
 #define ms(a,n) memset(a, n,sizeof(a))
 #define all(x) (x).begin(),(x).end()
-#define uniquev(v) sort(all(v)), (v).resize(unique(all(v)) - (v).begin())
 #define ins insert
 #define sz(x) (int)(x.size())
 #define name "TASK"
@@ -44,42 +43,37 @@ ll __lcm(ll x, ll y) { return 1ll*(x / __gcd(x,y))*y;}
 #define ep emplace_back
 #define pb push_back
 #define endl "\n"
-constexpr int MOD = 1e9+7;
-constexpr int32_t IINF = 0x3f3f3f3f;
-constexpr int64_t LLINF = 0x3f3f3f3f3f3f3f3f;
+const int MOD = 1e9+7;
+const int32_t IINF = 0x3f3f3f3f;
+const int64_t LLINF = 0x3f3f3f3f3f3f3f3f;
+
+const int M = 1e3;
+ll n,m,q, dis[M+7][M+7];
 
 signed main() {
-    cin.tie(0)->sync_with_stdio(0);
-    ll n;cin>>n;
-    vector<ll> a(n);
-    for (auto &x:a) cin>>x;
-    ll max_sum = a[0];
-    ll max_length = 1;
-    ll current_sum = a[0];
-    ll current_length = 1;
-
-    for (ll i = 1; i < n; i++)
-    {
-        if (current_sum + a[i] >= a[i])
-        {
-            current_sum += a[i];
-            current_length++;
-        } else
-        {
-            current_sum = a[i];
-            current_length = 1;
+    cin.tie(nullptr)->sync_with_stdio(false);
+    cin >> n >> m >> q;
+    for (int i = 1; i <= n+1; i++) {
+        for (int j = 1; j <= n+1; j++) {
+            dis[i][j] = LLINF;
         }
-
-        if (current_sum > max_sum)
-        {
-            max_sum = current_sum;
-            max_length = current_length;
-        }
-        else if (current_sum == max_sum and current_length > max_length)
-        {
-            max_length = current_length;
+        dis[i][i] = 0;
+    }
+    for (ll i = 0,x,y,z; i < m; i++) {
+        cin >> x >> y >> z;
+        dis[x][y] = min(dis[x][y],z);
+        dis[y][x] = min(dis[y][x],z);
+    }
+    for (int k = 1; k <= n+1; k++) {
+        for (int i = 1; i <= n+1; i++) {
+            for (int j = 1; j <= n+1; j++) {
+                dis[i][j] = min(dis[i][j], dis[i][k]+dis[k][j]);
+            }
         }
     }
-    cout << max_sum << " " << max_length;
+    for (int i = 0,a,b; i < q; i++) {
+        cin >> a >> b;
+        cout << ((dis[a][b]>= LLINF)? -1 : dis[a][b]) << endl;
+    }
     return 0;
 }

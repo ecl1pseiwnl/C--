@@ -47,37 +47,58 @@ const int MOD = 1e9+7;
 const int32_t IINF = 0x3f3f3f3f;
 const int64_t LLINF = 0x3f3f3f3f3f3f3f3f;
 
-const int N = 250007, M = 500;
-ll n,m,q, dis[M+7][M+7];
+int n, m, q;
+vector<pi> adj[1001];
+const int INF = 1e9;
 
+void inp() {
+	cin >> n >> m >> q;
+	for (int i = 0; i < m; i++) {
+		int x, y, z;
+		cin >> x >> y >> z;
+		adj[x].pb({ y,z });
+		adj[y].pb({ x,z });
+	}
+}
+
+void dijkstra(int s, int e) {
+	vector<ll> d(n + 1, INF);
+	d[s] = 0;
+	priority_queue<pi, vector<pi>, greater<pi>> Q;
+	Q.push({ 0,s });
+	while (!Q.empty()) {
+		pi top = Q.top();
+		Q.pop();
+		int u = top.second, v = top.first;
+		if (v > d[u]) {
+			continue;
+		}
+		for (auto it : adj[u]) {
+			int s1 = it.first, s2 = it.second;
+			if (d[s1] > d[u] + s2) {
+				d[s1] = d[u] + s2;
+				Q.push({ d[s1],s1 });
+			}
+		}
+	}
+	if (d[e] != INF) {
+		cout << d[e] << endl;
+	}
+	else {
+		cout << "-1" << endl;
+	}
+}
 signed main() {
     cin.tie(nullptr)->sync_with_stdio(false);
     if (fopen(name ".inp", "r")) {
         freopen(name ".inp","r",stdin);
         freopen(name ".out","w",stdout);
     }
-    cin >> n >> m >> q;
-    for (int i = 1; i <= n+1; i++) {
-        for (int j = 1; j <= n+1; j++) {
-            dis[i][j] = LLINF;
-        }
-        dis[i][i] = 0;
-    }
-    for (ll i = 0,x,y,z; i < m; i++) {
-        cin >> x >> y >> z;
-        dis[x][y] = min(dis[x][y],z);
-        dis[y][x] = min(dis[y][x],z);
-    }
-    for (int k = 1; k <= n+1; k++) {
-        for (int i = 1; i <= n+1; i++) {
-            for (int j = 1; j <= n+1; j++) {
-                dis[i][j] = min(dis[i][j], dis[i][k]+dis[k][j]);
-            }
-        }
-    }
-    for (int i = 0,a,b; i < q; i++) {
-        cin >> a >> b;
-        cout << ((dis[a][b]>= LLINF)? -1 : dis[a][b]) << endl;
-    }
+    inp();
+	while (q--) {
+		int x, y;
+		cin >> x >> y;
+		dijkstra(x, y);
+	}
     return 0;
 }
