@@ -56,10 +56,10 @@ vector<int> a,b;
 void inp() {
     cin >> n >> m >> x >> y;
     for (int i = 0; i < m; i++) {
-        int x,y,z;
-        cin >> x >> y >> z;
-        v[x].pb({y,z});
-        v[y].pb({x,z});
+        int u,t,z;
+        cin >> u >> t >> z;
+        v[u].pb({t,z});
+        v[t].pb({u,z});
     }
 }
 
@@ -98,24 +98,18 @@ signed main() {
         freopen(name ".out","w",stdout);
     }
     inp();
+    a.ep(0);
+    b.ep(0);
     dijkstra(x,true);
     dijkstra(y,false);
-    int ansi = 1,ansx = a[0],ansy = b[0];
-    for (int i = 2; i <= n; i++) {
-        if (a[i] != 0 && b[i] != 0) {
-            if (abs(ansx - ansy) > abs(a[i] - b[i])) {
-                ansi = i+1;
-                ansx = a[i];
-                ansy = b[i];
-            } else if (abs(ansx - ansy) == abs(a[i] - b[i])) {
-                if (ansx > a[i] && ansy > b[i]) {
-                    ansi = i+1;
-                    ansx = a[i];
-                    ansy = b[i];
-                }
-            }
+    ll minT = INF, ans = -1;
+    for (int i = 1; i <= n; i++) {
+        ll cur = max(a[i],b[i]);
+        if (cur < minT && cur != 0) {
+            minT = cur;
+            ans = i;
         }
     }
-    cout << ansi << " " << max(ansx, ansy);
+    cout << ans << " " << minT;
     return 0;
 }
