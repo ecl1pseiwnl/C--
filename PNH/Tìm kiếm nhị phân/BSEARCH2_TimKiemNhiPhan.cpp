@@ -48,25 +48,34 @@ constexpr int MOD = 1e9+7;
 constexpr int32_t IINF = 0x3f3f3f3f;
 constexpr int64_t LLINF = 0x3f3f3f3f3f3f3f3f;
 
-signed main() {
-    cin.tie(nullptr)->sync_with_stdio(false);
-    int n, ans = INT_MIN;
-    cin >> n;
-    string s;
-    cin >> s;
-    for (int k = 1; k <= n; k++) {
-        int l = 0;
-        while(l < s.size()) {
-            string t = s.substr(l,k);
-            if (t.size() != k) break;
-            sort(all(t));
-            t.resize(unique(all(t)) - t.begin());
-            if (t.size() == k) {
-                ans = max(ans,k);
-            }
-            l++;
+int bs(vector<int> a, int x) {
+    int l = 0, r = a.size();
+    while(l < r) {
+        int m = l+(r-l)/2;
+        if (a[m] < x) {
+            l = m + 1;
+        } else {
+            r = m;
         }
     }
-    cout << ans;
+    if (l < a.size() && a[l] == x) {
+        return l+1;
+    } else return 0;
+}
+
+signed main() {
+    cin.tie(nullptr)->sync_with_stdio(false);
+    if (fopen(name ".inp", "r")) {
+        freopen(name ".inp","r",stdin);
+        freopen(name ".out","w",stdout);
+    }
+    int n,q;
+    cin >> n >> q;
+    vi v(n+1);
+    for (int i = 0; i < n; i++) cin >> v[i];
+    for (int i = 1; i <= q; i++) {
+        int x; cin >> x;
+        cout << bs(v,x) << " ";
+    }
     return 0;
 }

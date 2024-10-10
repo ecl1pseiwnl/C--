@@ -48,7 +48,9 @@ signed main() {
         cnt[it]++;
     }
     for (auto [x,y] : cnt) {
-        if (a[x] && y > 1) ans += y*(y-1)/2;
+        if (a[x]) {
+            ans += (y * (y-1))/2;
+        }
     }
     cout << ans;
     return 0;

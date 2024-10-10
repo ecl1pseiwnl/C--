@@ -50,23 +50,19 @@ constexpr int64_t LLINF = 0x3f3f3f3f3f3f3f3f;
 
 signed main() {
     cin.tie(nullptr)->sync_with_stdio(false);
-    int n, ans = INT_MIN;
-    cin >> n;
-    string s;
-    cin >> s;
-    for (int k = 1; k <= n; k++) {
-        int l = 0;
-        while(l < s.size()) {
-            string t = s.substr(l,k);
-            if (t.size() != k) break;
-            sort(all(t));
-            t.resize(unique(all(t)) - t.begin());
-            if (t.size() == k) {
-                ans = max(ans,k);
-            }
-            l++;
-        }
+    if (fopen(name ".inp", "r")) {
+        freopen(name ".inp","r",stdin);
+        freopen(name ".out","w",stdout);
     }
-    cout << ans;
+    int n,q;
+    cin >> n >> q;
+    vi v(n);
+    for (auto &it : v) cin >> it;
+    for (int i = 1; i <= q; i++) {
+        int x; cin >> x;
+        if (binary_search(all(v),x)) {
+            cout << "1";
+        } else cout << "0";
+    }
     return 0;
 }
