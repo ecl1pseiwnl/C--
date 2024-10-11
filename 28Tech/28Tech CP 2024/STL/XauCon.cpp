@@ -55,18 +55,14 @@ signed main() {
     string s;
     cin >> s;
     for (int k = 1; k <= n; k++) {
-        int l = 0;
-        while(l < s.size()) {
-            string t = s.substr(l,k);
-            if (t.size() != k) break;
-            sort(all(t));
-            t.resize(unique(all(t)) - t.begin());
-            if (t.size() == k) {
-                ans = max(ans,k);
-            }
-            l++;
+        unordered_set<string> se;
+        for (int i = 0; i <= n-k; i++) {
+            se.insert(s.substr(i,k));
+        }
+        if (se.size() == n-k+1) {
+            cout << k;
+            break;
         }
     }
-    cout << ans;
     return 0;
 }
