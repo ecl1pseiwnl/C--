@@ -53,7 +53,7 @@ signed main() {
     cin.tie(nullptr); cout.tie(nullptr);
     int n;
     cin >> n;
-    vector<ll> a(n+1), dp(n+1,1);
+    vector<ll> a(n+1), dp(n+1,0);
     for (int i = 1; i <= n; i++) cin >> a[i];
     for (int i = 1; i <= n; i++) {
         dp[i] = a[i];
@@ -63,6 +63,10 @@ signed main() {
             }
         }
     }
+    if (n == 1) {
+        cout << a[1];
+    } else {
     cout << *max_element(all(dp));
+    }
     return 0;
 }

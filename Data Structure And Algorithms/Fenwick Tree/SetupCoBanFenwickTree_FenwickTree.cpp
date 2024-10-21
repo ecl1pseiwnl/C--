@@ -48,24 +48,33 @@ constexpr int MOD = 1e9+7;
 constexpr int32_t IINF = 0x3f3f3f3f;
 constexpr int64_t LLINF = 0x3f3f3f3f3f3f3f3f;
 
-int n, k, a[1005], dp[1005];
+int n, a[20000], bit[20000];
+
+void update(int pos, int val) {
+    for (; pos <= n; pos += pos & (-pos)) {
+        bit[pos] += val;
+    }
+}
+
+int query(int pos) {
+    int s = 0;
+    for (; pos >= 1; pos -= pos & (-pos)) {
+        s += bit[pos];
+    }
+    return s;
+}
 
 signed main() {
     cin.tie(nullptr)->sync_with_stdio(false);
-    cin >> n >> k;
-    dp[0] = 1;
-    for (int i = 1; i <= k; i++) {
-        int x; cin >> x;
-        a[x] = 1;
+    if (fopen(name ".inp", "r")) {
+        freopen(name ".inp","r",stdin);
+        freopen(name ".out","w",stdout);
     }
+    cin >> n;
     for (int i = 1; i <= n; i++) {
-        if (a[i] == 0) {
-            dp[i] = (dp[i] + dp[i-1]) % 13051984;
-            if (i >= 2) {
-                dp[i] = (dp[i] + dp[i-2]) % 13051984;
-            }
-        }
+        cin >> a[i];
+        update(i,a[i]);
     }
-    cout << dp[n];
+    cout << query(7);
     return 0;
 }
