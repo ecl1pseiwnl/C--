@@ -48,12 +48,60 @@ constexpr int MOD = 1e9+7;
 constexpr int32_t IINF = 0x3f3f3f3f;
 constexpr int64_t LLINF = 0x3f3f3f3f3f3f3f3f;
 
+const int N = 1e7+7;
+int a[N],F[N];
+
+bool ts(int u) {
+    u = u * 10;
+    for (int i = 0; i <= 9; i++) {
+        u+=i;
+        if (!a[u]) return 1;
+        u-=i;
+    }
+    return 0;
+}
+
+bool check(int u) {
+    while(u>0) {
+        if (a[u]) return 0;
+        u /=10;
+    }
+    return 1;
+}
+
+void snt() {
+    a[0] = a[1] = 1;
+    for (int i = 2; i*i <= N; i++) {
+        if (!a[i]) {
+            for (int j = i*i; j < N; j+=i) {
+                a[j] = 1;
+            }
+        }
+    }
+}
+
 signed main() {
     cin.tie(nullptr)->sync_with_stdio(false);
     if (fopen(name ".inp", "r")) {
         freopen(name ".inp","r",stdin);
         freopen(name ".out","w",stdout);
     }
-
+    snt();
+    int n;
+    cin >> n;
+    F[0] = 0;
+    for (int i = 1,x; i <= n; i++) {
+        cin >> x;
+        if (!a[x] && check(x) && ts(x)) {
+            F[i] = F[i-1] + 1;
+        } else F[i] = F[i-1];
+    }
+    int q;
+    cin >> q;
+    while(q--) {
+        int l,r;
+        cin >> l >> r;
+        cout << F[r] - F[l-1] << "\n";
+    }
     return 0;
 }
