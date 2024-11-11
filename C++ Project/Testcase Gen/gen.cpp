@@ -51,13 +51,17 @@ const int INF_INT = 2e9;
 const ll INF_LL = 2e18;
 
 void makefile(ofstream &inp) {
-    int n = rand(1,1e6);
-    inp << n;
+    int n = rand(1,1e3);
+    inp << n << "\n";
+    for (int i = 1; i <= n; i++) {
+        int x = rand(1,1e6);
+        inp << x << " ";
+    }
 }
 
 signed main() {
     cin.tie(nullptr)->sync_with_stdio(false);
-    int test = 15, temp = 0;
+    int test = 30, temp = 0;
     string input,output;
     for (int i = 1; i <= test; i++) {
         system(("mkdir test" + to_string(i+temp)).c_str());

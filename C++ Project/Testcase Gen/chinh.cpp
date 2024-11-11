@@ -47,18 +47,32 @@ const int MOD = 1e9+7;
 const int32_t IINF = 0x3f3f3f3f;
 const int64_t LLINF = 0x3f3f3f3f3f3f3f3f;
 
+const int N = 1e6+7;
+int a[N];
+void snt() {
+    ms(a,1);
+    a[0] = a[1] = 0;
+    for (int i = 2; i*i <= N; i++) {
+        if(a[i]) {
+            for (int j = i*i; j <= N; j+=i) {
+                a[j] = 0;
+            }
+        }
+    }
+}
+
 signed main() {
     cin.tie(nullptr)->sync_with_stdio(false);
-    ll n;
-	cin >> n;
-	cout << n;
-	while (n != 1) {
-        if (n % 2 == 0) {
-            n /= 2;
-        } else {
-            n = 3*n + 1;
-        }
-        cout << " " << n;
-	}
+    snt();
+    int n;
+    cin >> n;
+    vi v(n);
+    for (auto &it : v) cin >> it;
+    for (int i = 0; i < n; i++) {
+        if (a[v[i]]) v[i] = 0;
+    }
+    for (auto it : v) {
+        cout << it << " ";
+    }
     return 0;
 }
