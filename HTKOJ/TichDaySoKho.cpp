@@ -58,8 +58,8 @@ signed main() {
     ll n,x,y;
     cin >> n >> x >> y;
     vector<ll> v(n);
-    ll ans = v[0]*x + v[1]*y, t = v[1];
     for (auto &it : v) cin >> it;
+    ll ans = v[0]*x + v[1]*y, t = v[1];
     for (int i = 2; i < n; i++) {
         ans = max(ans,t*x + v[i]*y);
         if (x > 0) {
