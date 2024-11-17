@@ -49,19 +49,6 @@ constexpr int MOD = 1e9+7;
 constexpr int32_t IINF = 0x3f3f3f3f;
 constexpr int64_t LLINF = 0x3f3f3f3f3f3f3f3f;
 
-vi sang(int r) {
-    vi a(r+1,1);
-    a[0] = a[1] = 0;
-    for (int i = 2; i*i <= r; i++) {
-        if (a[i]) {
-            for (int j = i*i; j <= r; j+=i) {
-                a[j] = 0;
-            }
-        }
-    }
-    return a;
-}
-
 set<int> ptich(int n) {
     set<int> se;
     for (int i = 2; i*i <= n; i++) {
