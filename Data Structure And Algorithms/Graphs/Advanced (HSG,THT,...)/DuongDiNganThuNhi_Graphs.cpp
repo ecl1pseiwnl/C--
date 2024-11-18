@@ -49,14 +49,88 @@ constexpr int MOD = 1e9+7;
 constexpr int32_t IINF = 0x3f3f3f3f;
 constexpr int64_t LLINF = 0x3f3f3f3f3f3f3f3f;
 
+struct edge{
+    int x,y,z;
+};
+
+const int N = 2e4+7;
+int n,m;
+ll res = LLINF, d[N],dn[N];
+vector<pi> v[N],rev[N];
+bool vis[N];
+edge e[N];
+
+void inp() {
+    cin >> n >> m;
+    for (int i = 1; i <= m; i++) {
+        int x,y,z;
+        cin >> x >> y >> z;
+        e[i].x = x; e[i].y = y; e[i].z = z;
+        v[x].pb({y,z});
+        rev[y].pb({x,z});
+    }
+}
+
+void dijkstra() {
+    for (int i = 1; i <= n; i++) {
+        d[i] = LLINF;
+        dn[i] = LLINF;
+    }
+    priority_queue<pair<ll,int>, vector<pair<ll,int>>, greater<pair<ll,int>>> q;
+    q.push({0,1});
+    d[1] = 0; dn[n] = 0;
+    while(!q.empty()) {
+        auto [x,y] = q.top();
+        q.pop();
+        if (vis[y]) continue;
+        vis[y]=1;
+        for (auto [t,w] : v[y]) {
+            if (d[t] > d[y] + w) {
+                d[t] = d[y] + w;
+                q.push({d[t],t});
+            }
+        }
+    }
+    for (int i = 1; i <= n; i++) vis[i] = 0;
+    while(!q.empty()) q.pop();
+    q.push({0,n});
+    while(!q.empty()) {
+        auto [x,y] = q.top();
+        q.pop();
+        if (vis[y]) continue;
+        vis[y]=1;
+        for (auto [t,w] : rev[y]) {
+            if (dn[t] > dn[y] + w) {
+                dn[t] = dn[y] + w;
+                q.push({dn[t],t});
+            }
+        }
+    }
+}
+
 signed main() {
     cin.tie(nullptr)->sync_with_stdio(false);
     if (fopen(name ".inp", "r")) {
         freopen(name ".inp","r",stdin);
         freopen(name ".out","w",stdout);
     }
-
-
-    cerr << "Time elapsed: " << TIME << "s. \n";
+    inp();
+    dijkstra();
+    for (int i = 1; i <= n; i++) {
+        cout << d[i] << " " << dn[i] << "\n";
+    }
+    for (int i = 1; i <= m;i++) {
+        int x,y,z;
+        x = e[i].x; y = e[i].y; z = e[i].z;
+        if (d[x]+dn[y]+z > d[n]) {
+            res = min(res,d[x]+dn[y]+z);
+        }
+    }
+    if (res == LLINF) {
+        cout << -1;
+    } else {
+        cout << res;
+    }
+    cerr << "\nTime elapsed: " << TIME << "s. \n";
     return 0;
 }
