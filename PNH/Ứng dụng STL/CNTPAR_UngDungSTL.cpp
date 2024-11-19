@@ -55,7 +55,21 @@ signed main() {
         freopen(name ".inp","r",stdin);
         freopen(name ".out","w",stdout);
     }
-
+    int n, cnt = 0;
+    cin >> n;
+    vector<pi> p(n);
+    map<pi,int> mp;
+    for (int i = 0; i < n; i++) {
+        cin >> p[i].fi >> p[i].se;
+    }
+    for (int i = 0; i < n; i++) {
+        for (int j = i+1; j < n; j++) {
+            pi mid = ({p[i].fi+p[j].fi,p[i].se + p[j].se});
+            cnt += mp[mid];
+            mp[mid]++;
+        }
+    }
+    cout << cnt;
     cerr << "Time elapsed: " << TIME << "s. \n";
     return 0;
 }
