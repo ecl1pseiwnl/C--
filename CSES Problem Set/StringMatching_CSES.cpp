@@ -34,6 +34,7 @@ typedef vector<mii> viii;
 ll __lcm(ll x, ll y) { return 1ll*(x / __gcd(x,y))*y;}
 #define ms(a,n) memset(a, n,sizeof(a))
 #define all(x) (x).begin(),(x).end()
+#define uniquev(v) sort(all(v)), (v).resize(unique(all(v)) - (v).begin())
 #define ins insert
 #define sz(x) (int)(x.size())
 #define name "TASK"
@@ -43,34 +44,21 @@ ll __lcm(ll x, ll y) { return 1ll*(x / __gcd(x,y))*y;}
 #define ep emplace_back
 #define pb push_back
 #define endl "\n"
-const int MOD = 1e9+7;
-const int32_t IINF = 0x3f3f3f3f;
-const int64_t LLINF = 0x3f3f3f3f3f3f3f3f;
+#define TIME (1.0 * clock() / CLOCKS_PER_SEC)
+constexpr int MOD = 1e9+7;
+constexpr int32_t IINF = 0x3f3f3f3f;
+constexpr int64_t LLINF = 0x3f3f3f3f3f3f3f3f;
 
-const int N = 2e5+7;
-
-string s, k;
-int cnt = 0;
-
-int kmp(int sz) {
-    int temp = 0;
-    for (int i = 0; i < s.size(); i++) {
-        if (s[i] == k[0]) {
-            temp = 0;
-            for (int j = 0; j < sz; j++) {
-                debug(s[i],k[j],temp);
-                if (s[i] == k[j]) {
-                    temp++;
-                    i++;
-                } else {
-                    break;
-                }
-                debug(s[i],k[j],temp);
-            }
-            if (temp == sz) cnt++;
-        }
+vi prefix(string s) {
+    int sz = s.size();
+    vi p(sz);
+    for (int i = 1; i < sz; i++) {
+        int j = p[i-1];
+        while(j > 0 && s[i] != s[j]) j = p[j-1];
+        if (s[i] == s[j]) j++;
+        p[i] = j;
     }
-    return cnt;
+    return p;
 }
 
 signed main() {
@@ -79,9 +67,17 @@ signed main() {
         freopen(name ".inp","r",stdin);
         freopen(name ".out","w",stdout);
     }
-    cin >> s >> k;
-    int sz = k.size();
-    int ans = kmp(sz);
-    cout << ans;
+    string s,t;
+    cin >> s >> t;
+    int n = s.size(), m = t.size();
+    vi p = prefix(t), res;
+    int ans = 0, j = 0;
+    for (int i = 0; i < n; i++) {
+        while(j > 0 && s[i] != t[j]) j = p[j-1];
+        if (s[i] == t[j]) j++;
+        if (j == m) ans++;
+    }
+    cout << ans << "\n";
+    cerr << "Time elapsed: " << TIME << "s. \n";
     return 0;
 }

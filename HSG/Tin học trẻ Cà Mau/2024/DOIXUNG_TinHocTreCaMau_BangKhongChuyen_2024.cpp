@@ -44,18 +44,38 @@ ll __lcm(ll x, ll y) { return 1ll*(x / __gcd(x,y))*y;}
 #define ep emplace_back
 #define pb push_back
 #define endl "\n"
+#define TIME (1.0 * clock() / CLOCKS_PER_SEC)
 constexpr int MOD = 1e9+7;
 constexpr int32_t IINF = 0x3f3f3f3f;
 constexpr int64_t LLINF = 0x3f3f3f3f3f3f3f3f;
 
-bool check(const string& s) {
-    int l = s.size();
-    for (int i = 0; i < l / 2; i++) {
-        if (s[i] != s[l - 1 - i]) {
-            return false;
-        }
+bool palin(string s) {
+    int sz = s.size();
+    for (int i = 0; i < sz/2; i++) {
+        if (s[i] != s[sz-i-1]) return false;
     }
     return true;
+}
+
+string csl(string s) {
+    int sz = s.size();
+    string res = s;
+    int du = 1;
+    for (int i = sz - 1; i >= 0; i--) {
+        int temp = res[i] - '0' + du;
+        if (temp == 10) {
+            res[i] = '0';
+            du = 1;
+        } else {
+            res[i] = '0' + temp;
+            du = 0;
+            break;
+        }
+    }
+    if (du == 1) {
+        res = '1' + res;
+    }
+    return res;
 }
 
 signed main() {
@@ -66,20 +86,14 @@ signed main() {
     }
     string s;
     cin >> s;
-    int l = s.size();
-    string left = s.substr(0, (l + 1) / 2);
-    string temp = left;
-    for (int i = (l - 1) / 2; i >= 0; i--) {
-        temp += left[i];
-    }
-    if (temp <= s) {
-        long long leftn = stoll(left) + 1;
-        left = to_string(leftn);
-        temp = left;
-        for (int i = (left.size() - 1) / 2; i >= 0; i--) {
-            temp += left[i];
+    string cur = csl(s);
+    while(true) {
+        if (palin(cur)) {
+            cout << cur;
+            break;
         }
+        cur = csl(cur);
     }
-    cout << temp;
+    cerr << "Time elapsed: " << TIME << "s. \n";
     return 0;
 }
