@@ -55,7 +55,19 @@ signed main() {
         freopen(name ".inp","r",stdin);
         freopen(name ".out","w",stdout);
     }
-
+    string s,t;
+    cin >> s >> t;
+    s = " " + s;
+    int sz = s.size();
+    vi f(sz+1);
+    for (int i = 2, j = 0; i <= sz; i++) {
+        while(j && s[i] != s[j+1]) j = f[i];
+        if (s[i] == s[j+1]) {
+            f[i] = j+1;
+            j++;
+        }
+    }
+    debug(f);
     cerr << "Time elapsed: " << TIME << "s. \n";
     return 0;
 }
