@@ -21,28 +21,42 @@ const int MOD = 1e9+7;
 const int INF_INT = 2e9;
 const ll INF_LL = 2e18;
 
-const int N = 1e6+5;
-int f[N];
-
+const int N = 1e6+7;
+int f[N],inv[N];
 ll binpow(ll a, ll b) {
     ll ans = 1;
     while(b) {
-        if (b&1) ans = (1ll * ans * a) % MOD;
-        a = (1ll*a*a) % MOD;
-        b >>=1;
+        if (b&1) ans = ans * a % MOD;
+        a = a*a % MOD;
+        b /= 2;
     }
     return ans;
 }
 
-ll C(ll n, ll k) {
-    return f[n] * binpow(f[k],MOD-2) % MOD * binpow(f[n-k], MOD-2) % MOD;
-}
-
 void prep() {
     f[0] = 1;
-    for (int i = 1; i < N; i++) {
-        f[i] = (1ll*f[i-1]*i) % MOD;
+    for (int i = 1; i <= N; i++) {
+        f[i] = (1LL * f[i-1] * i) % MOD;
     }
+    inv[N] = binpow(f[N],MOD-2);
+    for (int i = N-1; i >= 1; i--) {
+        inv[i] = (1LL * inv[i+1] * (i+1)) % MOD;
+    }
+}
+
+ll C(ll n, ll k) {
+    if (k > n) return 0;
+    return (1LL * f[n] * inv[k] % MOD) * inv[n-k] % MOD;
+}
+
+ll lucas(ll n, ll k) {
+    if (k > n) return 0;
+    ll res = 1;
+    while(n > 0) {
+        res = 1LL * res * C(n % MOD, k % MOD) % MOD;
+        n /= MOD; k/= MOD;
+    }
+    return res;
 }
 
 signed main() {
@@ -50,6 +64,6 @@ signed main() {
     prep();
     ll n,k;
     cin >> n >> k;
-    cout << C(k+n-1,n-1);
+    cout << lucas(n+k-1,n-1);
     return 0;
 }
