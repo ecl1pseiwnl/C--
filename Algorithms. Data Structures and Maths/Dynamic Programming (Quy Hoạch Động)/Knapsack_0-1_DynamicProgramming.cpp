@@ -48,28 +48,30 @@ constexpr int MOD = 1e9+7;
 constexpr int32_t IINF = 0x3f3f3f3f;
 constexpr int64_t LLINF = 0x3f3f3f3f3f3f3f3f;
 
+const int N = 1e6+7;
+vi v(N), w(N), dp(N,LLINF);
+
 signed main() {
     cin.tie(nullptr)->sync_with_stdio(false);
     if (fopen(name ".inp", "r")) {
         freopen(name ".inp","r",stdin);
         freopen(name ".out","w",stdout);
     }
-    int n, s;
+    int n,s;
+    ll t = 0;
     cin >> n >> s;
-    vi v(n+1),w(n+1),prev(s+5),cur(s+5);
-    for (int i = 1; i<= n; i++) cin >> v[i] >> w[i];
+    for (int i = 1; i <= n; i++) cin >> v[i] >> w[i];
+    for (int i = 1; i <= n; i++) t += w[i];
+    dp[0] = 0;
     for (int i = 1; i <= n; i++) {
-        for (int j = 0; j <= s; j++) {
-            prev[j] = cur[j];
-            cur[j] = 0;
-        }
-        for (int j = 0; j <= s; j++) {
-            cur[j] = prev[j];
-            if (j >= w[i]) {
-                cur[j] = max(cur[j],prev[j-w[i]]+v[i]);
-            }
+        for (int j = t; j >= 1; j--) {
+            if (w[i] <= j) dp[j] = min(dp[j], dp[j-w[i]] + v[i]);
         }
     }
-    cout << cur[s];
+    ll ans = LLINF;
+    for (int j = 1; j <= t; j++) {
+        if (dp[j] <= s) ans = j;
+    }
+    cout << ans;
     return 0;
 }
