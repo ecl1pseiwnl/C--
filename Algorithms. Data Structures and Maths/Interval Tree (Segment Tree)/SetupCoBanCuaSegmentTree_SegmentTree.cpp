@@ -31,12 +31,13 @@ int get(int id, int l, int r,int u, int v) {
 	return t1 + t2;
 }
 
-void update(int id, int l, int r, int p) {
-	if (p < l || p > r) return;
-	if (l == r) return t[id] = a[p], void();
+void update(int id, int l, int r, int i, int x) {
+	if (i < l || i > r) return;
+	if (l == r) return t[id] = a[x], void();
 	int mid = (l + r) / 2;
-	update(id * 2, l, mid, p);
-	update(id * 2 + 1, mid + 1, r, p);
+	update(id * 2, l, mid, i, x);
+	update(id * 2 + 1, mid + 1, r, i, x);
+	t[i] = t[2*id] + t[2*id+1];
 }
 
 int main() {

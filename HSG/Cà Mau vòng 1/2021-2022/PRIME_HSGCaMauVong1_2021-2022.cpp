@@ -77,7 +77,7 @@ signed main() {
         }
     }
     for (auto [x,y] : cnt) {
-        ans += y*(y-1)/2;
+        ans += (1LL * y*(y-1)/2);
     }
     cout << ans;
     return 0;
