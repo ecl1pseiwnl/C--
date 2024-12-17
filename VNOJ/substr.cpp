@@ -49,6 +49,9 @@ constexpr int MOD = 1e9+7;
 constexpr int32_t IINF = 0x3f3f3f3f;
 constexpr int64_t LLINF = 0x3f3f3f3f3f3f3f3f;
 
+const int N = 2e6+7;
+int f[N];
+
 signed main() {
     cin.tie(nullptr)->sync_with_stdio(false);
     if (fopen(name ".inp", "r")) {
@@ -57,17 +60,18 @@ signed main() {
     }
     string s,t;
     cin >> s >> t;
-    s = " " + s;
-    int sz = s.size();
-    vi f(sz+1);
-    for (int i = 2, j = 0; i <= sz; i++) {
-        while(j && s[i] != s[j+1]) j = f[i];
-        if (s[i] == s[j+1]) {
-            f[i] = j+1;
-            j++;
-        }
+    s = t + "#" + s;
+    f[0] = 0;
+    for (int i = 1; i < s.size(); i++) {
+        int j = f[i-1];
+        while(j > 0 && s[j] != s[i]) j = f[j-1];
+        if (s[j] == s[i]) ++j;
+        f[i] = j;
     }
-    debug(f);
+    for (int i = t.size()+1; i <= s.size()+1; i++) {
+        if (f[i] == t.size()) cout << i-2*t.size()+1 << " ";
+    }
+
     cerr << "Time elapsed: " << TIME << "s. \n";
     return 0;
 }
