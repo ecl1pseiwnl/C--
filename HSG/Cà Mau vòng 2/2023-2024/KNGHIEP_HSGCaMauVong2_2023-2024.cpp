@@ -56,18 +56,17 @@ signed main() {
     }
     ll n,cnt = 0;
     cin >> n;
-    for (ll m = 1; m * (m+1)/2 <= n; m++) {
-        if ((2*n) % m == 0) {
-            ll temp = (2*n)/m-(m-1);
-            if (temp > 0 && temp % 2 == 0) {
+    for (ll m = 1; (m * (m + 1)) /2 <= n; m++) {
+        if ((n - m * (m - 1) / 2) % m == 0) {
+            ll temp = (n - m * (m - 1) / 2) / m;
+            if (temp > 0) {
                 cnt++;
             }
         }
-
     }
     cout << cnt;
     return 0;
 }
-// S = ((j-i+1) * (i+j)) / 2 = n;
-// => m*(2*i + m - 1) = 2n
-// 1 -> 2n
+// Nhan xet co the thay: S = a + (a + 1) + (a + 2) + ... + (a + k - 1)
+// => S = (k * (2a + k - 1)) / 2
+// Tu do ta co nhan xet rang chung ta chi can duyet k * (k+1)/2 lan

@@ -79,6 +79,7 @@ ll C(ll n, ll k) {
 
 //https://wiki.vnoi.info/translate/he/Lucas-theorem
 ll lucas(ll n, ll k) {
+    if (k == 0) return 1;
     if (k > n) return 0;
     ll res = 1;
     while(n > 0) {
