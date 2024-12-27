@@ -21,7 +21,7 @@ const int MOD = 1e9+7;
 const int INF_INT = 2e9;
 const ll INF_LL = 2e18;
 
-const int N = 1e6+7;
+const int N = 1e6;
 int f[N],inv[N];
 ll binpow(ll a, ll b) {
     ll ans = 1;
