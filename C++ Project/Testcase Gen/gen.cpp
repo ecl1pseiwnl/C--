@@ -51,7 +51,7 @@ const int INF_INT = 2e9;
 const ll INF_LL = 2e18;
 
 void makefile(ofstream &inp) {
-    int n = rand(1,1e3);
+    int n = rand(1,1e4);
     inp << n << "\n";
     for (int i = 1; i <= n; i++) {
         int x = rand(1,1e6);

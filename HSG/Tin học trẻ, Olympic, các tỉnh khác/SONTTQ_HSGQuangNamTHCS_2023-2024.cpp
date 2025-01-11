@@ -10,22 +10,33 @@ typedef map<int, int> mii;
 #define mp make_pair
 #define pb push_back
 
-bool check(char c) {
-    return c == '2' || c == '3' || c == '5' || c == '7';
+const int N = 25;
+vector<int> a(N,1);
+
+void snt() {
+    a[0] = a[1] = 0;
+    for (int i = 2; i <= N; i++) {
+        if (a[i]) {
+            for (int j = i*i; j <= N; j += i) {
+                a[j] = 0;
+            }
+        }
+    }
 }
 
-int main() {
-    ios_base::sync_with_stdio(false);
-    cin.tie(nullptr);
+signed main() {
+    cin.tie(nullptr)->sync_with_stdio(false);
+    snt();
     string s;
     cin >> s;
-    int t;
-    cin >> t;
-    sort(s.begin(), s.end());
-    cout << s[t - 1] << " ";
-    if (check(s[t - 1])) {
-        cout << "YES";
-    }
-    else cout << "NO";
+    int n;
+    cin >> n;
+    vector<int> v;
+    for (auto it : s) v.push_back(int(it-'0'));
+    sort(v.begin(),v.end());
+    v.resize(unique(v.begin(),v.end()) - v.begin());
+    if (v.size() >= n) {
+        cout << v[n-1] << " " << (a[v[n-1]] == 1 ? "Yes" : "No");
+    } else cout << "-1";
     return 0;
 }

@@ -10,32 +10,23 @@ typedef map<int, int> mii;
 #define mp make_pair
 #define pb push_back
 
-ll uoc(int n) {
-    ll ans = 0;
-    for (int i = sqrt(n); i >= 1; i--) {
-        if (n % i == 0) {
-            ans += i;
+ll sol(int u) {
+    ll s = 0;
+    for (int i = 1; i <= sqrt(u); i++) {
+        if (u % i == 0) {
+            s += i;
+            if (u / i != i) s += u/i;
         }
     }
-    for (int i = sqrt(n); i >= 1; i--) {
-        if (n % i == 0 && n / i != i) {
-            ans += n / i;
-        }
-    }
-    return ans;
+    return s;
 }
 
-int main() {
-    ios_base::sync_with_stdio(false);
-    cin.tie(nullptr);
+signed main() {
+    cin.tie(nullptr)->sync_with_stdio(false);
     int n;
     cin >> n;
-    int a[n];
-    for (int i = 0; i < n; i++) cin >> a[i];
-    for (int i = 0; i < n; i++) {
-        ll b = uoc(a[i]);
-        a[i] = b;
-    }
-    for (int i = 0; i < n; i++) cout << a[i] << " ";
+    vi v(n);
+    for (auto &it : v) cin >> it;
+    for (auto it : v) cout << sol(it) << " ";
     return 0;
 }

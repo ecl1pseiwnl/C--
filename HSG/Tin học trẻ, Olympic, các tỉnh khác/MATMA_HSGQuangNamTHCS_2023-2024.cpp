@@ -10,7 +10,7 @@ typedef map<int, int> mii;
 #define mp make_pair
 #define pb push_back
 
-int main() {
+signed main() {
     ios_base::sync_with_stdio(false);
     cin.tie(nullptr);
     string s, temp;
