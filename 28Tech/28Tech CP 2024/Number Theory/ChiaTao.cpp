@@ -21,9 +21,10 @@ const int MOD = 1e9+7;
 const int INF_INT = 2e9;
 const ll INF_LL = 2e18;
 
-const int N = 1e6;
+const int N = 2e6;
 int f[N],inv[N];
 ll binpow(ll a, ll b) {
+    a %= MOD;
     ll ans = 1;
     while(b) {
         if (b&1) ans = ans * a % MOD;
@@ -34,8 +35,8 @@ ll binpow(ll a, ll b) {
 }
 
 void prep() {
-    f[0] = 1;
-    for (int i = 1; i <= N; i++) {
+    f[0] = f[1] = 1;
+    for (int i = 2; i <= N; i++) {
         f[i] = (1LL * f[i-1] * i) % MOD;
     }
     inv[N] = binpow(f[N],MOD-2);
@@ -49,21 +50,11 @@ ll C(ll n, ll k) {
     return (1LL * f[n] * inv[k] % MOD) * inv[n-k] % MOD;
 }
 
-ll lucas(ll n, ll k) {
-    if (k > n) return 0;
-    ll res = 1;
-    while(n > 0) {
-        res = 1LL * res * C(n % MOD, k % MOD) % MOD;
-        n /= MOD; k/= MOD;
-    }
-    return res;
-}
-
 signed main() {
     cin.tie(nullptr)->sync_with_stdio(false);
     prep();
     ll n,k;
     cin >> n >> k;
-    cout << lucas(n+k-1,n-1);
+    cout << C(n+k-1,n-1);
     return 0;
 }
