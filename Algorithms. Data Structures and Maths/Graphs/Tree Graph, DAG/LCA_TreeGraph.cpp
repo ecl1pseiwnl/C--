@@ -84,6 +84,7 @@ int lca (int u, int v) {
             u = par[u][i];
         }
     }
+    if (u == v) return u;
     // cung di len toi to tien gan nhat
     for (int i = lg; i >= 0; i--) {
         if (par[u][i] != par[v][i]) {
