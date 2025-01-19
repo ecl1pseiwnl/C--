@@ -64,7 +64,7 @@ void inp() {
     }
 }
 
-void dijkstra(int s, int t, bool tf) {
+void dijkstra(int s, bool tf) {
     vector<ll> d(n+1,LLINF);
     d[s] = 0;
     priority_queue<pi,vector<pi>,greater<pi>> q;
@@ -84,15 +84,11 @@ void dijkstra(int s, int t, bool tf) {
     }
     if (tf) {
         for (int i = 1; i <= n; i++) {
-            if (i == s) {
-                a.pb(LLINF);
-            } else a.pb(d[i]);
+            a.pb(d[i]);
         }
     } else {
         for (int i = 1; i <= n; i++) {
-            if (i == s) {
-                b.pb(LLINF);
-            } else b.pb(d[i]);
+            b.pb(d[i]);
         }
     }
 }
@@ -104,23 +100,21 @@ signed main() {
         freopen(name ".out","w",stdout);
     }
     inp();
-    a.pb(0);
-    b.pb(0);
-    dijkstra(s,t,1);
-    dijkstra(t,s,0);
-    bool tf = 0;
-    ll minv = LLINF, ans = -1, curv = 0;
+    a.pb(LLINF);
+    b.pb(LLINF);
+    dijkstra(s,1);
+    dijkstra(t,0);
+    debug(a,b);
+    ll minv = LLINF, ans = -1;
     for (int i = 1; i <= n; i++) {
-        curv = max(a[i],b[i]);
-        if (curv < minv && curv != 0) {
-            minv = curv;
+        if (a[i] == b[i] && a[i] < minv) {
+            minv = a[i];
             ans = i;
-            tf = 1;
         }
     }
-    if (tf) {
-        cout << ans;
-    } else cout << "CRY";
+    if (ans == -1) {
+        cout << "CRY";
+    } else cout << ans;
     cerr << "Time elapsed: " << TIME << "s. \n";
     return 0;
 }
