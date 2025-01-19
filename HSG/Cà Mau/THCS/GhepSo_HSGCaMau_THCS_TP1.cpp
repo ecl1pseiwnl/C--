@@ -8,9 +8,8 @@ int main() {
     string s,t,ans = "";
     cin >> s;
     cin >> t;
-    int n = s.size()+1, m = t.size()+1;
-    int l = 0, r = 0;
-    while (l < n && r < m) {
+    int n = s.size(), m = t.size(), l = 0, r = 0;
+    while (ans.size() != n+m) {
         if (s[l] > t[r]) {
             ans += t[r];
             r++;
@@ -22,11 +21,10 @@ int main() {
             ans += t[r];
             l++; r++;
         }
-    }
-    if (l < n-1) {
-        ans += s[l];
-    } else if (r < m-1) {
-        ans += t[r];
+        if (!t[r] && s[l]) {
+            ans += s[l];
+        } else if (!s[l] && t[r]) { ans += t[r]; }
     }
     cout << ans;
+    return 0;
 }
