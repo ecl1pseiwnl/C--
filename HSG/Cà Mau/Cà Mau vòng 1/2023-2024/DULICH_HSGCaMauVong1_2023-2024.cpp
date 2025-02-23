@@ -107,7 +107,6 @@ signed main() {
     sort(all(ans),greater<int>());
     f[0] = ans[0];
     for (int i = 1; i < sz;i++) f[i] = f[i-1] + ans[i];
-    debug(f,ans);
     while(q--) {
         int x;
         cin >> x;

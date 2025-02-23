@@ -38,8 +38,8 @@ bool bfs(int u) {
 				q.push(x);
 				visited[x] = true;
 				parent[x] = c;
-			} else if (x != parent[v]) {
-				st = v; en = x;
+			} else if (x != parent[c]) {
+				st = c; en = x;
 				return true;
 			}
 		}

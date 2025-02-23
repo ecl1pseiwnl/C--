@@ -51,7 +51,6 @@ constexpr int32_t IINF = 0x3f3f3f3f;
 constexpr int64_t LLINF = 0x3f3f3f3f3f3f3f3f;
 
 const int N = 3e5+7;
-const int lg = 19; // log2 2^j
 int n;
 vi v[N];
 int par[N][lg+1], high[N];
@@ -79,20 +78,26 @@ void dfs(int u) {
 int lca (int u, int v) {
     if (high[v] > high[u]) return lca(v,u);
     // binary lift do sau cua 2 diem
-    for (int i = lg; i >= 0; i--) {
+    int k = __lg(high[u] - high[y]);
+    for (int i = k; i >= 0; i--) {
         if (high[par[u][i]] >= high[v]) {
             u = par[u][i];
         }
     }
     if (u == v) return u;
     // cung di len toi to tien gan nhat
-    for (int i = lg; i >= 0; i--) {
+    int t = __lg(high[u]);
+    for (int i = t; i >= 0; i--) {
         if (par[u][i] != par[v][i]) {
             u = par[u][i];
             v = par[v][i];
         }
 	}
 	return par[u][0];
+}
+
+int dist(int u, int y) {
+    return 1ll* d[u] + d[y] - 2 * d[lca(u,y)];
 }
 
 signed main() {

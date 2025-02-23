@@ -24,7 +24,7 @@ void inp() {
 		v[y].pb(x);
 	}
 	memset(visited, false, sizeof(visited));
-	memset(visited, false, sizeof(ap));
+	memset(ap, false, sizeof(ap));
 }
 
 void dfs(int u, int par) {

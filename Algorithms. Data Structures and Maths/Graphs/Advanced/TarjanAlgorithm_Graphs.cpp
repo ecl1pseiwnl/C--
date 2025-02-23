@@ -12,7 +12,7 @@ typedef map<int, int> mii;
 
 int n, m, cnt = 0, scc = 0, low[1001], num[1001];
 vi v[1001];
-bool visited[1001], in_stack[1001];
+bool visited[1001];
 stack<int> st;
 
 void inp() {
@@ -22,33 +22,27 @@ void inp() {
 		cin >> x >> y;
 		v[x].pb(y);
 	}
-	memset(visited, false, sizeof(visited));
-	memset(in_stack, false, sizeof(visited));
 }
 
 void dfs(int u) {
-	visited[u] = true; in_stack[u] = true;
 	num[u] = low[u] = ++cnt;
 	st.push(u);
 	for (int it : v[u]) {
-		if (!visited[it]) {
-			dfs(it);
-			low[u] = min(low[u], low[it]);
+		if (num[it]) {
+                low[u] = min(low[u], num[it]);
 		}
 		else {
-			low[u] = min(low[u], num[it]);
+                dfs(it);
+                low[u] = min(low[u], low[it]);
 		}
 	}
 	if (low[u] == num[u]) {
 		++scc;
-		while (st.top() != u) {
-			//cout << st.top() << " ";
-			in_stack[st.top()] = false;
-			st.pop();
-		}
-		//cout << st.top() << " ";
-		//in_stack[st.top()] = false;
-		//st.pop();
+        int k = 0;
+        while (k != u) {
+            cout << st.pop() << " ";
+            st.pop();
+        }
 	}
 }
 
