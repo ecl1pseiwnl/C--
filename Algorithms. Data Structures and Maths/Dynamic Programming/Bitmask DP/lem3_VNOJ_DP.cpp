@@ -31,14 +31,14 @@ typedef map<int,int> mii;
 typedef vector<int> vi;
 typedef vector<pi> vii;
 typedef vector<mii> viii;
-ll __lcm(ll x, ll y) { return 1ll*(x / __gcd(x,y))*y;}
 const double PI = 3.141592653589793238463;
+#define bmask(x,i) (((x) >> (i)) & 1)
 #define ms(a,n) memset(a, n,sizeof(a))
 #define all(x) (x).begin(),(x).end()
 #define uniquev(v) sort(all(v)), (v).resize(unique(all(v)) - (v).begin())
 #define ins insert
 #define sz(x) (int)(x.size())
-#define name "data"
+#define name "TASK"
 #define fi first
 #define sec second
 #define mp make_pair
@@ -46,34 +46,45 @@ const double PI = 3.141592653589793238463;
 #define pb push_back
 #define endl "\n"
 #define TIME (1.0 * clock() / CLOCKS_PER_SEC)
+ll __lcm(ll x, ll y) { return 1ll*(x / __gcd(x,y))*y;}
 constexpr int MOD = 1e9+7;
 constexpr int32_t IINF = 0x3f3f3f3f;
 constexpr int64_t LLINF = 0x3f3f3f3f3f3f3f3f;
 
+const int N = 20;
+int a[N][N], dp[N][(1<<N)];
+
 signed main() {
     cin.tie(nullptr)->sync_with_stdio(false);
-    if (fopen(name ".INP", "r")) {
-        freopen(name ".INP","r",stdin);
-        //freopen(name ".OUT","w",stdout);
-    }
-    int n,q;
-    cin >> n >> q;
-    vi v(n+1);
-    map<int,int> m;
-    for (int i = 1; i <= n; i++) {
-        cin >> v[i];
-        if (m.find(v[i]) == m.end()) {
-            m[v[i]] = i;
+    int n;
+    cin >> n;
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++) {
+            cin >> a[i][j];
         }
     }
-    while(q--) {
-        int x; cin >> x;
-        if (binary_search(all(v),x)) {
-            cout << m[x] << endl;
-        } else {
-            cout << "-1\n";
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < (1 << n); j++) {
+            dp[i][j] = IINF;
         }
     }
-    cerr << "\nTime elapsed: " << TIME << "s. \n";
+    for (int i = 0; i < n; i++) {
+        dp[i][1 << i] = 0;
+    }
+    for (int mask = 0; mask < (1 << n); mask++) {
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                if (!(mask & (1 << j))) {
+                    dp[j][mask | (1 << j)] = min(dp[j][mask | (1 << j)], dp[i][mask] + a[i][j]);
+                }
+            }
+        }
+    }
+    int ans = IINF;
+    for (int i = 0; i < n; i++) {
+        ans = min(dp[i][(1 << n) - 1], ans);
+    }
+    cout << ans;
+    cerr << "Time elapsed: " << TIME << "s. \n";
     return 0;
 }

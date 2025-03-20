@@ -31,14 +31,14 @@ typedef map<int,int> mii;
 typedef vector<int> vi;
 typedef vector<pi> vii;
 typedef vector<mii> viii;
-ll __lcm(ll x, ll y) { return 1ll*(x / __gcd(x,y))*y;}
 const double PI = 3.141592653589793238463;
+#define bmask(x,i) (((x) >> (i)) & 1)
 #define ms(a,n) memset(a, n,sizeof(a))
 #define all(x) (x).begin(),(x).end()
 #define uniquev(v) sort(all(v)), (v).resize(unique(all(v)) - (v).begin())
 #define ins insert
 #define sz(x) (int)(x.size())
-#define name "data"
+#define name "TASK"
 #define fi first
 #define sec second
 #define mp make_pair
@@ -46,23 +46,48 @@ const double PI = 3.141592653589793238463;
 #define pb push_back
 #define endl "\n"
 #define TIME (1.0 * clock() / CLOCKS_PER_SEC)
+ll __lcm(ll x, ll y) { return 1ll*(x / __gcd(x,y))*y;}
 constexpr int MOD = 1e9+7;
 constexpr int32_t IINF = 0x3f3f3f3f;
 constexpr int64_t LLINF = 0x3f3f3f3f3f3f3f3f;
 
+const int N = (1<<15)+1;
+ll dp[N][16];
+
+void sol() {
+    int n, k;
+        cin >> n >> k;
+        for (int mask = 0; mask < (1 << n); mask++) {
+            for (int i = 1; i <= n; i++) {
+                dp[mask][i] = 0;
+            }
+        }
+        dp[0][0] = 1;
+        for (int mask = 0; mask < (1 << n); mask++) {
+            for (int i = 1; i <= n; i++) {
+                if ((mask >> (i-1)) & 1) continue;
+                for (int j = 0; j <= n; j++) {
+                    if (j != 0 && abs(i-j) > k) continue;
+                    int nmask = (mask | (1 << (i-1)));
+                    dp[nmask][i] += dp[mask][j];
+                }
+            }
+        }
+        ll res = 0; int mask1 = (1 << n) - 1;
+        for (int i = 1; i <= n; i++) res += dp[mask1][i];
+        cout << res << endl;
+}
+
 signed main() {
     cin.tie(nullptr)->sync_with_stdio(false);
-    if (fopen(name ".INP", "r")) {
-        freopen(name ".INP","r",stdin);
-        //freopen(name ".OUT","w",stdout);
+    if (fopen(name ".inp", "r")) {
+        freopen(name ".inp","r",stdin);
+        freopen(name ".out","w",stdout);
     }
-    int n,q;
-    cin >> n >> q;
-    vi v(n);
-    for (auto &it : v) cin >> it;
-    while(q--) {
-        int x; cin >> x;
-        cout << (lower_bound(all(v),x) - v.begin()) + 1<< endl;
+    int t;
+    cin >> t;
+    while(t--) {
+        sol();
     }
     cerr << "\nTime elapsed: " << TIME << "s. \n";
     return 0;
