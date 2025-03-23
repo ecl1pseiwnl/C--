@@ -142,15 +142,33 @@ double getLen(vect v) {
     return hypot(v.x,v.y);
 }
 
+double getLen_sq(vect v) {
+    return v.x * v.x + v.y * v.y;
+}
+
 double distToLine(point M, point a, point b) {
-    double k = scalarProduct(vect(a,M),vect(a,b)) / getLen(a,b);
-    point H = translate(a,scale(vect(a,b)),k);
-    return dist(M,H);
+    double k = scalarProduct(getVec(a,M),getVec(a,b)) / getLen(getVec(a,b));
+    point H = translate(a,scale(getVec(a,b),k));
+    return distP(M,H);
 }
 
 double getAngle(point O, point A, point B) {
-    vect OA = vect(O,A); vect OB = vect(O,B);
-    return acos(scalarProduct(OA,OB) / sqrt(getlen(OA),getlen(OB)));
+    vect OA = getVec(O,A); vect OB = getVec(O,B);
+    return acos(scalarProduct(OA,OB) / sqrt(getLen_sq(OA) + getLen_sq(OB)));
+}
+
+double crossProduct(vect u, vect v) {
+    return u.x * v.y - u.y * v.x;
+}
+
+bool ccw(point o, point a, point b) {
+    vect OA = getVec(o,a), OB = getVec(o,b);
+    return (crossProduct(OA,OB) > 0);
+}
+
+bool collinear(point o, point a, point b) {
+    vect OA = getVec(o,a), OB = getVec(o,b);
+    return (fabs(crossProduct(OA,OB)) < EPS);
 }
 
 signed main() {
