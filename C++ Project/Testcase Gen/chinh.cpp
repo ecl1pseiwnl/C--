@@ -47,32 +47,38 @@ const int MOD = 1e9+7;
 const int32_t IINF = 0x3f3f3f3f;
 const int64_t LLINF = 0x3f3f3f3f3f3f3f3f;
 
-const int N = 1e6+7;
-int a[N];
+ll n, k, cnt = 0;
+const int N = 10000005;
+vector<ll> v, a(N+1,1);
+
 void snt() {
-    ms(a,1);
-    a[0] = a[1] = 0;
-    for (int i = 2; i*i <= N; i++) {
-        if(a[i]) {
-            for (int j = i*i; j <= N; j+=i) {
-                a[j] = 0;
-            }
-        }
-    }
+	a[1] = a[0] = 0;
+	for (int i = 2; i <= sqrt(N); i++) {
+		if (a[i]) {
+			for (int j = i * i; j <= N; j += i) {
+				a[j] = 0;
+			}
+		}
+	}
+	for (int i = 1; i <= n; i++) {
+		if (a[i]) {
+			v.pb(i);
+		}
+	}
 }
 
 signed main() {
     cin.tie(nullptr)->sync_with_stdio(false);
-    snt();
-    int n;
-    cin >> n;
-    vi v(n);
-    for (auto &it : v) cin >> it;
-    for (int i = 0; i < n; i++) {
-        if (a[v[i]]) v[i] = 0;
-    }
+    freopen("A.INP","r",stdin);
+    freopen("A.ANS","w",stdout);
+    cin >> n >> k;
+	snt();
     for (auto it : v) {
-        cout << it << " ";
+        if (binary_search(v.begin(),v.end(),it-k)) {
+            cnt++;
+            cout << it-k << " " << it << endl;
+        }
     }
+	cout << cnt;
     return 0;
 }

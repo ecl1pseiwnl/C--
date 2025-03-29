@@ -9,7 +9,7 @@ typedef map<int, int> mp;
 #define mp make_pair
 #define pb push_back
 
-ll n, k, cnt = 0, temp = 0;
+ll n, k, cnt = 0;
 const int N = 10000005;
 vector<ll> v;
 int a[N];
@@ -36,26 +36,12 @@ int main() {
 	cin.tie(NULL);
 	cin >> n >> k;
 	snt();
-	ll l = 0, r = l + 1, maxs = v.size() - 1;
-	while (l != maxs) {
-		if (r == maxs) {
-			if (v[r] - v[l] == k) {
-				cnt++;
-			}
-			l++;
-			r = l + 1;
-		}
-		else {
-			if (v[r] - v[l] == k) {
-				cnt++;
-				l++;
-				r = l + 1;
-			}
-			else {
-				r++;
-			}
-		}
-	}
+    for (auto it : v) {
+        if (binary_search(v.begin(),v.end(),it-k)) {
+            cnt++;
+            cout << it-k << " " << it << endl;
+        }
+    }
 	cout << cnt;
 	return 0;
 }

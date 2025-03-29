@@ -31,8 +31,8 @@ typedef map<int,int> mii;
 typedef vector<int> vi;
 typedef vector<pi> vii;
 typedef vector<mii> viii;
-ll __lcm(ll x, ll y) { return 1ll*(x / __gcd(x,y))*y;}
 const double PI = 3.141592653589793238463;
+#define bmask(x,i) (((x) >> (i)) & 1)
 #define ms(a,n) memset(a, n,sizeof(a))
 #define all(x) (x).begin(),(x).end()
 #define uniquev(v) sort(all(v)), (v).resize(unique(all(v)) - (v).begin())
@@ -46,13 +46,14 @@ const double PI = 3.141592653589793238463;
 #define pb push_back
 #define endl "\n"
 #define TIME (1.0 * clock() / CLOCKS_PER_SEC)
+ll __lcm(ll x, ll y) { return 1ll*(x / __gcd(x,y))*y;}
 constexpr int MOD = 1e9+7;
 constexpr int32_t IINF = 0x3f3f3f3f;
 constexpr int64_t LLINF = 0x3f3f3f3f3f3f3f3f;
 
 int n, m;
 const int N = 1e5+7;
-vi v[N], ans;
+vi v[N], topo;
 bool vis[N];
 
 void dfs(int u) {
@@ -65,13 +66,9 @@ void dfs(int u) {
 
 signed main() {
     cin.tie(nullptr)->sync_with_stdio(false);
-    if (fopen(name ".inp", "r")) {
-        freopen(name ".inp","r",stdin);
-        freopen(name ".out","w",stdout);
-    }
     int n,m;
     cin >> n >> m;
-    for (ll i = 1; i <= m; i++) {
+    for (int i = 1; i <= m; i++) {
         int x,y;
         cin >> x >> y;
         v[x].pb(y);
@@ -80,8 +77,11 @@ signed main() {
     for (int i = 1; i <= n; i++) {
         sort(all(v[i]));
     }
-    ms(vis,false);
-    dfs(1);
+    for (int i = 1; i <= n; i++) {
+        if (!vis[i]) {
+            dfs(i);
+        }
+    }
     cerr << "Time elapsed: " << TIME << "s. \n";
     return 0;
 }

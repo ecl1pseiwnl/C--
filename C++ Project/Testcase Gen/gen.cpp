@@ -61,12 +61,12 @@ void makefile(ofstream &inp) {
 
 signed main() {
     cin.tie(nullptr)->sync_with_stdio(false);
-    int test = 30, temp = 0;
-    string input,output;
+    int test = 5, temp = 0;
+    string input,output, testname = "AM";
     for (int i = 1; i <= test; i++) {
         system(("mkdir test" + to_string(i+temp)).c_str());
-        input = "test" + to_string(i+temp) + ".INP";
-        output = "test" + to_string(i+temp) + ".OUT";
+        input  = testname + to_string(i+temp) + ".INP";
+        output = testname + to_string(i+temp) + ".OUT";
         ofstream Input(input.c_str());
         makefile(Input);
         Input.close();
