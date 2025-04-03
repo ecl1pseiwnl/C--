@@ -55,7 +55,7 @@ constexpr int64_t LLINF = 0x3f3f3f3f3f3f3f3f;
 const int N = 105;
 int n,m,x,y,u,v;
 vector<pi> adj[N];
-vi a,b;
+vector<ll> a,b;
 
 void inp() {
     cin >> n >> m;
@@ -71,7 +71,7 @@ void inp() {
 void dijkstra(int x, bool tf) {
     priority_queue<pi,vector<pi>,greater<pi>> q;
     q.push({0,x});
-    vi d(n+1, IINF);
+    vector<ll> d(n+1, LLINF);
     d[x] = 0;
     while(!q.empty()) {
         auto [len,vert] = q.top();
@@ -102,16 +102,18 @@ signed main() {
         freopen(name ".out","w",stdout);
     }
     inp();
-    a.pb(IINF);
-    b.pb(IINF);
+    a.pb(LLINF);
+    b.pb(LLINF);
     dijkstra(x,1);
     dijkstra(u,0);
-    debug(a,b);
-    int ans = IINF;
-    for (int i = 1; i <= n; i++) {
-        if (a[i] == b[i] && a[i] < ans) ans = a[i];
+    if (a[y] == LLINF || b[v] == LLINF) {
+        return cout << -1, 0;
     }
-    cout << (ans == IINF ? -1 : ans);
+    ll ans = LLINF;
+    for (int i = 1; i <= n; i++) {
+        if (a[i] == b[i]) ans = min(a[i],ans);
+    }
+    cout << (ans == LLINF ? -1 : ans);
     cerr << "Time elapsed: " << TIME << "s. \n";
     return 0;
 }

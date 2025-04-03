@@ -47,53 +47,46 @@ const double PI = 3.141592653589793238463;
 #define endl "\n"
 #define TIME (1.0 * clock() / CLOCKS_PER_SEC)
 ll __lcm(ll x, ll y) { return 1ll*(x / __gcd(x,y))*y;}
-constexpr int MOD = 1e9+7;
+constexpr int32_t EPS = -1e9;
+constexpr int32_t MOD = 1e9+7;
 constexpr int32_t IINF = 0x3f3f3f3f;
 constexpr int64_t LLINF = 0x3f3f3f3f3f3f3f3f;
 
 const int N = 2e5+7;
+int n,m,k;
 vector<pi> v[N];
-int n,m;
-vector<ll> ans;
-
-void dijkstra(int u) {
-    vector<ll> d(n+1,LLINF);
-    d[u] = 0;
-    priority_queue<pi,vector<pi>,greater<pi>> q;
-    q.push({0,u});
-    while(!q.empty()) {
-        auto [len, vert] = q.top();
-        q.pop();
-        if (d[vert] < len) continue;
-        for (auto [x,w] : v[vert]) {
-            if (d[x] > d[vert] + w) {
-                d[x] = d[vert] + w;
-                q.push({d[x],x});
-            }
-        }
-    }
-    if (d[n] != LLINF) ans.pb(d[n]);
-}
+vector<vector<ll>> d(N,vector<ll>(11,LLINF));
+priority_queue<tuple<ll,int,int>, vector<tuple<ll,int,int>>, greater<tuple<ll,int,int>>> q;
 
 signed main() {
     cin.tie(nullptr)->sync_with_stdio(false);
-    if (fopen(name ".inp", "r")) {
-        freopen(name ".inp","r",stdin);
-        freopen(name ".out","w",stdout);
-    }
-    cin >> n >> m;
+    cin >> n >> m >> k;
     for (int i = 0; i < m; i++) {
-        int k,x,y,l;
-        cin >> k >> x >> y >> l;
-        if (k == 1) {
-            v[x].pb({y,l});
-        } else {
-            v[x].pb({y,l});
-            v[y].pb({x,l});
+        int x,y,z;
+        cin >> x >> y >> z;
+        v[x].pb({y,z});
+        v[y].pb({x,z});
+    }
+    d[1][0] = 0;
+    q.push({0,1,0});
+    while(!q.empty()) {
+        auto [len,vert,cnt] = q.top();
+        q.pop();
+        if (d[vert][cnt] < len) continue;
+        for (auto [x,w] : v[vert]) {
+            if (d[x][cnt] > d[vert][cnt] + w) {
+                d[x][cnt] = d[vert][cnt] + w;
+                q.push({d[x][cnt],x,cnt});
+            }
+            if (cnt < k && d[x][cnt+1] > d[vert][cnt]) {
+                d[x][cnt+1] = d[vert][cnt];
+                q.push({d[x][cnt+1],x,cnt+1});
+            }
         }
     }
-    dijkstra(1);
-    debug(ans);
+    ll ans = LLINF;
+    for (int i = 0; i <= k; i++) ans = min(ans,d[n][i]);
+    cout << (ans == LLINF ? -1 : ans);
     cerr << "\nTime elapsed: " << TIME << "s. \n";
     return 0;
 }
