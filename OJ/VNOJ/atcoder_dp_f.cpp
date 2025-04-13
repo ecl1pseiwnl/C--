@@ -31,14 +31,14 @@ typedef map<int,int> mii;
 typedef vector<int> vi;
 typedef vector<pi> vii;
 typedef vector<mii> viii;
-ll __lcm(ll x, ll y) { return 1ll*(x / __gcd(x,y))*y;}
 const double PI = 3.141592653589793238463;
+#define bmask(x,i) (((x) >> (i)) & 1)
 #define ms(a,n) memset(a, n,sizeof(a))
 #define all(x) (x).begin(),(x).end()
 #define uniquev(v) sort(all(v)), (v).resize(unique(all(v)) - (v).begin())
 #define ins insert
 #define sz(x) (int)(x.size())
-#define name "data"
+#define name "TASK"
 #define fi first
 #define sec second
 #define mp make_pair
@@ -46,58 +46,39 @@ const double PI = 3.141592653589793238463;
 #define pb push_back
 #define endl "\n"
 #define TIME (1.0 * clock() / CLOCKS_PER_SEC)
+ll __lcm(ll x, ll y) { return 1ll*(x / __gcd(x,y))*y;}
+const int EPS = -1e9;
 constexpr int MOD = 1e9+7;
 constexpr int32_t IINF = 0x3f3f3f3f;
 constexpr int64_t LLINF = 0x3f3f3f3f3f3f3f3f;
 
-const int N = 205;
-int n,s, par[N], st, en;
-bool vis[N];
-vi v[N];
-
-bool dfs(int u) {
-    vis[u] = 1;
-    for (auto it : v[u]) {
-        if (!vis[it]) {
-            par[it] = u;
-            if (dfs(it)) return 1;
-        } else if (it != par[u]) {
-            st = it; en = u;
-            return 1;
-        }
-    }
-    return 0;
-}
+const int N = 3008;
+int dp[N][N];
 
 signed main() {
     cin.tie(nullptr)->sync_with_stdio(false);
-    if (fopen(name ".INP", "r")) {
-        freopen(name ".INP","r",stdin);
-        //freopen(name ".out","w",stdout);
-    }
-    cin >> n >> s;
-    int x,y;
-    while(cin >> x >> y) {
-        v[x].pb(y);
-        v[y].pb(x);
-    }
+    string s,t;
+    cin >> s >> t;
+    int n = s.size(), m = t.size();
     for (int i = 1; i <= n; i++) {
-        sort(all(v[i]));
-    }
-    if (dfs(s)) {
-        cout << "YES\n";
-        vi ans;
-        ans.pb(st);
-        while (en != st) {
-            ans.pb(en);
-            en = par[en];
+        for (int j = 1; j <= m; j++) {
+            if (s[i-1] == t[j-1]) {
+                dp[i][j] = dp[i-1][j-1] + 1;
+            } else dp[i][j] = max(dp[i-1][j],dp[i][j-1]);
         }
-        ans.pb(st);
-        reverse(all(ans));
-        for (auto it : ans) cout << it << " ";
-    } else {
-        cout << "NO\n";
     }
-    cerr << "Time elapsed: " << TIME << "s. \n";
+    string k = "";
+    while(n && m) {
+        if (s[n-1] == t[m-1]) {
+            k += s[n-1];
+            n--;
+            m--;
+        } else if (dp[n-1][m] > dp[n][m-1]) {
+            n--;
+        } else m--;
+    }
+    reverse(all(k));
+    cout << k;
+    cerr << "\nTime elapsed: " << TIME << "s. \n";
     return 0;
 }

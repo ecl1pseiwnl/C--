@@ -51,43 +51,38 @@ constexpr int MOD = 1e9+7;
 constexpr int32_t IINF = 0x3f3f3f3f;
 constexpr int64_t LLINF = 0x3f3f3f3f3f3f3f3f;
 
-unordered_map<int,int> m;
-unordered_map<string,int> t;
+unordered_map<string,int> m;
+vector<pair<string,int>> v;
 
-bool cmp(string a, string b) {
-    int i = int(t[a]), j = int(t[b]);
-    if (m[i] == m[j]) {
-        return t[a] < t[b];
+bool cmp(pair<string,int> a, pair<string,int> b) {
+    if (a.sec == b.sec) {
+        return m[a.fi] < m[b.fi];
     }
-    return m[i] < m[j];
+    return a.sec < b.sec;
 }
 
 signed main() {
     cin.tie(nullptr)->sync_with_stdio(false);
-    if (fopen(name ".inp", "r")) {
-        freopen(name ".inp","r",stdin);
-        freopen(name ".out","w",stdout);
-    }
+    //freopen(name ".INP","r",stdin);
+    //freopen(name ".OUT","w",stdout);
     int n;
     cin >> n;
-    vector<string> v;
     cin.ignore();
     for (int i = 0; i < n; i++) {
         string s;
         getline(cin,s);
         int cnt = 0;
         for (char it : s) {
-            int t = it - '0';
-            if (t >= 0 && t <= 9) {
+            if (it >= '0' && it <= '9') {
                 cnt++;
             }
         }
-        t[s] = i+1;
-        m[i+1] = cnt;
-        v.pb(s);
+        m[s] = i+1;
+        v.pb({s,cnt});
     }
     sort(all(v),cmp);
-    for (auto it : v) cout << it << endl;
+    for (auto it : v) cout << it.fi << endl;
     cerr << "Time elapsed: " << TIME << "s. \n";
     return 0;
 }
+
