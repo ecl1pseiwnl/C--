@@ -52,43 +52,19 @@ constexpr int MOD = 1e9+7;
 constexpr int32_t IINF = 0x3f3f3f3f;
 constexpr int64_t LLINF = 0x3f3f3f3f3f3f3f3f;
 
-const int N = 1e5+7;
-int n,m,k, high[N];
-vi v[N],p;
-bool vis[N];
-
-void dfs(int u) {
-    vis[u] = 1;
-    for (auto it : v[u]) {
-        if (!vis[it]) {
-            high[it] = high[u] + 1;
-            dfs(it);
-        }
-    }
-}
-
 signed main() {
     cin.tie(nullptr)->sync_with_stdio(false);
-    if (fopen(name ".inp", "r")) {
-        freopen(name ".inp","r",stdin);
-        freopen(name ".out","w",stdout);
+    int n,k;
+    cin >> n >> k;
+    vi v(n+1), dp(k+1,IINF);
+    for (int i = 1; i <= n; i++) cin >> v[i];
+    dp[0] = 0;
+    for (int j = 1; j <= k; j++) {
+        for (int i = 1; i <= n; i++) {
+            if (j - v[i] >= 0) dp[j] = min(dp[j],dp[j-v[i]]+1);
+        }
     }
-    cin >> n >> m >> k;
-    for (int i = 0; i < k; i++) {
-        int x;
-        cin >> x;
-        p.pb(x);
-    }
-    for (int i = 1; i <= m; i++) {
-        int x,y;
-        cin >> x >> y;
-        v[x].pb(y);
-        v[y].pb(x);
-    }
-    dfs(n);
-    for (auto it : p) {
-        cout << high[it] << " ";
-    }
+    cout << dp[k];
     cerr << "\nTime elapsed: " << TIME << "s. \n";
     return 0;
 }
