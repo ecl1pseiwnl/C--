@@ -50,54 +50,43 @@ constexpr int MOD = 1e9+7;
 constexpr int32_t IINF = 0x3f3f3f3f;
 constexpr int64_t LLINF = 0x3f3f3f3f3f3f3f3f;
 
-const int N = 3e5+7;
-int n;
-vi v[N];
-int par[N][lg+1], high[N];
+const int N = 1e5+7, lg = 18;
+int n,q, par[N][lg], high[N];
+vi adj[N];
 
-void inp() {
-    cin >> n;
-    for (int i = 0; i < n-1; i++) {
-        int x,y;
-        cin >> x >> y;
-        v[x].pb(y);
-        v[y].pb(x);
+void dfs(int u, int v) {
+    high[u] = high[v] + 1;
+    par[u][0] = v;
+    for (int i = 1; i < lg; i++) {
+        par[u][i] = par[par[u][i-1]][i-1];
     }
-}
-
-void dfs(int u) {
-    for (auto it : v[u]) {
-        if (it != par[u][0]) {
-            par[it][0] = u;
-            high[it] = high[u] + 1;
-            dfs(it);
-        }
+    for (auto it : adj[u]) {
+        if (it == v) continue;
+        dfs(it,u);
     }
 }
 
 int lca (int u, int v) {
-    if (high[v] > high[u]) return lca(v,u);
+    if (high[x] < high[y]) swap(x,y);
     // binary lift do sau cua 2 diem
-    int k = __lg(high[u] - high[y]);
-    for (int i = k; i >= 0; i--) {
-        if (high[par[u][i]] >= high[v]) {
-            u = par[u][i];
+    for (int i = lg-1; i >= 0; i--) {
+        if (high[par[x][i]] >= high[y]) {
+            x = par[x][i];
         }
     }
-    if (u == v) return u;
+    if (x == y) return x;
     // cung di len toi to tien gan nhat
-    int t = __lg(high[u]);
-    for (int i = t; i >= 0; i--) {
-        if (par[u][i] != par[v][i]) {
-            u = par[u][i];
-            v = par[v][i];
+     for (int i = lg-1; i >= 0; i--) {
+        if (par[x][i] != par[y][i]) {
+            x = par[x][i];
+            y = par[y][i];
         }
-	}
-	return par[u][0];
+    }
+    return par[x][0];
 }
 
 int dist(int u, int y) {
-    return 1ll* d[u] + d[y] - 2 * d[lca(u,y)];
+    return 1ll* high[u] + high[y] - 2 * high[lca(u,y)];
 }
 
 signed main() {
@@ -106,13 +95,14 @@ signed main() {
         freopen(name ".inp","r",stdin);
         freopen(name ".out","w",stdout);
     }
-    inp();
-    dfs(1);
-    for (int j = 1; j <= lg; j++) {
-        for (int i = 1; i <= n; i++) {
-            par[i][j] = par[par[i][j-1]][j-1];
-        }
+    cin >> n;
+    for (int i = 0; i < n-1; i++) {
+        int x,y;
+        cin >> x >> y;
+        v[x].pb(y);
+        v[y].pb(x);
     }
+    dfs(1,0);
     high[0] = -1;
     int x,y;
     cin >> x >> y;
