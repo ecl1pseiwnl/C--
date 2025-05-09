@@ -53,8 +53,8 @@ constexpr int32_t IINF = 0x3f3f3f3f;
 constexpr int64_t LLINF = 0x3f3f3f3f3f3f3f3f;
 
 const int N = 5e4+7;
-int n,m,k,t[4*N];
-ll a[N];
+int n,m,k;
+ll a[N],t[4*N];
 
 void build(int id, int l, int r) {
 	if (l == r) {
@@ -66,12 +66,12 @@ void build(int id, int l, int r) {
 	t[id] = max(t[id * 2], t[id * 2 + 1]);
 }
 
-int get(int id, int l, int r,int u, int v) {
-	if (r < u || l > v) return 0;
+ll get(int id, int l, int r,int u, int v) {
+	if (r < u || l > v) return INT_MIN;
 	if (u <= l && r <= v) return t[id];
 	int mid = (l + r) / 2;
-	int t1 = get(id * 2, l, mid, u, v);
-	int t2 = get(id * 2 + 1, mid + 1, r, u, v);
+	ll t1 = get(id * 2, l, mid, u, v);
+	ll t2 = get(id * 2 + 1, mid + 1, r, u, v);
 	return max(t1,t2);
 }
 

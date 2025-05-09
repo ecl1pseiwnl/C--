@@ -33,11 +33,11 @@ int get(int id, int l, int r,int u, int v) {
 
 void update(int id, int l, int r, int i, int x) {
 	if (i < l || i > r) return;
-	if (l == r) return t[id] = a[x], void();
+	if (l == r) return t[id] = x, void();
 	int mid = (l + r) / 2;
 	update(id * 2, l, mid, i, x);
 	update(id * 2 + 1, mid + 1, r, i, x);
-	t[i] = t[2*id] + t[2*id+1];
+	t[id] = t[2*id] + t[2*id+1];
 }
 
 int main() {
