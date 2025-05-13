@@ -67,7 +67,11 @@ void build(int id, int l, int r) {
 
 void update(int id, int l, int r, int pos, int x) {
     if (pos < l || pos > r) return;
-	if (l == r) return t[id] = x, void();
+	if (l == r) {
+        t[id] = x;
+        a[l] = x;
+        return;
+	}
 	int m = (l + r)/2;
 	update(id*2,l,m,pos,x);
 	update(id*2+1,m+1,r,pos,x);

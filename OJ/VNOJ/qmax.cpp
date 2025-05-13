@@ -53,46 +53,41 @@ constexpr int32_t IINF = 0x3f3f3f3f;
 constexpr int64_t LLINF = 0x3f3f3f3f3f3f3f3f;
 
 const int N = 5e4+7;
-int n,m,k;
-ll a[N],t[4*N];
+int n,q,k,t[4*N],lazy[4*N];
 
-void build(int id, int l, int r) {
-	if (l == r) {
-		return t[id] = a[l], void();
-	}
-	int mid = (l + r) / 2;
-	build(id * 2, l, mid);
-	build(id * 2 + 1, mid + 1, r);
-	t[id] = max(t[id * 2], t[id * 2 + 1]);
+int get(int id, int l, int r,int u, int v) {
+	if (l > r || v < l || u > r) return -IINF;
+	if (u <= l && r <= v) return t[id];
+	int mid = (l + r) >> 1;
+	return max(get(id*2,l,mid,u,v),get(id*2+1,mid+1,r,u,v)) + lazy[id];
 }
 
-ll get(int id, int l, int r,int u, int v) {
-	if (r < u || l > v) return INT_MIN;
-	if (u <= l && r <= v) return t[id];
-	int mid = (l + r) / 2;
-	ll t1 = get(id * 2, l, mid, u, v);
-	ll t2 = get(id * 2 + 1, mid + 1, r, u, v);
-	return max(t1,t2);
+void update(int id, int l, int r, int u, int v, int x) {
+	if (l > r || v < l || u > r) return;
+	if (u <= l && r <= v) {
+        t[id] += x;
+        lazy[id] += x;
+        return;
+	}
+	int mid = (l + r) >> 1;
+	update(id*2,l,mid,u,v,x);
+	update(id*2+1,mid+1,r,u,v,x);
+	t[id] = max(t[2*id], t[2*id+1]) + lazy[id];
 }
 
 signed main() {
     cin.tie(nullptr)->sync_with_stdio(false);
-    cin >> n >> m;
-    for (int i = 1; i <= m; i++) {
-        int x,y,z;
-        cin >> x >> y >> z;
-        a[x] += z;
-        a[y+1] -= z;
+    cin >> n >> q;
+    while(q--) {
+        int l,r,x;
+        cin >> l >> r >> x;
+        update(1,1,n,l,r,x);
     }
-    for (int i = 1; i <= n; i++) {
-        a[i] = a[i-1] + a[i];
-    }
-    build(1,1,n);
     cin >> k;
     while(k--) {
         int l,r;
         cin >> l >> r;
-        cout << get(1,l,r,1,n) << endl;
+        cout << get(1,1,n,l,r) << endl;
     }
     cerr << "\nTime elapsed: " << TIME << "s. \n";
     return 0;
