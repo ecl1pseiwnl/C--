@@ -53,50 +53,52 @@ constexpr int32_t IINF = 0x3f3f3f3f;
 constexpr int64_t LLINF = 0x3f3f3f3f3f3f3f3f;
 
 const int N = 1e5+7;
-int n, q, a[N], t[N];
+int n,q;
+ll t[4*N],a[N];
 
 void build(int id, int l, int r) {
+    if (l == r) return t[id] = a[l],void();
+    int m = (l+r)/2;
+    build(2*id,l,m);
+    build(2*id+1,m+1,r);
+    t[id] = t[2*id] + t[2*id+1];
+}
+
+ll get(int id, int l, int r, int u, int v) {
+    if (u > r || l > v) return 0;
+    if (u <= l && r <= v) return t[id];
+    int m = (l+r)/2;
+    return 1ll*(get(2*id,l,m,u,v) + get(2*id+1,m+1,r,u,v));
+}
+
+void update(int id, int l, int r, int pos, ll x) {
+    if (pos > r || l > pos) return;
     if (l == r) {
-        return t[id] = a[l],void();
+        t[id] += x;
+        a[l] += x;
+        return;
     }
     int m = (l+r)/2;
-    build(id*2,l,m);
-    build(id*2+1,m+1,r);
-    t[id] = t[2*id+1] + t[2*id];
-}
-
-void update(int id, int l, int r, int pos, int x) {
-    if (pos < l || pos > r) return;
-	if (l == r) {
-        t[id] = x;
-        a[l] = x;
-        return;
-	}
-	int m = (l + r)/2;
-	update(id*2,l,m,pos,x);
-	update(id*2+1,m+1,r,pos,x);
-	t[id] = t[2*id] + t[2*id+1];
-}
-
-ll get(int id, int l, int r,int u, int v) {
-	if (r < u || l > v) return 0;
-	if (u <= l && r <= v) return t[id];
-	int m = (l+r)/2;
-	ll t1 = get(id*2,l,m,u,v);
-	ll t2 = get(id*2+1,m+1,r,u,v);
-	return t1 + t2;
+    update(2*id,l,m,pos,x);
+    update(2*id+1,m+1,r,pos,x);
+    t[id] = t[2*id] + t[2*id+1];
 }
 
 signed main() {
     cin.tie(nullptr)->sync_with_stdio(false);
     cin >> n >> q;
+    for (int i = 1; i <= n; i++) {
+        cin >> a[i];
+    }
     build(1,1,n);
     while(q--) {
-        int k,l,r;
-        cin >> k >> l >> r;
-        if (k == 1) {
+        int t,l,r;
+        cin >> t >> l >> r;
+        if (t == 1) {
             update(1,1,n,l,r);
-        } else cout << get(1,1,n,l,r) << endl;
+        } else {
+            cout << get(1,1,n,l,r) << " ";
+        }
     }
     cerr << "\nTime elapsed: " << TIME << "s. \n";
     return 0;
