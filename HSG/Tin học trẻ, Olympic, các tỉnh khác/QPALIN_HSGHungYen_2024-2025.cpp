@@ -38,7 +38,7 @@ const double PI = 3.141592653589793238463;
 #define uniquev(v) sort(all(v)), (v).resize(unique(all(v)) - (v).begin())
 #define ins insert
 #define sz(x) (int)(x.size())
-#define name "TASK"
+#define name "QPALIN"
 #define fi first
 #define sec second
 #define mp make_pair
@@ -58,23 +58,21 @@ signed main() {
     freopen(name ".OUT","w",stdout);
     int n,q;
     cin >> n >> q;
-    vector<vi> dp(n+2,vi(n+2,1));
     string s;
     cin >> s;
-    for (int i = 0; i < n-1; i++) {
-        dp[i][i+1] = (s[i] == s[i+1]);
-    }
-    for (int i = 3; i <= n; i++) {
-        for (int j = 0; j <= n - i; j++) {
-            int k = j + i - 1;
-            dp[j][k] = ((s[j] == s[k]) && dp[j+1][k-1]);
-        }
-    }
     while(q--) {
-        int l,r;
+        int l,r,tf = 1;
         cin >> l >> r;
         l--; r--;
-        cout << dp[l][r] << endl;
+        while(l <= r) {
+            if (s[l] == s[r]) {
+                l++;
+                r--;
+            } else {
+                tf = 0; break;
+            }
+        }
+        cout << (tf == 1 ? "1\n" : "0\n");
     }
     cerr << "\nTime elapsed: " << TIME << "s. \n";
     return 0;
