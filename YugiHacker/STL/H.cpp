@@ -56,10 +56,13 @@ signed main() {
     cin.tie(nullptr)->sync_with_stdio(false);
     int n,m,q;
     cin >> n >> m >> q;
-    vector<vi> v(n+1,vi(m+1));
+    vector<vi> a(n+2,vi(m+2));
+    vector<ll> row(n+2,0), col(m+2,0);
     for (int i = 1; i <= n; i++) {
         for (int j = 1; j <= m; j++) {
-            cin >> v[i][j];
+            cin >> a[i][j];
+            row[i] += a[i][j];
+            col[j] += a[i][j];
         }
     }
     while(q--) {
@@ -68,16 +71,35 @@ signed main() {
         if (c == 'r') {
             int x;
             cin >> x;
+            cout << row[x] << endl;
         } else if (c == 'c') {
             int x;
             cin >> x;
+            cout << col[x] << endl;
         } else if (c == '1') {
             int u,v;
             cin >> u >> v;
+            if (u >= 1 && u <= n && v >= 1 && v <= m) {
+                swap(a[u],a[v]);
+                swap(row[u],row[v]);
+            }
         } else {
             int u,v,x;
             cin >> u >> v >> x;
+            if (u >= 1 && u <= n && v >= 1 && v <= m) {
+                row[u] -= a[u][v];
+                col[v] -= a[u][v];
+                a[u][v] = x;
+                row[u] += a[u][v];
+                col[v] += a[u][v];
+            }
         }
+    }
+    for (int i = 1; i <= n; i++) {
+        for (int j = 1; j <= m; j++) {
+            cout << a[i][j] << " ";
+        }
+        cout << endl;
     }
     cerr << "\nTime elapsed: " << TIME << "s. \n";
     return 0;
