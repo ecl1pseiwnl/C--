@@ -57,30 +57,16 @@ signed main() {
     cout.tie(NULL);
     int n, m;
     cin >> n >> m;
-    vi a(n), b(m);
+    vi v(n);
     ll cnt = 0;
-    for (auto &it : a) cin >> it;
-    for (auto &it : b) cin >> it;
-    int l = 0, r = 0;
-    while(l < n && r < m) {
-        if (a[l] == b[r]) {
-            int k  = a[l];
-            ll x = 0, y = 0;
-            while (l < n && a[l] == k) {
-                x++;
-                l++;
-            }
-            while (r < m && b[r] == k) {
-                y++;
-                r++;
-            }
-            cnt += (x*y);
-        } else if (a[l] < b[r]){
-            l++;
-        } else r++;
+    for (auto &it : v) cin >> it;
+    for (int i = 0, x; i < m; i++) {
+        cin >> x;
+        int l = int(lower_bound(all(v),x) - v.begin());
+        int r = int(upper_bound(all(v),x) - v.begin());
+        cnt += (r-l);
     }
     cout << cnt;
     cerr << "\nTime elapsed: " << TIME << "s. \n";
     return 0;
 }
- 
