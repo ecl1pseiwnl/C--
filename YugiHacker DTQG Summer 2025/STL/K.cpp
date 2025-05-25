@@ -50,41 +50,30 @@ constexpr int MOD = 1e9+7;
 constexpr int32_t IINF = 0x3f3f3f3f;
 constexpr int64_t LLINF = 0x3f3f3f3f3f3f3f3f;
 
+const int N = 1e5+7;
+int a[N], b[N];
+
 signed main() {
     cin.tie(nullptr)->sync_with_stdio(false);
     int n,k;
     cin >> n >> k;
-    vi v(n+1);
-    map<ll,int> m;
+    vi id(n+2,1);
+    priority_queue<pair<ll,int>,vector<pair<ll,int>>,greater<pair<ll,int>>> q;
+    for (int i = 1; i <= n; i++) cin >> a[i];
+    for (int i = 1; i <= n; i++) cin >> b[i];
+    sort(a+1,a+n+1);
+    sort(b+1,b+n+1);
     for (int i = 1; i <= n; i++) {
-        cin >> v[i];
+        q.push({a[i] + b[id[i]], i});
     }
-    for (int i = 1, x; i <= n; i++) {
-        cin >> x;
-        int l = 1, r = n;
-        while(l <= r) {
-            if (l != r) {
-                m[x+v[r]]++;
-                m[x+v[l]]++;
-            } else m[x+v[r]]++;
-            l++;
-            r--;
-        }
+    vector<ll> ans;
+    while(k--) {
+        auto [x,i] = q.top();
+        q.pop();
+        ans.pb(x);
+        if (++id[i] <= n) q.push({a[i] + b[id[i]],i});
     }
-    int cnt = 0;
-    for (auto it : m) {
-        cnt += it.sec;
-        if (cnt <= k) {
-            for (int i = 1; i <= it.sec; i++) {
-                cout << it.fi << " ";
-            }
-        } else {
-            for (int i = 1; i <= (k-(cnt-it.sec)); i++) {
-                cout << it.fi << " ";
-            }
-            break;
-        }
-    }
+    for (auto it : ans) cout << it << " ";
     cerr << "\nTime elapsed: " << TIME << "s. \n";
     return 0;
 }
