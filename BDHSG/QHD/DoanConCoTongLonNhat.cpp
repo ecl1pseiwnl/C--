@@ -72,16 +72,17 @@ signed main() {
     // Cach 2: Prefix sum
     int n;
     cin >> n;
-    vector<ll> pre(n+1,0);
+    vi v(n+1);
+    vector<ll> minv(n+1,LLINF), pre(n+1,0);
+    pre[0] = minv[0] = 0;
+    for (int i = 1; i <= n; i++) cin >> v[i];
     for (int i = 1; i <= n; i++) {
-        int x;
-        cin >> x;
-        pre[i] = pre[i-1] + x;
+        pre[i] = pre[i-1] + v[i];
+        minv[i] = min(minv[i-1],pre[i]);
     }
-    ll ans = -LLINF, minv = pre[0];
+    ll ans = -LLINF;
     for (int i = 1; i <= n; i++) {
-        ans = max(ans,pre[i] - minv);
-        minv = min(minv,pre[i]);
+        ans = max(ans,1ll*pre[i] - minv[i-1]);
     }
     cout << ans;
     cerr << "\nTime elapsed: " << TIME << "s. \n";
