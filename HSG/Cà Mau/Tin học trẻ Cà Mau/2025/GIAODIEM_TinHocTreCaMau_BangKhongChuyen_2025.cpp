@@ -67,7 +67,7 @@ signed main() {
     int cnt = 0;
     for (int i = 0; i < n; i++) {
         for (int j = i+1; j < n; j++) {
-            if (abs(v[i].a-v[j].a) == abs(v[i].b == v[j].a)) cnt++;
+            if (abs(v[i].a-v[j].a) == abs(v[i].b-v[j].b)) cnt++;
         }
     }
     cout << cnt;
