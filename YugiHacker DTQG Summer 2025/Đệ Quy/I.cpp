@@ -52,32 +52,32 @@ constexpr int MOD = 1e9+7;
 constexpr int32_t IINF = 0x3f3f3f3f;
 constexpr int64_t LLINF = 0x3f3f3f3f3f3f3f3f;
 
+ll a,b,c,ans;
+
 ll binpow(ll a, ll b) {
     ll res = 1;
+    a %= c;
+    b %= c;
     while(b > 0) {
-        if (b & 1) res = (res * a);
-        a = (a * a);
+        if (b & 1) res = (res%c*a%c)%c;
+        a = (a%c*a%c)%c;
         b >>= 1;
     }
-    return res;
+    return res%c;
 }
 
-ll binmul(ll a, ll b) {
-    ll res = 0;
-    while(b > 0) {
-        if (b & 1) res = (res + a);
-        a = (a * 2);
-        b >>=1;
-    }
-    return res;
+ll calc(ll n) {
+    if (n == 0) return 1;
+    ans = (calc((n-1)/2)%c*((binpow(a,(n+1)/2)%c+1%c)%c)%c)%c;
+    if (n % 2 == 0) ans = (ans%c+binpow(a,n)%c)%c;
+    return ans%c;
 }
 
 signed main() {
     cin.tie(nullptr)->sync_with_stdio(false);
-    ll a,b,c;
     cin >> a >> b >> c;
-    ll x = binpow(a,b+1)-1, y = (a-1);
-    cout << x % (1ll*binmul(c,y)) /y;
+    ll res = calc(b);
+    cout << res;
     cerr << "\nTime elapsed: " << TIME << "s. \n";
     return 0;
 }
