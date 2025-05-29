@@ -52,53 +52,38 @@ constexpr int MOD = 1e9+7;
 constexpr int32_t IINF = 0x3f3f3f3f;
 constexpr int64_t LLINF = 0x3f3f3f3f3f3f3f3f;
 
-ll binmul(ll a, ll b) {
-    ll res = 0;
-    a %= MOD;
-    b %= MOD;
-    while(b > 0) {
-        if (b & 1) res = (res+a) % MOD;
-        a = (a*2) % MOD;
-        b >>= 1;
-    }
-    return res%MOD;
-}
+const int N = 1e6+7;
+vector<ll> phi(N,0), pre(N,0), ans(N,0);
 
-ll binpow(ll a, ll b) {
-    ll res = 1;
-    a %= MOD;
-    b %= MOD;
-    while(b > 0) {
-        if (b & 1) res = (res * a) % MOD;
-        a = (a*a) % MOD;
-        b >>= 1;
+void sang() {
+    for (int i = 1; i <= N; i++) phi[i] = i;
+    for (int i = 2; i <= N; i++) {
+        if (phi[i] == i) {
+            phi[i] = i-1;
+            for (int j = 2*i; j <= N; j += i) {
+                phi[j] = (phi[j] / i) * (i-1);
+            }
+        }
     }
-    return res%MOD;
+    for (int i = 1; i <= N; i++) {
+        pre[i] = pre[i-1] + phi[i];
+    }
+    for (int i = 1; i <= N; i++) {
+        ll s = 1ll*i*(i+1)/2;
+        ans[i] = s - pre[i];
+    }
 }
 
 signed main() {
     cin.tie(nullptr)->sync_with_stdio(false);
-    int n;
-    cin >> n;
-    ll num = 1, sum = 0, prod = 1, cnt = 0;
-    for (int i = 1; i <= n; i++) {
-        int x,y;
-        cin >> x >> y;
-        num = binmul(num,binpow(x,y));
+    sang();
+    int t;
+    cin >> t;
+    while(t--) {
+        int n;
+        cin >> n;
+        cout << ans[n] << endl;
     }
-    for (ll i = 1; i*i <= num; i++) {
-        if (num % i == 0) {
-            cnt++;
-            sum += i;
-            prod = binmul(prod,i);
-            if (num / i != i) {
-                cnt++;
-                sum += num/i;
-                prod = binmul(prod,num/i);
-            }
-        }
-    }
-    cout << cnt % MOD << " " << sum % MOD << " " << prod % MOD;
     cerr << "\nTime elapsed: " << TIME << "s. \n";
     return 0;
 }
