@@ -53,39 +53,62 @@ constexpr int32_t IINF = 0x3f3f3f3f;
 constexpr int64_t LLINF = 0x3f3f3f3f3f3f3f3f;
 
 const int N = 1e5+7;
-int v[N],n,q;
+int n,q;
+ll t[4*N],lazy[4*N];
+
+int get(int id, int l, int r, int u, int v) {
+    if (v < l || r < u) return -IINF;
+    if (u <= l && r <= v) return t[id];
+    int m = (r+l)/2;
+    if (lazy[id]) {
+        t[2*id] += lazy[id];
+        t[2*id+1] += lazy[id];
+        lazy[2*id] += lazy[id];
+        lazy[2*id+1] += lazy[id];
+        lazy[id] = 0;
+    }
+    return max(get(2*id,l,m,u,v),get(2*id+1,m+1,r,u,v));
+}
+
+void update(int id, int l, int r, int u, int v, int x) {
+    if (v < l || r < u) return;
+    if (u <= l && r <= v) {
+        t[id] += x;
+        lazy[id] += x;
+        return;
+    }
+    int m = (r+l)/2;
+    if (lazy[id]) {
+        t[2*id] += lazy[id];
+        t[2*id+1] += lazy[id];
+        lazy[2*id] += lazy[id];
+        lazy[2*id+1] += lazy[id];
+        lazy[id] = 0;
+    }
+    update(id*2,l,m,u,v,x);
+    update(id*2+1,m+1,r,u,v,x);
+    t[id] = max(t[2*id], t[2*id+1]);
+}
 
 signed main() {
     cin.tie(nullptr)->sync_with_stdio(false);
-    cin >> n >> q;
-    for (int i = 1; i <= n; i++) cin >> v[i];
+    cin >> n;
+    for (int i = 1; i <= n; i++) cin >> t[i];
+    cin >> q;
     while(q--) {
-        int k, x;
-        cin >> k >> x;
-        auto l = lower_bound(v+1,v+n+1,x), r = upper_bound(v+1,v+n+1,x);
-        int posl = l - v, posr = r - v;
+        int k;
+        cin >> k;
         if (k == 1) {
-            if (posl >= 1 && posl <= n) {
-                cout << v[posl] << endl;
-            } else cout << "-1\n";
-        } else if (k == 2) {
-            if (posr >= 1 && posr <= n) {
-                cout << v[posr] << endl;
-            } else cout << "-1\n";
-        } else if (k == 3) {
-            if (posr-1 >= 1 && posr-1 <= n) {
-                cout << v[posr-1] << endl;
-            } else cout << "-1\n";
-        } else if (k == 4) {
-            if (posl-1 >= 1 && posl-1 <= n) {
-                cout << v[posl-1] << endl;
-            } else cout << "-1\n";
+            int l,r,x;
+            cin >> l >> r >> x;
+            update(1,1,n,l,r,x);
         } else {
-            if (posl >= 1 && posl <= n && posr >= 1) {
-                cout << posr - posl << endl;
-            } else cout << "-1\n";
+            int l,r;
+            cin >> l >> r;
+            cout << get(1,1,n,l,r) << endl;
         }
     }
     cerr << "\nTime elapsed: " << TIME << "s. \n";
     return 0;
 }
+

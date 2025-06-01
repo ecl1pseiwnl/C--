@@ -52,20 +52,55 @@ constexpr int MOD = 1e9+7;
 constexpr int32_t IINF = 0x3f3f3f3f;
 constexpr int64_t LLINF = 0x3f3f3f3f3f3f3f3f;
 
+const int N = 1e5+7;
+int v[N],n,q;
+int first(int x) {
+    int l = 1, r = n, ans = 0;
+    while(l <= r) {
+        int m = (l+r)/2;
+        if (v[m] == x) {
+            ans = m;
+            r = m - 1;
+        } else if (v[m] < x) {
+            l = m + 1;
+        } else r = m - 1;
+    }
+    return ans;
+}
+
+int last(int x) {
+    int l = 1, r = n, ans = 0;
+    while(l <= r) {
+        int m = (l+r)/2;
+        if (v[m] == x) {
+            ans = m;
+            l = m + 1;
+        } else if (v[m] < x) {
+            l = m + 1;
+        } else r = m - 1;
+    }
+    return ans;
+}
+
 signed main() {
     cin.tie(nullptr)->sync_with_stdio(false);
-    int n, m;
-    cin >> n >> m;
-    vi v(n);
-    ll cnt = 0;
-    for (auto &it : v) cin >> it;
-    for (int i = 0, x; i < m; i++) {
-        cin >> x;
-        int l = int(lower_bound(all(v),x) - v.begin());
-        int r = int(upper_bound(all(v),x) - v.begin());
-        cnt += (r-l);
+    cin >> n >> q;
+    for (int i = 1; i <= n; i++) cin >> v[i];
+    while(q--) {
+        int k, x;
+        cin >> k >> x;
+        if (!binary_search(v+1,v+n+1,x)) {
+            cout << -1 << endl;
+            continue;
+        }
+        if (k == 1) {
+            cout << "YES\n";
+        } else if (k == 2) {
+            cout << first(x) << endl;
+        } else {
+            cout << last(x) << endl;
+        }
     }
-    cout << cnt;
     cerr << "\nTime elapsed: " << TIME << "s. \n";
     return 0;
 }

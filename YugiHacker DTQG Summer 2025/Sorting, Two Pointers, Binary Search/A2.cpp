@@ -54,33 +54,6 @@ constexpr int64_t LLINF = 0x3f3f3f3f3f3f3f3f;
 
 const int N = 1e5+7;
 int v[N],n,q;
-int first(int x) {
-    int l = 1, r = n, ans = 0;
-    while(l <= r) {
-        int m = (l+r)/2;
-        if (v[m] == x) {
-            ans = m;
-            r = m - 1;
-        } else if (v[m] < x) {
-            l = m + 1;
-        } else r = m - 1;
-    }
-    return ans;
-}
-
-int last(int x) {
-    int l = 1, r = n, ans = 0;
-    while(l <= r) {
-        int m = (l+r)/2;
-        if (v[m] == x) {
-            ans = m;
-            l = m + 1;
-        } else if (v[m] < x) {
-            l = m + 1;
-        } else r = m - 1;
-    }
-    return ans;
-}
 
 signed main() {
     cin.tie(nullptr)->sync_with_stdio(false);
@@ -89,16 +62,28 @@ signed main() {
     while(q--) {
         int k, x;
         cin >> k >> x;
-        if (!binary_search(v+1,v+n+1,x)) {
-            cout << -1 << endl;
-            continue;
-        }
+        auto l = lower_bound(v+1,v+n+1,x), r = upper_bound(v+1,v+n+1,x);
+        int posl = l - v, posr = r - v;
         if (k == 1) {
-            cout << "YES\n";
+            if (posl >= 1 && posl <= n) {
+                cout << v[posl] << endl;
+            } else cout << "-1\n";
         } else if (k == 2) {
-            cout << first(x) << endl;
+            if (posr >= 1 && posr <= n) {
+                cout << v[posr] << endl;
+            } else cout << "-1\n";
+        } else if (k == 3) {
+            if (posr-1 >= 1 && posr-1 <= n) {
+                cout << v[posr-1] << endl;
+            } else cout << "-1\n";
+        } else if (k == 4) {
+            if (posl-1 >= 1 && posl-1 <= n) {
+                cout << v[posl-1] << endl;
+            } else cout << "-1\n";
         } else {
-            cout << last(x) << endl;
+            if (posl >= 1 && posl <= n && posr >= 1) {
+                cout << posr - posl << endl;
+            } else cout << "-1\n";
         }
     }
     cerr << "\nTime elapsed: " << TIME << "s. \n";

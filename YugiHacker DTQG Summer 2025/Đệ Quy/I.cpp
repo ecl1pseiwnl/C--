@@ -57,27 +57,28 @@ ll a,b,c,ans;
 ll binpow(ll a, ll b) {
     ll res = 1;
     a %= c;
-    b %= c;
     while(b > 0) {
-        if (b & 1) res = (res%c*a%c)%c;
-        a = (a%c*a%c)%c;
+        if (b & 1) res = (res*a)%c;
+        a = (a*a)%c;
         b >>= 1;
     }
-    return res%c;
+    return res;
 }
 
 ll calc(ll n) {
     if (n == 0) return 1;
-    ans = (calc((n-1)/2)%c*((binpow(a,(n+1)/2)%c+1%c)%c)%c)%c;
-    if (n % 2 == 0) ans = (ans%c+binpow(a,n)%c)%c;
-    return ans%c;
+    ll res = (calc((n-1)/2)%c * (binpow(a,(n+1)/2)+1) % c)%c;
+    if (n % 2 == 0) {
+        res = (res%c + binpow(a,n)%c)%c;
+    }
+    return res;
 }
 
 signed main() {
     cin.tie(nullptr)->sync_with_stdio(false);
     cin >> a >> b >> c;
-    ll res = calc(b);
-    cout << res;
+    ans = calc(b);
+    cout << ans;
     cerr << "\nTime elapsed: " << TIME << "s. \n";
     return 0;
 }

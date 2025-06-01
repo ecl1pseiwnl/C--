@@ -52,30 +52,60 @@ constexpr int MOD = 1e9+7;
 constexpr int32_t IINF = 0x3f3f3f3f;
 constexpr int64_t LLINF = 0x3f3f3f3f3f3f3f3f;
 
-bool check(int a) {
-    int x = sqrt(a);
-    if (x*x == a) return 1;
-    return 0;
+const int N = 5e6+7;
+int v[N];
+unordered_map<int,int> m;
+/*
+void sang() {
+    for (int i = 2; i*i <= N; i++) {
+        if (!v[i]) {
+            for (int j = i*i; j <= N; j+=i) {
+                v[j] = i;
+            }
+        }
+    }
+    for (int i = 2; i <= N; i++) if (!v[i]) v[i] = i;
 }
+
+    sang();
+    for (int i = 1; i <= n; i++) {
+        int tmp = i, cur = 1;
+        while(tmp > 1) {
+            int k = v[tmp],cnt = 0;
+            while(tmp % k == 0) {
+                tmp /= k;
+                cnt++;
+            }
+            if (cnt % 2 == 1) cur *= k;
+        }
+        m[cur]++;
+    }
+*/
+
 
 signed main() {
     cin.tie(nullptr)->sync_with_stdio(false);
-    freopen(name ".inp","r",stdin);
-    freopen(name ".out","w",stdout);
+    //freopen(name ".inp","r",stdin);
+    //freopen(name ".out","w",stdout);
     int n;
     cin >> n;
-    vi v;
-    v.pb(-1);
+    for (int i = 1; i <= n; i++) v[i] = i;
+    for (int i = 2; i*i <= n; i++) {
+        if (v[i] == i) {
+            for (int j = i*i; j <= n; j+=i) {
+                while(v[j] % (i*i) == 0) {
+                    v[j] /= (i*i);
+                    m[v[i]]++;
+                }
+            }
+        }
+    }
+    debug(m);
+    ll ans = 0;
     for (int i = 1; i <= n; i++) {
-        if (check(i)) v.pb(i);
+        ans += 1ll*(m[i]*(m[i]-1)*(m[i]-2))/6;
     }
-    ll cnt = 0;
-    debug(v);
-    for (int i = 1; i < v.size(); i++) {
-        ll m = v.size() - i - 1;
-        cnt += 1ll*m*(m-1)/2;
-    }
-    cout << cnt;
+    cout << ans;
     cerr << "\nTime elapsed: " << TIME << "s. \n";
     return 0;
 }

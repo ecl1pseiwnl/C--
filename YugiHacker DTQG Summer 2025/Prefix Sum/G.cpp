@@ -52,33 +52,29 @@ constexpr int MOD = 1e9+7;
 constexpr int32_t IINF = 0x3f3f3f3f;
 constexpr int64_t LLINF = 0x3f3f3f3f3f3f3f3f;
 
-const int N = 10;
-int a[1<<N][1<<N],n,x,y,cnt;
-
-void f(vector<pi> &v) {
-    for (auto [i,j] : v) {
-        a[i][j] = ++cnt;
-    }
-}
-
-void bt(int r, int c, int x, int y, int sz) {
-    if (n == 2) {
-        vector<pi> v;
-        for (int i = r; i <= r+1; i++) {
-            for (int j = c; j <= c+1; j++) {
-                if (i != x && j != y) v.pb({i,j});
-            }
-        }
-        f(v);
-        return;
-    }
-
-}
-
 signed main() {
     cin.tie(nullptr)->sync_with_stdio(false);
-    cin >> n >> x >> y;
-    bt(1,1,x,y,n);
+    string s;
+    cin >> s;
+    int t, sz = s.size();
+    cin >> t;
+    vi pre(sz+2,0), d(sz+2,0);
+    for (int i = 1; i <= t; i++) {
+        int x;
+        cin >> x;
+        d[x]++;
+        d[sz-x+2]--;
+    }
+    for (int i = 1; i <= sz; i++) {
+        pre[i] = pre[i-1] + d[i];
+    }
+    for (int i = 1; i <= sz; i++) {
+        if (pre[i] & 1) {
+            cout << s[sz-i];
+        } else {
+            cout << s[i-1];
+        }
+    }
 
     cerr << "\nTime elapsed: " << TIME << "s. \n";
     return 0;
