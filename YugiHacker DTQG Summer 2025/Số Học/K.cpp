@@ -38,7 +38,7 @@ const double PI = 3.141592653589793238463;
 #define uniquev(v) sort(all(v)), (v).resize(unique(all(v)) - (v).begin())
 #define ins insert
 #define sz(x) (int)(x.size())
-#define name "prime"
+#define name "triple"
 #define fi first
 #define sec second
 #define mp make_pair
@@ -52,48 +52,31 @@ constexpr int MOD = 1e9+7;
 constexpr int32_t IINF = 0x3f3f3f3f;
 constexpr int64_t LLINF = 0x3f3f3f3f3f3f3f3f;
 
-const int N = 1e6+7;
-vi minp(N,0);
-
-void sang() {
-    for (int i = 2; i*i <= N; i++) {
-        if (minp[i] == 0) {
-            for (int j = i*i; j <= N; j+=i) {
-                minp[j] = i;
-            }
-        }
-    }
-    for (int i = 2; i <= N; i++) {
-        if (!minp[i]) minp[i] = i;
-    }
-}
-
-int ptich(int u) {
-    set<int> s;
-    while(u > 1) {
-        s.ins(minp[u]);
-        u /= minp[u];
-    }
-    if (u > 1) s.ins(u);
-    return s.size();
+bool check(int a) {
+    int x = sqrt(a);
+    if (x*x == a) return 1;
+    return 0;
 }
 
 signed main() {
     cin.tie(nullptr)->sync_with_stdio(false);
     freopen(name ".inp","r",stdin);
     freopen(name ".out","w",stdout);
-    sang();
-    int n, ans = 0, cur = 0;
+    int n;
     cin >> n;
+    vi v;
+    v.pb(-1);
     for (int i = 1; i <= n; i++) {
-        int x; cin >> x;
-        int t = ptich(x);
-        if (t > ans) {
-            ans = t;
-            cur = x;
-        }
+        if (check(i)) v.pb(i);
     }
-    cout << cur;
+    ll cnt = 0;
+    debug(v);
+    for (int i = 1; i < v.size(); i++) {
+        ll m = v.size() - i - 1;
+        cnt += 1ll*m*(m-1)/2;
+    }
+    cout << cnt;
     cerr << "\nTime elapsed: " << TIME << "s. \n";
     return 0;
 }
+

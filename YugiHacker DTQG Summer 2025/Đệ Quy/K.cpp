@@ -52,20 +52,34 @@ constexpr int MOD = 1e9+7;
 constexpr int32_t IINF = 0x3f3f3f3f;
 constexpr int64_t LLINF = 0x3f3f3f3f3f3f3f3f;
 
-const int N = 1e6+7;
-int v[N];
+const int N = 10;
+int a[1<<N][1<<N],n,x,y,cnt;
+
+void f(vector<pi> &v) {
+    for (auto [i,j] : v) {
+        a[i][j] = ++cnt;
+    }
+}
+
+void bt(int r, int c, int x, int y, int sz) {
+    if (n == 2) {
+        vector<pi> v;
+        for (int i = r; i <= r+1; i++) {
+            for (int j = c; j <= c+1; j++) {
+                if (i != x && j != y) v.pb({i,j});
+            }
+        }
+        f(v);
+        return;
+    }
+
+}
 
 signed main() {
     cin.tie(nullptr)->sync_with_stdio(false);
-    int n,m;
-    cin >> n >> m;
-    for (int i = 1; i <= n; i++) cin >> v[i];
-    for (int i = 1,x; i <= m; i++) {
-        cin >> x;
-        int up = upper_bound(v+1,v+n+1,x) - v;
-        int low = lower_bound(v+1,v+n+1,x) - v;
-        cout << 1ll*(up-(up-low)-1)<< " ";
-    }
+    cin >> n >> x >> y;
+    bt(1,1,x,y,n);
+
     cerr << "\nTime elapsed: " << TIME << "s. \n";
     return 0;
 }

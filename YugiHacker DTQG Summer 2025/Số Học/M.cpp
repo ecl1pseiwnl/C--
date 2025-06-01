@@ -68,13 +68,13 @@ signed main() {
     cin.tie(nullptr)->sync_with_stdio(false);
     int n;
     cin >> n;
-    ll num = 1,sum = 1, prod, cnt = 1;
+    ll num = 1,sum = 1, prod = 0, cnt = 1;
     for (int i = 1; i <= n; i++) {
         ll x,y;
         cin >> x >> y;
         num = (num%MOD*binpow(x,y)%MOD)%MOD;
         cnt = (cnt%MOD*(y+1)%MOD)%MOD;
-        sum = (sum%MOD*((binpow(x,y+1)-1)/(x-1))%MOD)%MOD;
+        sum = (sum%MOD*(((binpow(x,y+1)-1)%(MOD*(x-1)))/(x-1))%MOD)%MOD;
     }
     prod = binpow(num,cnt/2);
     cout << cnt << " " << sum << " " << prod;

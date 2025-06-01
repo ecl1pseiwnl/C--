@@ -52,20 +52,30 @@ constexpr int MOD = 1e9+7;
 constexpr int32_t IINF = 0x3f3f3f3f;
 constexpr int64_t LLINF = 0x3f3f3f3f3f3f3f3f;
 
+int gcd(int a, int b, int &x, int &y) {
+    if (b == 0) {
+        x = 1;
+        y = 0;
+        return a;
+    }
+    int u = 0, v = 0;
+    int k = gcd(b,a%b,u,v);
+    x = v;
+    y = u - v * (a/b);
+    return k;
+}
+
 signed main() {
     cin.tie(nullptr)->sync_with_stdio(false);
-    ll n;
-    cin >> n;
-    // phi(n) = n * pi p|n(1 - 1/p)
-    ll ans = n;
-    for (ll i = 2; i*i <= n; i++) {
-        if (n % i == 0) {
-            ans -= (ans/i);
-            while(n % i == 0) n /= i;
-        }
+    int a,m;
+    cin >> a >> m;
+    int x = 0,y = 0;
+    int d = gcd(a,m,x,y);
+    if (d != 1) {
+        cout << -1;
+    } else {
+        cout << (x % m + m) % m;
     }
-    if (n > 1) ans -= (ans/n);
-    cout << ans;
     cerr << "\nTime elapsed: " << TIME << "s. \n";
     return 0;
 }

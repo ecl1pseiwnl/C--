@@ -52,7 +52,9 @@ constexpr int MOD = 1e9+7;
 constexpr int32_t IINF = 0x3f3f3f3f;
 constexpr int64_t LLINF = 0x3f3f3f3f3f3f3f3f;
 
-int gcd(int a, int b, int &x, int &y) {
+int x,y;
+
+int gcd(int a, int b, int& x, int& y) {
     if (b == 0) {
         x = 1;
         y = 0;
@@ -67,15 +69,10 @@ int gcd(int a, int b, int &x, int &y) {
 
 signed main() {
     cin.tie(nullptr)->sync_with_stdio(false);
-    int a,m;
-    cin >> a >> m;
-    int x = 0,y = 0;
-    int d = gcd(a,m,x,y);
-    if (d != 1) {
-        cout << -1;
-    } else {
-        cout << (x % m + m) % m;
-    }
+    int a,b;
+    cin >> a >> b;
+    int d = gcd(a,b,x,y);
+    cout << x << " " << y;
     cerr << "\nTime elapsed: " << TIME << "s. \n";
     return 0;
 }

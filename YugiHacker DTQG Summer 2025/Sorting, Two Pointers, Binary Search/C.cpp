@@ -52,39 +52,19 @@ constexpr int MOD = 1e9+7;
 constexpr int32_t IINF = 0x3f3f3f3f;
 constexpr int64_t LLINF = 0x3f3f3f3f3f3f3f3f;
 
-const int N = 1e5+7;
-int v[N],n,q;
+const int N = 1e6+7;
+int v[N];
 
 signed main() {
     cin.tie(nullptr)->sync_with_stdio(false);
-    cin >> n >> q;
+    int n,m;
+    cin >> n >> m;
     for (int i = 1; i <= n; i++) cin >> v[i];
-    while(q--) {
-        int k, x;
-        cin >> k >> x;
-        auto l = lower_bound(v+1,v+n+1,x), r = upper_bound(v+1,v+n+1,x);
-        int posl = l - v, posr = r - v;
-        if (k == 1) {
-            if (posl >= 1 && posl <= n) {
-                cout << v[posl] << endl;
-            } else cout << "-1\n";
-        } else if (k == 2) {
-            if (posr >= 1 && posr <= n) {
-                cout << v[posr] << endl;
-            } else cout << "-1\n";
-        } else if (k == 3) {
-            if (posr-1 >= 1 && posr-1 <= n) {
-                cout << v[posr-1] << endl;
-            } else cout << "-1\n";
-        } else if (k == 4) {
-            if (posl-1 >= 1 && posl-1 <= n) {
-                cout << v[posl-1] << endl;
-            } else cout << "-1\n";
-        } else {
-            if (posl >= 1 && posl <= n && posr >= 1) {
-                cout << posr - posl << endl;
-            } else cout << "-1\n";
-        }
+    for (int i = 1,x; i <= m; i++) {
+        cin >> x;
+        int up = upper_bound(v+1,v+n+1,x) - v;
+        int low = lower_bound(v+1,v+n+1,x) - v;
+        cout << 1ll*(up-(up-low)-1)<< " ";
     }
     cerr << "\nTime elapsed: " << TIME << "s. \n";
     return 0;
