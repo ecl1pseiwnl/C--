@@ -58,8 +58,11 @@ signed main() {
     cin >> n;
     vi v(n+1);
     for (int i = 1; i <= n; i++) cin >> v[i];
-    vector<vi> dp(n+1,vi(2,0));
-    for (int i = 1; i <= n; i++) {
+    vector<vector<ll>> dp(n+1,vector<ll>(2,0));
+    dp[1][1] = v[1];
+    dp[2][1] = max(dp[1][1],1ll*v[2]);
+    dp[2][0] = max(v[1]-v[2]*1LL,0LL);
+    for (int i = 3; i <= n; i++) {
         dp[i][0] = max(dp[i-1][1] - v[i],dp[i-1][0]);
         dp[i][1] = max(dp[i-1][0] + v[i],dp[i-1][1]);
     }

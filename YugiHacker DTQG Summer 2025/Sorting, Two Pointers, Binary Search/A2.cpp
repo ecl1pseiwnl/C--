@@ -73,17 +73,17 @@ signed main() {
                 cout << v[posr] << endl;
             } else cout << "-1\n";
         } else if (k == 3) {
-            if (posr-1 >= 1 && posr-1 <= n) {
-                cout << v[posr-1] << endl;
+            posr--;
+            if (posr >= 1 && posr <= n) {
+                cout << v[posr] << endl;
             } else cout << "-1\n";
         } else if (k == 4) {
-            if (posl-1 >= 1 && posl-1 <= n) {
-                cout << v[posl-1] << endl;
+            posl--;
+            if (posl >= 1 && posl <= n) {
+                cout << v[posl] << endl;
             } else cout << "-1\n";
         } else {
-            if (posl >= 1 && posl <= n && posr >= 1) {
-                cout << posr - posl << endl;
-            } else cout << "-1\n";
+            cout << posr - posl << endl;
         }
     }
     cerr << "\nTime elapsed: " << TIME << "s. \n";
