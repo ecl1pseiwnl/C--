@@ -63,21 +63,21 @@ bool cmp(pair<string,int> a, pair<string,int> b) {
 
 signed main() {
     cin.tie(nullptr)->sync_with_stdio(false);
-    //freopen(name ".INP","r",stdin);
-    //freopen(name ".OUT","w",stdout);
+    freopen(name ".INP","r",stdin);
+    freopen(name ".OUT","w",stdout);
     int n;
     cin >> n;
     cin.ignore();
-    for (int i = 0; i < n; i++) {
+    for (int i = 1; i <= n; i++) {
         string s;
         getline(cin,s);
         int cnt = 0;
-        for (char it : s) {
-            if (it >= '0' && it <= '9') {
+        for (int i = 0; i < s.size(); i++) {
+            if (s[i] >= '0' && s[i] <= '9') {
                 cnt++;
             }
         }
-        m[s] = i+1;
+        m[s] = i;
         v.pb({s,cnt});
     }
     sort(all(v),cmp);
@@ -85,4 +85,5 @@ signed main() {
     cerr << "Time elapsed: " << TIME << "s. \n";
     return 0;
 }
+
 
