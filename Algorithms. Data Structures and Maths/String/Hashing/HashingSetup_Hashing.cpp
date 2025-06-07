@@ -56,6 +56,10 @@ const int base = 256, N = 1e3+7;
 int hs[N], pw[N];
 char s[N][N];
 
+ll gethash(int l, int r) {
+    return ((hs[r] - hs[r-1]) * pw[j-i+1] + MOD * MOD)%MOD;
+}
+
 signed main() {
     cin.tie(nullptr)->sync_with_stdio(false);
     int n, k;

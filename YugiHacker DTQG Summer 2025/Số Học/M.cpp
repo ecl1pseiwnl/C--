@@ -55,25 +55,28 @@ constexpr int64_t LLINF = 0x3f3f3f3f3f3f3f3f;
 ll binpow(ll a, ll b) {
     ll res = 1;
     a %= MOD;
+    b %= MOD;
     while(b > 0) {
-        if (b & 1) res = res * a % MOD;
-        a = a * a % MOD;
+        if (b & 1) res = (res * a) % MOD;
+        a = (a*a) % MOD;
         b >>= 1;
     }
-    return res;
+    return res%MOD;
 }
 
 signed main() {
     cin.tie(nullptr)->sync_with_stdio(false);
     int n;
     cin >> n;
-    ll sum = 1, prod = 0, cnt = 0;
+    ll num = 1,sum = 1, prod = 0, cnt = 1;
     for (int i = 1; i <= n; i++) {
         ll x,y;
         cin >> x >> y;
-        cnt = (cnt%MOD+(y%MOD+1%MOD)%MOD) % MOD;
-        sum = (binpow(x,y+1) - 1) * binpow(x,MOD-2);
+        num = (num%MOD*binpow(x,y)%MOD)%MOD;
+        cnt = (cnt%MOD*(y+1)%MOD)%MOD;
+        sum = (sum%MOD*(((binpow(x,y+1)-1)%(MOD*(x-1)))/(x-1))%MOD)%MOD;
     }
+    prod = binpow(num,cnt/2);
     cout << cnt << " " << sum << " " << prod;
     cerr << "\nTime elapsed: " << TIME << "s. \n";
     return 0;

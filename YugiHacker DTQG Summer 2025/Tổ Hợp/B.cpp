@@ -79,7 +79,6 @@ void pre() {
 
 ll C(ll n, ll k) {
     if (k > n) return 0;
-    if (k == 0) return 1;
     return (1ll* pw[n] * inv[k] % MOD) * inv[n-k] % MOD;
 }
 
@@ -91,7 +90,7 @@ signed main() {
     while(t--) {
         int n,k;
         cin >> n >> k;
-        cout << C(n,k);
+        cout << C(n,k) << endl;
     }
     cerr << "\nTime elapsed: " << TIME << "s. \n";
     return 0;
