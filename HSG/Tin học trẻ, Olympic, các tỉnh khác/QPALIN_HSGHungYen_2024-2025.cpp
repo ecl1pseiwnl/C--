@@ -48,9 +48,20 @@ const double PI = 3.141592653589793238463;
 #define TIME (1.0 * clock() / CLOCKS_PER_SEC)
 ll __lcm(ll x, ll y) { return 1ll*(x / __gcd(x,y))*y;}
 const int EPS = -1e9;
-constexpr int MOD = 1e9+7;
+constexpr int MOD = 1e9+2277;
 constexpr int32_t IINF = 0x3f3f3f3f;
 constexpr int64_t LLINF = 0x3f3f3f3f3f3f3f3f;
+
+const int base = 256, N = 3e5+7;
+ll Hash[N],revHash[N],pw[N];
+
+ll gethash(int l, int r) {
+    return (Hash[r] - Hash[l-1] * pw[r-l+1]%MOD+MOD) % MOD;
+}
+
+ll getrev(int l, int r) {
+    return (revHash[r] - revHash[l-1] * pw[r-l+1]%MOD+MOD) % MOD;
+}
 
 signed main() {
     cin.tie(nullptr)->sync_with_stdio(false);
@@ -60,19 +71,22 @@ signed main() {
     cin >> n >> q;
     string s;
     cin >> s;
+    pw[0] = 1;
+    for (int i = 1; i <= n; i++) pw[i] = (pw[i-1]*base) % MOD;
+    for (int i = 1; i <= n; i++) {
+        Hash[i] = (Hash[i-1] * base + (s[i-1]-'a'+1)) % MOD;
+    }
+    reverse(all(s));
+    for (int i = 1; i <= n; i++) {
+        revHash[i] = (revHash[i-1] * base + (s[i-1]-'a'+1)) % MOD;
+    }
     while(q--) {
-        int l,r,tf = 1;
+        int l,r;
         cin >> l >> r;
-        l--; r--;
-        while(l <= r) {
-            if (s[l] == s[r]) {
-                l++;
-                r--;
-            } else {
-                tf = 0; break;
-            }
-        }
-        cout << (tf == 1 ? "1\n" : "0\n");
+        ll nor = gethash(l,r), rev = getrev(n-r+1,n-l+1);
+        if (nor == rev || l == r) {
+            cout << "1\n";
+        } else cout << "0\n";
     }
     cerr << "\nTime elapsed: " << TIME << "s. \n";
     return 0;

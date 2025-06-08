@@ -52,38 +52,37 @@ constexpr int MOD = 1e9+7;
 constexpr int32_t IINF = 0x3f3f3f3f;
 constexpr int64_t LLINF = 0x3f3f3f3f3f3f3f3f;
 
-const int base = 256, N = 1e3+7;
-int hs[N], pw[N];
-char s[N][N];
+const int base = 256, N = 1e6+7;
+ll hs[N], pw[N];
 
 ll gethash(int l, int r) {
-    return ((hs[r] - hs[r-1]) * pw[j-i+1] + MOD * MOD)%MOD;
+    return (1ll *hs[r] - hs[l-1] * pw[r-l+1] % MOD + MOD)%MOD;
 }
 
 signed main() {
     cin.tie(nullptr)->sync_with_stdio(false);
-    int n, k;
-    cin >> n >> k;
-    for (int i = 1; i <= n; i++) {
-        string t;
-        cin >> t;
-        for (int j = 1; j <= k; j++) {
-            s[i][j] = t[i-1];
-        }
-    }
+    string s,t;
+    cin >> s;
+    int u = s.size();
+    s = "#" + s;
+    cin >> t;
+    int v = t.size();
+    t = "#" + t;
     pw[0] = 1;
-    for (int i = 1; i <= 11; i++) pw[i] = 1ll*pw[i-1]*base % MOD;
-    for (int i = 1; i <= n; i++) {
-        hs[i] = 0;
-        for (int j = 1; j <= k; j++) hs[i] = (hs[i] * 1ll * s[i][j] * pw[j-1]) % MOD;
+    for (int i = 1; i <= u; i++) pw[i] = (pw[i-1] * base) % MOD;
+    hs[0] = 0;
+    for (int i = 1; i <= u; i++) {
+        hs[i] = (hs[i-1] * base + (s[i] -'a' + 1))%MOD;
     }
-    int cnt = 0;
-    for (int i = 1; i <= n; i++) {
-        for (int j = i+1; j <= n; j++) {
-            if (hs[i] == hs[j]) cnt++;
+    ll cur = 0;
+    for (int i = 1; i <= v; i++) {
+        cur = (cur * base + (t[i] - 'a' + 1)) % MOD;
+    }
+    for (int i = 1; i <= u-v+1; i++) {
+        if (cur == gethash(i,i+v-1)) {
+            cout << i << " ";
         }
     }
-    cout << cnt;
     cerr << "\nTime elapsed: " << TIME << "s. \n";
     return 0;
 }

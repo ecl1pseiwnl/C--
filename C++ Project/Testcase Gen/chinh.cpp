@@ -31,9 +31,11 @@ typedef map<int,int> mii;
 typedef vector<int> vi;
 typedef vector<pi> vii;
 typedef vector<mii> viii;
-ll __lcm(ll x, ll y) { return 1ll*(x / __gcd(x,y))*y;}
+const double PI = 3.141592653589793238463;
+#define bmask(x,i) (((x) >> (i)) & 1)
 #define ms(a,n) memset(a, n,sizeof(a))
 #define all(x) (x).begin(),(x).end()
+#define uniquev(v) sort(all(v)), (v).resize(unique(all(v)) - (v).begin())
 #define ins insert
 #define sz(x) (int)(x.size())
 #define name "TASK"
@@ -43,42 +45,40 @@ ll __lcm(ll x, ll y) { return 1ll*(x / __gcd(x,y))*y;}
 #define ep emplace_back
 #define pb push_back
 #define endl "\n"
-const int MOD = 1e9+7;
-const int32_t IINF = 0x3f3f3f3f;
-const int64_t LLINF = 0x3f3f3f3f3f3f3f3f;
+#define TIME (1.0 * clock() / CLOCKS_PER_SEC)
+ll __lcm(ll x, ll y) { return 1ll*(x / __gcd(x,y))*y;}
+const int EPS = -1e9;
+constexpr int MOD = 1e9+7;
+constexpr int32_t IINF = 0x3f3f3f3f;
+constexpr int64_t LLINF = 0x3f3f3f3f3f3f3f3f;
 
-ll n, k, cnt = 0;
-const int N = 10000005;
-vector<ll> v, a(N+1,1);
+const int N = 1e5+7;
+ll dp[N], pre[N];
 
-void snt() {
-	a[1] = a[0] = 0;
-	for (int i = 2; i <= sqrt(N); i++) {
-		if (a[i]) {
-			for (int j = i * i; j <= N; j += i) {
-				a[j] = 0;
-			}
-		}
-	}
-	for (int i = 1; i <= n; i++) {
-		if (a[i]) {
-			v.pb(i);
-		}
-	}
+ll binpow(ll a, ll b) {
+    ll ans = 1;
+    a %= MOD;
+    while(b) {
+        if (b & 1) ans = (ans*a) % MOD;
+        a = (a*a) % MOD;
+        b >>= 1;
+    }
+    return ans;
 }
 
 signed main() {
     cin.tie(nullptr)->sync_with_stdio(false);
-    freopen("A.INP","r",stdin);
-    freopen("A.ANS","w",stdout);
-    cin >> n >> k;
-	snt();
-    for (auto it : v) {
-        if (binary_search(v.begin(),v.end(),it-k)) {
-            cnt++;
-            cout << it-k << " " << it << endl;
-        }
+    int l,r;
+    cin >> l >> r;
+    dp[0] = dp[1] = 1;
+    for (int i = 2; i <= N; i++) {
+        dp[i] = (binpow(2,i-1)*dp[i-1] + 2*dp[i-2]) % MOD;
     }
-	cout << cnt;
+    pre[0] = 1;
+    for (int i = 1; i <= N; i++) {
+        pre[i] = pre[i-1] + dp[i];
+    }
+    cout << (pre[r] - pre[l-1])%MOD;
+    cerr << "\nTime elapsed: " << TIME << "s. \n";
     return 0;
 }

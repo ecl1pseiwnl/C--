@@ -49,88 +49,81 @@ constexpr int MOD = 1e9+7;
 constexpr int32_t IINF = 0x3f3f3f3f;
 constexpr int64_t LLINF = 0x3f3f3f3f3f3f3f3f;
 
-struct edge{
-    int x,y,z;
-};
-
 const int N = 2e4+7;
-int n,m,s,t, par[N], revpar[N];
-ll res = LLINF, d[N],dn[N];
-vector<pi> v[N],rev[N];
-bool vis[N];
-edge e[N];
-
-void inp() {
-    cin >> n >> m >> s >> t;
-    for (int i = 1; i <= m; i++) {
-        int x,y,z;
-        cin >> x >> y >> z;
-        e[i].x = x; e[i].y = y; e[i].z = z;
-        v[x].pb({y,z});
-        rev[y].pb({x,z});
-    }
-}
+int n,m,s,t,par1[N],par2[N];
+vector<pi> v[N];
 
 void dijkstra() {
-    for (int i = 1; i <= n; i++) {
-        d[i] = LLINF;
-        dn[i] = LLINF;
-    }
-    priority_queue<pair<ll,int>, vector<pair<ll,int>>, greater<pair<ll,int>>> q;
-    q.push({0,1});
-    d[1] = 0; dn[n] = 0;
+    vi d1(n+1,IINF),d2(n+1,IINF);
+    d1[s] = 0;
+    priority_queue<pi,vector<pi>,greater<pi>> q;
+    q.push({0,s});
     while(!q.empty()) {
-        auto [x,y] = q.top();
+        auto [len,vert] = q.top();
         q.pop();
-        if (vis[y]) continue;
-        vis[y]=1;
-        for (auto [t,w] : v[y]) {
-            if (d[t] > d[y] + w) {
-                d[t] = d[y] + w;
-                par[t] = y;
-                q.push({d[t],t});
+        if (len > d2[vert]) continue;
+        for (auto [x,w] : v[vert]) {
+            int k = len + w;
+            if (d1[x] > k) {
+                d2[x] = d1[x];
+                par1[x] = vert;
+                d1[x] = k;
+                q.push({d1[x],x});
+            } else if (d1[x] < k && d2[x] > k) {
+                par2[x] = vert;
+                d2[x] = k;
+                q.push({d2[x],x});
             }
         }
     }
-    for (int i = 1; i <= n; i++) vis[i] = 0;
-    while(!q.empty()) q.pop();
-    q.push({0,n});
-    while(!q.empty()) {
-        auto [x,y] = q.top();
-        q.pop();
-        if (vis[y]) continue;
-        vis[y]=1;
-        for (auto [t,w] : rev[y]) {
-            if (dn[t] > dn[y] + w) {
-                dn[t] = dn[y] + w;
-                revpar[t] = y;
-                q.push({dn[t],t});
-            }
+    cout << (d1[t] == IINF ? -1 : d1[t]) << " ";
+    cout << (d2[t] == IINF ? -1 : d2[t]) << endl;
+    if (d1[t] != IINF) {
+        int p = t;
+        vi path;
+        while(p != s) {
+            path.pb(p);
+            p = par1[p];
         }
+        path.pb(s);
+        reverse(all(path));
+        for (auto it : path) cout << it << " ";
+        cout << endl;
     }
+    /*if (d2[t] != IINF) {
+        int p = t;
+        vi path;
+        while(p != s) {
+            path.pb(p);
+            p = par2[p];
+        }
+        path.pb(s);
+        reverse(all(path));
+        for (auto it : path) cout << it << " ";
+        cout << endl;
+    }*/
 }
 
 signed main() {
     cin.tie(nullptr)->sync_with_stdio(false);
-    if (fopen(name ".inp", "r")) {
-        freopen(name ".inp","r",stdin);
-        freopen(name ".out","w",stdout);
-    }
-    inp();
-    dijkstra();
-    for (int i = 1; i <= m;i++) {
+    cin >> n >> m >> s >> t;
+    for (int i = 1; i <= m; i++) {
         int x,y,z;
-        x = e[i].x; y = e[i].y; z = e[i].z;
-        if (d[x]+dn[y]+z > d[n]) {
-            debug(x,y,z,d[x],dn[y]);
-            res = min(res,d[x]+dn[y]+z);
-        }
+        cin >> x >> y >> z;
+        v[x].pb({y,z});
+        v[y].pb({x,z});
     }
-    if (d[t] == LLINF || res == LLINF) {
-        return cout << "-1",0;
-    }
-    cout << d[t] << " " << res << "\n";
-
+    dijkstra();
     cerr << "\nTime elapsed: " << TIME << "s. \n";
     return 0;
 }
+/*
+5 7 1 5
+1 2 3
+1 4 8
+2 3 5
+2 4 4
+3 5 5
+4 3 8
+4 5 3
+*/
