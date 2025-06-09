@@ -58,21 +58,23 @@ signed main() {
     cin >> n;
     vi v(n+1);
     for (int i = 1; i <= n; i++) cin >> v[i];
-    vi dp(n+1,1);
+    vi dp(n+1,1), trace(n+1,0);
     for (int i = 1; i <= n; i++) {
         for (int j = 1; j <= i; j++) {
-            if (v[i] > v[j]) {
-                dp[i] = max(dp[i],dp[j]+1);
+            if (v[i] > v[j] && dp[i] < dp[j] + 1) {
+                dp[i] = dp[j]+1;
+                trace[i] = j;
             }
         }
     }
+
+    int pos = max_element(all(dp)) - dp.begin();
+    cout << dp[pos] << endl;
     vi ans;
-    for (int i = n; i >= 1; i--) {
-        if ((dp[i] == dp[i-1]+1 && v[i] > v[i-1]) || (dp[i-1] == 1 && dp[i]+1 == dp[i+1])) {
-            ans.pb(v[i]);
-        }
+    while(pos != 0) {
+        ans.pb(v[pos]);
+        pos = trace[pos];
     }
-    cout << ans.size() << endl;
     reverse(all(ans));
     for (auto it : ans) cout << it << " ";
     cerr << "\nTime elapsed: " << TIME << "s. \n";
