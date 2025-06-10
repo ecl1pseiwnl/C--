@@ -53,33 +53,34 @@ constexpr int32_t IINF = 0x3f3f3f3f;
 constexpr int64_t LLINF = 0x3f3f3f3f3f3f3f3f;
 
 const int N = 1e6+7;
-ll pw[N], inv[N];
+ll fact[N], inv[N];
 
 ll binpow(ll a, ll b) {
     ll ans = 1;
     a %= MOD;
     while(b) {
-        if (b&1) ans = ans * a % MOD;
-        a = a*a % MOD;
+        if (b&1) ans = (ans*a) % MOD;
+        a = (a*a) % MOD;
         b >>= 1;
     }
     return ans;
 }
 
 void pre() {
-    pw[0] = 1;
+    fact[0] = 1;
     for (int i = 1; i <= N; i++) {
-        pw[i] = 1ll*(pw[i-1]*i)%MOD;
+        fact[i] = 1ll*(fact[i-1]*i)%MOD;
     }
-    inv[N] = binpow(pw[N],MOD-2);
+    inv[N] = binpow(fact[N],MOD-2);
     for (int i = N-1; i >= 1; i--) {
-        inv[i] = 1ll*inv[i+1]*(i+1)%MOD;
+        inv[i] = 1ll*(inv[i+1]*(i+1))%MOD;
     }
 }
 
 ll C(ll n, ll k) {
     if (k > n) return 0;
-    return (1ll* pw[n] * inv[k] % MOD) * inv[n-k] % MOD;
+    if (k == n) return 1;
+    return (1ll* fact[n] * inv[k] % MOD) * inv[n-k] % MOD;
 }
 
 signed main() {
@@ -88,7 +89,7 @@ signed main() {
     int t;
     cin >> t;
     while(t--) {
-        int n,k;
+        ll n,k;
         cin >> n >> k;
         cout << C(n,k) << endl;
     }

@@ -52,8 +52,8 @@ constexpr int MOD = 1e9+7;
 constexpr int32_t IINF = 0x3f3f3f3f;
 constexpr int64_t LLINF = 0x3f3f3f3f3f3f3f3f;
 
-bool check(vector<ll> &v, ll x, ll m, ll k) {
-    return upper_bound(all(v),x+m) - lower_bound(all(v),x-m) >= k;
+bool check(vector<ll> v, ll x, ll m, ll k) {
+    return (upper_bound(all(v),x+m) - lower_bound(all(v),x-m)) >= k;
 }
 
 signed main() {
@@ -67,12 +67,12 @@ signed main() {
         ll x,k;
         cin >> x >> k;
         ll l = -2e9, r = 2e9, ans = 0;
-        while(r - l > 1) {
-            ll m = l+r>>1;
+        while(l <= r) {
+            ll m = (l+r)/2;
             if (check(v,x,m,k)) {
                 ans = m;
-                r = m;
-            } else l = m;
+                r = m-1;
+            } else l = m+1;
         }
         cout << ans << endl;
     }

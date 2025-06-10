@@ -54,21 +54,9 @@ constexpr int64_t LLINF = 0x3f3f3f3f3f3f3f3f;
 
 signed main() {
     cin.tie(nullptr)->sync_with_stdio(false);
-    int n;
-    cin >> n;
-    map<int,vi> m;
-    for (int i = 1,x; i <= n; i++) {
-        cin >> x;
-        if (m[x].empty()) m[x].pb(-1);
-        m[x].pb(i);
-    }
-    int q;
-    cin >> q;
-    while(q--) {
-        int l,r,k;
-        cin >> l >> r >> k;
-        cout << (upper_bound(all(m[k]),r) - m[k].begin()) - (lower_bound(all(m[k]),l) - m[k].begin()) << endl;
-    }
+    double a,b,c,d;
+    cin >> a >> b >> c >> d;
+    cout << fixed << setprecision(2) << sqrt(pow(c-a,2)+ pow(d-b,2));
     cerr << "\nTime elapsed: " << TIME << "s. \n";
     return 0;
 }
