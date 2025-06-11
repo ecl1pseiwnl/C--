@@ -46,7 +46,7 @@ const double PI = 3.141592653589793238463;
 #define pb push_back
 #define endl "\n"
 #define TIME (1.0 * clock() / CLOCKS_PER_SEC)
-ll __lcm(ll x, ll y) { return 1ll*(x / __gcd(x,y))*y;}
+ll __lcm(ll x, ll y) { return 1ll*(x / (__gcd(x,y) * y));}
 const int EPS = -1e9;
 constexpr int MOD = 1e9+7;
 constexpr int32_t IINF = 0x3f3f3f3f;
@@ -63,10 +63,10 @@ signed main() {
     while(t--) {
         ll n,a,b;
         cin >> n >> a >> b;
-        ll l = 1, r = 1e18, ans = 0;
+        ll l = 0, r = 1e18, ans = 0;
         while(l <= r) {
-            ll m = (l+r)/2, cur = calc(m,a,b);
-            if (cur >= n) {
+            ll m = l+r>>1;
+            if (calc(m,a,b) >= n) {
                 ans = m;
                 r = m-1;
             } else l = m+1;
