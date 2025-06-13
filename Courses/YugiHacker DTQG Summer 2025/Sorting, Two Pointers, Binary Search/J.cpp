@@ -62,7 +62,7 @@ signed main() {
     cin >> t;
     while(t--) {
         ll n,a,b;
-        cin >> n >> a >> b;
+        cin >> a >> b >> n;
         ll l = 0, r = 1e18, ans = 0;
         while(l <= r) {
             ll m = l+r>>1;

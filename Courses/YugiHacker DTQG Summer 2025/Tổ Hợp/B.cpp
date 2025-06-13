@@ -52,46 +52,23 @@ constexpr int MOD = 1e9+7;
 constexpr int32_t IINF = 0x3f3f3f3f;
 constexpr int64_t LLINF = 0x3f3f3f3f3f3f3f3f;
 
-const int N = 1e6+7;
-ll fact[N], inv[N];
-
-ll binpow(ll a, ll b) {
-    ll ans = 1;
-    a %= MOD;
-    while(b) {
-        if (b&1) ans = (ans*a) % MOD;
-        a = (a*a) % MOD;
-        b >>= 1;
-    }
-    return ans;
-}
-
-void pre() {
-    fact[0] = 1;
-    for (int i = 1; i <= N; i++) {
-        fact[i] = 1ll*(fact[i-1]*i)%MOD;
-    }
-    inv[N] = binpow(fact[N],MOD-2);
-    for (int i = N-1; i >= 1; i--) {
-        inv[i] = 1ll*(inv[i+1]*(i+1))%MOD;
-    }
-}
-
-ll C(ll n, ll k) {
-    if (k > n) return 0;
-    if (k == n) return 1;
-    return (1ll* fact[n] * inv[k] % MOD) * inv[n-k] % MOD;
-}
+int dp[1007][1007];
 
 signed main() {
     cin.tie(nullptr)->sync_with_stdio(false);
-    pre();
+    dp[0][0] = 1;
+    for (int i = 1; i <= 1000; i++) {
+        dp[i][0] = 1;
+        for (int j = 1; j <= i; j++) {
+            dp[i][j] = (dp[i-1][j-1] + dp[i-1][j]) % MOD;
+        }
+    }
     int t;
     cin >> t;
-    while(t--) {
-        ll n,k;
+    while (t--) {
+        int n,k;
         cin >> n >> k;
-        cout << C(n,k) << endl;
+        cout << dp[n][k] << endl;
     }
     cerr << "\nTime elapsed: " << TIME << "s. \n";
     return 0;

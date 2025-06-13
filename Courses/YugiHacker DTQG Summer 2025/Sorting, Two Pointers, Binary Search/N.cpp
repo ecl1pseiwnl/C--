@@ -52,24 +52,25 @@ constexpr int MOD = 1e9+7;
 constexpr int32_t IINF = 0x3f3f3f3f;
 constexpr int64_t LLINF = 0x3f3f3f3f3f3f3f3f;
 
-bool check(vector<ll> v, ll x, ll m, ll k) {
-    return (upper_bound(all(v),x+m) - lower_bound(all(v),x-m)) >= k;
+const int N = 1e5+7;
+int v[N],n,q;;
+
+bool check(ll m, ll x, ll k) {
+    return (upper_bound(v+1,v+n+1,x+m) - lower_bound(v+1,v+n+1,x-m)) >= k;
 }
 
 signed main() {
     cin.tie(nullptr)->sync_with_stdio(false);
-    int n,q;
     cin >> n >> q;
-    vector<ll> v(n);
-    for (auto &it : v) cin >> it;
-    sort(all(v));
+    for (int i = 1; i <= n; i++) cin >> v[i];
+    sort(v+1,v+n+1);
     while(q--) {
         ll x,k;
         cin >> x >> k;
-        ll l = -2e9, r = 2e9, ans = 0;
+        ll l = 0, r = 1e10, ans = 0;
         while(l <= r) {
             ll m = (l+r)/2;
-            if (check(v,x,m,k)) {
+            if (check(m,x,k)) {
                 ans = m;
                 r = m-1;
             } else l = m+1;
@@ -79,3 +80,4 @@ signed main() {
     cerr << "\nTime elapsed: " << TIME << "s. \n";
     return 0;
 }
+
