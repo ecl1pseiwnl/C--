@@ -52,19 +52,27 @@ constexpr int MOD = 1e9+7;
 constexpr int32_t IINF = 0x3f3f3f3f;
 constexpr int64_t LLINF = 0x3f3f3f3f3f3f3f3f;
 
+const int N = 3e5+7;
+int n, q, v[N];
+ll pre[N],pp[N],block[N],pblock[N],pos[N];
+
+ll calc(ll x) {
+    auto i = lower_bound(pos+1,pos+n+1,x)-pos;
+    ll ans = pblock[i-1], k = x-pos[i-1];
+    ans += pp[i+k-1] - pp[i-1] - pre[i-1] * k;
+    return ans;
+}
+
 signed main() {
     cin.tie(nullptr)->sync_with_stdio(false);
-    int n, q;
     cin >> n;
-    vi v(n+1);
-    vector<ll> pre(n+1,0),pp(n+1,0),block(n+1,0), pblock(n+1,0), pos(n+1,0);
     for (int i = 1; i <= n; i++) {
         cin >> v[i];
         pre[i] = pre[i-1] + v[i];
         pp[i] = pp[i-1] + pre[i];
-        pos[i] = pos[i-1] + (n + 1 - i);
+        pos[i] = pos[i-1] + (n+1-i);
     }
-    block[1] = pp[n];
+    block[1] = pblock[1] =pp[n];
     for (int i = 2; i <= n; i++) {
         block[i] = block[i-1] - v[i-1] * (n+2-i);
         pblock[i] = pblock[i-1] + block[i];
@@ -73,10 +81,7 @@ signed main() {
     while(q--) {
         ll l, r;
         cin >> l >> r;
-        auto i = lower_bound(all(pos),r)-pos.begin();
-        ll ans = pblock[i-1], k = r-pos[i-1];
-        ans += (pp[i+k-1] - pp[i-1] - pre[i-1] * k);
-        cout << ans << endl;
+        cout << calc(r) - calc(l-1) << endl;
     }
     cerr << "\nTime elapsed: " << TIME << "s. \n";
     return 0;
