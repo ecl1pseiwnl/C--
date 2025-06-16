@@ -52,58 +52,52 @@ constexpr int MOD = 1e9+7;
 constexpr int32_t IINF = 0x3f3f3f3f;
 constexpr int64_t LLINF = 0x3f3f3f3f3f3f3f3f;
 
-const int N = 5e4+7;
-int n,q,t[4*N],lazy[4*N];
+const int N = 1e5+7;
+int n,q;
+ll t[4*N],lazy[4*N];
+
+void push(int id) {
+    t[2*id] += lazy[id];
+    t[2*id+1] += lazy[id];
+    lazy[2*id] += lazy[id];
+    lazy[2*id+1] += lazy[id];
+    lazy[id] = 0;
+}
 
 void update(int id, int l, int r, int x, int y, int val) {
-    if (l > r || x < l || r < y) return;
-    if (l == x && r == y) {
+    if (l > y || r < x || l > r) return;
+    if (x <= l && r <= y) {
         t[id] += val;
         lazy[id] += val;
         return;
     }
     int m = (l+r)/2;
-    if (lazy[id]) {
-        t[2*id] += lazy[id];
-        t[2*id+1] += lazy[id];
-        lazy[2*id] += lazy[id];
-        lazy[2*id+1] += lazy[id];
-        lazy[id] = 0;
-    }
+    push(id);
     update(2*id,l,m,x,y,val);
     update(2*id+1,m+1,r,x,y,val);
     t[id] = max(t[2*id],t[2*id+1]);
 }
 
-int get(int id, int l, int r, int x, int y) {
-    if (x < l || r < y || l > r) return 0;
-    if (l == x && r == y) return t[id];
+ll get(int id, int l, int r, int x, int y) {
+    if (l > y || r < x || l > r) return -LLINF;
+    if (x <= l && r <= y) return t[id];
     int m = (l+r)/2;
-    if (lazy[id]) {
-        t[2*id] += lazy[id];
-        t[2*id+1] += lazy[id];
-        lazy[2*id] += lazy[id];
-        lazy[2*id+1] += lazy[id];
-        lazy[id] = 0;
-    }
-    return max(get(2*id,l,m,x,y),get(2*id+1,m+1,r,x,y));
+    push(id);
+    ll t1 = get(2*id,l,m,x,y), t2 = get(2*id+1,m+1,r,x,y);
+    return max(t1,t2);
 }
 
 signed main() {
     cin.tie(nullptr)->sync_with_stdio(false);
     cin >> n >> q;
     while(q--) {
-        int t;
-        cin >> t;
-        if (t == 0) {
-            int x,y,z;
-            cin >> x >> y >> z;
-            update(1,1,n,x,y,z);
-        } else {
-            int x,y;
-            cin >> x >> y;
-            cout << get(1,1,n,x,y) << " ";
-        }
+        int type,l,r;
+        cin >> type >> l >> r;
+        if (type == 0) {
+            int x;
+            cin >> x;
+            update(1,1,n,l,r,x);
+        } else cout << get(1,1,n,l,r) << endl;
     }
     cerr << "\nTime elapsed: " << TIME << "s. \n";
     return 0;

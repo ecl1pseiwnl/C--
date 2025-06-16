@@ -54,61 +54,62 @@ constexpr int64_t LLINF = 0x3f3f3f3f3f3f3f3f;
 
 const int N = 1e5+7;
 int n,q;
-ll t[4*N],lazy[4*N];
+ll v[N],t[4*N],lazy[4*N];
 
-int get(int id, int l, int r, int u, int v) {
-    if (v < l || r < u) return -IINF;
-    if (u <= l && r <= v) return t[id];
-    int m = (r+l)/2;
-    if (lazy[id]) {
-        t[2*id] += lazy[id];
-        t[2*id+1] += lazy[id];
-        lazy[2*id] += lazy[id];
-        lazy[2*id+1] += lazy[id];
-        lazy[id] = 0;
-    }
-    return max(get(2*id,l,m,u,v),get(2*id+1,m+1,r,u,v));
+void build(int id, int l, int r) {
+    if (l == r) return t[id] = v[l], void();
+    int m = (l+r)/2;
+    build(2*id,l,m);
+    build(2*id+1,m+1,r);
+    t[id] = max(t[2*id], t[2*id+1]);
 }
 
-void update(int id, int l, int r, int u, int v, int x) {
-    if (v < l || r < u) return;
-    if (u <= l && r <= v) {
-        t[id] += x;
-        lazy[id] += x;
+void push(int id) {
+    t[2*id] += lazy[id];
+    t[2*id+1] += lazy[id];
+    lazy[2*id] += lazy[id];
+    lazy[2*id+1] += lazy[id];
+    lazy[id] = 0;
+}
+
+void update(int id, int l, int r, int x, int y, int val) {
+    if (l > y || r < x || l > r) return;
+    if (x <= l && r <= y) {
+        t[id] += val;
+        lazy[id] += val;
         return;
     }
-    int m = (r+l)/2;
-    if (lazy[id]) {
-        t[2*id] += lazy[id];
-        t[2*id+1] += lazy[id];
-        lazy[2*id] += lazy[id];
-        lazy[2*id+1] += lazy[id];
-        lazy[id] = 0;
-    }
-    update(id*2,l,m,u,v,x);
-    update(id*2+1,m+1,r,u,v,x);
-    t[id] = max(t[2*id], t[2*id+1]);
+    int m = (l+r)/2;
+    push(id);
+    update(2*id,l,m,x,y,val);
+    update(2*id+1,m+1,r,x,y,val);
+    t[id] = max(t[2*id],t[2*id+1]);
+}
+
+ll get(int id, int l, int r, int x, int y) {
+    if (l > y || r < x || l > r) return -LLINF;
+    if (x <= l && r <= y) return t[id];
+    int m = (l+r)/2;
+    push(id);
+    ll t1 = get(2*id,l,m,x,y), t2 = get(2*id+1,m+1,r,x,y);
+    return max(t1,t2);
 }
 
 signed main() {
     cin.tie(nullptr)->sync_with_stdio(false);
     cin >> n;
-    for (int i = 1; i <= n; i++) cin >> t[i];
+    for (int i = 1; i <= n; i++) cin >> v[i];
+    build(1,1,n);
     cin >> q;
     while(q--) {
-        int k;
-        cin >> k;
-        if (k == 1) {
-            int l,r,x;
-            cin >> l >> r >> x;
+        int type,l,r;
+        cin >> type >> l >> r;
+        if (type == 1) {
+            int x;
+            cin >> x;
             update(1,1,n,l,r,x);
-        } else {
-            int l,r;
-            cin >> l >> r;
-            cout << get(1,1,n,l,r) << endl;
-        }
+        } else cout << get(1,1,n,l,r) << endl;
     }
     cerr << "\nTime elapsed: " << TIME << "s. \n";
     return 0;
 }
-

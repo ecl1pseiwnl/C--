@@ -77,17 +77,17 @@ signed main() {
     for (int i = 1; i <= n; i++) cin >> v[i];
     cin >> m;
     for (int i = 1; i <= m; i++) cin >> u[i];
-    ll l = 0, r = t+5, ans = 0;
+    ll l = 0, r = t+1, ans = 0;
     while(r - l > 1) {
         ll mi = (l+r)/2;
         if (check(mi) <= check1(t-mi)) {
             l = mi;
         } else r = mi;
     }
-    if (l > 0) ans = max(ans,check(l));
-    if (r <= t) ans = max(ans,check1(r));
+    if (l > 0) {
+        ans = max(ans,check(l));
+    } else if (r <= t) ans = max(ans,check1(r));
     cout << ans << endl;
     cerr << "\nTime elapsed: " << TIME << "s. \n";
     return 0;
 }
-
