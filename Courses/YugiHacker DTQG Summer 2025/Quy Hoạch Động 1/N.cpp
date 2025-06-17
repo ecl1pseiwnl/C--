@@ -54,7 +54,8 @@ constexpr int64_t LLINF = 0x3f3f3f3f3f3f3f3f;
 
 const int N = 5007;
 int v[N], n;
-ll dp[N][N], pre[N];
+vector<vector<ll>> dp(N,vector<ll>(N,-LLINF));
+vector<ll> pre(N,0);
 
 signed main() {
     cin.tie(nullptr)->sync_with_stdio(false);
@@ -64,9 +65,9 @@ signed main() {
         pre[i] = pre[i-1] + v[i];
     }
     for (int i = n; i >= 1; i--) {
-        dp[i][i] = v[i];
         for (int j = i; j <= n; j++) {
-            dp[i][j] = max(1ll*v[i] + pre[j] - pre[i] - dp[i+1][j],1ll* v[j] + pre[j-1] - pre[i-1] - dp[i][j-1]);
+            if (i == j) dp[i][j] = v[i];
+            else dp[i][j] = max(1ll*v[i] + pre[j] - pre[i] - dp[i+1][j],1ll* v[j] + pre[j-1] - pre[i-1] - dp[i][j-1]);
         }
     }
     ll ans = -LLINF;
