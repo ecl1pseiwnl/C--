@@ -62,7 +62,7 @@ signed main() {
         cin >> it;
         maxv = max(maxv,it);
     }
-    ll l = 1, r = maxv;
+    ll l = 1, r = 1e10, ans = 0;
     while(l < r) {
         ll m = (l+r)/2, s = 0;
         for (auto it : v) {

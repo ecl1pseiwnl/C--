@@ -71,15 +71,12 @@ signed main() {
     dp[1][1] = a[1][1];
     for (int i = 1; i <= n; i++) {
         for (int j = 1; j <= m; j++) {
-            if (a[i][j] == -1) continue;
-            if (i > 1 && dp[i-1][j] != -IINF) {
-                dp[i][j] = max(dp[i][j], dp[i-1][j] + a[i][j]);
-            }
-            if (j > 1 && dp[i][j-1] != -IINF) {
-                dp[i][j] = max(dp[i][j], dp[i][j-1] + a[i][j]);
-            }
-            if (i > 1 && j > 1 && dp[i-1][j-1] != -IINF) {
-                dp[i][j] = max(dp[i][j], dp[i-1][j-1] + a[i][j]);
+            if (a[i][j] == -1 || (i == 1 && j == 1)) continue;
+            int cur = -IINF;
+            if (i > 1 && dp[i-1][j] != -IINF) cur = max(cur, dp[i-1][j]);
+            if (j > 1 && dp[i][j-1] != -IINF) cur = max(cur, dp[i][j-1]);
+            if (cur != -IINF) {
+                dp[i][j] = cur + a[i][j];
             }
         }
     }
