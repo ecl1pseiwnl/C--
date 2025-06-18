@@ -53,26 +53,17 @@ constexpr int32_t IINF = 0x3f3f3f3f;
 constexpr int64_t LLINF = 0x3f3f3f3f3f3f3f3f;
 
 const int N = 1e5+7;
-int n,k,m,high[N];
-vi v[N],q, d(N,IINF);
+int n,k,m;
+vi v[N],high(N,-1);
 bool vis[N];
-
-void dfs(int u) {
-    vis[u] = 1;
-    for (auto it : v[u]) {
-        if (!vis[it]) {
-            high[it] = high[u]+1;
-            dfs(it);
-            d[it] = min(d[it],high[it]);
-        }
-    }
-}
 
 signed main() {
     cin.tie(nullptr)->sync_with_stdio(false);
     cin >> n >> k;
+    queue<int> q;
     for (int i = 1; i <= k; i++) {
-        int x; cin >> x; q.pb(x);
+        int x; cin >> x; q.push(x);
+        vis[x] = 1; high[x] = 0;
     }
     cin >> m;
     for (int i = 1; i <= m; i++) {
@@ -81,13 +72,19 @@ signed main() {
         v[x].pb(y);
         v[y].pb(x);
     }
-    for (auto it : q) {
-        d[it] = 0;
-        dfs(it);
-        ms(high,0);
-        ms(vis,0);
+    while(q.size()) {
+        auto i = q.front();
+        q.pop();
+        for (auto j : v[i]) {
+            if (!vis[j]) {
+                vis[j] = 1;
+                high[j] = high[i] + 1;
+                q.push(j);
+            }
+        }
     }
-    for (int i = 1; i <= n; i++) cout << d[i] << " ";
+    for (int i = 1; i <= n; i++) cout << high[i] << " ";
     cerr << "\nTime elapsed: " << TIME << "s. \n";
     return 0;
 }
+
