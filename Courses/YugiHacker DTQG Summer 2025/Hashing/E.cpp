@@ -55,7 +55,7 @@ constexpr int64_t LLINF = 0x3f3f3f3f3f3f3f3f;
 const int N = 1e6+7, base = 256;
 ll hashS[N],hashT[N],pw[N],cur;
 string s,t;
-int n,ans = 1;
+int n,ans1 = 1, ans2 = 1;
 
 ll get(ll hs[],int l, int r) {
     return (hs[r]-hs[l-1]*pw[r-l+1]%MOD+MOD)%MOD;
@@ -85,15 +85,23 @@ signed main() {
         hashS[i] = (hashS[i-1]*base+s[i]-'a'+1)%MOD;
         hashT[i] = (hashT[i-1]*base+t[i]-'a'+1)%MOD;
     }
-    int l = 1, r = n;
+    int l = 1, r = n/2;
     while(l <= r) {
         int m = l+r>>1;
-        if (check(m)) {
-            ans = max(ans,m);
+        if (check(2*m)) {
+            ans1 = max(ans1,2*m);
             l = m + 1;
         } else r = m - 1;
     }
-    cout << ans;
+    l = 1, r = n/2;
+    while(l <= r) {
+        int m = l+r>>1;
+        if (check(2*m+1)) {
+            ans2 = max(ans2,2*m+1);
+            l = m + 1;
+        } else r = m - 1;
+    }
+    cout << max(ans1,ans2);
     cerr << "\nTime elapsed: " << TIME << "s. \n";
     return 0;
 }

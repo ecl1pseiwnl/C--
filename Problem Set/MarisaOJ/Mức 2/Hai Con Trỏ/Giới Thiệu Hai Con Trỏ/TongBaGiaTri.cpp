@@ -52,6 +52,8 @@ constexpr int MOD = 1e9+7;
 constexpr int32_t IINF = 0x3f3f3f3f;
 constexpr int64_t LLINF = 0x3f3f3f3f3f3f3f3f;
 
+#define int ll
+
 signed main() {
     cin.tie(nullptr)->sync_with_stdio(false);
     int n, k;
@@ -64,7 +66,7 @@ signed main() {
     sort(all(v));
     for (int i = 1; i <= n; i++) {
         ll tar = k - v[i].fi;
-        int l = i+1, r = n;
+        int l = 1, r = n;
         while (l <= r) {
             ll cur = v[l].fi + v[r].fi;
             if (cur == tar) {
@@ -78,4 +80,3 @@ signed main() {
     cerr << "\nTime elapsed: " << TIME << "s. \n";
     return 0;
 }
-
