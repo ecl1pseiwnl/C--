@@ -71,11 +71,12 @@ signed main() {
     s = "#" + s;
     t = "#" + t;
     n = s.size()-1;
+    ans = n;
     pw[0] = 1;
     for (int i = 1; i <= n; i++) pw[i] = (pw[i-1]*base)%MOD;
     for (int i = 1; i <= n; i++) hashS[i] = (hashS[i-1]*base+s[i]-'a'+1)%MOD;
     for (int i = 1; i <= n; i++) hashT[i] = (hashT[i-1]*base+t[i]-'a'+1)%MOD;
-    for (int i = 1; i <= n; i++) {
+    for (int i = 2; i <= n; i++) {
         for (int j = 1; j <= n-i+1; j++) {
             int l = j, r = j+i-1;
             if (get(hashS,l,r) == get(hashT,n-r+1,n-l+1)) ans++;
