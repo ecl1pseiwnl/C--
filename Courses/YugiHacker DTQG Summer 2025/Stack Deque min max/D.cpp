@@ -54,10 +54,24 @@ constexpr int MOD = 1e9+7;
 constexpr int IINF = 0x3f3f3f3f;
 constexpr ll LLINF = 0x3f3f3f3f3f3f3f3f;
 
+const int N = 1e5+7;
+int n,q,v[N],d[N],cur[N];
+stack<int> st;
+
 signed main() {
     cin.tie(nullptr)->sync_with_stdio(false);
-
-
+    cin >> n >> q;
+    FOR(i,1,n) cin >> v[i];
+    FORD(i,n,1) {
+        while(!st.empty() && v[st.top()] <= v[i]) st.pop();
+        d[i] = (!st.empty() ? d[st.top()]+1 : 0);
+        st.push(i);
+    }
+    while(q--) {
+        int x;
+        cin >> x;
+        cout << d[x] << endl;
+    }
     cerr << "\nTime elapsed: " << TIME << "s. \n";
     return 0;
 }
