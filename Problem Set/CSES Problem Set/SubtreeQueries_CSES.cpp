@@ -58,16 +58,6 @@ const int N = 2e5+7;
 int n,q,pos[N],sz[N],w[N],cnt;
 vi v[N];
 
-void dfs(int u, int p = -1) {
-    pos[u] = ++cnt;
-    sz[u] = 1;
-    for (auto it : v[u]) {
-        if (it == p) continue;
-        dfs(it,u);
-        sz[u] += sz[it];
-    }
-}
-
 ll t[4*N];
 
 ll get(int id, int l, int r, int x, int y) {
@@ -86,6 +76,16 @@ void update(int id, int l, int r, int p, int x) {
         update(2*id,l,m,p,x);
     } else update(2*id+1,m+1,r,p,x);
     t[id] = t[2*id] + t[2*id+1];
+}
+
+void dfs(int u, int p = -1) {
+    pos[u] = ++cnt;
+    sz[u] = 1;
+    for (auto it : v[u]) {
+        if (it == p) continue;
+        dfs(it,u);
+        sz[u] += sz[it];
+    }
 }
 
 signed main() {

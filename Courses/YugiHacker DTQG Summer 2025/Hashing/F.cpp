@@ -52,10 +52,10 @@ constexpr int MOD = 1e9+7;
 constexpr int32_t IINF = 0x3f3f3f3f;
 constexpr int64_t LLINF = 0x3f3f3f3f3f3f3f3f;
 
-const int N = 1e6+7, base = 256;
-ll hashS[N],hashT[N],pw[N],cur;
+const int N = 5e5+7, base = 256;
+ll hashS[N],hashT[N],pw[N],ans;
 string s,t;
-int n,ans;
+int n;
 
 ll get(ll hs[],int l, int r) {
     return (hs[r]-hs[l-1]*pw[r-l+1]%MOD+MOD)%MOD;

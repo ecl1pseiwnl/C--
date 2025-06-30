@@ -31,67 +31,69 @@ typedef map<int,int> mii;
 typedef vector<int> vi;
 typedef vector<pi> vii;
 typedef vector<mii> viii;
-const double PI = 3.141592653589793238463;
-#define bmask(x,i) (((x) >> (i)) & 1)
+#define FOR(i, a, b) for (int i = (a), _b = (b); i <= _b; i++)
+#define FORD(i, b, a) for (int i = (b), _a = (a); i >= _a; i--)
+#define REP(i, n) for (int i = 0, _n = (n); i < _n; i++)
+#define FORE(i, v) for (__typeof((v).begin()) i = (v).begin(); i != (v).end(); i++)
+#define Mask(x,i) (((x) >> (i)) & 1)
 #define ms(a,n) memset(a, n,sizeof(a))
 #define all(x) (x).begin(),(x).end()
 #define uniquev(v) sort(all(v)), (v).resize(unique(all(v)) - (v).begin())
 #define ins insert
 #define sz(x) (int)(x.size())
-#define name "TASK"
 #define fi first
-#define sec second
+#define se second
 #define mp make_pair
 #define ep emplace_back
 #define pb push_back
 #define endl "\n"
 #define TIME (1.0 * clock() / CLOCKS_PER_SEC)
+#define name "TASK"
 ll __lcm(ll x, ll y) { return 1ll*(x / __gcd(x,y))*y;}
-const int EPS = -1e9;
 constexpr int MOD = 1e9+7;
-constexpr int32_t IINF = 0x3f3f3f3f;
-constexpr int64_t LLINF = 0x3f3f3f3f3f3f3f3f;
+constexpr int IINF = 0x3f3f3f3f;
+constexpr ll LLINF = 0x3f3f3f3f3f3f3f3f;
 
-const int N = 2006;
-int n,m,q,cnt, dx[] = {-1,1,0,0}, dy[] = {0,0,-1,1},mark[N][N], pre[N][N];
-char a[N][N];
-
-void bfs(int i, int j) {
-    queue<pi> q;
-    q.push({i,j});
-    mark[i][j] = cnt;
-    a[i][j] = '0';
-    while(!q.empty()) {
-        auto [x,y] = q.front();
-        q.pop();
-        for (int k = 0; k < 4; k++) {
-            int nx = x + dx[k], ny = y + dy[k];
-            if (1 <= nx && nx <= n && 1 <= ny && ny <= m && a[nx][ny] == '1') {
-                mark[nx][ny] = cnt;
-                q.push({nx,ny});
-                a[nx][ny] = '0';
-            }
-        }
-    }
-}
+const int N = 1e6+7, base = 10;
+ll hs[N],pw[N],pre[N];
+string s;
+int t,n,v[34];
 
 signed main() {
     cin.tie(nullptr)->sync_with_stdio(false);
-    cin >> n >> m >> q;
-    for (int i = 1; i <= n; i++) {
-        for (int j = 1; j <= m; j++) {
-            cin >> a[i][j];
+    cin >> s;
+    n = s.size();
+    cin >> t;
+    s = "#" + s;
+    pw[0] = 1;
+    FOR(i,1,n) {
+        hs[i] = (hs[i-1] * base + s[i]-'0') % 33;
+        pw[i] = pw[i-1] * base % 33;
+    }
+    FOR(i,1,n) {
+        pre[i] = hs[i] * pw[i-1] % 33;
+        if (v[pre[i]] == 0) {
+            v[pre[i]] = i;
         }
     }
-    for (int i = 1; i <= n; i++) {
-        for (int j = 1; j <= m; j++) {
-            if (a[i][j] == '1') {
-                cnt++;
-                bfs(i,j);
+    if (t == 1) {
+        ll ans = 0;
+        unordered_map<ll,int> m;
+        m[0] = 1;
+        FOR(i,1,n) ans += m[pre[i]]++;
+        cout << ans << endl;
+    } else {
+        int len = 0;
+        string ans;
+        FOR(i,1,n) {
+            if (len < i - v[pre[i]]) {
+                len = i - v[pre[i]];
+                ans = s.substr(v[pre[i]]+1,i-1);
             }
         }
+        cout << ans;
     }
-
     cerr << "\nTime elapsed: " << TIME << "s. \n";
     return 0;
 }
+
