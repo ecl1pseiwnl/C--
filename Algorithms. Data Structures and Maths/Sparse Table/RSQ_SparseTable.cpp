@@ -50,13 +50,19 @@ constexpr int MOD = 1e9+7;
 constexpr int32_t IINF = 0x3f3f3f3f;
 constexpr int64_t LLINF = 0x3f3f3f3f3f3f3f3f;
 
-const int N = 50007;
+const int N = 50007, lg = 22;
 int n, a[N], dp[N][22];
 
 int get(int l, int r) {
-    int k = log2(r-l+1);
-    return min(dp[l][k], dp[r-(1<<k)+1][k]);
+    int len = r - l + 1, s = 0;
+    for (int j = 0; (1<<j) <= len; ++j)
+        if (len >> j & 1) {
+            s = s + dp[l][j];
+            l = l + (1<<j);
+        }
+    return s;
 }
+
 
 signed main() {
     cin.tie(nullptr)->sync_with_stdio(false);
@@ -66,9 +72,9 @@ signed main() {
     }
     cin >> n;
     for (int i = 1; i <= n; i++) {cin >> a[i]; dp[i][0] = a[i];}
-    for (int j = 1; (1 << j) <= n; j++) {
+    for (int j = 1; (1 << j) <= lg; j++) {
         for (int i = 1; i +(1<<j)-1 <= n; i++) {
-            dp[i][j] = min(dp[i][j-1], dp[i+(1<<(j-1))][j-1]);
+            dp[i][j] = dp[i][j-1] + dp[i+(1<<(j-1))][j-1];
         }
     }
     int t; cin >> t;
