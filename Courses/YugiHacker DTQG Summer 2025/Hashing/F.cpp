@@ -48,7 +48,7 @@ const double PI = 3.141592653589793238463;
 #define TIME (1.0 * clock() / CLOCKS_PER_SEC)
 ll __lcm(ll x, ll y) { return 1ll*(x / __gcd(x,y))*y;}
 const int EPS = -1e9;
-constexpr int MOD = 1e9+7;
+constexpr int MOD = 1e9+2277;
 constexpr int32_t IINF = 0x3f3f3f3f;
 constexpr int64_t LLINF = 0x3f3f3f3f3f3f3f3f;
 
