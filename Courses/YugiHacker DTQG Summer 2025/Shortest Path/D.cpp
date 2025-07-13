@@ -55,41 +55,30 @@ constexpr int IINF = 0x3f3f3f3f;
 constexpr ll LLINF = 0x3f3f3f3f3f3f3f3f;
 
 const int N = 507;
-int n,m,q,val[N][N];
-vector<pi> v[N];
-
-void dijkstra(int s) {
-    vector<int> d(n+1,IINF);
-    d[s] = 0;
-    priority_queue<pi,vector<pi>,greater<pi>> q;
-    q.push({0,s});
-    while(q.size()) {
-        auto [len,vert] = q.top(); q.pop();
-        if (len > d[vert]) continue;
-        for (auto [x,w] : v[vert]) {
-            if (d[x] > d[vert] + w) {
-                d[x] = d[vert] + w;
-                q.push({d[x],x});
-            }
-        }
-    }
-    FOR(i,1,n) val[s][i] = (d[i] == IINF ? -1 : d[i]);
-}
+int n,m,q;
+vector<vector<ll>> d(N,vector<ll>(N,LLINF));
 
 signed main() {
     cin.tie(nullptr)->sync_with_stdio(false);
     cin >> n >> m >> q;
+    for (int i = 1; i <= n+1; i++) d[i][i] = 0;
     FOR(i,1,m) {
-        int x,y,z;
+        ll x,y,z;
         cin >> x >> y >> z;
-        v[x].pb({y,z});
-        v[y].pb({x,z});
+        d[x][y] = min(d[x][y],z);
+        d[y][x] = min(d[y][x],z);
     }
-    FOR(i,1,n) dijkstra(i);
+    for (int k = 1; k <= n+1; k++) {
+        for (int i = 1; i <= n+1; i++) {
+            for (int j = 1; j <= n+1; j++) {
+                d[i][j] = min(d[i][j], d[i][k]+d[k][j]);
+            }
+        }
+    }
     while(q--) {
-        int l,r;
-        cin >> l >> r;
-        cout << val[l][r] << endl;
+        int x,y;
+        cin >> x >> y;
+        cout << (d[x][y] == LLINF ? -1 : d[x][y]) << endl;
     }
     cerr << "\nTime elapsed: " << TIME << "s. \n";
     return 0;
