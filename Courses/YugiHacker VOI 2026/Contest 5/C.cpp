@@ -67,22 +67,26 @@ signed main() {
             cin >> x >> y >> z >> k;
             v[x].pb({y,z,k});
         }
-        vi d(n+1,IINF);
-        d[1] = 0;
+        vector<vi> d(n+1,vi(c+1,IINF));
+        d[1][0] = 0;
         priority_queue<tuple<int,int,int>,vector<tuple<int,int,int>>,greater<tuple<int,int,int>>> q;
         q.push({0,1,0});
         while(q.size()) {
             auto [len,vert,state] = q.top();
             q.pop();
-            if (len > d[vert]) continue;
+            if (len > d[vert][state]) continue;
             for (auto [x,w,co] : v[vert]) {
-                if (state + co < c && d[x] > d[vert] + w) {
-                    d[x] = d[vert] + w;
-                    q.push({d[x],x,state+co});
+                if (state + co <= c && d[x][state+co] > d[vert][state] + w) {
+                    d[x][state+co] = d[vert][state] + w;
+                    q.push({d[x][state+co],x,state+co});
                 }
             }
         }
-        cout << (d[n] == LLINF ? -1 : d[n]) << endl;
+        int ans = IINF;
+        FOR(i,1,c) {
+            ans = min(ans,d[n][i]);
+        }
+        cout << (ans == IINF ? -1 : ans) << endl;
     }
     cerr << "\nTime elapsed: " << TIME << "s. \n";
     return 0;
