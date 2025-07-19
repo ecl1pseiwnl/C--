@@ -63,7 +63,8 @@ signed main() {
     string s;
     cin >> s;
     s = " " + s;
-    int l = 1, r = 1, u = 0, v = 0;
+    ll l = IINF, r = IINF;
+    int u = 1, v = 1;
     for (int k = 1; k <= 26; k++) {
         int j = 1, cnt = 0;
         for (int i = 1; i <= n; i++) {
@@ -79,11 +80,12 @@ signed main() {
             if (l*ans > r*k) {
                 l = k;
                 r = ans;
+                u = j+1;
+                v = i;
             }
         }
     }
-    int g = __gcd(l,r);
-    cout << l/g << " " << r/g;
+    cout << u << " " << v;
     cerr << "\nTime elapsed: " << TIME << "s. \n";
     return 0;
 }

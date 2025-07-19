@@ -53,13 +53,14 @@ constexpr int32_t IINF = 0x3f3f3f3f;
 constexpr int64_t LLINF = 0x3f3f3f3f3f3f3f3f;
 
 const int N = 1e5+7;
-int n,q,par[N], d[N];
-vector<map<int,int>> v(N);
+int n,q,par[N],d[N];
+vi w(N,1);
+vector<unordered_map<int,int>> v(N);
 
 void makeset() {
     for (int i = 1; i <= n; i++) {
         par[i] = i;
-        v[i][d[i]]++;
+        v[i][d[i]] = 1;
     }
 }
 
@@ -71,16 +72,18 @@ int findset(int u) {
 void unite(int a, int b) {
     a = findset(a);
     b = findset(b);
-    if (a == b) return void();
+    if (a == b) return;
+    if (w[a] < w[b]) swap(a,b);
+    w[a] += w[b];
     par[b] = a;
-    v[a][d[b]]++;
+    for (auto it : v[b]) v[a][it.fi] += it.sec;
 }
 
 signed main() {
     cin.tie(nullptr)->sync_with_stdio(false);
     cin >> n >> q;
-    makeset();
     for (int i = 1; i <= n; i++) cin >> d[i];
+    makeset();
     while(q--) {
         int k,l,r;
         cin >> k >> l >> r;
@@ -91,7 +94,6 @@ signed main() {
             cout << v[l][r] << endl;
         }
     }
-
     cerr << "\nTime elapsed: " << TIME << "s. \n";
     return 0;
 }
