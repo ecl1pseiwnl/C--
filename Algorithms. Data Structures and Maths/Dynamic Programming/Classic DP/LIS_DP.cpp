@@ -31,43 +31,55 @@ typedef map<int,int> mii;
 typedef vector<int> vi;
 typedef vector<pi> vii;
 typedef vector<mii> viii;
-const double PI = 3.141592653589793238463;
-#define bmask(x,i) (((x) >> (i)) & 1)
+#define FOR(i, a, b) for (int i = (a), _b = (b); i <= _b; i++)
+#define FORD(i, b, a) for (int i = (b), _a = (a); i >= _a; i--)
+#define REP(i, n) for (int i = 0, _n = (n); i < _n; i++)
+#define FORE(i, v) for (__typeof((v).begin()) i = (v).begin(); i != (v).end(); i++)
+#define Mask(x,i) (((x) >> (i)) & 1)
 #define ms(a,n) memset(a, n,sizeof(a))
 #define all(x) (x).begin(),(x).end()
 #define uniquev(v) sort(all(v)), (v).resize(unique(all(v)) - (v).begin())
 #define ins insert
 #define sz(x) (int)(x.size())
-#define name "TASK"
 #define fi first
-#define sec second
+#define se second
 #define mp make_pair
 #define ep emplace_back
 #define pb push_back
 #define endl "\n"
 #define TIME (1.0 * clock() / CLOCKS_PER_SEC)
+#define name "TASK"
 ll __lcm(ll x, ll y) { return 1ll*(x / __gcd(x,y))*y;}
-const int EPS = -1e9;
 constexpr int MOD = 1e9+7;
-constexpr int32_t IINF = 0x3f3f3f3f;
-constexpr int64_t LLINF = 0x3f3f3f3f3f3f3f3f;
+constexpr int IINF = 0x3f3f3f3f;
+constexpr ll LLINF = 0x3f3f3f3f3f3f3f3f;
+
+const int N = 1e5+7;
+int n, bit[N];
+
+void compress(vi &v) {
+    vi u(all(v));
+    sort(all(u));
+    u.resize(unique(all(u))-u.begin());
+    for (auto &it : v) {
+        it = lower_bound(all(u),it) - u.begin() + 1;
+    }
+}
+
+void update(int pos, int x) {
+    for (;pos <= n; pos += pos & -pos) bit[pos] = max(bit[pos],x);
+}
+
+int get(int pos) {
+    int ans = 0;
+    for (;pos >= 1; pos -= pos & -pos) ans = max(ans,bit[pos]);
+    return ans;
+}
+
 
 signed main() {
     cin.tie(nullptr)->sync_with_stdio(false);
-    int n;
-    cin >> n;
-    vi v(n),lis;
-    for (auto &it : v) cin >> it;
-    for (auto it : v) {
-        auto pos = lower_bound(all(lis),it);
-        if (pos == lis.end()) {
-            lis.pb(it);
-        } else {
-            *pos = it;
-        }
-    }
-    cout << lis.size();
-    /*
+    /// DP O(N^2)
 	int f[1005], a[1005], ans;
 	int n;
 	cin >> n;
@@ -86,7 +98,30 @@ signed main() {
 	for (int i = 1; i <= n; i++) {
 		if (f[i] > ans) ans = f[i];
 	}
-	cout << endl << ans; */
+	cout << endl << ans;
+	/// Binary Search O(NLogN)
+	int n;
+    cin >> n;
+    vi v(n),lis;
+    for (auto &it : v) cin >> it;
+    for (auto it : v) {
+        auto pos = lower_bound(all(lis),it);
+        if (pos == lis.end()) {
+            lis.pb(it);
+        } else {
+            *pos = it;
+        }
+    }
+    cout << lis.size();
+    /// Binary Search by Fenwick Tree O(NLogC), C = max value of A
+    cin >> n;
+    vi v(n);
+    for (auto &it : v) cin >> it;
+    compress(v);
+    for (auto it : v) {
+        update(it,get(it-1)+1);
+    }
+    cout << get(n);
     cerr << "\nTime elapsed: " << TIME << "s. \n";
     return 0;
 }
