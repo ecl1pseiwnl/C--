@@ -1,5 +1,5 @@
 <h1 align="center">Hi 👋, I'm ecl1pseiwnl!</h1>
-<h3 align="center">🇻🇳,16 y/o. I'm a junior competitive programmer, also new to application developing</h3>
+<h3 align="center">🇻🇳,17 y/o. This repo is my journey in competitive programming and with some random C++ projects :D</h3>
 
 <h3 align="left">Connect with me:</h3>
 <p align="left">

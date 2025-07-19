@@ -31,26 +31,28 @@ typedef map<int,int> mii;
 typedef vector<int> vi;
 typedef vector<pi> vii;
 typedef vector<mii> viii;
-const double PI = 3.141592653589793238463;
-#define bmask(x,i) (((x) >> (i)) & 1)
+#define FOR(i, a, b) for (int i = (a), _b = (b); i <= _b; i++)
+#define FORD(i, b, a) for (int i = (b), _a = (a); i >= _a; i--)
+#define REP(i, n) for (int i = 0, _n = (n); i < _n; i++)
+#define FORE(i, v) for (__typeof((v).begin()) i = (v).begin(); i != (v).end(); i++)
+#define Mask(x,i) (((x) >> (i)) & 1)
 #define ms(a,n) memset(a, n,sizeof(a))
 #define all(x) (x).begin(),(x).end()
 #define uniquev(v) sort(all(v)), (v).resize(unique(all(v)) - (v).begin())
 #define ins insert
 #define sz(x) (int)(x.size())
-#define name "TASK"
 #define fi first
-#define sec second
+#define se second
 #define mp make_pair
 #define ep emplace_back
 #define pb push_back
 #define endl "\n"
 #define TIME (1.0 * clock() / CLOCKS_PER_SEC)
+#define name "TASK"
 ll __lcm(ll x, ll y) { return 1ll*(x / __gcd(x,y))*y;}
-const int EPS = -1e9;
 constexpr int MOD = 1e9+7;
-constexpr int32_t IINF = 0x3f3f3f3f;
-constexpr int64_t LLINF = 0x3f3f3f3f3f3f3f3f;
+constexpr int IINF = 0x3f3f3f3f;
+constexpr ll LLINF = 0x3f3f3f3f3f3f3f3f;
 
 const int N = 1e5+7;
 int n,m;
@@ -62,17 +64,17 @@ void dijkstra() {
     priority_queue<tuple<ll,int,int>,vector<tuple<ll,int,int>>,greater<tuple<ll,int,int>>> q;
     q.push({0,1,0});
     while(!q.empty()) {
-        auto [len,vert,cnt] = q.top();
+        auto [len,vert,state] = q.top();
         q.pop();
-        if (d[vert][cnt] < len) continue;
+        if (d[vert][state] < len) continue;
         for (auto [x,w] : v[vert]) {
-            if (cnt == 0 && d[x][cnt+1] > d[vert][cnt] + w/2) {
-                d[x][1] = d[vert][cnt] + w/2;
-                q.push({d[x][cnt+1],x,cnt+1});
+            if (!state && d[x][state + 1] > d[vert][state] + int(w/2)) {
+                d[x][state+1] = d[vert][state] + int(w/2);
+                q.push({d[x][state+1],x,state+1});
             }
-            if (d[x][cnt] > d[vert][cnt] + w) {
-                d[x][cnt] = d[vert][cnt] + w;
-                q.push({d[x][cnt],x,cnt});
+            if (d[x][state] > d[vert][state] + w) {
+                d[x][state] = d[vert][state] + w;
+                q.push({d[x][state],x,state});
             }
         }
     }
@@ -86,7 +88,6 @@ signed main() {
         int x,y,z;
         cin >> x >> y >> z;
         v[x].pb({y,z});
-        v[y].pb({x,z});
     }
     dijkstra();
     cerr << "\nTime elapsed: " << TIME << "s. \n";
