@@ -73,9 +73,7 @@ signed main() {
             }
         }
     }
-    ll ans = -LLINF;
-    for (int i = 1; i <= n; i++) ans = max(ans,dp[i][n]);
-    cout << ans;
+    cout << dp[1][n];
     cerr << "\nTime elapsed: " << TIME << "s. \n";
     return 0;
 }
