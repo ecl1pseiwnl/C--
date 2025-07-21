@@ -54,7 +54,7 @@ constexpr int MOD = 1e9+7;
 constexpr int IINF = 0x3f3f3f3f;
 constexpr ll LLINF = 0x3f3f3f3f3f3f3f3f;
 
-const int N = 2507;
+const int N = 5007;
 int n,m;
 ll d[N];
 struct nd{
@@ -73,7 +73,7 @@ signed main() {
     d[1] = 0;
     FOR(i,1,n) {
         FOR(j,1,m) {
-            auto [x,y,z] = e[i];
+            auto [x,y,z] = e[j];
             if (d[x] != -LLINF && d[x] + z > d[y]) d[y] = d[x] + z;
         }
     }

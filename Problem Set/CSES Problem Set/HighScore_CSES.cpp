@@ -54,7 +54,7 @@ constexpr int MOD = 1e9+7;
 constexpr int IINF = 0x3f3f3f3f;
 constexpr ll LLINF = 0x3f3f3f3f3f3f3f3f;
 
-const int N = 2507;
+const int N = 5007;
 int n,m;
 ll d[N];
 struct nd{
