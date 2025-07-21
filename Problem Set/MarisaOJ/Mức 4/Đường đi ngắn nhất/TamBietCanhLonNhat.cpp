@@ -59,35 +59,30 @@ int n,m,par[N], wei[N];
 vector<pair<int,ll>> v[N];
 
 void dijkstra() {
-    vector<ll> d(n+1,LLINF);
-    d[1] = 0;
-    priority_queue<pair<ll,int>,vector<pair<ll,int>>,greater<pair<ll,int>>> q;
-    q.push({0,1});
+    vector<vector<ll>> d(n+1,vector<ll>(2,LLINF));
+    d[1][0] = 0;
+    priority_queue<pair<ll,pi>,vector<pair<ll,pi>>, greater<pair<ll,pi>>> q;
+    q.push({0,{1,0}});
     while(!q.empty()) {
-        auto [len,vert] = q.top();
+        auto it = q.top();
         q.pop();
-        if (len > d[vert]) continue;
-        for (auto [x,w] : v[vert]) {
-            ll k = len + w;
-            if (d[x] > k) {
-                par[x] = vert;
-                wei[x] = w;
-                d[x] = k;
-                q.push({d[x],x});
+        int len = it.fi, vert = it.sec.fi, cnt = it.sec.sec;
+        if (len > d[vert][cnt]) continue;
+        for (auto te : v[vert]) {
+            int x = te.fi, w = te.sec;
+            if (!cnt && d[x][cnt+1] > d[vert][cnt]) {
+                d[x][cnt+1] = d[vert][cnt];
+                q.push({d[x][cnt+1],{x,cnt+1}});
+            }
+            if (d[x][cnt] > d[vert][cnt] + w) {
+                d[x][cnt] = d[vert][cnt] + w;
+                q.push({d[x][cnt],{x,cnt}});
             }
         }
     }
-    if (d[n] != LLINF) {
-        ll ans = 0, maxv = 0;
-        int p = n;
-        while(p != 1) {
-            ans += wei[p];
-            maxv = max(maxv,1ll*wei[p]);
-            p = par[p];
-        }
-        ans -= maxv;
-        cout << ans;
-    } else cout << -1;
+    ll ans = LLINF;
+    for (int i = 0; i <= 1; i++) ans = min(ans,d[n][i]);
+    cout << (ans == LLINF ? -1 : ans);
 }
 
 signed main() {
