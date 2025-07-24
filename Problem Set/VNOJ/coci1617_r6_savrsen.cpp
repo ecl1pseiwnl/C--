@@ -31,48 +31,52 @@ typedef map<int,int> mii;
 typedef vector<int> vi;
 typedef vector<pi> vii;
 typedef vector<mii> viii;
-const double PI = 3.141592653589793238463;
-#define bmask(x,i) (((x) >> (i)) & 1)
+#define FOR(i, a, b) for (int i = (a), _b = (b); i <= _b; i++)
+#define FORD(i, b, a) for (int i = (b), _a = (a); i >= _a; i--)
+#define REP(i, n) for (int i = 0, _n = (n); i < _n; i++)
+#define FORE(i, v) for (__typeof((v).begin()) i = (v).begin(); i != (v).end(); i++)
+#define Mask(x,i) (((x) >> (i)) & 1)
 #define ms(a,n) memset(a, n,sizeof(a))
 #define all(x) (x).begin(),(x).end()
 #define uniquev(v) sort(all(v)), (v).resize(unique(all(v)) - (v).begin())
 #define ins insert
 #define sz(x) (int)(x.size())
-#define name "TASK"
 #define fi first
-#define sec second
+#define se second
 #define mp make_pair
 #define ep emplace_back
 #define pb push_back
 #define endl "\n"
 #define TIME (1.0 * clock() / CLOCKS_PER_SEC)
+#define name "TASK"
 ll __lcm(ll x, ll y) { return 1ll*(x / __gcd(x,y))*y;}
-const int EPS = -1e9;
 constexpr int MOD = 1e9+7;
-constexpr int32_t IINF = 0x3f3f3f3f;
-constexpr int64_t LLINF = 0x3f3f3f3f3f3f3f3f;
+constexpr int IINF = 0x3f3f3f3f;
+constexpr ll LLINF = 0x3f3f3f3f3f3f3f3f;
 
 const int N = 1e7+5;
-ll v[N], pre[N];
+int l,r;
+vector<ll> v(N,1);
 
 void sang() {
-    for (int i = 1; i*i <= N; i++) {
-        for (int j = i; j <= N; j+=i) {
+    for (int i = 2; i*i <= N; i++) {
+        for (int j = i*i; j <= N; j+=i) {
             v[j] += i;
+            if (i*i != j) v[j] += j/i;
         }
     }
-    for (int i = 1; i <= N; i++) {
-        ll cur = v[i] - i;
-        pre[i] = pre[i-1] + abs(i-cur);
+    v[1] = 0;
+    ll ans = 0;
+    FOR(i,l,r) {
+        ans += abs(i-v[i]);
     }
+    cout << ans;
 }
 
 signed main() {
     cin.tie(nullptr)->sync_with_stdio(false);
-    int l,r;
     cin >> l >> r;
     sang();
-    cout << pre[r] - pre[l-1];
     cerr << "\nTime elapsed: " << TIME << "s. \n";
     return 0;
 }
