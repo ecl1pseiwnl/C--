@@ -31,34 +31,45 @@ typedef map<int,int> mii;
 typedef vector<int> vi;
 typedef vector<pi> vii;
 typedef vector<mii> viii;
-const double PI = 3.141592653589793238463;
-#define bmask(x,i) (((x) >> (i)) & 1)
+#define FOR(i, a, b) for (int i = (a), _b = (b); i <= _b; i++)
+#define FORD(i, b, a) for (int i = (b), _a = (a); i >= _a; i--)
+#define REP(i, n) for (int i = 0, _n = (n); i < _n; i++)
+#define FORE(i, v) for (__typeof((v).begin()) i = (v).begin(); i != (v).end(); i++)
+#define Mask(x,i) (((x) >> (i)) & 1)
 #define ms(a,n) memset(a, n,sizeof(a))
 #define all(x) (x).begin(),(x).end()
 #define uniquev(v) sort(all(v)), (v).resize(unique(all(v)) - (v).begin())
 #define ins insert
 #define sz(x) (int)(x.size())
-#define name "TROCHOI"
 #define fi first
-#define sec second
+#define se second
 #define mp make_pair
 #define ep emplace_back
 #define pb push_back
 #define endl "\n"
 #define TIME (1.0 * clock() / CLOCKS_PER_SEC)
+#define name "TROCHOI"
 ll __lcm(ll x, ll y) { return 1ll*(x / __gcd(x,y))*y;}
 constexpr int MOD = 1e9+7;
-constexpr int32_t IINF = 0x3f3f3f3f;
-constexpr int64_t LLINF = 0x3f3f3f3f3f3f3f3f;
+constexpr int IINF = 0x3f3f3f3f;
+constexpr ll LLINF = 0x3f3f3f3f3f3f3f3f;
 
-unordered_map<string,int> m;
 vector<pair<string,int>> v;
 
-bool cmp(pair<string,int> a, pair<string,int> b) {
-    if (a.sec == b.sec) {
-        return m[a.fi] < m[b.fi];
+int cal(string s) {
+    int cnt = 0;
+    for (char it : s) {
+        if (isdigit(it)) {
+            cnt++;
+        }
     }
-    return a.sec < b.sec;
+    return cnt;
+}
+
+bool cmp(pair<string,int> a, pair<string,int> b) {
+    int x = cal(a.fi), y = cal(b.fi);
+    if (x == y) return a.se < b.se;
+    return x < y;
 }
 
 signed main() {
@@ -71,19 +82,10 @@ signed main() {
     for (int i = 1; i <= n; i++) {
         string s;
         getline(cin,s);
-        int cnt = 0;
-        for (int i = 0; i < s.size(); i++) {
-            if (s[i] >= '0' && s[i] <= '9') {
-                cnt++;
-            }
-        }
-        m[s] = i;
-        v.pb({s,cnt});
+        v.pb({s,i});
     }
     sort(all(v),cmp);
     for (auto it : v) cout << it.fi << endl;
     cerr << "Time elapsed: " << TIME << "s. \n";
     return 0;
 }
-
-
