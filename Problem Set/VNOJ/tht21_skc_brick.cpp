@@ -31,31 +31,61 @@ typedef map<int,int> mii;
 typedef vector<int> vi;
 typedef vector<pi> vii;
 typedef vector<mii> viii;
-ll __lcm(ll x, ll y) { return 1ll*(x / __gcd(x,y))*y;}
+#define FOR(i, a, b) for (int i = (a), _b = (b); i <= _b; i++)
+#define FORD(i, b, a) for (int i = (b), _a = (a); i >= _a; i--)
+#define REP(i, n) for (int i = 0, _n = (n); i < _n; i++)
+#define FORE(i, v) for (__typeof((v).begin()) i = (v).begin(); i != (v).end(); i++)
+#define Mask(x,i) (((x) >> (i)) & 1)
 #define ms(a,n) memset(a, n,sizeof(a))
 #define all(x) (x).begin(),(x).end()
 #define uniquev(v) sort(all(v)), (v).resize(unique(all(v)) - (v).begin())
 #define ins insert
 #define sz(x) (int)(x.size())
-#define name "TASK"
 #define fi first
-#define sec second
+#define se second
 #define mp make_pair
 #define ep emplace_back
 #define pb push_back
 #define endl "\n"
 #define TIME (1.0 * clock() / CLOCKS_PER_SEC)
+#define name "TASK"
+ll __lcm(ll x, ll y) { return 1ll*(x / __gcd(x,y))*y;}
 constexpr int MOD = 1e9+7;
-constexpr int32_t IINF = 0x3f3f3f3f;
-constexpr int64_t LLINF = 0x3f3f3f3f3f3f3f3f;
+constexpr int IINF = 0x3f3f3f3f;
+constexpr ll LLINF = 0x3f3f3f3f3f3f3f3f;
+
+const int N = 1e6+7;
+vi v(N,1);
+vector<ll> p,ans;
+
+void sang() {
+    v[0] = v[1] = 0;
+    for (int i = 2; i*i <= N; i++) {
+        if (v[i]) {
+            for (int j = i*i; j <= N; j+=i) {
+                v[j] = 0;
+            }
+        }
+    }
+    for (int i = 2; i <= N; i++) {
+        if (v[i]) p.ep(i);
+    }
+    for (int i = 1; i < p.size(); i++) {
+        ans.pb(1ll*p[i-1]*p[i]);
+    }
+}
 
 signed main() {
     cin.tie(nullptr)->sync_with_stdio(false);
-    if (fopen(name ".inp", "r")) {
-        freopen(name ".inp","r",stdin);
-        freopen(name ".out","w",stdout);
+    sang();
+    int t;
+    cin >> t;
+    while(t--) {
+        ll x;
+        cin >> x;
+        auto it = lower_bound(all(ans),x);
+        cout << (*it == x ? 0 : x-(*--it)) << endl;
     }
-
-    cerr << "Time elapsed: " << TIME << "s. \n";
+    cerr << "\nTime elapsed: " << TIME << "s. \n";
     return 0;
 }
