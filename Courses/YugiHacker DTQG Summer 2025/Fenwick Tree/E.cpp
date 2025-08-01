@@ -55,21 +55,53 @@ constexpr int IINF = 0x3f3f3f3f;
 constexpr ll LLINF = 0x3f3f3f3f3f3f3f3f;
 
 const int N = 1e5+7;
-int n,a[N],b[N],c[N];
+int n;
+ll ans,a[N],b[N],c[N],bitA[3*N],bitB[3*N];
+vi u;
+
+void update(int pos, ll bit[], ll x) {
+    for (;pos <= 3*N; pos += pos & -pos) bit[pos] += x;
+}
+
+ll get(int pos, ll bit[]) {
+    ll ans = 0;
+    for (;pos >= 1; pos -= pos & -pos) ans += bit[pos];
+    return ans;
+}
 
 signed main() {
     cin.tie(nullptr)->sync_with_stdio(false);
     cin >> n;
     FOR(i,1,n) {
         cin >> a[i];
+        u.pb(a[i]);
     }
     FOR(i,1,n) {
         cin >> b[i];
+        u.pb(b[i]);
     }
     FOR(i,1,n) {
         cin >> c[i];
+        u.pb(c[i]);
     }
-
+    sort(all(u));
+    u.resize(unique(all(u))-u.begin());
+    FOR(i,1,n) {
+        a[i] = lower_bound(all(u),a[i]) - u.begin() + 1;
+        b[i] = lower_bound(all(u),b[i]) - u.begin() + 1;
+        c[i] = lower_bound(all(u),c[i]) - u.begin() + 1;
+    }
+    FOR(i,1,n) {
+        update(a[i],bitA,1);
+    }
+    FOR(i,1,n) {
+        ll cur = get(b[i]-1,bitA);
+        update(b[i],bitB,cur);
+    }
+    FOR(i,1,n) {
+        ans += get(c[i]-1,bitB);
+    }
+    cout << ans;
     cerr << "\nTime elapsed: " << TIME << "s. \n";
     return 0;
 }
