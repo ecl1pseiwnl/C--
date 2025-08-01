@@ -62,21 +62,20 @@ signed main() {
     vector<ll> v(k);
     for (auto &it : v) {
         cin >> it;
-        ans += n/it;
     }
     for (int mask = 1; mask < (1 << k); mask++) {
-        if (__builtin_popcountll(mask) < 2) continue;
         ll cur = 1;
-        bool tf = 1;
         for (int i = 0; i < k; i++) {
             if ((mask >> i) & 1) {
-                if (tf) {
-                    cur = v[i];
-                    tf = 0;
-                } else cur = lcm(cur,v[i]);
+                if (cur > 1e18 / v[i]) {
+                    cur = n + 1;
+                    break;
+                } else cur *= v[i];
             }
         }
-        ans -= n/cur;
+        if (__builtin_popcount(mask)&1) {
+            ans += n/cur;
+        } else ans -= n/cur;
     }
     cout << ans;
     cerr << "\nTime elapsed: " << TIME << "s. \n";
