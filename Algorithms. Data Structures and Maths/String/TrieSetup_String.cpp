@@ -55,41 +55,77 @@ constexpr int64_t LLINF = 0x3f3f3f3f3f3f3f3f;
 const int sz = 26;
 #define N 1000100
 
-struct Node{
-    Node* child[sz];
-    Node() {
-        for (int i = 0; i < sz; i++) child[i] = nullptr;
+struct Trie{
+    struct Node{
+        Node* child[26];
+        int exist, cnt;
+        Node() {
+            for (int i = 0; i < 26; i++) child[i] = nullptr;
+            exist = cnt = 0;
+        }
+    };
+    int cur;
+    Node* root;
+    Trie() : cur(0) {
+        root = new Node();
+    };
+    void add(string s) {
+        Node* p = root;
+        for (char c : s) {
+            if (p->child[c - 'a'] == nullptr) p->child[c - 'a'] = new Node();
+            p = p->child[c - 'a'];
+            p->cnt++;
+        }
+        p->exist++;
+    }
+
+    bool qdel(Node* p, string& s, int i) {
+        if (i != (int)s.size()) {
+            bool tf = qdel(p->child[s[i] - 'a'],s,i+1);
+            if (tf) p->child[s[i] - 'a'] = nullptr;
+        }
+        else p->exist--;
+        if (p != root) {
+            p->cnt--;
+            if (p->cnt == 0) {
+                delete(p);
+                return 1;
+            }
+        }
+        return 0;
+    }
+
+    void del(string s) {
+        if (finds(s) == false) return;
+        qdel(root, s, 0);
+    }
+
+    bool finds(string s) {
+        Node* p = root;
+        for (char c : s) {
+            if (p->child[c - 'a'] == nullptr) return 0;
+            p = p->child[c - 'a'];
+        }
+        return (p->exist != 0);
     }
 };
 
-Node node[N];
-int cnt;
-
-Node* root;
-
-Node* create(void) {
-    return &node[cnt++];
-}
-
-void add(const string &s) {
-    Node* p = root;
-    for (char c : s) {
-        if (p->child[c-'a'] == nullptr) p->child[c-'a'] = create();
-        p = p->child[c-'a'];
-    }
-}
-
 signed main() {
     cin.tie(nullptr)->sync_with_stdio(false);
-    int n;
+    int n,q;
     cin >> n;
-    root = create();
+    Trie trie;
     for (int i = 1; i <= n; i++) {
         string s;
         cin >> s;
-        add(s);
+        trie.add(s);
     }
-
+    cin >> q;
+    while(q--) {
+        string s;
+        cin >> s;
+        cout << (trie.finds(s) ? 1 : 0) << endl;
+    }
     cerr << "\nTime elapsed: " << TIME << "s. \n";
     return 0;
 }
