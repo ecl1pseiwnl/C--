@@ -31,68 +31,85 @@ typedef map<int,int> mii;
 typedef vector<int> vi;
 typedef vector<pi> vii;
 typedef vector<mii> viii;
-ll __lcm(ll x, ll y) { return 1ll*(x / __gcd(x,y))*y;}
+#define FOR(i, a, b) for (int i = (a), _b = (b); i <= _b; i++)
+#define FORD(i, b, a) for (int i = (b), _a = (a); i >= _a; i--)
+#define REP(i, n) for (int i = 0, _n = (n); i < _n; i++)
+#define FORE(i, v) for (__typeof((v).begin()) i = (v).begin(); i != (v).end(); i++)
+#define Mask(x,i) (((x) >> (i)) & 1)
 #define ms(a,n) memset(a, n,sizeof(a))
 #define all(x) (x).begin(),(x).end()
 #define uniquev(v) sort(all(v)), (v).resize(unique(all(v)) - (v).begin())
 #define ins insert
 #define sz(x) (int)(x.size())
-#define name "TASK"
 #define fi first
-#define sec second
+#define se second
 #define mp make_pair
 #define ep emplace_back
 #define pb push_back
 #define endl "\n"
+#define TIME (1.0 * clock() / CLOCKS_PER_SEC)
+#define name "TASK"
+ll __lcm(ll x, ll y) { return 1ll*(x / __gcd(x,y))*y;}
 constexpr int MOD = 1e9+7;
-constexpr int32_t IINF = 0x3f3f3f3f;
-constexpr int64_t LLINF = 0x3f3f3f3f3f3f3f3f;
+constexpr int IINF = 0x3f3f3f3f;
+constexpr ll LLINF = 0x3f3f3f3f3f3f3f3f;
 
-vector<string> ans;
+const int sz = 2, N = 1e5+7, lg = 29;
 
-void sol() {
-    queue<string> q;
-    q.push("6");
-    q.push("8");
-    ans.pb("6");
-    ans.pb("8");
-    while(1) {
-        string top = q.front();
-        q.pop();
-        if (top.size() == 18) break;
-        ans.pb(top + "6");
-        ans.pb(top + "8");
-        q.push(top + "6");
-        q.push(top + "8");
+struct BTrie{
+    struct Node{
+        int exist, cnt, child[sz];
+        Node() : exist(0), cnt(0) {
+            ms(child,0);
+        }
+    };
+    vector<Node> node;
+    BTrie() {
+        node.ep();
+    };
+    void add(int x) {
+        int pos = 0;
+        for (int i = lg; i >= 0; i--) {
+            int j = (x >> i) & 1;
+            if (node[pos].child[j] == 0) {
+                node[pos].child[j] = node.size();
+                node.ep();
+            }
+            pos = node[pos].child[j];
+            node[pos].cnt++;
+        }
+        node[pos].exist++;
     }
-}
+
+    int sol(int x) {
+        int ans = 0, pos = 0;
+        for (int i = lg; i >= 0; i--) {
+            int j = (x >> i) & 1;
+            if (node[pos].child[j^1] != 0) {
+                pos = node[pos].child[j^1];
+                ans |= (1 << i);
+            } else pos = node[pos].child[j];
+        }
+        return ans;
+    }
+};
 
 signed main() {
     cin.tie(nullptr)->sync_with_stdio(false);
-    if (fopen(name ".inp", "r")) {
-        freopen(name ".inp","r",stdin);
-        freopen(name ".out","w",stdout);
-    }
-    sol();
     int t;
     cin >> t;
     while(t--) {
-        ll n,k;
-        cin >> n >> k;
-        vector<string> res;
-        for (auto it : ans) {
-            ll x = stoll(it);
-            if (it.size() <= n && x % k == 0) {
-                res.pb(it);
-            }
+        int n, ans = 0;
+        cin >> n;
+        BTrie trie;
+        FOR(i,1,n) {
+            int x;
+            cin >> x;
+            ans = max(ans,trie.sol(x));
+            trie.add(x);
         }
-        reverse(all(res));
-        if (res.empty()) {
-            cout << "HETCUU\n";
-        } else {
-            for (auto it : res) cout << it << " ";
-            cout << endl;
-        }
+        cout << ans << endl;
     }
+    cerr << "\nTime elapsed: " << TIME << "s. \n";
     return 0;
 }

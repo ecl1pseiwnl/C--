@@ -31,53 +31,78 @@ typedef map<int,int> mii;
 typedef vector<int> vi;
 typedef vector<pi> vii;
 typedef vector<mii> viii;
-ll __lcm(ll x, ll y) { return 1ll*(x / __gcd(x,y))*y;}
+#define FOR(i, a, b) for (int i = (a), _b = (b); i <= _b; i++)
+#define FORD(i, b, a) for (int i = (b), _a = (a); i >= _a; i--)
+#define REP(i, n) for (int i = 0, _n = (n); i < _n; i++)
+#define FORE(i, v) for (__typeof((v).begin()) i = (v).begin(); i != (v).end(); i++)
+#define Mask(x,i) (((x) >> (i)) & 1)
 #define ms(a,n) memset(a, n,sizeof(a))
 #define all(x) (x).begin(),(x).end()
 #define uniquev(v) sort(all(v)), (v).resize(unique(all(v)) - (v).begin())
 #define ins insert
 #define sz(x) (int)(x.size())
-#define name "TASK"
 #define fi first
-#define sec second
+#define se second
 #define mp make_pair
 #define ep emplace_back
 #define pb push_back
 #define endl "\n"
 #define TIME (1.0 * clock() / CLOCKS_PER_SEC)
+#define name "TASK"
+ll __lcm(ll x, ll y) { return 1ll*(x / __gcd(x,y))*y;}
 constexpr int MOD = 1e9+7;
-constexpr int32_t IINF = 0x3f3f3f3f;
-constexpr int64_t LLINF = 0x3f3f3f3f3f3f3f3f;
+constexpr int IINF = 0x3f3f3f3f;
+constexpr ll LLINF = 0x3f3f3f3f3f3f3f3f;
 
-vi prefix(string s) {
-    int sz = s.size();
-    vi p(sz);
-    for (int i = 1; i < sz; i++) {
-        int j = p[i-1];
-        while(j > 0 && s[i] != s[j]) j = p[j-1];
-        if (s[i] == s[j]) j++;
-        p[i] = j;
+const int N = 1e5+7;
+int n,m,low[N],num[N],cnt,bridge,mark[N],ap,scc;
+stack<int> st;
+bool vis[N];
+vi v[N],ans[N];
+
+void dfs(int u, int par) {
+    low[u] = num[u] = ++cnt;
+    st.push(u);
+    int child = 0;
+    for (auto it : v[u]) {
+        if (it == par) continue;
+        if (!num[it]) {
+            dfs(it,u);
+            low[u] = min(low[u],low[it]);
+            child++;
+            if (num[u] < low[it]) bridge++;
+            if (par != -1 && num[u] <= low[it]) mark[u] = 1;
+        } else low[u] = min(low[u],num[it]);
     }
-    return p;
+    if (par == -1 && child > 1) mark[u] = 1;
+    if (low[u] == num[u]) {
+        scc++;
+        int c = 0;
+        while(c != u) {
+            c = st.top();
+            ans[scc].pb(c);
+            vis[c] = 1;
+            st.pop();
+        }
+    }
 }
 
 signed main() {
     cin.tie(nullptr)->sync_with_stdio(false);
-    if (fopen(name ".inp", "r")) {
-        freopen(name ".inp","r",stdin);
-        freopen(name ".out","w",stdout);
+    cin >> n >> m;
+    for (int i = 1; i <= m; i++) {
+        int x,y;
+        cin >> x >> y;
+        v[x].pb(y);
+        v[y].pb(x);
     }
-    string s,t;
-    cin >> s >> t;
-    int n = s.size(), m = t.size();
-    vi p = prefix(t), res;
-    int ans = 0, j = 0;
-    for (int i = 0; i < n; i++) {
-        while(j > 0 && s[i] != t[j]) j = p[j-1];
-        if (s[i] == t[j]) j++;
-        if (j == m) ans++;
+    for (int i = 1; i <= n; i++) {
+        if (!num[i]) {
+            dfs(i,-1);
+        }
     }
-    cout << ans << "\n";
-    cerr << "Time elapsed: " << TIME << "s. \n";
+    for (int i = 1; i <= n; i++) if (mark[i]) ap++;
+    cout << ap << " " << bridge;
+    cerr << "\nTime elapsed: " << TIME << "s. \n";
     return 0;
 }

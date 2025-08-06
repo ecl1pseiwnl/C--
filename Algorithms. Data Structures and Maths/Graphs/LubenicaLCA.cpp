@@ -31,93 +31,91 @@ typedef map<int,int> mii;
 typedef vector<int> vi;
 typedef vector<pi> vii;
 typedef vector<mii> viii;
-ll __lcm(ll x, ll y) { return 1ll*(x / __gcd(x,y))*y;}
-const double PI = 3.141592653589793238463;
+#define FOR(i, a, b) for (int i = (a), _b = (b); i <= _b; i++)
+#define FORD(i, b, a) for (int i = (b), _a = (a); i >= _a; i--)
+#define REP(i, n) for (int i = 0, _n = (n); i < _n; i++)
+#define FORE(i, v) for (__typeof((v).begin()) i = (v).begin(); i != (v).end(); i++)
+#define Mask(x,i) (((x) >> (i)) & 1)
 #define ms(a,n) memset(a, n,sizeof(a))
 #define all(x) (x).begin(),(x).end()
 #define uniquev(v) sort(all(v)), (v).resize(unique(all(v)) - (v).begin())
 #define ins insert
 #define sz(x) (int)(x.size())
-#define name "TASK"
 #define fi first
-#define sec second
+#define se second
 #define mp make_pair
 #define ep emplace_back
 #define pb push_back
 #define endl "\n"
 #define TIME (1.0 * clock() / CLOCKS_PER_SEC)
+#define name "TASK"
+ll __lcm(ll x, ll y) { return 1ll*(x / __gcd(x,y))*y;}
 constexpr int MOD = 1e9+7;
-constexpr int32_t IINF = 0x3f3f3f3f;
-constexpr int64_t LLINF = 0x3f3f3f3f3f3f3f3f;
+constexpr int IINF = 0x3f3f3f3f;
+constexpr ll LLINF = 0x3f3f3f3f3f3f3f3f;
 
-const int N = 1005, lg = 10;
-int n,q;
+const int N = 2e5+7, lg = 21;
+int n,q,par[N][lg+1],maxv[N][lg+1],minv[N][lg+1],dp[N];
 vector<pi> v[N];
-int par[N][lg+1], high[N],d[N];
 
-void inp() {
-    cin >> n >> q;
-    for (int i = 0; i < n - 1; i++) {
-        int x,y,z;
-        cin >> x >> y >> z;
-        v[x].pb({y,z});
-        v[y].pb({x,z});
+void dfs(int u, int p) {
+    par[u][0] = p;
+    for (int i = 1; i < lg; i++) {
+        par[u][i] = par[par[u][i-1]][i-1];
+        maxv[u][i] = max(maxv[u][i-1],maxv[par[u][i-1]][i-1]);
+        minv[u][i] = min(minv[u][i-1],minv[par[u][i-1]][i-1]);
+    }
+    for (auto it : v[u]) {
+        if (it.fi == p) continue;
+        dp[it.fi] = dp[u] + 1;
+        maxv[it.fi][0] = it.se;
+        minv[it.fi][0] = it.se;
+        dfs(it.fi,u);
     }
 }
 
-void dfs(int u) {
-    for (auto [y,w] : v[u]) {
-        if (y != par[u][0]) {
-            high[y] = high[u] + 1;
-            d[y] = d[u] + w;
-            par[y][0] = u;
-            dfs(y);
+pi lca(int x, int y) {
+    int mx = -IINF, mi = IINF;
+    if (dp[x] < dp[y]) swap(x,y);
+    FORD(i,lg-1,0) {
+        if (dp[par[x][i]] >= dp[y]) {
+            mx = max(mx,maxv[x][i]);
+            mi = min(mi,minv[x][i]);
+            x = par[x][i];
         }
     }
-}
-
-ll lca(int u, int y) {
-    if (high[y] > high[u]) return lca(y,u);
-    int k = __lg(high[u] - high[y]);
-    for (int i = k; i >= 0; i--) {
-        if (high[par[u][i]] >= high[y]) {
-            u = par[u][i];
-        }
-    }
-    if (u == y) return u;
-    int t = __lg(high[u]);
-    for (int i = t; i >= 0; i--) {
-        if (par[u][i] != par[y][i]) {
-            u = par[u][i];
+    if (x == y) return {mx,mi};
+    FORD(i,lg-1,0) {
+        if (par[x][i] != par[y][i]) {
+            mx = max({maxv[x][i],maxv[y][i],mx});
+            mi = min({minv[x][i],minv[y][i],mi});
+            x = par[x][i];
             y = par[y][i];
         }
     }
-    return par[u][0];
-}
-
-ll dist(int u, int y) {
-    return 1ll* d[u] + d[y] - 2 * d[lca(u,y)];
+    mx = max({maxv[x][0],maxv[y][0],mx});
+    mi = min({minv[x][0],minv[y][0],mi});
+    return {mx,mi};
 }
 
 signed main() {
     cin.tie(nullptr)->sync_with_stdio(false);
-    if (fopen(name ".inp", "r")) {
-        freopen(name ".inp","r",stdin);
-        freopen(name ".out","w",stdout);
+    cin >> n;
+    FOR(i,1,n-1) {
+        int x,y,w;
+        cin >> x >> y >> w;
+        v[x].pb({y,w});
+        v[y].pb({x,w});
     }
-    inp();
-    dfs(1);
-    high[0] = -1;
-    for (int j = 1; j <= lg; j++) {
-        for (int i = 1; i <= n; i++) {
-            par[i][j] = par[par[i][j-1]][j-1];
-        }
-    }
+    dp[1] = 1;
+    dfs(1,0);
+    cin >> q;
     while(q--) {
         int x,y;
         cin >> x >> y;
-        cout << dist(x,y) << endl;
+        auto [mx,mi] = lca(x,y);
+        cout << mi << " " << mx << endl;
     }
-    cerr << "Time elapsed: " << TIME << "s. \n";
+    cerr << "\nTime elapsed: " << TIME << "s. \n";
     return 0;
 }

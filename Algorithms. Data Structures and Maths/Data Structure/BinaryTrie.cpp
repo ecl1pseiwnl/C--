@@ -31,64 +31,88 @@ typedef map<int,int> mii;
 typedef vector<int> vi;
 typedef vector<pi> vii;
 typedef vector<mii> viii;
-const double PI = 3.141592653589793238463;
-#define bmask(x,i) (((x) >> (i)) & 1)
+#define FOR(i, a, b) for (int i = (a), _b = (b); i <= _b; i++)
+#define FORD(i, b, a) for (int i = (b), _a = (a); i >= _a; i--)
+#define REP(i, n) for (int i = 0, _n = (n); i < _n; i++)
+#define FORE(i, v) for (__typeof((v).begin()) i = (v).begin(); i != (v).end(); i++)
+#define Mask(x,i) (((x) >> (i)) & 1)
 #define ms(a,n) memset(a, n,sizeof(a))
 #define all(x) (x).begin(),(x).end()
 #define uniquev(v) sort(all(v)), (v).resize(unique(all(v)) - (v).begin())
 #define ins insert
 #define sz(x) (int)(x.size())
-#define name "TASK"
 #define fi first
-#define sec second
+#define se second
 #define mp make_pair
 #define ep emplace_back
 #define pb push_back
 #define endl "\n"
 #define TIME (1.0 * clock() / CLOCKS_PER_SEC)
+#define name "TASK"
 ll __lcm(ll x, ll y) { return 1ll*(x / __gcd(x,y))*y;}
-const int EPS = -1e9;
 constexpr int MOD = 1e9+7;
-constexpr int32_t IINF = 0x3f3f3f3f;
-constexpr int64_t LLINF = 0x3f3f3f3f3f3f3f3f;
+constexpr int IINF = 0x3f3f3f3f;
+constexpr ll LLINF = 0x3f3f3f3f3f3f3f3f;
 
-const int N = 5e4+7;
-int n,q,k,t[4*N],lazy[4*N];
+const int sz = 2, N = 1e5+7, lg = 29;
 
-int get(int id, int l, int r,int u, int v) {
-	if (l > r || v < l || u > r) return -IINF;
-	if (u <= l && r <= v) return t[id];
-	int mid = (l + r) >> 1;
-	return max(get(id*2,l,mid,u,v),get(id*2+1,mid+1,r,u,v)) + lazy[id];
-}
+struct BTrie{
+    struct Node{
+        int exist, cnt, child[sz];
+        Node() : exist(0), cnt(0) {
+            ms(child,0);
+        }
+    };
+    vector<Node> node;
+    BTrie() {
+        node.ep();
+    };
 
-void update(int id, int l, int r, int u, int v, int x) {
-	if (l > r || v < l || u > r) return;
-	if (u <= l && r <= v) {
-        t[id] += x;
-        lazy[id] += x;
-        return;
-	}
-	int mid = (l + r) >> 1;
-	update(id*2,l,mid,u,v,x);
-	update(id*2+1,mid+1,r,u,v,x);
-	t[id] = max(t[2*id], t[2*id+1]) + lazy[id];
-}
+    void add(int x) {
+        int pos = 0;
+        for (int i = lg; i >= 0; i--) {
+            int j = (x >> i) & 1;
+            if (!node[pos].child[j]) {
+                node[pos].child[j] = node.size();
+                node.ep();
+            }
+            pos = node[pos].child[j];
+            node[pos].cnt++;
+        }
+        node[pos].exist++;
+    }
+
+    void del(int x) {
+        if (Find(s) == false) return;
+        int pos = 0;
+        for (int i = lg; i >= 0; i--) {
+            int j = (x >> i) & 1;
+            int tmp = node[pos].child[j];
+            node[tmp].cnt--;
+            if (!node[tmp].cnt) {
+                node[pos].child[j] = 0;
+                return;
+            }
+            pos = tmp;
+        }
+        node[pos].exist--;
+    }
+
+    bool Find(int x) {
+        int pos = 0;
+        for (int i = lg; i >= 0; i--) {
+            int j = (x >> i) & 1;
+            if (!node[pos].child[j]) return 0;
+            pos = node[pos].child[j];
+        }
+        return node[pos].exist != 0;
+    }
+};
 
 signed main() {
     cin.tie(nullptr)->sync_with_stdio(false);
-    cin >> n >> q;
-    while(q--) {
-        int l,r,x;
-        cin >> l >> r >> x;
-        update(1,1,n,l,r,x);
-    }
-    cin >> k;
-    while(k--) {
-        int l,r;
-        cin >> l >> r;
-        cout << get(1,1,n,l,r) << endl;
-    }
+
+
     cerr << "\nTime elapsed: " << TIME << "s. \n";
     return 0;
 }
