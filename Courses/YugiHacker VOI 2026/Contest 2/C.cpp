@@ -56,12 +56,42 @@ constexpr ll LLINF = 0x3f3f3f3f3f3f3f3f;
 
 const int N = 2e5+7;
 int n,k,v[N];
-set<int> s1,s2;
+multiset<int> s1,s2;
 
 signed main() {
     cin.tie(nullptr)->sync_with_stdio(false);
-
-
+    cin >> n >> k;
+    FOR(i,1,n) {
+        cin >> v[i];
+    }
+    FOR(i,1,n) {
+        if (s1.size() && v[i] < *s1.rbegin()) {
+            s1.ins(v[i]);
+        } else s2.ins(v[i]);
+        if (s2.size() > s1.size()) {
+            s1.ins(*s2.begin());
+            s2.erase(s2.begin());
+        }
+        if (s1.size() - s2.size() > 1) {
+            s2.ins(*s1.rbegin());
+            s1.erase(prev(s1.end()));
+        }
+        if (i > k) {
+            int x = v[i-k];
+            if (s1.find(x) != s1.end()) {
+                s1.erase(s1.find(x));
+            } else s2.erase(s2.find(x));
+            if (s2.size() > s1.size()) {
+                s1.ins(*s2.begin());
+                s2.erase(s2.begin());
+            }
+            if (s1.size() - s2.size() > 1) {
+                s2.ins(*s1.rbegin());
+                s1.erase(prev(s1.end()));
+            }
+        }
+        if (i >= k) cout << *s1.rbegin() << " ";
+    }
     cerr << "\nTime elapsed: " << TIME << "s. \n";
     return 0;
 }
