@@ -79,7 +79,7 @@ signed main() {
         cin >> v[i];
         pre[i] = pre[i-1] + v[i];
     }
-    double l = 0, r = 1e6, ans = 0;
+    double l = 0, r = 1e6;
     FOR(i,1,100) {
         double m = (l+r)/2;
         if (check(m)) {
