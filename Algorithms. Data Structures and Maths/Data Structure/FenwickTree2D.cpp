@@ -57,6 +57,7 @@ constexpr ll LLINF = 0x3f3f3f3f3f3f3f3f;
 const int N = 5007;
 int n,m,bit[N][N];
 
+// Point Query
 void add(int u, int v, int x){
     for(int i = u; i <= n; i += i&(-i)) {
         for(int j = v; j <= m; j += j&(-j)) {
@@ -80,6 +81,39 @@ int query(int u, int v){
         }
     }
     return sum;
+}
+
+// Rectangle Query
+int BIT[4][N][M];
+
+void add(int u, int v, int x){
+    for(int i = u; i <= n; i += i&(-i)) {
+        for(int j = v; j <= m; j += j&(-j)) {
+            bit[0][i][j] += x;
+            bit[1][i][j] += u*x;
+            bit[2][i][j] += v*x;
+            bit[3][i][j] += u*v*x;
+        }
+    }
+}
+
+void rectAdd(int l, int r, int u, int v, int val){
+    add(l, r, val);
+    add(u+1, v+1, val);
+    add(u+1, r, -val);
+    add(l, v+1, -val);
+}
+
+int query(int u, int v){
+    int a[4] = {0,0,0,0};
+    for(int k = 0; k < 4; k++){
+        for(int i = x; i > 0; i -= i&(-i)){
+            for(int j = y; j > 0; j -= j&(-j)){
+                a[k] += BIT[k][i][j];
+            }
+        }
+    }
+    return a[0]*(u+1)*(v+1)-a[1]*(v+1)-a[2]*(u+1)+a[3];
 }
 
 signed main() {
