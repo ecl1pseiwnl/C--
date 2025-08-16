@@ -108,6 +108,15 @@ struct Trie{
         }
         return (p->exist != 0);
     }
+
+    bool findpre(Node* root, string pre) {
+        Node* p = root;
+        for (char c : pre) {
+            if (p->child[c - 'a'] == nullptr) return 0;
+            p = p->child[c - 'a'];
+        }
+        return 1;
+    }
 };
 
 signed main() {
