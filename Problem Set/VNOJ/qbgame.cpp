@@ -95,7 +95,7 @@ signed main() {
             ans2 = max(ans2,v[i][j]);
         }
     }
-    cout << (ans2 < 0 && ans < 0 ? ans2 : ans);
+    cout << (ans < 0 ? ans2 : ans);
     cerr << "\nTime elapsed: " << TIME << "s. \n";
     return 0;
 }

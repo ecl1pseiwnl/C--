@@ -55,23 +55,23 @@ constexpr int IINF = 0x3f3f3f3f;
 constexpr ll LLINF = 0x3f3f3f3f3f3f3f3f;
 
 const int N = 1e5+7;
-int n,k,v[N],pre[N];
-ll ans;
-unordered_map<int,int> m;
+int n,k,v[N];
 
 signed main() {
     cin.tie(nullptr)->sync_with_stdio(false);
     cin >> n >> k;
     FOR(i,1,n) {
         cin >> v[i];
-        pre[i] = pre[i-1] + (v[i]-k);
     }
+    unordered_map<int,ll> m;
     m[0] = 1;
+    ll pre = 0, ans = 0;
     FOR(i,1,n) {
-        if (m.find(pre[i]) != m.end()) {
-            ans += m[pre[i]];
+        pre += (v[i] - k);
+        if (m.find(pre) != m.end()) {
+            ans += m[pre];
         }
-        m[pre[i]]++;
+        m[pre]++;
     }
     cout << ans;
     cerr << "\nTime elapsed: " << TIME << "s. \n";

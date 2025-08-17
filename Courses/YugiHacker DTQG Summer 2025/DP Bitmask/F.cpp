@@ -54,9 +54,8 @@ constexpr int MOD = 1e9+7;
 constexpr int IINF = 0x3f3f3f3f;
 constexpr ll LLINF = 0x3f3f3f3f3f3f3f3f;
 
-#define int long long
 const int N = 1e4+7;
-int n,v[10][N];
+ll n,v[10][N];
 vi u,check(256,1);
 vector<vector<ll>> dp(N,vector<ll>(256,-LLINF));
 
@@ -77,9 +76,9 @@ signed main() {
     }
     FOR(i,1,n) {
         for (auto mask : u) {
-            int s = 0;
+            ll s = 0;
             REP(j,8) {
-                s += v[j+1][i]*Mask(mask,j);
+                if (Mask(mask,j)) s += v[j+1][i];
             }
             for (auto premask : u) {
                 if ((mask & premask) == 0) {
@@ -88,14 +87,14 @@ signed main() {
             }
         }
     }
-    int ans = -IINF, ans2 = -IINF;
+    ll ans = -LLINF, ans2 = -LLINF;
     for (auto it : u) if (it != 0) ans = max(ans,dp[n][it]);
     FOR(i,1,8) {
         FOR(j,1,n) {
             ans2 = max(ans2,v[i][j]);
         }
     }
-    cout << (ans2 < 0 && ans < 0 ? ans2 : ans);
+    cout << (ans < 0 ? ans2 : ans);
     cerr << "\nTime elapsed: " << TIME << "s. \n";
     return 0;
 }
