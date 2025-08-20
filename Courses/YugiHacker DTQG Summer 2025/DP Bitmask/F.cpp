@@ -88,13 +88,13 @@ signed main() {
         }
     }
     ll ans = -LLINF, ans2 = -LLINF;
-    for (auto it : u) if (it != 0) ans = max(ans,dp[n][it]);
+    for (auto it : u) ans = max(ans,dp[n][it]);
     FOR(i,1,8) {
         FOR(j,1,n) {
             ans2 = max(ans2,v[i][j]);
         }
     }
-    cout << (ans < 0 ? ans2 : ans);
+    cout << (ans <= 0 ? ans2 : ans);
     cerr << "\nTime elapsed: " << TIME << "s. \n";
     return 0;
 }

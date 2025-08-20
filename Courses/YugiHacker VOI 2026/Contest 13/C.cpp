@@ -54,10 +54,11 @@ constexpr int MOD = 1e9+7;
 constexpr int IINF = 0x3f3f3f3f;
 constexpr ll LLINF = 0x3f3f3f3f3f3f3f3f;
 
+#define int ll
 const int N = 1e4+7;
 int n,v[6][N];
-vi u,check((1<<4),1);
-vector<vi> dp(N,vi((1<<4)+1,-IINF));
+vector<ll> u,check((1<<4),1);
+vector<vector<ll>> dp(N,vector<ll>((1<<4)+1,-IINF));
 
 signed main() {
     cin.tie(nullptr)->sync_with_stdio(false);
@@ -74,7 +75,6 @@ signed main() {
         }
         if (check[mask]) u.pb(mask);
     }
-    debug(u);
     FOR(i,1,n) {
         for (auto mask : u) {
             int s = 0;
@@ -89,13 +89,14 @@ signed main() {
         }
     }
     int ans = -IINF, ans2 = -IINF;
-    for (auto it : u) if (it != 0) ans = max(ans,dp[n][it]);
+    for (auto it : u) ans = max(ans,dp[n][it]);
     FOR(i,1,4) {
         FOR(j,1,n) {
             ans2 = max(ans2,v[i][j]);
         }
     }
-    cout << (ans < 0 ? ans2 : ans);
+    cout << (ans <= 0 ? ans2 : ans);
     cerr << "\nTime elapsed: " << TIME << "s. \n";
     return 0;
 }
+
