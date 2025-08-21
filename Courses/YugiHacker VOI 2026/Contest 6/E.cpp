@@ -54,9 +54,56 @@ constexpr int MOD = 1e9+7;
 constexpr int IINF = 0x3f3f3f3f;
 constexpr ll LLINF = 0x3f3f3f3f3f3f3f3f;
 
+const int N = 1e5+7;
+int n,q,t[4*N],lazy[4*N];
+
+void push(int id, int l, int r) {
+    if (l < r || lazy[id] != 0) {
+        if (lazy[id] % 2) t[id] = (r-l+1) - t[id];
+        if (l != r) {
+            lazy[id<<1] += lazy[id];
+            lazy[id<<1|1] += lazy[id];
+        }
+        lazy[id] = 0;
+    }
+
+}
+
+void update(int id, int l, int r, int x, int y) {
+    push(id,l,r);
+    if (l > y || r < x) return;
+    if (l >= x && r <= y) {
+        t[id] = (r-l+1) - t[id];
+        if (l != r) {
+            lazy[id<<1]++;
+            lazy[id<<1|1]++;
+        }
+        return;
+    }
+    int m = l+r>>1;
+    update(id<<1,l,m,x,y);
+    update(id<<1|1,m+1,r,x,y);
+    t[id] = t[id<<1] + t[id<<1|1];
+}
+
+int get(int id, int l, int r, int x, int y) {
+    push(id,l,r);
+    if (l > y || r < x) return 0;
+    if (l >= x && r <= y) return t[id];
+    int m = l+r>>1;
+    return get(id<<1,l,m,x,y) + get(id<<1|1,m+1,r,x,y);
+}
+
 signed main() {
     cin.tie(nullptr)->sync_with_stdio(false);
-
+    cin >> n >> q;
+    while(q--) {
+        int ty,l,r;
+        cin >> ty >> l >> r;
+        if (ty == 0) {
+            update(1,1,n,l,r);
+        } else cout << get(1,1,n,l,r) << endl;
+    }
     cerr << "\nTime elapsed: " << TIME << "s. \n";
     return 0;
 }
