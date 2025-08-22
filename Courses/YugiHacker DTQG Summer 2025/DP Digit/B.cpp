@@ -54,42 +54,43 @@ constexpr int MOD = 1e9+7;
 constexpr int IINF = 0x3f3f3f3f;
 constexpr ll LLINF = 0x3f3f3f3f3f3f3f3f;
 
-const int N = 1e4+7;
-int n,m,k,s,t;
-vector<pi> v[N];
+ll dp[20][2][100];
+vi v;
 
-void dijkstra() {
-    vi d(n+1,IINF);
-    d[s] = 0;
-    priority_queue<pi,vector<pi>,greater<pi>> q;
-    q.push({0,s});
-    while(q.size()) {
-        auto [len,vert] = q.top();
-        q.pop();
-        if (len > d[vert]) continue;
-        for (auto [x,w] : v[vert]) {
-            if (d[x] > d[vert] + w) {
-                d[x] = d[vert] + w;
-                q.push({d[x],x});
-            }
-        }
+ll bt(int pos, int ok, ll cnt) {
+    if (pos == v.size()) {
+        return cnt;
     }
+    ll &ans = dp[pos][ok][cnt];
+    if (ans != -1) return ans;
+    ans = 0;
+    int lim = ok ? 9 : v[pos];
+    FOR(c,0,lim) {
+        ans += bt(pos+1,ok|(c<v[pos]),cnt + c);
+    }
+    return ans;
+}
+
+ll calc(ll x) {
+    v.clear();
+    while(x) {
+        v.pb(x%10);
+        x /= 10;
+    }
+    reverse(all(v));
+    ms(dp,-1);
+    return bt(0,0,0);
 }
 
 signed main() {
     cin.tie(nullptr)->sync_with_stdio(false);
-    int t;
-    cin >> t;
-    while(t--) {
-        cin >> n >> m >> k >> s >> t;
-        FOR(i,1,m) {
-            int x,y,w;
-            cin >> x >> y >> w;
-            v[x]
-        }
-
+    int q;
+    cin >> q;
+    while(q--) {
+        ll a,b;
+        cin >> a >> b;
+        cout << calc(b) - calc(a-1) << endl;
     }
-
     cerr << "\nTime elapsed: " << TIME << "s. \n";
     return 0;
 }
