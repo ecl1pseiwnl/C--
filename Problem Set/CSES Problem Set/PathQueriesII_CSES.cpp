@@ -54,47 +54,72 @@ constexpr int MOD = 1e9+7;
 constexpr int IINF = 0x3f3f3f3f;
 constexpr ll LLINF = 0x3f3f3f3f3f3f3f3f;
 
-const int N = 2e5+7,lg = 21;
-int n,q,pos[N],w[N],cnt,t[4*N],node[2*N],dp[lg][2*N],h[N];
+const int N = 2e5+7;
+int n,q,w[N];
+int node[N],pos[N],cnt,chain,h[N],sz[N],heavy[N],head[N],id[N],par[N];
+int t[N<<2];
 vi v[N];
 
-void dfs(int u, int par) {
-    node[++cnt] = u;
-    pos[u] = cnt;
+void dfs(int u, int p) {
+    sz[u] = 1;
     for (auto it : v[u]) {
-        if (it == par) continue;
+        if (it == p) continue;
+        par[it] = u;
         h[it] = h[u] + 1;
         dfs(it,u);
-        node[++cnt] = u;
+        sz[u] += sz[it];
     }
 }
 
-int cal(int x, int y) {
-    return (h[x] < h[y] ? x : y);
+void hld(int u, int p) {
+    if (!head[chain]) head[chain] = u;
+    id[u] = chain;
+    pos[u] = cnt;
+    node[cnt] = w[u];
+    cnt++;
+    int nxt = 0;
+    for (auto it : v[u]) {
+        if (it == p) continue;
+        if (!nxt || sz[it] > sz[nxt]) nxt = it;
+    }
+    if (nxt) hld(nxt,u);
+    for (auto it : v[u]) {
+        if (it == p || it == nxt) continue;
+        chain++;
+        hld(it,u);
+    }
 }
 
 int lca(int x, int y) {
-    int nx = pos[x], ny = pos[y];
-    if (nx > ny) swap(nx,ny);
-    int k = 31 - __builtin_clz(ny-nx+1);
-    return cal(dp[k][nx],dp[k][ny-(1<<k)+1]);
+    while(id[x] != id[y]) {
+        if (id[x] > id[y]) {
+            x = par[head[id[x]]];
+        } else {
+            y = par[head[id[y]]];
+        }
+    }
+    return (h[x] < h[y] ? x : y);
 }
 
-void update(int id, int l, int r, int pos, int x) {
-    if (pos < l || pos > r) return;
-    if (l == r) {
-        t[id] = x;
-        return;
-    }
+void build(int id, int l, int r) {
+    if (l == r) return t[id] = node[l], void();
     int m = l+r>>1;
-    if (pos <= m) {
-        update(id<<1,l,m,pos,x);
-    } else update(id<<1|1,m+1,r,pos,x);
+    build(id<<1,l,m);
+    build(id<<1|1,m+1,r);
+    t[id] = max(t[id<<1],t[id<<1|1]);
+}
+
+void update(int id, int l, int r, int coord, int val) {
+    if (coord < l || coord > r) return;
+    if (l == r) return t[id] = val, void();
+    int m = l+r>>1;
+    update(id<<1,l,m,coord,val);
+    update(id<<1|1,m+1,r,coord,val);
     t[id] = max(t[id<<1],t[id<<1|1]);
 }
 
 int get(int id, int l, int r, int x, int y) {
-    if (y < l || r < x) return -IINF;
+    if (l > y || r < x) return -IINF;
     if (l >= x && r <= y) return t[id];
     int m = l+r>>1;
     return max(get(id<<1,l,m,x,y),get(id<<1|1,m+1,r,x,y));
@@ -112,26 +137,31 @@ signed main() {
         v[x].pb(y);
         v[y].pb(x);
     }
+    cnt = chain = 1;
     dfs(1,-1);
-    FOR(i,1,cnt) {
-        dp[0][i] = node[i];
-    }
-    FOR(i,1,n) {
-        update(1,1,cnt,pos[i],w[i]);
-    }
-    FOR(j,1,lg) {
-        for (int i = 1; i+(1<<j)-1 <= cnt; i++) {
-            dp[j][i] = cal(dp[j-1][i],dp[j-1][i+(1<<(j-1))]);
-        }
-    }
+    hld(1,-1);
+    build(1,1,cnt-1);
     while(q--) {
         int ty,x,y;
         cin >> ty >> x >> y;
         if (ty == 1) {
-            update(1,1,cnt,pos[x],y);
+            update(1,1,cnt-1,pos[x],y);
+            w[x] = y;
         } else {
             int root = lca(x,y);
-            cout << max(get(1,1,cnt,pos[root],pos[x]),get(1,1,cnt,pos[root],pos[y])) << " ";
+            int ans = -IINF;
+            while(id[x] != id[root]) {
+                ans = max(ans,get(1,1,cnt-1,pos[head[id[x]]],pos[x]));
+                x = par[head[id[x]]];
+            }
+            while(id[y] != id[root]) {
+                ans = max(ans,get(1,1,cnt-1,pos[head[id[y]]],pos[y]));
+                y = par[head[id[y]]];
+            }
+            if (h[x] < h[y]) {
+                ans = max(ans,get(1,1,cnt-1,pos[x],pos[y]));
+            } else ans = max(ans,get(1,1,cnt-1,pos[y],pos[x]));
+            cout << ans << " ";
         }
     }
     cerr << "\nTime elapsed: " << TIME << "s. \n";

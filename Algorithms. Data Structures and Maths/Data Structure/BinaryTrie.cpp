@@ -107,6 +107,18 @@ struct BTrie{
         }
         return node[pos].exist != 0;
     }
+
+    int FindBestXOR(int x) {
+        int ans = 0, pos = 0;
+        for (int i = lg; i >= 0; i--) {
+            int j = (x >> i) & 1;
+            if (node[pos].child[j^1] != 0) {
+                pos = node[pos].child[j^1];
+                ans |= (1 << i);
+            } else pos = node[pos].child[j];
+        }
+        return ans;
+    }
 };
 
 signed main() {
