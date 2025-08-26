@@ -63,12 +63,12 @@ int calc(int l, int r) {
 }
 
 int bs(int i, int maxv) {
-    int l = i, r = n, ans = 0;
-    while(r-l>1) {
+    int l = i, r = n-1;
+    while(l <= r) {
         int m = (l+r)/2;
-        if (calc(i,m) < maxv) {
-            r = m;
-        } else l = m;
+        if (calc(i,m) >= maxv) {
+            l = m+1;
+        } else r = m-1;
     }
     return l;
 }
@@ -76,25 +76,25 @@ int bs(int i, int maxv) {
 signed main() {
     cin.tie(nullptr)->sync_with_stdio(false);
     cin >> n;
-    FOR(i,1,n) {
+    REP(i,n) {
         cin >> v[i];
         dp[0][i] = v[i];
     }
-    for(int j = 1; (1<<j) <= n; j++) {
-        for (int i = 1; i+(1<<j)-1 <= n; i++) {
+    for(int j = 1; (1<<j) < n; j++) {
+        for (int i = 0; i+(1<<j)-1 < n; i++) {
             dp[j][i] = gcd(dp[j-1][i],dp[j-1][i+(1<<(j-1))]);
         }
     }
     ll ans = 0;
-    FOR(i,1,n) {
+    REP(i,n) {
         int j = i, cur = v[i];
-        while (j <= n && cur > 1) {
-            cur = gcd(v[j],cur);
+        while (j < n) {
             int r = bs(j,cur);
-            ans += 1ll*ll(r-j+1)*cur;
-            j = r+1;
+            ans += 1ll*(r-j)*cur;
+            cur = calc(i,r);
+            j = r;
         }
-        ans += ll(n-j+1);
+        ans += (n-j);
     }
     cout << ans;
     cerr << "\nTime elapsed: " << TIME << "s. \n";

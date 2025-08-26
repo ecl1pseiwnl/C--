@@ -54,22 +54,21 @@ constexpr int MOD = 1e9+7;
 constexpr int IINF = 0x3f3f3f3f;
 constexpr ll LLINF = 0x3f3f3f3f3f3f3f3f;
 
-const int N = 1e5+7,lg = 22;
-int n,v[N];
-ll dp[N][lg];
+const int N = 2e5+7, lg = 22;
+int n,v[N],dp[lg][N];
 
-ll calc(int l, int r) {
-    int k = 31-__builtin_clz(r-l+1);
-    return __gcd(dp[l][k],dp[r-(1<<k)+1][k]);
+int calc(int l, int r) {
+    int k = 31 - __builtin_clz(r-l+1);
+    return gcd(dp[k][l],dp[k][r-(1<<k)+1]);
 }
 
-int bs(int i, ll cur) {
-    int l = i, r = n;
-    while(l < r) {
+ll bs(int i, ll maxv) {
+    int l = i, r = n-1;
+    while(l <= r) {
         int m = (l+r)/2;
-        if (calc(i,m) >= cur) {
+        if (calc(i,m) >= maxv) {
             l = m+1;
-        } else r = m;
+        } else r = m-1;
     }
     return l;
 }
@@ -79,24 +78,24 @@ signed main() {
     cin >> n;
     REP(i,n) {
         cin >> v[i];
-        dp[i][0] = v[i];
+        dp[0][i] = v[i];
     }
-    FOR(j,1,lg) {
+    for(int j = 1; (1<<j) < n; j++) {
         for (int i = 0; i+(1<<j)-1 < n; i++) {
-            dp[i][j] = __gcd(dp[i][j-1],dp[i+(1<<(j-1))][j-1]);
+            dp[j][i] = gcd(dp[j-1][i],dp[j-1][i+(1<<(j-1))]);
         }
     }
     ll ans = 0;
     REP(i,n) {
-        int j = i;
-        ll cur = v[i];
-        while(j < n && cur > 1) {
-            int k = bs(j,cur);
-            ans = (ans + ((k-j)*cur)%MOD)%MOD;
-            cur = calc(i,k);
-            j = k;
+        ll j = i, cur = v[i];
+        while (j != n && cur > 1) {
+            ll r = bs(j,cur);
+            ans += (1ll*(r-j)*cur);
+            ans %= MOD;
+            cur = calc(i,r);
+            j = r;
         }
-        ans = (ans + (n-j)) % MOD;
+        ans += (n-j);
     }
     cout << ans;
     cerr << "\nTime elapsed: " << TIME << "s. \n";
