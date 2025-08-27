@@ -54,28 +54,28 @@ constexpr int MOD = 1e9+7;
 constexpr int IINF = 0x3f3f3f3f;
 constexpr ll LLINF = 0x3f3f3f3f3f3f3f3f;
 
-const int N = 2e5+7, lg = 21;
-int n,q,par[N][lg+1],maxv[N][lg+1],minv[N][lg+1],dp[N];
-vector<pi> v[N];
+const int N = 1e5+7, lg = 21;
+int n,q,par[N][lg+1],maxv[N][lg+1],minv[N][lg+1],dp[N],w[N];
+vi v[N];
 
 void dfs(int u, int p) {
     par[u][0] = p;
+    maxv[u][0] = minv[u][0] = w[u];
     for (int i = 1; i < lg; i++) {
         par[u][i] = par[par[u][i-1]][i-1];
         maxv[u][i] = max(maxv[u][i-1],maxv[par[u][i-1]][i-1]);
         minv[u][i] = min(minv[u][i-1],minv[par[u][i-1]][i-1]);
     }
     for (auto it : v[u]) {
-        if (it.fi == p) continue;
-        dp[it.fi] = dp[u] + 1;
-        maxv[it.fi][0] = it.se;
-        minv[it.fi][0] = it.se;
-        dfs(it.fi,u);
+        if (it == p) continue;
+        dp[it] = dp[u] + 1;
+        dfs(it,u);
     }
 }
 
 pi lca(int x, int y) {
-    int mx = -IINF, mi = IINF;
+    if (x == y) return {w[x],w[x]};
+    int mx = max(w[x],w[y]), mi = min(w[x],w[y]);
     if (dp[x] < dp[y]) swap(x,y);
     FORD(i,lg-1,0) {
         if (dp[par[x][i]] >= dp[y]) {
@@ -100,22 +100,28 @@ pi lca(int x, int y) {
 
 signed main() {
     cin.tie(nullptr)->sync_with_stdio(false);
-    cin >> n;
-    FOR(i,1,n-1) {
-        int x,y,w;
-        cin >> x >> y >> w;
-        v[x].pb({y,w});
-        v[y].pb({x,w});
+    cin >> n >> q;
+    FOR(i,1,n) {
+        char c; cin >> c;
+        w[i] = (c == 'H' ? 1 : -1);
     }
-    dp[1] = 1;
-    dfs(1,0);
-    cin >> q;
-    while(q--) {
+    FOR(i,2,n) {
         int x,y;
         cin >> x >> y;
+        v[x].pb(y);
+        v[y].pb(x);
+    }
+    maxv[1][0] = minv[1][0] = w[1];
+    dfs(1,-1);
+    while(q--) {
+        int x,y,k;
+        char c;
+        cin >> x >> y >> c;
+        k = (c == 'H' ? 1 : -1);
         auto [mx,mi] = lca(x,y);
-        cout << mi << " " << mx << endl;
+        cout << (mx == k || mi == k ? 1 : 0);
     }
     cerr << "\nTime elapsed: " << TIME << "s. \n";
     return 0;
 }
+

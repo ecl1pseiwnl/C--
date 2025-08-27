@@ -65,7 +65,6 @@ dt d[N];
 
 void dfs(int u, int p) {
     par[u][0] = p;
-    h[u] = h[p] + 1;
     maxv[u][0] = w[u];
     FOR(i,1,lg-1) {
         par[u][i] = par[par[u][i-1]][i-1];
@@ -73,12 +72,14 @@ void dfs(int u, int p) {
     }
     for (auto it : v[u]) {
         if (it == p) continue;
+        h[u] = h[p] + 1;
         dfs(it,u);
     }
 }
 
 int lca(int x, int y) {
-    int mx = 0;
+    if (x == y) return w[x];
+    int mx = w[x];
     if (h[x] < h[y]) swap(x,y);
     FORD(i,lg-1,0) {
         if (h[par[x][i]] >= h[y]) {
@@ -112,7 +113,6 @@ signed main() {
         v[x].pb(y);
         v[y].pb(x);
     }
-    ms(maxv,-IINF);
     dfs(1,0);
     h[0] = -1;
     cin >> q;
@@ -134,3 +134,4 @@ signed main() {
     cerr << "\nTime elapsed: " << TIME << "s. \n";
     return 0;
 }
+
