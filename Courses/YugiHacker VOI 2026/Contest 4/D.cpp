@@ -54,10 +54,46 @@ constexpr int MOD = 1e9+7;
 constexpr int IINF = 0x3f3f3f3f;
 constexpr ll LLINF = 0x3f3f3f3f3f3f3f3f;
 
+const int N = 2007;
+int n,m;
+char c[N][N];
+string ans;
+
+void bfs() {
+    vector<pi> cur;
+    cur.pb({1,1});
+    while(cur.size()) {
+        char k = 'z';
+        for (auto it : cur) {
+            k = min(k,c[it.fi][it.se]);
+        }
+        ans += k;
+        vector<pi> nxt;
+        for (auto it : cur) {
+            if (k == c[it.fi][it.se]) {
+                if (it.fi+1 <= n && it.fi+1 >= 1 && it.se <= m && it.se >= 1) nxt.pb({it.fi+1,it.se});
+                if (it.fi <= n && it.fi >= 1 && it.se+1 <= m && it.se+1 >= 1) nxt.pb({it.fi,it.se+1});
+            }
+        }
+        sort(all(nxt));
+        cur.clear();
+        REP(i,nxt.size()) {
+            if (nxt[i] == nxt[i-1]) continue;
+            cur.pb({nxt[i].fi,nxt[i].se});
+        }
+    }
+}
+
 signed main() {
     cin.tie(nullptr)->sync_with_stdio(false);
-
-
+    cin >> n >> m;
+    FOR(i,1,n) {
+        FOR(j,1,m) {
+            cin >> c[i][j];
+        }
+    }
+    bfs();
+    cout << ans;
     cerr << "\nTime elapsed: " << TIME << "s. \n";
     return 0;
 }
