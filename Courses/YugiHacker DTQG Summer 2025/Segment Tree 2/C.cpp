@@ -64,7 +64,7 @@ void push(int id, int l, int r) {
         lazy[id<<1] |= lazy[id];
         lazy[id<<1|1] |= lazy[id];
     }
-    lazy[id] = 0;
+    lazy[id] |= 0;
 }
 
 void update(int id, int l, int r, int x, int y, int val) {
@@ -83,12 +83,12 @@ void update(int id, int l, int r, int x, int y, int val) {
 
 int get(int id, int l, int r, int x, int y) {
     push(id,l,r);
-    if (l > y || r < x) return IINF;
+    if (l > y || r < x) return 1073741823;
     if (l >= x && r <= y) return t[id];
     int m = l+r>>1;
     ll t1 = get(id<<1,l,m,x,y);
     ll t2 = get(id<<1|1,m+1,r,x,y);
-    return ((t1 & t2) != IINF ? t1 & t2 : 0);
+    return t1 & t2;
 }
 
 signed main() {

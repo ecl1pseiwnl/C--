@@ -86,7 +86,7 @@ int get(int id, int l, int r, int x, int y) {
     int m = l+r>>1;
     int t1 = get(id<<1,l,m,x,y);
     int t2 = get(id<<1|1,m+1,r,x,y);
-    return (v[t1] > v[t2] ? t1 : t2);
+    return (v[t1] < v[t2] ? t1 : t2);
 }
 
 signed main() {
