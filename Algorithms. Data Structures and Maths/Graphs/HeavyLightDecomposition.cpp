@@ -125,6 +125,50 @@ int get(int id, int l, int r, int x, int y) {
     return max(get(id<<1,l,m,x,y),get(id<<1|1,m+1,r,x,y));
 }
 
+/// Update path
+//void push(int id, int l, int r) {
+//    if (lazy[id]) {
+//        t[id] += lazy[id];
+//        if (l != r) {
+//            lazy[id<<1] += lazy[id];
+//            lazy[id<<1|1] += lazy[id];
+//        }
+//        lazy[id] = 0;
+//    }
+//}
+//
+//void update(int id, int l, int r, int x, int y, int val) {
+//    push(id,l,r);
+//    if (y < l || x > r) return;
+//    if (l >= x && r <= y) {
+//        lazy[id] += val;
+//        push(id,l,r);
+//        return;
+//    }
+//    int m = l+r>>1;
+//    update(id<<1,l,m,x,y,val);
+//    update(id<<1|1,m+1,r,x,y,val);
+//    t[id] = max(t[id<<1],t[id<<1|1]);
+//}
+//
+//ll get(int id, int l, int r, int x, int y) {
+//    push(id,l,r);
+//    if (l > y || r < x) return -LLINF;
+//    if (l >= x && r <= y) return t[id];
+//    int m = l+r>>1;
+//    return max(get(id<<1,l,m,x,y),get(id<<1|1,m+1,r,x,y));
+//}
+//
+//void up(int x, int y, ll val) {
+//    while(id[x] != id[y]) {
+//        if (h[head[id[x]]] < h[head[id[y]]]) swap(x,y);
+//        update(1,1,n,pos[head[id[x]]],pos[x],val);
+//        x = par[head[id[x]]];
+//    }
+//    if (h[x] > h[y]) swap(x,y);
+//    update(1,1,n,pos[x],pos[y],val);
+//}
+
 signed main() {
     cin.tie(nullptr)->sync_with_stdio(false);
     cin >> n >> q;

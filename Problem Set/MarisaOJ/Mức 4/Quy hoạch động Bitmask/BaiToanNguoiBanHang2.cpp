@@ -70,13 +70,15 @@ signed main() {
             dp[i][j] = IINF;
         }
     }
-    REP(i,n) dp[i][1<<i] = 0;
-    for (int mask = 0; mask < (1 << n); mask++) {
+    REP(i,n) {
+        dp[i][1<<i] = 0;
+    }
+    for (int mask = 1; mask < (1 << n); mask++) {
         REP(i,n) {
+            if ((mask >> i) & 1 == 0) continue;
             REP(j,n) {
-                if (!(mask & (1 << j))) {
-                    dp[j][mask|(1 << j)] = min(dp[j][mask|(1 << j)],dp[i][mask] + v[i][j]);
-                }
+                if ((mask >> j) & 1) continue;
+                dp[j][mask|(1 << j)] = min(dp[j][mask|(1 << j)],dp[i][mask] + v[i][j]);
             }
         }
     }
