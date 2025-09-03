@@ -58,8 +58,8 @@ struct dt{
     int l,r;
 };
 const int N = 2e5+7,lg = 24;
-int n,q,par[N][lg],maxv[N][lg],h[N];
-ll w[N],dp[N];
+int n,q,par[N][lg],h[N];
+ll maxv[N][lg],w[N],dp[N];
 vi v[N];
 dt d[N];
 
@@ -77,12 +77,11 @@ void dfs(int u, int p) {
     }
 }
 
-int lca(int x, int y) {
-    if (x == y) return w[x];
-    int mx = w[x];
+ll lca(int x, int y) {
+    ll mx = -LLINF;
     if (h[x] < h[y]) swap(x,y);
     FORD(i,lg-1,0) {
-        if (h[par[x][i]] >= h[y]) {
+        if (h[x] - (1<<i) >= h[y]) {
             mx = max(maxv[x][i],mx);
             x = par[x][i];
         }
@@ -113,6 +112,7 @@ signed main() {
         v[x].pb(y);
         v[y].pb(x);
     }
+    ms(maxv,-LLINF);
     dfs(1,0);
     h[0] = -1;
     cin >> q;
