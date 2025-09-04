@@ -74,11 +74,10 @@ void dfs(int u, int p) {
 }
 
 pi lca(int x, int y) {
-    if (x == y) return {w[x],w[x]};
-    int mx = -2, mi = 2;
+    int mx = max(w[x],w[y]), mi = min(w[x],w[y]);
     if (dp[x] < dp[y]) swap(x,y);
     FORD(i,lg-1,0) {
-        if (dp[par[x][i]] >= dp[y]) {
+        if (dp[x] - (1<<i) >= dp[y]) {
             mx = max(mx,maxv[x][i]);
             mi = min(mi,minv[x][i]);
             x = par[x][i];
@@ -103,7 +102,7 @@ signed main() {
     cin >> n >> q;
     FOR(i,1,n) {
         char c; cin >> c;
-        w[i] = (c == 'H' ? 1 : -1);
+        w[i] = (c == 'H' ? IINF : -IINF);
     }
     FOR(i,2,n) {
         int x,y;
@@ -111,13 +110,12 @@ signed main() {
         v[x].pb(y);
         v[y].pb(x);
     }
-    maxv[1][0] = minv[1][0] = w[1];
     dfs(1,-1);
     while(q--) {
         int x,y,k;
         char c;
         cin >> x >> y >> c;
-        k = (c == 'H' ? 1 : -1);
+        k = (c == 'H' ? IINF : -IINF);
         auto [mx,mi] = lca(x,y);
         cout << (mx == k || mi == k ? 1 : 0);
     }
