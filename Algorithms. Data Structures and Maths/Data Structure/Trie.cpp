@@ -119,6 +119,70 @@ struct Trie{
     }
 };
 
+const int NODES = 5e5+7;
+
+struct Trie{
+    struct Node{
+        int child[26];
+        int exist, cnt;
+    } nodes[NODES];
+
+    int cur;
+    Trie() : cur(0) {
+        memset(nodes[0].child, -1, sizeof(nodes[cur].child));
+        nodes[0].exist = nodes[0].cnt = 0;
+    };
+
+    int newnode() {
+        cur++;
+        memset(nodes[cur].child, -1, sizeof(nodes[cur].child));
+        nodes[cur].exist = nodes[cur].cnt = 0;
+        return cur;
+    }
+
+    void add_string(string s) {
+        int pos = 0;
+        for (auto f : s) {
+            int c = f - 'a';
+            if (nodes[pos].child[c] == -1) {
+                nodes[pos].child[c] = newnode();
+            }
+            pos = nodes[pos].child[c];
+            nodes[pos].cnt++;
+        }
+        nodes[pos].exist++;
+    }
+
+    bool deleteS(int pos, string& s, int i) {
+        if (i != (int)s.size()) {
+            int c = s[i] - 'a';
+            bool isChildDeleted = delete_string_recursive(nodes[pos].child[c], s, i + 1);
+            if (isChildDeleted) nodes[pos].child[c] = -1;
+        }
+        else nodes[pos].exist--;
+        if (pos != 0) {
+            nodes[pos].cnt--;
+            if (nodes[pos].cnt == 0) return true;
+        }
+        return false;
+    }
+
+    void Delete(string s) {
+        if (find_string(s) == false) return;
+        deleteS(0, s, 0);
+    }
+
+    bool Find(string s) {
+        int pos = 0;
+        for (auto f : s) {
+            int c = f - 'a';
+            if (nodes[pos].child[c] == -1) return false;
+            pos = nodes[pos].child[c];
+        }
+        return (nodes[pos].exist != 0);
+    }
+};
+
 signed main() {
     cin.tie(nullptr)->sync_with_stdio(false);
     int n,q;
