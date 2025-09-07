@@ -31,29 +31,30 @@ typedef map<int,int> mii;
 typedef vector<int> vi;
 typedef vector<pi> vii;
 typedef vector<mii> viii;
-const double PI = 3.141592653589793238463;
-#define bmask(x,i) (((x) >> (i)) & 1)
+#define FOR(i, a, b) for (int i = (a), _b = (b); i <= _b; i++)
+#define FORD(i, b, a) for (int i = (b), _a = (a); i >= _a; i--)
+#define REP(i, n) for (int i = 0, _n = (n); i < _n; i++)
+#define FORE(i, v) for (__typeof((v).begin()) i = (v).begin(); i != (v).end(); i++)
+#define Mask(x,i) (((x) >> (i)) & 1)
 #define ms(a,n) memset(a, n,sizeof(a))
 #define all(x) (x).begin(),(x).end()
 #define uniquev(v) sort(all(v)), (v).resize(unique(all(v)) - (v).begin())
 #define ins insert
 #define sz(x) (int)(x.size())
-#define name "TASK"
 #define fi first
-#define sec second
+#define se second
 #define mp make_pair
 #define ep emplace_back
 #define pb push_back
 #define endl "\n"
 #define TIME (1.0 * clock() / CLOCKS_PER_SEC)
+#define name "TASK"
 ll __lcm(ll x, ll y) { return 1ll*(x / __gcd(x,y))*y;}
-const int EPS = -1e9;
 constexpr int MOD = 1e9+7;
-constexpr int32_t IINF = 0x3f3f3f3f;
-constexpr int64_t LLINF = 0x3f3f3f3f3f3f3f3f;
+constexpr int IINF = 0x3f3f3f3f;
+constexpr ll LLINF = 0x3f3f3f3f3f3f3f3f;
 
-const int sz = 26;
-#define N 1000100
+const int sz = 26, N = 1e5+7;
 
 struct Trie{
     struct Node{
@@ -119,69 +120,32 @@ struct Trie{
     }
 };
 
-const int NODES = 5e5+7;
+int node[N][sz];
+vi v[N];
+int dp[N], curnode = 1;
 
-struct Trie{
-    struct Node{
-        int child[26];
-        int exist, cnt;
-    } nodes[NODES];
-
-    int cur;
-    Trie() : cur(0) {
-        memset(nodes[0].child, -1, sizeof(nodes[cur].child));
-        nodes[0].exist = nodes[0].cnt = 0;
-    };
-
-    int newnode() {
-        cur++;
-        memset(nodes[cur].child, -1, sizeof(nodes[cur].child));
-        nodes[cur].exist = nodes[cur].cnt = 0;
-        return cur;
-    }
-
-    void add_string(string s) {
-        int pos = 0;
-        for (auto f : s) {
-            int c = f - 'a';
-            if (nodes[pos].child[c] == -1) {
-                nodes[pos].child[c] = newnode();
-            }
-            pos = nodes[pos].child[c];
-            nodes[pos].cnt++;
+void build(string s) {
+    int cur = 1;
+    for (char it : s) {
+        int nxt = node[cur][it-'a'];
+        if (!nxt) {
+            v[cur].pb(++curnode);
+            nxt = curnode;
         }
-        nodes[pos].exist++;
+        cur = node[cur][it-'a'] = nxt;
     }
+    return;
+}
 
-    bool deleteS(int pos, string& s, int i) {
-        if (i != (int)s.size()) {
-            int c = s[i] - 'a';
-            bool isChildDeleted = delete_string_recursive(nodes[pos].child[c], s, i + 1);
-            if (isChildDeleted) nodes[pos].child[c] = -1;
-        }
-        else nodes[pos].exist--;
-        if (pos != 0) {
-            nodes[pos].cnt--;
-            if (nodes[pos].cnt == 0) return true;
-        }
-        return false;
+void dfs(string s) {
+    int cur = 1, res = 0;
+    REP(i,s.size()) {
+        int nxt = node[cur][s[i]-'a']; res = max(res, dp[cur]+1);
+        cur = nxt;
+        if (i == s.size()-1) dp[nxt] = res;
     }
-
-    void Delete(string s) {
-        if (find_string(s) == false) return;
-        deleteS(0, s, 0);
-    }
-
-    bool Find(string s) {
-        int pos = 0;
-        for (auto f : s) {
-            int c = f - 'a';
-            if (nodes[pos].child[c] == -1) return false;
-            pos = nodes[pos].child[c];
-        }
-        return (nodes[pos].exist != 0);
-    }
-};
+    return;
+}
 
 signed main() {
     cin.tie(nullptr)->sync_with_stdio(false);
