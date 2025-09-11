@@ -56,9 +56,10 @@ constexpr ll LLINF = 0x3f3f3f3f3f3f3f3f;
 
 const int N = 1e5+7;
 int n,k;
-ll v[N],dp[N],t[N<<2];
+ll v[N],t[N<<2];
+vector<ll> dp(N,-LLINF);
 
-void update(int id, int l, int r, int pos, int x) {
+void update(int id, int l, int r, int pos, ll x) {
     if (pos < l || pos > r) return;
     if (l == r) return t[id] = x, void();
     int m = l+r>>1;
@@ -76,13 +77,14 @@ ll get(int id, int l, int r, int x, int y) {
 
 signed main() {
     cin.tie(nullptr)->sync_with_stdio(false);
+    freopen("kbox.inp","r",stdin);
+    freopen("kbox.out","w",stdout);
     cin >> n >> k;
     FOR(i,1,n) {
         cin >> v[i];
     }
-    ms(dp,-LLINF);
     dp[1] = v[1];
-    update(1,1,n,1,v[1]);
+    update(1,1,n,1,dp[1]);
     FOR(i,2,n) {
         if (i-k >= 1) {
             dp[i] = max(0ll,get(1,1,n,i-k,i-1)) + v[i];
