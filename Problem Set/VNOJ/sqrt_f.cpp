@@ -1,3 +1,5 @@
+#pragma GCC optimize("O3")
+#pragma GCC optimize("unroll-loops")
 #include <bits/stdc++.h>
 using namespace std;
 void __print(int x) {cerr << x;}
@@ -54,7 +56,7 @@ constexpr int MOD = 1e9+7;
 constexpr int IINF = 0x3f3f3f3f;
 constexpr ll LLINF = 0x3f3f3f3f3f3f3f3f;
 
-const int N = 2.5e5+7,bl = 700,maxv = 5e4+7;
+const int N = 2.5e5+7,bl = 505,maxv = 5e4+7;
 int n,q,v[N];
 ll bit[maxv],fen[bl][maxv],sz[bl],ans;
 
