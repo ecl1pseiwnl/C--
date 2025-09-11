@@ -90,6 +90,8 @@ struct mat{
 
 signed main() {
     cin.tie(nullptr)->sync_with_stdio(false);
+    freopen("FROG.INP","r",stdin);
+    freopen("FROG.OUT","w",stdout);
     ll n;
     cin >> n;
     if (n == 0) return cout << 1, 0;
