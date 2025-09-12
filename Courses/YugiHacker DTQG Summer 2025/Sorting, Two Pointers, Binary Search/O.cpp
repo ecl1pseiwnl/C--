@@ -31,41 +31,44 @@ typedef map<int,int> mii;
 typedef vector<int> vi;
 typedef vector<pi> vii;
 typedef vector<mii> viii;
-const double PI = 3.141592653589793238463;
-#define bmask(x,i) (((x) >> (i)) & 1)
+#define FOR(i, a, b) for (int i = (a), _b = (b); i <= _b; i++)
+#define FORD(i, b, a) for (int i = (b), _a = (a); i >= _a; i--)
+#define REP(i, n) for (int i = 0, _n = (n); i < _n; i++)
+#define FORE(i, v) for (__typeof((v).begin()) i = (v).begin(); i != (v).end(); i++)
+#define Mask(x,i) (((x) >> (i)) & 1)
 #define ms(a,n) memset(a, n,sizeof(a))
 #define all(x) (x).begin(),(x).end()
 #define uniquev(v) sort(all(v)), (v).resize(unique(all(v)) - (v).begin())
 #define ins insert
 #define sz(x) (int)(x.size())
-#define name "TASK"
 #define fi first
-#define sec second
+#define se second
 #define mp make_pair
 #define ep emplace_back
 #define pb push_back
 #define endl "\n"
 #define TIME (1.0 * clock() / CLOCKS_PER_SEC)
+#define name "TASK"
 ll __lcm(ll x, ll y) { return 1ll*(x / __gcd(x,y))*y;}
-const int EPS = -1e9;
 constexpr int MOD = 1e9+7;
-constexpr int32_t IINF = 0x3f3f3f3f;
-constexpr int64_t LLINF = 0x3f3f3f3f3f3f3f3f;
+constexpr int IINF = 0x3f3f3f3f;
+constexpr ll LLINF = 0x3f3f3f3f3f3f3f3f;
 
 const int N = 1e5+7;
-int v[N],u[N],t,n,m;
+int v[N],u[N],n,m;
+ll t;
 
-ll check(ll mi) {
+ll calcv(ll mi) {
     ll s = 0;
-    for (int i = 1; i <= n; i++) {
+    FOR(i,1,n) {
         s += (mi/v[i]);
     }
     return s;
 }
 
-ll check1(ll mi) {
+ll calcu(ll mi) {
     ll s = 0;
-    for (int i = 1; i <= m; i++) {
+    FOR(i,1,m) {
         s += (mi/u[i]);
     }
     return s;
@@ -74,20 +77,19 @@ ll check1(ll mi) {
 signed main() {
     cin.tie(nullptr)->sync_with_stdio(false);
     cin >> t >> n;
-    for (int i = 1; i <= n; i++) cin >> v[i];
+    FOR(i,1,n) cin >> v[i];
     cin >> m;
-    for (int i = 1; i <= m; i++) cin >> u[i];
-    ll l = 0, r = t+1, ans = 0;
-    while(r - l > 1) {
+    FOR(i,1,m) cin >> u[i];
+    ll l = 0, r = t+1;
+    while(l <= r) {
         ll mi = (l+r)/2;
-        if (check(mi) <= check1(t-mi)) {
-            l = mi;
-        } else r = mi;
+        if (calcv(mi) <= calcu(t-mi)) {
+            l = mi+1;
+        } else r = mi-1;
     }
-    if (l > 0) {
-        ans = max(ans,check(l));
-    } else if (r <= t) ans = max(ans,check1(r));
-    cout << ans << endl;
+    ll ans = min(calcv(l),calcu(t-l));
+    if (r != t+1) ans = max(ans,min(calcv(r),calcu(t-r)));
+    cout << ans;
     cerr << "\nTime elapsed: " << TIME << "s. \n";
     return 0;
 }
