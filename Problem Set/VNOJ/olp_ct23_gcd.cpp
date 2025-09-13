@@ -57,6 +57,16 @@ constexpr ll LLINF = 0x3f3f3f3f3f3f3f3f;
 const int N = 20;
 ll n,m,MOD;
 
+ll binmul(ll a, ll b) {
+    ll res = 0;
+    while(b > 0) {
+        if (b & 1) res = res+a%MOD;
+        a = a*2%MOD;
+        b >>= 1;
+    }
+    return res;
+}
+
 struct mat{
     int n,m;
     ll a[N][N];
@@ -70,19 +80,20 @@ struct mat{
         REP(i,x) {
             REP(k,z) {
                 REP(j,y) {
-                    ans.a[i][k] = (ans.a[i][k] + 1ll * a[i][j] * d.a[j][k]) % MOD;
+                    ans.a[i][k] = (ans.a[i][k] + 1ll * binmul(a[i][j],d.a[j][k])) % MOD;
                 }
             }
         }
         return ans;
     }
+
     mat operator ^ (ll k) {
         mat ans(n,n);
         REP(i,n) ans.a[i][i] = 1;
         mat mul = *this;
         while(k) {
-            if (k&1) ans = ans*mul;
-            mul = mul*mul;
+            if (k&1) ans = ans * mul;
+            mul = mul * mul;
             k>>=1;
         }
         return ans;
