@@ -56,7 +56,7 @@ constexpr ll LLINF = 0x3f3f3f3f3f3f3f3f;
 
 const int N = 1e5+7;
 int n,q,w[N];
-int node[N],pos[N],cnt,chain,h[N],sz[N],heavy[N],head[N],id[N],par[N];
+int node[N],pos[N],cnt,chain,h[N],sz[N],head[N],id[N],par[N];
 int t[N<<2];
 vi v[N];
 
