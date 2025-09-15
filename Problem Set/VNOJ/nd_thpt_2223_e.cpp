@@ -71,4 +71,3 @@ signed main() {
     cerr << "\nTime elapsed: " << TIME << "s. \n";
     return 0;
 }
-

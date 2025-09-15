@@ -3,10 +3,13 @@
   "WorkspaceRootPath": "C:\\Users\\PC\\source\\repos\\C\u002B\u002B Project\\HeThongQuanLyHocSinh\\",
   "Documents": [
     {
+<<<<<<< HEAD
       "AbsoluteMoniker": "D:0:0:{A6478F51-5017-4E25-AB9E-27A75EB48796}|HeThongQuanLyHocSinh\\HeThongQuanLyHocSinh.vcxproj|C:\\Users\\PC\\source\\repos\\C\u002B\u002B Project\\HeThongQuanLyHocSinh\\HeThongQuanLyHocSinh\\Functions.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{A6478F51-5017-4E25-AB9E-27A75EB48796}|HeThongQuanLyHocSinh\\HeThongQuanLyHocSinh.vcxproj|solutionrelative:HeThongQuanLyHocSinh\\Functions.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
+=======
+>>>>>>> parent of a9fe09cd (15/9/25)
       "AbsoluteMoniker": "D:0:0:{A6478F51-5017-4E25-AB9E-27A75EB48796}|HeThongQuanLyHocSinh\\HeThongQuanLyHocSinh.vcxproj|C:\\Users\\PC\\source\\repos\\C\u002B\u002B Project\\HeThongQuanLyHocSinh\\HeThongQuanLyHocSinh\\HeThongQuanLyHocSinh.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{A6478F51-5017-4E25-AB9E-27A75EB48796}|HeThongQuanLyHocSinh\\HeThongQuanLyHocSinh.vcxproj|solutionrelative:HeThongQuanLyHocSinh\\HeThongQuanLyHocSinh.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
@@ -22,6 +25,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
+<<<<<<< HEAD
           "SelectedChildIndex": 2,
           "Children": [
             {
@@ -31,18 +35,30 @@
             {
               "$type": "Document",
               "DocumentIndex": 1,
+=======
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+>>>>>>> parent of a9fe09cd (15/9/25)
               "Title": "HeThongQuanLyHocSinh.cpp",
               "DocumentMoniker": "C:\\Users\\PC\\source\\repos\\C\u002B\u002B Project\\HeThongQuanLyHocSinh\\HeThongQuanLyHocSinh\\HeThongQuanLyHocSinh.cpp",
               "RelativeDocumentMoniker": "HeThongQuanLyHocSinh\\HeThongQuanLyHocSinh.cpp",
               "ToolTip": "C:\\Users\\PC\\source\\repos\\C\u002B\u002B Project\\HeThongQuanLyHocSinh\\HeThongQuanLyHocSinh\\HeThongQuanLyHocSinh.cpp",
               "RelativeToolTip": "HeThongQuanLyHocSinh\\HeThongQuanLyHocSinh.cpp",
+<<<<<<< HEAD
               "ViewState": "AQIAAIEAAAAAAAAAAAAAAJoAAAAEAAAA",
+=======
+              "ViewState": "AgIAAG4BAAAAAAAAAAAAAEoBAAAEAAAAAAAAAA==",
+>>>>>>> parent of a9fe09cd (15/9/25)
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2024-05-01T08:37:20.525Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
+<<<<<<< HEAD
               "DocumentIndex": 0,
               "Title": "Functions.cpp",
               "DocumentMoniker": "C:\\Users\\PC\\source\\repos\\C\u002B\u002B Project\\HeThongQuanLyHocSinh\\HeThongQuanLyHocSinh\\Functions.cpp",
@@ -57,6 +73,9 @@
             {
               "$type": "Document",
               "DocumentIndex": 2,
+=======
+              "DocumentIndex": 1,
+>>>>>>> parent of a9fe09cd (15/9/25)
               "Title": "MySQL_Queries.cpp",
               "DocumentMoniker": "C:\\Users\\PC\\source\\repos\\C\u002B\u002B Project\\HeThongQuanLyHocSinh\\HeThongQuanLyHocSinh\\MySQL_Queries.cpp",
               "RelativeDocumentMoniker": "HeThongQuanLyHocSinh\\MySQL_Queries.cpp",
@@ -64,8 +83,12 @@
               "RelativeToolTip": "HeThongQuanLyHocSinh\\MySQL_Queries.cpp",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAMAAAARAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+<<<<<<< HEAD
               "WhenOpened": "2024-06-20T19:01:38.213Z",
               "EditorCaption": ""
+=======
+              "WhenOpened": "2024-06-20T19:01:38.213Z"
+>>>>>>> parent of a9fe09cd (15/9/25)
             }
           ]
         }

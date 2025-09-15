@@ -54,61 +54,60 @@ constexpr int MOD = 1e9+7;
 constexpr int IINF = 0x3f3f3f3f;
 constexpr ll LLINF = 0x3f3f3f3f3f3f3f3f;
 
-const int N = 1e5+7;
-int n,q,node[N],pos[N],cnt,chain,h[N],sz[N],head[N],id[N],par[N],w[N];
-vi v[N];
+const int N = 2e5+7;
+int n,m,k;
+pi p[N];
+ll inv[N],fact[N],dp[N];
 
-void dfs(int u, int p) {
-    sz[u] = 1;
-    for (auto it : v[u]) {
-        if (it == p) continue;
-        par[it] = u;
-        h[it] = h[u] + 1;
-        dfs(it,u);
-        sz[u] += sz[it];
+ll binpow(ll a, ll b) {
+    ll ans = 1;
+    a %= MOD;
+    while(b) {
+        if (b&1) ans = ans*a%MOD;
+        a = a*a%MOD;
+        b>>=1;
+    }
+    return ans;
+}
+
+void prep() {
+    fact[0] = 1;
+    FOR(i,1,N) {
+        fact[i] = fact[i-1]*i%MOD;
+    }
+    inv[N-1] = binpow(fact[N-1],MOD-2);
+    FORD(i,N-1,1) {
+        inv[i-1] = inv[i] * i % MOD;
     }
 }
 
-void decompose(int u, int p) {
-    if (!head[chain]) head[chain] = u;
-    id[u] = chain;
-    pos[u] = cnt;
-    node[cnt] = 0;
-    cnt++;
-    int nxt = 0;
-    for (auto it : v[u]) {
-        if (it == p) continue;
-        if (!nxt || sz[it] > sz[nxt]) nxt = it;
-    }
-    if (nxt) decompose(nxt,u);
-    for (auto it : v[u]) {
-        if (it == p || it == nxt) continue;
-        chain++;
-        decompose(it,u);
-    }
+ll C(ll n, ll k) {
+    if (k > n) return 0;
+    return fact[n] * inv[k] % MOD * inv[n-k] % MOD;
+}
+
+ll calc(int x1, int y1, int x2, int y2) {
+    return x1 > x2 || y1 > y2 ? 0 : C(x2-x1+y2-y1,x2-x1);
 }
 
 signed main() {
     cin.tie(nullptr)->sync_with_stdio(false);
-    cin >> n >> q;
-    FOR(i,2,n) {
-        int x,y;
-        cin >> x >> y;
-        v[x].pb(y);
-        v[y].pb(x);
+    prep();
+    cin >> n >> m >> k;
+    FOR(i,1,k) {
+        cin >> p[i].fi >> p[i].se;
     }
-    cnt = chain = 1;
-    dfs(1,-1);
-    decompose(1,-1);
-    while(q--) {
-        int ty, x;
-        cin >> ty >> x;
-        if (ty == 0) {
-
-        } else {
-
+    p[k+1] = {n,m};
+    sort(p+1,p+k+2);
+    FOR(i,1,k+1) {
+        dp[i] = calc(1,1,p[i].fi,p[i].se);
+        FOR(j,1,i-1) {
+            if (p[j].fi <= p[i].fi && p[j].se <= p[i].se) {
+                    dp[i] = (dp[i]%MOD - (dp[j] * calc(p[j].fi,p[j].se,p[i].fi,p[i].se)%MOD)%MOD+MOD)%MOD;
+            }
         }
     }
+    cout << dp[k+1];
     cerr << "\nTime elapsed: " << TIME << "s. \n";
     return 0;
 }
