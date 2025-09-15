@@ -31,43 +31,52 @@ typedef map<int,int> mii;
 typedef vector<int> vi;
 typedef vector<pi> vii;
 typedef vector<mii> viii;
-#define FOR(i, a, b) for (int i = (a), _b = (b); i <= _b; i++)
-#define FORD(i, b, a) for (int i = (b), _a = (a); i >= _a; i--)
-#define REP(i, n) for (int i = 0, _n = (n); i < _n; i++)
-#define FORE(i, v) for (__typeof((v).begin()) i = (v).begin(); i != (v).end(); i++)
-#define BIT(x,i) (((x) >> (i)) & 1)
+ll __lcm(ll x, ll y) { return 1ll*(x / __gcd(x,y))*y;}
 #define ms(a,n) memset(a, n,sizeof(a))
 #define all(x) (x).begin(),(x).end()
 #define uniquev(v) sort(all(v)), (v).resize(unique(all(v)) - (v).begin())
 #define ins insert
 #define sz(x) (int)(x.size())
+#define name "TASK"
 #define fi first
-#define se second
+#define sec second
 #define mp make_pair
 #define ep emplace_back
 #define pb push_back
 #define endl "\n"
 #define TIME (1.0 * clock() / CLOCKS_PER_SEC)
-#define name "TASK"
-ll __lcm(ll x, ll y) { return 1ll*(x / __gcd(x,y))*y;}
 constexpr int MOD = 1e9+7;
-constexpr int IINF = 0x3f3f3f3f;
-constexpr ll LLINF = 0x3f3f3f3f3f3f3f3f;
+constexpr int32_t IINF = 0x3f3f3f3f;
+constexpr int64_t LLINF = 0x3f3f3f3f3f3f3f3f;
 
-const int N = 10007;
-int n,
-
-void sol() {
-    cin >> n;
+double atan2(double x, double y) {
+    if (x > 0) return atan(y/x);
+    if (x < 0 && y >= 0) return atan(y/x) + 3.141592653589793238463;
+    if (x < 0 && y < 0) return atan(y/x) - 3.141592653589793238463;
+    if (x == 0 && y > 0) return 3.141592653589793238463 / 2;
+    if (x == 0 && y < 0) return  - (3.141592653589793238463 / 2);
+    if (x == 0 && y == 0) return 0;
 }
 
 signed main() {
     cin.tie(nullptr)->sync_with_stdio(false);
-    int t;
-    cin >> t;
-    while(t--) {
-        sol();
+    if (fopen(name ".inp", "r")) {
+        freopen(name ".inp","r",stdin);
+        freopen(name ".out","w",stdout);
     }
-    cerr << "\nTime elapsed: " << TIME << "s. \n";
+    double x,y;
+    cin >> x >> y;
+    double r = sqrt((x*x) + (y*y));
+    /*if (y >= 0 && r != 0) {
+        cout << fixed << setprecision(10) << acos(x/r);
+    } else if (y < 0) {
+        cout << fixed << setprecision(10) << -acos(x/r);
+    }*/
+    double ans = atan2(x,y);
+    if (ans < 0) {
+        cout << fixed << setprecision(10) << ans + (2 * 3.141592653589793238463);
+    } else cout << fixed << setprecision(10) << ans;
+
+    cerr << "Time elapsed: " << TIME << "s. \n";
     return 0;
 }
