@@ -95,9 +95,9 @@ signed main() {
     cin.tie(nullptr)->sync_with_stdio(false);
     cin >> n >> m >> s >> t;
     FOR(i,1,m) {
-        int x,y;
-        cin >> x >> y;
-        cin >> c[x][y];
+        int x,y,w;
+        cin >> x >> y >> w;
+        c[x][y] = w;
         v[x].pb(y);
         v[y].pb(x);
     }

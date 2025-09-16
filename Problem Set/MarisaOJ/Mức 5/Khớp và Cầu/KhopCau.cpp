@@ -54,46 +54,43 @@ constexpr int MOD = 1e9+7;
 constexpr int IINF = 0x3f3f3f3f;
 constexpr ll LLINF = 0x3f3f3f3f3f3f3f3f;
 
-const int N = 70007;
-int n,q;
-ll v[N],t[N<<2];
+const int N = 1e5+7;
+int n,m,low[N],num[N],cnt,bridge,mark[N],ap;
+bool vis[N];
+vi v[N];
 
-void build(int id, int l, int r) {
-    if (l == r) {
-        return t[id] = v[l], void();
+void dfs(int u, int par) {
+    low[u] = num[u] = ++cnt;
+    int child = 0;
+    for (auto it : v[u]) {
+        if (it == par) continue;
+        if (!num[it]) {
+            dfs(it,u);
+            low[u] = min(low[u],low[it]);
+            child++;
+            if (num[u] < low[it]) bridge++;
+            if (par != -1 && num[u] <= low[it]) mark[u] = 1;
+        } else low[u] = min(low[u],num[it]);
     }
-    int m = l+r>>1;
-    build(id<<1,l,m);
-    build(id<<1|1,m+1,r);
-    t[id] = t[id<<1] * t[id<<1|1];
-}
-
-ll get(int id, int l, int r, int x, int y) {
-    if (l > y || r < x) return 1;
-    if (l >= x && r <= y) return t[id];
-    int m = l+r>>1;
-    return get(id<<1,l,m,x,y) * get(id<<1|1,m+1,r,x,y);
-}
-
-ll check(ll x) {
-    ll sx = sqrt(x);
-    return sx*sx == x;
+    if (par == -1 && child > 1) mark[u] = 1;
 }
 
 signed main() {
     cin.tie(nullptr)->sync_with_stdio(false);
-    freopen("SEQCP.INP","r",stdin);
-    freopen("SEQCP.OUT","w",stdout);
-    cin >> n >> q;
-    FOR(i,1,n) {
-        cin >> v[i];
+    cin >> n >> m;
+    for (int i = 1; i <= m; i++) {
+        int x,y;
+        cin >> x >> y;
+        v[x].pb(y);
+        v[y].pb(x);
     }
-    build(1,1,n);
-    while(q--) {
-        int l,r;
-        cin >> l >> r;
-        cout << (check(get(1,1,n,l,r)) ? "YES\n" : "NO\n");
+    for (int i = 1; i <= n; i++) {
+        if (!num[i]) {
+            dfs(i,-1);
+        }
     }
+    for (int i = 1; i <= n; i++) if (mark[i]) ap++;
+    cout << ap << " " << bridge;
     cerr << "\nTime elapsed: " << TIME << "s. \n";
     return 0;
 }
