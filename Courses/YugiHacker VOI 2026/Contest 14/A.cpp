@@ -57,9 +57,10 @@ constexpr ll LLINF = 0x3f3f3f3f3f3f3f3f;
 struct Q{
     int l,r,id;
 };
-const int N = 5e4+7, sz = 190, M = 1e6+7;
-int n,q,cur[M],cnt,ans[M],v[N];
-Q qu[M];
+const int N = 5e5+7, sz = 710;
+int n,q,cur[N],cnt,ans[N],v[N];
+vi u;
+Q qu[N];
 
 bool cmp(const Q &a, const Q &b) {
     if (a.l/sz == b.l/sz) {
@@ -70,31 +71,39 @@ bool cmp(const Q &a, const Q &b) {
 }
 
 void del(int x) {
-    if (--cur[x] == 0) cnt--;
+    if (cur[x]-- == 2) cnt--;
+    if (cur[x] == 2) cnt++;
 }
 
 void add(int x) {
-    if (cur[x]++ == 0) cnt++;
+    if (cur[x] == 2) cnt--;
+    cur[x]++;
+    if (cur[x] == 2) cnt++;
 }
 
 signed main() {
     cin.tie(nullptr)->sync_with_stdio(false);
-    cin >> n;
+    cin >> n >> q;
     FOR(i,1,n) {
         cin >> v[i];
+        u.pb(v[i]);
     }
-    cin >> q;
     FOR(i,1,q) {
         cin >> qu[i].l >> qu[i].r;
         qu[i].id = i;
     }
     sort(qu+1,qu+q+1,cmp);
+    sort(all(u));
+    u.resize(unique(all(u))-u.begin());
+    FOR(i,1,n) {
+        v[i] = lower_bound(all(u),v[i]) - u.begin() + 1;
+    }
     int l = 1, r = 0;
     FOR(i,1,q) {
-        while(l < qu[i].l) del(v[l++]);
         while(l > qu[i].l) add(v[--l]);
-        while(r > qu[i].r) del(v[r--]);
+        while(l < qu[i].l) del(v[l++]);
         while(r < qu[i].r) add(v[++r]);
+        while(r > qu[i].r) del(v[r--]);
         ans[qu[i].id] = cnt;
     }
     FOR(i,1,q) cout << ans[i] << endl;

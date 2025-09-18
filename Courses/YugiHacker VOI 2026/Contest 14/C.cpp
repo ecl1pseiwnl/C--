@@ -54,39 +54,50 @@ constexpr int MOD = 1e9+7;
 constexpr int IINF = 0x3f3f3f3f;
 constexpr ll LLINF = 0x3f3f3f3f3f3f3f3f;
 
-const int N = 2e5+7, block = 455;
-int n,q,v[N];
-ll t[block];
+struct Q{
+    int l,r,id;
+};
+const int N = 5e4+7, sz = 190, M = 1e6+7;
+int n,q,cur[M],cnt,ans[M],v[N];
+Q qu[M];
 
+bool cmp(const Q &a, const Q &b) {
+    if (a.l/sz == b.l/sz) {
+        if ((a.l/sz)&1) return a.r < b.r;
+        else return a.r > b.r;
+    }
+    return a.l < b.l;
+}
+
+void del(int x) {
+    if (--cur[x] == 0) cnt--;
+}
+
+void add(int x) {
+    if (cur[x]++ == 0) cnt++;
+}
 
 signed main() {
     cin.tie(nullptr)->sync_with_stdio(false);
-    cin >> n >> q;
+    cin >> n;
     FOR(i,1,n) {
         cin >> v[i];
-        t[i/block] += v[i];
     }
-    while(q--) {
-        int ty,l,r;
-        cin >> ty >> l >> r;
-        if (ty == 1) {
-            t[l/block] -= v[l];
-            v[l] = r;
-            t[l/block] += v[l];
-        } else {
-            int left = l/block, right = r/block;
-            ll ans = 0;
-            if (left == right) {
-                FOR(i,l,r) ans += v[i];
-            } else {
-                for (int i = l; i < (left+1)*block; i++) ans += v[i];
-                for (int i = right*block; i <= r; i++) ans += v[i];
-                for (int i = left+1; i < right; i++) ans += t[i];
-            }
-            cout << ans << endl;
-        }
+    cin >> q;
+    FOR(i,1,q) {
+        cin >> qu[i].l >> qu[i].r;
+        qu[i].id = i;
     }
-
+    sort(qu+1,qu+q+1,cmp);
+    int l = 1, r = 0;
+    FOR(i,1,q) {
+        while(l < qu[i].l) del(v[l++]);
+        while(l > qu[i].l) add(v[--l]);
+        while(r > qu[i].r) del(v[r--]);
+        while(r < qu[i].r) add(v[++r]);
+        ans[qu[i].id] = cnt;
+    }
+    FOR(i,1,q) cout << ans[i] << endl;
     cerr << "\nTime elapsed: " << TIME << "s. \n";
     return 0;
 }
