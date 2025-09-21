@@ -55,38 +55,49 @@ constexpr int IINF = 0x3f3f3f3f;
 constexpr ll LLINF = 0x3f3f3f3f3f3f3f3f;
 
 const int N = 2e5+7;
-int n,q,t[4*N],v[N];
+int n,q;
+ll t[N<<2],k[N<<2],v[N];
 
-void build(int id, int l, int r) {
-    if (l == r) {
-        return t[id] = l, void();
-    }
-    int m = l+r>>1;
-    build(id<<1,l,m);
-    build(id<<1|1,m+1,r);
-    t[id] = (v[t[id<<1]] < v[t[id<<1|1]] ? t[id<<1] : t[id<<1|1]);
-}
-
-void update(int id, int l, int r, int pos, int x) {
+void update(int id, int l, int r, int pos, ll x) {
     if (pos < l || pos > r) return;
     if (l == r) {
-        v[l] = x;
-        t[id] = l;
+        t[id] = x;
         return;
     }
     int m = l+r>>1;
     update(id<<1,l,m,pos,x);
     update(id<<1|1,m+1,r,pos,x);
-    t[id] = (v[t[id<<1]] < v[t[id<<1|1]] ? t[id<<1] : t[id<<1|1]);
+    t[id] = min(t[id<<1],t[id<<1|1]);
 }
 
-int get(int id, int l, int r, int x, int y) {
-    if (l > y || r < x) return 0;
+ll get(int id, int l, int r, int x, int y) {
+    if (l > y || r < x) return LLINF;
     if (l >= x && r <= y) return t[id];
     int m = l+r>>1;
     int t1 = get(id<<1,l,m,x,y);
     int t2 = get(id<<1|1,m+1,r,x,y);
-    return (v[t1] < v[t2] ? t1 : t2);
+    return min(t1,t2);
+}
+
+void update1(int id, int l, int r, int pos, ll x) {
+    if (pos < l || pos > r) return;
+    if (l == r) {
+        k[id] = x;
+        return;
+    }
+    int m = l+r>>1;
+    update1(id<<1,l,m,pos,x);
+    update1(id<<1|1,m+1,r,pos,x);
+    k[id] = min(k[id<<1],k[id<<1|1]);
+}
+
+ll get1(int id, int l, int r, int x, int y) {
+    if (l > y || r < x) return LLINF;
+    if (l >= x && r <= y) return k[id];
+    int m = l+r>>1;
+    int k1 = get1(id<<1,l,m,x,y);
+    int k2 = get1(id<<1|1,m+1,r,x,y);
+    return min(k1,k2);
 }
 
 signed main() {
@@ -94,18 +105,22 @@ signed main() {
     cin >> n >> q;
     FOR(i,1,n) {
         cin >> v[i];
+        update(1,1,n,i,v[i]-i);
+        update1(1,1,n,i,v[i]+i);
     }
-    build(1,1,n);
     while(q--) {
         int ty,x,y;
         cin >> ty;
         if (ty == 1) {
             cin >> x >> y;
-            update(1,1,n,x,y);
+            update(1,1,n,x,y-x);
+            update1(1,1,n,x,y+x);
+            v[x] = y;
         } else {
             cin >> x;
-            int pos = get(1,1,n,1,n);
-            cout << v[pos] + abs(x-pos) << endl;
+            int pos1 = get(1,1,n,1,x-1);
+            int pos2 = get1(1,1,n,x+1,n);
+            cout << min(abs(pos1-x),abs(pos2-x)) << endl;
         }
     }
     cerr << "\nTime elapsed: " << TIME << "s. \n";
