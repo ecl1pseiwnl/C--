@@ -66,13 +66,13 @@ signed main() {
     stack<int> st;
     FOR(i,1,n) {
         while(st.size() && v[st.top()] >= v[i]) st.pop();
-        l[i] = (st.size() ? st.top()+1 : 1);
+        l[i] = (st.size() ? st.top()+1 : 0);
         st.push(i);
     }
     while(st.size()) st.pop();
     FORD(i,n,1) {
         while(st.size() && v[st.top()] >= v[i]) st.pop();
-        r[i] = (st.size() ? st.top()-1 : n);
+        r[i] = (st.size() ? st.top()-1 : n+1);
         st.push(i);
     }
     ll ans = 0;
