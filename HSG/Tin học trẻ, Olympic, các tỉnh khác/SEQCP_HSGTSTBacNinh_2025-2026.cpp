@@ -53,19 +53,44 @@ ll __lcm(ll x, ll y) { return 1ll*(x / __gcd(x,y))*y;}
 constexpr int MOD = 1e9+7;
 constexpr int IINF = 0x3f3f3f3f;
 constexpr ll LLINF = 0x3f3f3f3f3f3f3f3f;
-mt19937 rng(chrono::steady_clock::now().time_since_epouch().count());
+mt19937_64 rng(chrono::steady_clock::now().time_since_epoch().count());
 
 const int N = 70007, sz = 275;
 struct Q{
     int id,l,r;
 } qu[N];
 int n,q;
-bool u[N];
-ll v[N],f[N],ans[N];
+ll v[N],f[N],ans[N],ph[N],XOR;
+vi p;
 
-void sang() {
-
-    for
+void calc() {
+    vector<bool> u(N,1);
+    u[0] = u[1] = 0;
+    for (int i = 2; i*i < N; i++) {
+        if (u[i]) {
+            p.pb(i);
+            for (int j = i*i; j < N; j += i) {
+                u[j] = 0;
+            }
+        }
+    }
+    for (auto it : p) {
+        ph[it] = rng();
+    }
+    FOR(i,1,n) {
+        int cur = v[i];
+        f[i] = 0;
+        for (auto it : p) {
+            if (it*it > cur) break;
+            int cnt = 0;
+            while (cur % it == 0) {
+                cnt++;
+                cur /= it;
+            }
+            if (cnt % 2 == 1) f[i] ^= ph[it];
+        }
+        if (cur > 1) f[i] ^= ph[cur];
+    }
 }
 
 bool cmp(const Q&a, const Q&b) {
@@ -76,22 +101,28 @@ bool cmp(const Q&a, const Q&b) {
     return a.l < b.l;
 }
 
-void del(ll x) {
-    cur /= x;
+void del(int x) {
+    XOR ^= f[x];
 }
 
 void add(ll x) {
-    cur *= x;
+    XOR ^= f[x];
 }
+
+// Tich cua ca doan thi co the len 7000^7000 nen se ap dung XOR Hashing + phan tich thua so nguyen to
+// Mot so la so chinh phuong khi thua so nguyen to cua no toan mu chan
+// -> Khi sqrt thi no van se luon la 1 so nguyen duong
+// Do do ap dung vao, ta se xet neu XOR cua doan la 1 thi tong so mu bi le nen khong bi triet tieu nen bang 1
 
 signed main() {
     cin.tie(nullptr)->sync_with_stdio(false);
-    //freopen("SEQCP.INP","r",stdin);
-    //freopen("SEQCP.OUT","w",stdout);
+    freopen("SEQCP.INP","r",stdin);
+    freopen("SEQCP.OUT","w",stdout);
     cin >> n >> q;
     FOR(i,1,n) {
         cin >> v[i];
     }
+    calc();
     FOR(i,1,q) {
         cin >> qu[i].l >> qu[i].r;
         qu[i].id = i;
@@ -99,15 +130,16 @@ signed main() {
     sort(qu+1,qu+q+1,cmp);
     int l = 1,r = 0;
     FOR(i,1,q) {
-        while(l < qu[i].l) del(v[l++]);
-        while(l > qu[i].l) add(v[--l]);
-        while(r > qu[i].r) del(v[r--]);
-        while(r < qu[i].r) add(v[++r]);
-        ans[qu[i].id] = cur;
+        while(l > qu[i].l) add(--l);
+        while(l < qu[i].l) del(l++);
+        while(r < qu[i].r) add(++r);
+        while(r > qu[i].r) del(r--);
+        ans[qu[i].id] = XOR;
     }
     FOR(i,1,q) {
-        cout << (check(ans[i]) ? "YES\n" : "NO\n");
+        cout << (ans[i] == 0 ? "YES\n" : "NO\n");
     }
     cerr << "\nTime elapsed: " << TIME << "s. \n";
     return 0;
 }
+
