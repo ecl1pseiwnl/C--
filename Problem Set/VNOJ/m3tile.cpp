@@ -35,7 +35,7 @@ typedef vector<mii> viii;
 #define FORD(i, b, a) for (int i = (b), _a = (a); i >= _a; i--)
 #define REP(i, n) for (int i = 0, _n = (n); i < _n; i++)
 #define FORE(i, v) for (__typeof((v).begin()) i = (v).begin(); i != (v).end(); i++)
-#define Mask(x,i) (((x) >> (i)) & 1)
+#define BIT(x,i) (((x) >> (i)) & 1)
 #define ms(a,n) memset(a, n,sizeof(a))
 #define all(x) (x).begin(),(x).end()
 #define uniquev(v) sort(all(v)), (v).resize(unique(all(v)) - (v).begin())
@@ -53,22 +53,26 @@ ll __lcm(ll x, ll y) { return 1ll*(x / __gcd(x,y))*y;}
 constexpr int MOD = 1e9+7;
 constexpr int IINF = 0x3f3f3f3f;
 constexpr ll LLINF = 0x3f3f3f3f3f3f3f3f;
+#define rand(l,r) uniform_int_distribution<ll> (l,r) (rng);
+mt19937_64 rng(chrono::steady_clock::now().time_since_epoch().count());
 
 const int N = 37;
-ll dp[N], dp1[N];
+ll dp[N],s[N];
 
 signed main() {
     cin.tie(nullptr)->sync_with_stdio(false);
-    dp[0] = 1;
-    dp1[1] = 1;
+    s[1] = 1;
+    dp[1] = 1;
     FOR(i,2,30) {
-        dp[i] = dp[i-2] + 2*dp1[i-1];
-        dp1[i] = dp[i-1] + dp1[i-2];
+        dp[i] = dp[i-1] + 2 * s[i-1];
+        s[i] = s[i-1] + dp[i];
     }
     int x;
     while(cin >> x) {
         if (x == -1) return 0;
-        cout << dp[x] << endl;
+        if (x & 1) {
+            cout << 0 << endl;
+        } else cout << dp[x/2+1] << endl;
     }
     cerr << "\nTime elapsed: " << TIME << "s. \n";
     return 0;
