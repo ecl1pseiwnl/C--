@@ -54,25 +54,21 @@ constexpr int MOD = 1e9+7;
 constexpr int IINF = 0x3f3f3f3f;
 constexpr ll LLINF = 0x3f3f3f3f3f3f3f3f;
 
-struct dt{
-    int l,r;
-};
-const int N = 2e5+7,lg = 24;
-int n,q,par[N][lg],h[N];
+const int N = 2e5+7,lg = 20;
+int n,q,par[N][lg],h[N],r[N],l[N];
 ll maxv[N][lg],w[N],dp[N];
 vi v[N];
-dt d[N];
 
 void dfs(int u, int p) {
-    par[u][0] = p;
-    maxv[u][0] = w[u];
-    FOR(i,1,lg-1) {
-        par[u][i] = par[par[u][i-1]][i-1];
-        maxv[u][i] = max(maxv[u][i-1],maxv[par[u][i-1]][i-1]);
-    }
     for (auto it : v[u]) {
         if (it == p) continue;
-        h[u] = h[p] + 1;
+        h[it] = h[u] + 1;
+        par[it][0] = u;
+        maxv[it][0] = w[it];
+        FOR(i,1,lg-1) {
+            par[it][i] = par[par[it][i-1]][i-1];
+            maxv[it][i] = max(maxv[it][i-1],maxv[par[it][i-1]][i-1]);
+        }
         dfs(it,u);
     }
 }
@@ -80,12 +76,15 @@ void dfs(int u, int p) {
 ll lca(int x, int y) {
     ll mx = -LLINF;
     if (h[x] < h[y]) swap(x,y);
-    FORD(i,lg-1,0) {
-        if (h[x] - (1<<i) >= h[y]) {
-            mx = max(maxv[x][i],mx);
+    int k = (h[y]-h[x]);
+    ll cur = w[x];
+    REP(i,lg) {
+        if ((k>>i)&1) {
+            cur = max(cur,maxv[x][i]);
             x = par[x][i];
         }
     }
+    mx = max(mx,cur);
     if (x == y) return mx;
     FORD(i,lg-1,0) {
         if (par[x][i] != par[y][i]) {
@@ -94,8 +93,7 @@ ll lca(int x, int y) {
             y = par[y][i];
         }
     }
-    mx = max({maxv[x][0],maxv[y][0],mx});
-    return mx;
+    return max(maxv[x][0],mx);
 }
 
 signed main() {
@@ -112,23 +110,19 @@ signed main() {
         v[x].pb(y);
         v[y].pb(x);
     }
-    ms(maxv,-LLINF);
-    dfs(1,0);
-    h[0] = -1;
     cin >> q;
-    FOR(_,1,q) {
-        int l,r;
-        cin >> l >> r;
-        d[_] = {l,r};
-    }
-    ll ans = 0;
     FOR(i,1,q) {
-        if (dp[d[i].l] == 0 && d[i].l != 1) continue;
-        /// Neu dinh hien tai co W = 0 va dinh do khong phai dinh 1 thi bo qua
-        /// Ta se tinh duoc khi co Li = 1 thi moi K truy van tiep theo se tinh duoc
-        /// thong qua truy van phia truoc
-        dp[d[i].r] = max(dp[d[i].r],dp[d[i].l] + lca(d[i].l,d[i].r));
-        ans = max(ans,dp[d[i].r]);
+        cin >> l[i] >> r[i];
+    }
+    ms(dp,-LLINF);
+    maxv[1][0] = w[1];
+    dp[1] = 0;
+    dfs(1,0);
+    ll ans = -LLINF;
+    FOR(i,1,q) {
+        if (dp[l[i]] == -LLINF) continue;
+        dp[r[i]] = max(dp[r[i]],dp[l[i]] + lca(l[i],r[i]));
+        ans = max(ans,dp[r[i]]);
     }
     cout << ans;
     cerr << "\nTime elapsed: " << TIME << "s. \n";
