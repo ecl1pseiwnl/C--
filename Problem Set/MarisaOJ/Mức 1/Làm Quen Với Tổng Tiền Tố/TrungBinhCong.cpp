@@ -55,19 +55,18 @@ constexpr int IINF = 0x3f3f3f3f;
 constexpr ll LLINF = 0x3f3f3f3f3f3f3f3f;
 
 const int N = 1e5+7;
-int n,k,v[N];
+ll n,k;
 
 signed main() {
     cin.tie(nullptr)->sync_with_stdio(false);
     cin >> n >> k;
-    FOR(i,1,n) {
-        cin >> v[i];
-    }
-    unordered_map<int,ll> m;
+    unordered_map<ll,ll> m;
     m[0] = 1;
     ll pre = 0, ans = 0;
     FOR(i,1,n) {
-        pre += (v[i] - k);
+        ll x;
+        cin >> x;
+        pre += (x - k);
         if (m.find(pre) != m.end()) {
             ans += m[pre];
         }
@@ -77,3 +76,5 @@ signed main() {
     cerr << "\nTime elapsed: " << TIME << "s. \n";
     return 0;
 }
+
+

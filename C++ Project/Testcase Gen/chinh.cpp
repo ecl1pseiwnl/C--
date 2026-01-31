@@ -52,33 +52,20 @@ constexpr int MOD = 1e9+7;
 constexpr int32_t IINF = 0x3f3f3f3f;
 constexpr int64_t LLINF = 0x3f3f3f3f3f3f3f3f;
 
-const int N = 1e5+7;
-ll dp[N], pre[N];
-
-ll binpow(ll a, ll b) {
-    ll ans = 1;
-    a %= MOD;
-    while(b) {
-        if (b & 1) ans = (ans*a) % MOD;
-        a = (a*a) % MOD;
-        b >>= 1;
-    }
-    return ans;
-}
-
 signed main() {
     cin.tie(nullptr)->sync_with_stdio(false);
-    int l,r;
-    cin >> l >> r;
-    dp[0] = dp[1] = 1;
-    for (int i = 2; i <= N; i++) {
-        dp[i] = (binpow(2,i-1)*dp[i-1] + 2*dp[i-2]) % MOD;
+    int n, maxv = -IINF;
+    cin >> n;
+    vi pre(n+2,0);
+    for (int i = 1,x; i <= n; i++) {
+        cin >> x;
+        pre[i] = pre[i-1] + x;
     }
-    pre[0] = 1;
-    for (int i = 1; i <= N; i++) {
-        pre[i] = pre[i-1] + dp[i];
+    for (int i = 1; i <= n; i++) {
+        int x = pre[i] - pre[0], y = pre[n] - pre[i];
+        maxv = max({maxv,(x*(-1))+y,x+(y*(-1))});
     }
-    cout << (pre[r] - pre[l-1])%MOD;
+    cout << maxv;
     cerr << "\nTime elapsed: " << TIME << "s. \n";
     return 0;
 }

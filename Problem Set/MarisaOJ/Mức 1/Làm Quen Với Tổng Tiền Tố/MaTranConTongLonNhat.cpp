@@ -53,7 +53,7 @@ constexpr int32_t IINF = 0x3f3f3f3f;
 constexpr int64_t LLINF = 0x3f3f3f3f3f3f3f3f;
 
 const int N = 507;
-ll a[N][N], pre[N][N];
+ll pre[N][N];
 
 signed main() {
     cin.tie(nullptr)->sync_with_stdio(false);
@@ -61,17 +61,18 @@ signed main() {
     cin >> n >> m;
     for (int i = 1; i <= n; i++) {
         for (int j = 1; j <= m; j++) {
-            cin >> a[i][j];
-            pre[i][j] = pre[i][j-1] + pre[i-1][j] - pre[i-1][j-1] + a[i][j];
+            ll x;
+            cin >> x;
+            pre[i][j] = pre[i][j-1] + pre[i-1][j] - pre[i-1][j-1] + x;
         }
     }
     ll maxv = -LLINF;
     for (int k = 1; k <= n; k++) {
         for (int l = 1; l <= m; l++) {
             for (int i = 1; i <= n-k+1; i++) {
-            for (int j = 1; j <= m-l+1; j++) {
-                ll s = pre[i+k-1][j+l-1] - pre[i-1][j+l-1] - pre[i+l-1][j-1] + pre[i-1][j-1];
-                maxv = max(maxv,s);
+                for (int j = 1; j <= m-l+1; j++) {
+                    ll s = pre[i+k-1][j+l-1] - pre[i-1][j+l-1] - pre[i+k-1][j-1] + pre[i-1][j-1];
+                    maxv = max(maxv,s);
                 }
             }
         }

@@ -50,30 +50,29 @@ const int MOD = 1e9+7;
 const int INF_INT = 2e9;
 const ll INF_LL = 2e18;
 
+string sampleStr = "abcdefghijklmnopqrstuvwxyz";
+
 void makefile(ofstream &inp) {
-    int r = rand(1,100);
-    int l = rand(1,r);
-    inp << l << " " << r;
+    int n = 89792, k = 523976;
+    inp << n << " " << k << "\n";
+    for (int i = 1; i <= n; i++) {
+        inp << 523976 << " ";
+    }
 }
 
-void makefile1(ofstream &inp) {
-    int r = rand(1,1e5);
-    int l = rand(1,r);
-    inp << l << " " << r;
-}
 
 signed main() {
     cin.tie(nullptr)->sync_with_stdio(false);
-    int test = 40;
-    string input,output, testname = "";
+    int test = 1;
+    string input,output, testName = "test";
     for (int i = 1; i <= test; i++) {
-        //system(("mkdir test" + to_string(i)).c_str());
-        input  = "input" + to_string(i) + ".txt";
-        output = "output" + to_string(i) + ".txt";
+        string curTest = "test";
+        curTest += (i < 10 ? "0" : "") + to_string(i);
+        system(("mkdir " + curTest).c_str());
+        input  = curTest + "\\" + testName + ".INP";
+        output = curTest + "\\" + testName + ".OUT";
         ofstream Input(input.c_str());
-        if (i <= test / 2) {
-            makefile(Input);
-        } else makefile1(Input);
+        makefile(Input);
         Input.close();
         system(("chinh.exe < " + input + " > " + output).c_str());
     }
