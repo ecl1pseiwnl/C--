@@ -66,7 +66,7 @@ signed main() {
     }
     cin >> n;
     for (int i = 1; i <= n; i++) {cin >> a[i]; dp[i][0] = a[i];}
-    for (int j = 1; (1 << j) <= lg; j++) {
+    for (int j = 1; (1 << j) <= n; j++) {
         for (int i = 1; i +(1<<j)-1 <= n; i++) {
             dp[i][j] = min(dp[i][j-1], dp[i+(1<<(j-1))][j-1]);
         }
