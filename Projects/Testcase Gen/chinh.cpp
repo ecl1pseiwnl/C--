@@ -31,11 +31,9 @@ typedef map<int,int> mii;
 typedef vector<int> vi;
 typedef vector<pi> vii;
 typedef vector<mii> viii;
-const double PI = 3.141592653589793238463;
-#define bmask(x,i) (((x) >> (i)) & 1)
+ll __lcm(ll x, ll y) { return 1ll*(x / __gcd(x,y))*y;}
 #define ms(a,n) memset(a, n,sizeof(a))
 #define all(x) (x).begin(),(x).end()
-#define uniquev(v) sort(all(v)), (v).resize(unique(all(v)) - (v).begin())
 #define ins insert
 #define sz(x) (int)(x.size())
 #define name "TASK"
@@ -45,27 +43,76 @@ const double PI = 3.141592653589793238463;
 #define ep emplace_back
 #define pb push_back
 #define endl "\n"
-#define TIME (1.0 * clock() / CLOCKS_PER_SEC)
-ll __lcm(ll x, ll y) { return 1ll*(x / __gcd(x,y))*y;}
-const int EPS = -1e9;
-constexpr int MOD = 1e9+7;
-constexpr int32_t IINF = 0x3f3f3f3f;
-constexpr int64_t LLINF = 0x3f3f3f3f3f3f3f3f;
+const int MOD = 1e9+7;
+const int32_t IINF = 0x3f3f3f3f;
+const int64_t LLINF = 0x3f3f3f3f3f3f3f3f;
+
+struct edge{
+    int x,y;
+};
+
+const int N = 1e5+7;
+int n,m,q, par[N], sz[N], visited[N];
+vector<edge> v;
+vi ans;
+
+void makeset() {
+    for (int i = 1; i <= n; i++) {
+        par[i] = i;
+        sz[i] = 1;
+    }
+}
+
+int find_set(int u) {
+    if (u == par[u]) return u;
+    int p = find_set(par[u]);
+    return p;
+}
+
+void Union(int a, int b) {
+    a = find_set(a);
+    b = find_set(b);
+    if (a != b) {
+        if (sz[a] < sz[b]) swap(a,b);
+        par[b] = a;
+        sz[a] += sz[b];
+    }
+}
 
 signed main() {
     cin.tie(nullptr)->sync_with_stdio(false);
-    int n, maxv = -IINF;
-    cin >> n;
-    vi pre(n+2,0);
-    for (int i = 1,x; i <= n; i++) {
-        cin >> x;
-        pre[i] = pre[i-1] + x;
+    cin >> n >> m >> q;
+    for (int i = 0; i < m; i++) {
+        int x,y;
+        cin >> x >> y;
+        edge e;
+        e.x = x;
+        e.y = y;
+        v.ep(e);
+    }
+    makeset();
+    for (int i = 0; i < m; i++) {
+        edge e = v[i];
+        Union(e.x,e.y);
     }
     for (int i = 1; i <= n; i++) {
-        int x = pre[i] - pre[0], y = pre[n] - pre[i];
-        maxv = max({maxv,(x*(-1))+y,x+(y*(-1))});
+        int x = find_set(i);
+        if(!visited[x]) {
+            visited[x] = 1;
+            ans.ep(sz[x]);
+        }
     }
-    cout << maxv;
-    cerr << "\nTime elapsed: " << TIME << "s. \n";
+    int sz = ans.size();
+    vi f(sz);
+    sort(all(ans),greater<int>());
+    f[0] = ans[0];
+    for (int i = 1; i < sz;i++) f[i] = f[i-1] + ans[i];
+    while(q--) {
+        int x;
+        cin >> x;
+        auto it = lower_bound(all(f), x);
+        if (it != f.end()) cout << (it - f.begin()) << " ";
+    }
     return 0;
 }
+

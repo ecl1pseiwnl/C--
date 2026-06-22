@@ -50,22 +50,36 @@ const int MOD = 1e9+7;
 const int INF_INT = 2e9;
 const ll INF_LL = 2e18;
 
-string sampleStr = "abcdefghijklmnopqrstuvwxyz";
 
-void makefile(ofstream &inp) {
-    int n = 89792, k = 523976;
-    inp << n << " " << k << "\n";
-    for (int i = 1; i <= n; i++) {
-        inp << 523976 << " ";
+void makefile(ofstream& inp) {
+    int n = rand(1, 100);
+    int m = rand(0, min(100000LL, (ll)n*(n-1)/2));
+    int Q = rand(1, 100000);
+    inp << n << " " << m << " " << Q << endl;
+    set<pi> edges;
+    for (int i = 0; i < m; i++) {
+        int u = rand(1, n);
+        int v = rand(1, n);
+        while (u == v || edges.count({min(u,v), max(u,v)})) {
+            u = rand(1, n);
+            v = rand(1, n);
+        }
+        edges.insert({min(u,v), max(u,v)});
+        inp << u << " " << v << "\n";
+    }
+
+    for (int i = 0; i < Q; i++) {
+        int x = rand(1, n);
+        inp << x << (i < Q-1 ? " " : "");
     }
 }
 
 
 signed main() {
     cin.tie(nullptr)->sync_with_stdio(false);
-    int test = 1;
-    string input,output, testName = "test";
-    for (int i = 1; i <= test; i++) {
+    int test = 50;
+    string input,output, testName = "TRAVEL";
+    for (int i = 41; i <= test; i++) {
         string curTest = "test";
         curTest += (i < 10 ? "0" : "") + to_string(i);
         system(("mkdir " + curTest).c_str());
@@ -78,3 +92,95 @@ signed main() {
     }
     return 0;
 }
+
+/*
+vector<int> adj[100005];
+bool vis[100005];
+
+void dfs(int u, int n, vector<int> adj[]) {
+    vis[u] = true;
+    for (int v : adj[u]) {
+        if (!vis[v]) {
+            dfs(v, n, adj);
+        }
+    }
+}
+
+bool hasPathFrom1ToN(int n, vector<int> adj[]) {
+    memset(vis, false, sizeof(vis));
+    dfs(1, n, adj);
+    return vis[n];
+}
+
+void makefile(ofstream &inp, int testId) {
+    int n, m;
+
+    if (testId <= 10) {
+        n = rand(2, 100);
+        m = rand(1, min(500, n*(n-1)/2));
+    } else if (testId <= 30) {
+        n = rand(100, 1000);
+        m = rand(1000, min(10000, n*(n-1)/2));
+    } else {
+        n = rand(1000, 1e5);
+        m = rand(10000, 2e5);
+    }
+
+    m = min(m, n*(n-1)/2);
+
+    inp << n << " " << m << endl;
+
+    for (int i = 1; i <= n; i++) {
+        adj[i].clear();
+    }
+
+    set<pair<int,int>> edges;
+    vector<tuple<int,int,int>> edgeList;
+
+    vector<int> path;
+    path.pb(1);
+    int cur = 1;
+    while (cur != n) {
+        int next = rand(cur+1, n);
+        if (next > cur) {
+            path.pb(next);
+            cur = next;
+        }
+    }
+    for (int i = 0; i < sz(path)-1; i++) {
+        int x = path[i];
+        int y = path[i+1];
+        int z = rand(1, 1000);
+        edges.insert({x, y});
+        edgeList.pb({x, y, z});
+        adj[x].pb(y);
+    }
+
+    int remaining = m - sz(edgeList);
+    for (int i = 0; i < remaining; i++) {
+        int x = rand(1, n);
+        int y = rand(1, n);
+        while (x == y || edges.count({x, y}) > 0) {
+            x = rand(1, n);
+            y = rand(1, n);
+        }
+
+        int z = rand(1, 1000000000);
+        edges.insert({x, y});
+        edgeList.pb({x, y, z});
+        adj[x].pb(y);
+    }
+
+    if (!hasPathFrom1ToN(n, adj)) {
+        if (edges.count({1, n}) == 0) {
+            edgeList.pb({1, n, rand(1, 1000)});
+        }
+    }
+
+    shuffle(edgeList.begin(),edgeList.end(), rng);
+
+    for (auto [x, y, z] : edgeList) {
+        inp << x << " " << y << " " << z << endl;
+    }
+}
+*/

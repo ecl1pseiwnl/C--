@@ -32,28 +32,55 @@ typedef vector<int> vi;
 typedef vector<pi> vii;
 typedef vector<mii> viii;
 ll __lcm(ll x, ll y) { return 1ll*(x / __gcd(x,y))*y;}
+template<class X, class Y>
+    bool minimize(X &x, const Y &y) {
+        if (x > y) {
+            x = y;
+            return true;
+        } else return false;
+    }
+template<class X, class Y>
+    bool maximize(X &x, const Y &y) {
+        if (x < y) {
+            x = y;
+            return true;
+        } else return false;
+    }
+#define FOR(i, a, b) for (int i = (a), _b = (b); i <= _b; i++)
+#define FORD(i, b, a) for (int i = (b), _a = (a); i >= _a; i--)
+#define REP(i, n) for (int i = 0, _n = (n); i < _n; i++)
+#define FORE(i, v) for (__typeof((v).begin()) i = (v).begin(); i != (v).end(); i++)
+#define BIT(x,i) (((x) >> (i)) & 1)
 #define ms(a,n) memset(a, n,sizeof(a))
 #define all(x) (x).begin(),(x).end()
 #define uniquev(v) sort(all(v)), (v).resize(unique(all(v)) - (v).begin())
 #define ins insert
 #define sz(x) (int)(x.size())
-#define name "TASK"
 #define fi first
-#define sec second
+#define se second
 #define mp make_pair
 #define ep emplace_back
 #define pb push_back
 #define endl "\n"
+#define TIME (1.0 * clock() / CLOCKS_PER_SEC)
+#define name "TASK"
 constexpr int MOD = 1e9+7;
-constexpr int32_t IINF = 0x3f3f3f3f;
-constexpr int64_t LLINF = 0x3f3f3f3f3f3f3f3f;
+constexpr int IINF = 0x3f3f3f3f;
+constexpr ll LLINF = 0x3f3f3f3f3f3f3f3f;
+
+const int N = 1e5+7;
+int n,m,dp[N][N];
 
 signed main() {
     cin.tie(nullptr)->sync_with_stdio(false);
-    freopen("test.INP","r",stdin);
-    freopen("test1.OUT","w",stdout);
-    int a,b,c,d;
-    cin >> a >> b >> c >> d;
-    cout << min({a,b,c,d}) << " " << max({a,b,c,d});
+    cin >> n >> m;
+    dp[1][1] = 0;
+    for (int i = 1; i <= n; i++) {
+        for (int j = 1; j <= m; j++) {
+            dp[i][j] = dp[i-1][j] + dp[i][j-1];
+        }
+    }
+    cout << dp[n][m];
+    cerr << "\nTime elapsed: " << TIME << "s. \n";
     return 0;
 }
