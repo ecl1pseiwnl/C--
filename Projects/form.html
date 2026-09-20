@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+        <style>
+            body {
+                font-family: 'Open Sans', sans-serif;
+                margin: 0;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 100vh;
+                background-color: #1480da;
+            }
+
+            .setform {
+                background-image: url("https://image2url.com/r2/default/images/1772250898275-04ba89ad-8073-48d6-a169-e28722614f54.jpg");
+                background-size: cover;
+                background-position: center;
+                background-repeat: no-repeat;
+                padding: 20px;
+                border-radius: 8px;
+                width: 1050px;
+                height: 800px;
+                position: relative;
+                box-shadow: 0 0 20px rgba(0,0,0,0.5);
+                overflow: hidden; 
+            }
+
+            /* --- KỸ THUẬT LÀM MỜ NỀN --- */
+            .setform::before {
+                content: "";
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-image: inherit;
+                background-size: cover;
+                background-position: center;
+                filter: blur(10px); 
+                z-index: -1;
+            }
+            /* --------------------------- */
+
+            form {
+                position: relative;
+                width: 100%;
+                height: 100%;
+                z-index: 1;
+            }
+
+            .title {
+                font-family: "Montserrat", sans-serif;
+                font-weight: 900;
+                font-size: 2.5rem;
+                color: #1269cc;
+                margin: 0;
+                line-height: 1;
+                text-shadow: 2px 2px 0px rgba(255,255,255,0.3);
+                /* Adding a slight animation to the title as well */
+                animation: fadeInDown 1s ease-out;
+            }
+
+            /* --- SHATTERED GLASS FRAME --- */
+            .glassimgframe-container {
+                position: absolute;
+                top: 100px;
+                left: 250px;
+                width: 400px;
+                height: 250px;
+                background-color: #1269cc;
+                clip-path: polygon(0% 45%, 20% 48%, 5% 5%, 45% 10%, 55% 0%, 70% 8%, 100% 0%, 100% 50%, 80% 70%, 95% 100%, 50% 85%, 10% 100%, 25% 65%);
+                padding: 8px;
+                box-sizing: border-box;
+                animation: scaleIn 1s ease-out;
+            }
+
+            .glassimgframe-inner {
+                width: 100%;
+                height: 100%;
+                background-image: url('https://image2url.com/r2/default/images/1772385951338-c3f742e9-bb3d-477b-875d-c9de6efff916.png');
+                background-size: cover;
+                background-position: center;
+                clip-path: polygon(0% 45%, 20% 48%, 5% 5%, 45% 10%, 55% 0%, 70% 8%, 100% 0%, 100% 50%, 80% 70%, 95% 100%, 50% 85%, 10% 100%, 25% 65%);
+            }
+
+            /* --- ANIMATION KEYFRAMES --- */
+            @keyframes fadeInUp {
+                from {
+                    opacity: 0;
+                    transform: rotate(-10deg) translateY(20px);
+                }
+                to {
+                    opacity: 1;
+                    transform: rotate(-10deg) translateY(0);
+                }
+            }
+
+            @keyframes fadeInDown {
+                from {
+                    opacity: 0;
+                    transform: translateY(-20px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+
+            @keyframes scaleIn {
+                from {
+                    opacity: 0;
+                    transform: scale(0.9);
+                }
+                to {
+                    opacity: 1;
+                    transform: scale(1);
+                }
+            }
+
+            /* --- FORM FIELDS POSITIONING --- */
+            .form-group {
+                position: absolute;
+                display: flex;
+                align-items: center;
+                transform: rotate(-10deg);
+                width: 600px;
+                gap: 10px;
+                /* Apply animation to form groups */
+                opacity: 0;
+                animation: fadeInUp 0.8s ease-out forwards;
+            }
+
+            label.main-label {
+                font-family: "Montserrat", sans-serif;
+                font-weight: 900;
+                font-size: 1.1rem;
+                text-shadow: 1px 1px 0px #000;
+                white-space: nowrap;
+                width: 250px;
+                text-align: right;
+                margin-right: 20px;
+            }
+
+            input[type="text"], textarea {                
+                font-family: "Montserrat", sans-serif;
+                font-weight: 900;
+                background: rgba(255, 255, 255, 0.1);
+                border: 1px solid #51eefc;
+                border-radius: 4px;
+                padding: 8px;
+                color: #ffffff;
+                font-size: 1rem;
+                width: 300px;
+                backdrop-filter: blur(2px);
+                resize: none; 
+                box-sizing: border-box;
+            }
+
+            textarea {
+                height: 60px;
+                line-height: 1.2;
+                padding: 10px;
+            }
+
+            .option-label {
+                font-family: 'Montserrat', sans-serif;
+                font-weight: 900;
+                font-size: 1.1rem;
+                color: #ffffff;
+                display: flex;
+                align-items: center;
+                gap: 5px;
+                white-space: nowrap;
+            }
+
+            input[type="radio"], input[type="checkbox"] {
+                accent-color: #51eefc;
+                width: 18px;
+                height: 18px;
+                cursor: pointer;
+            }
+
+            /* Positioning each row and adding stagger delay */
+            .row-1 { top: 355px; left: 250px; animation-delay: 0.2s; }
+            .row-2 { top: 405px; left: 260px; animation-delay: 0.4s; }
+            .row-3 { top: 440px; left: 270px; animation-delay: 0.6s; }
+            .row-4 { top: 490px; left: 305px; animation-delay: 0.8s; }
+            .row-5 { top: 530px; left: 325px; animation-delay: 1.0s; }
+            .row-6 { top: 580px; left: 335px; animation-delay: 1.2s; }
+            .row-7 { top: 630px; left: 345px; animation-delay: 1.4s; }  
+            .row-8 { top: 700px; left: 358px; animation-delay: 1.6s; }
+        </style>
+    </head>
+    <body>
+        <div class="setform">
+            <form>
+                <p class="title">TÂM SỰ ĐÔI DÒNG</p>
+                <p class="title">HOÀNG LỘC</p>
+                
+                <div class="glassimgframe-container">
+                    <div class="glassimgframe-inner"></div>
+                </div>
+
+                <div class="form-group row-1">
+                    <label for="name" class="main-label" style="color: #51eefc;">HỌ TÊN ĐẦY ĐỦ:</label>
+                    <input type="text" id="name" name="name" value="Chu Hoàng Lộc" >
+                </div>
+                
+                <div class="form-group row-2">
+                    <label class="main-label" style="color: #81d9fc">GIỚI TÍNH:</label>
+                    <input type="radio" id="gender-male" name="gender" value="male"checked> 
+                    <label for="gender-male" class="option-label">Nam</label>
+                    
+                    <input type="radio" id="gender-female" name="gender" value="female"> 
+                    <label for="gender-female" class="option-label">Nữ</label>
+                </div>
+
+                <div class="form-group row-3">
+                    <label for="dob" class="main-label" style="color: #40e2ff">NGÀY SINH:</label>
+                    <input type="text" id="dob" name="dob" value="17/10/2008" >
+                </div>
+
+                <div class="form-group row-4">
+                    <label class="main-label" style="color: #23f0ff;">MÔN THỂ THAO YÊU THÍCH:</label>
+                    
+                    <input type="checkbox" id="sport1" name="sport" value="badminton"checked> 
+                    <label for="sport1" class="option-label">Cầu lông</label>
+                    
+                    <input type="checkbox" id="sport2" name="sport" value="volleyball"> 
+                    <label for="sport2" class="option-label">Bóng chuyền</label>
+                    
+                    <input type="checkbox" id="sport3" name="sport" value="soccer"> 
+                    <label for="sport3" class="option-label">Bóng đá</label>
+                </div>
+
+                <div class="form-group row-5">
+                    <label for="color" class="main-label" style="color: #44e3ff;">MÀU SẮC YÊU THÍCH:</label>
+                    <input type="text" id="color" name="color" value="Cyan" >
+                </div>
+
+                <div class="form-group row-6">
+                    <label for="subject" class="main-label" style="color: #71d7ff;">MÔN HỌC TỰ TIN:</label>
+                    <input type="text" id="subject" name="subject" value="Tin học, Hóa học" >
+                </div>
+                <div class="form-group row-7">
+                    <label for="subject" class="main-label" style="color: #71d7ff;">SỞ THÍCH kỲ QuẶc:</label>
+                    <textarea id="motto" name="motto" rows="4">Thích một thứ gì thì có thể ngồi tìm hiểu 5-8 tiếng không vì lý do gì cả.</textarea>
+                </div>
+                <div class="form-group row-8">
+                    <label for="motto" class="main-label" style="color: #54b2ff;">PHƯƠNG CHÂM SỐNG:</label>
+                    <textarea id="motto" name="motto" rows="4">"Mặc kệ mọi thứ xung quanh không liên quan mà sống."</textarea>
+                </div>
+            </form>
+        </div>
+    </body>
+</html>

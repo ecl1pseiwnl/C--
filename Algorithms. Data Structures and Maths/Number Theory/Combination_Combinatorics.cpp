@@ -1,0 +1,104 @@
+#include <bits/stdc++.h>
+using namespace std;
+void __print(int x) {cerr << x;}
+void __print(long x) {cerr << x;}
+void __print(long long x) {cerr << x;}
+void __print(unsigned x) {cerr << x;}
+void __print(unsigned long x) {cerr << x;}
+void __print(unsigned long long x) {cerr << x;}
+void __print(float x) {cerr << x;}
+void __print(double x) {cerr << x;}
+void __print(long double x) {cerr << x;}
+void __print(char x) {cerr << '\'' << x << '\'';}
+void __print(const char *x) {cerr << '\"' << x << '\"';}
+void __print(const string &x) {cerr << '\"' << x << '\"';}
+void __print(bool x) {cerr << (x ? "true" : "false");}
+template<typename T, typename V>
+void __print(const pair<T, V> &x) {cerr << '{'; __print(x.first); cerr << ','; __print(x.second); cerr << '}';}
+template<typename T>
+void __print(const T &x) {int f = 0; cerr << '{'; for (auto &i: x) cerr << (f++ ? "," : ""), __print(i); cerr << "}";}
+void _print() {cerr << "]\n";}
+template <typename T, typename... V>
+void _print(T t, V... v) {__print(t); if (sizeof...(v)) cerr << ", "; _print(v...);}
+#ifndef ONLINE_JUDGE
+#define debug(x...) cerr << "[" << #x << "] = ["; _print(x)
+#else
+#define debug(x...)
+#endif
+typedef long long ll;
+typedef pair<int,int> pi;
+typedef map<int,int> mii;
+typedef vector<int> vi;
+typedef vector<pi> vii;
+typedef vector<mii> viii;
+ll __lcm(ll x, ll y) { return 1ll*(x / __gcd(x,y))*y;}
+#define ms(a,n) memset(a, n,sizeof(a))
+#define all(x) (x).begin(),(x).end()
+#define uniquev(v) sort(all(v)), (v).resize(unique(all(v)) - (v).begin())
+#define ins insert
+#define sz(x) (int)(x.size())
+#define name "TASK"
+#define fi first
+#define sec second
+#define mp make_pair
+#define ep emplace_back
+#define pb push_back
+#define endl "\n"
+#define TIME (1.0 * clock() / CLOCKS_PER_SEC)
+constexpr int MOD = 1e9+7;
+constexpr int32_t IINF = 0x3f3f3f3f;
+constexpr int64_t LLINF = 0x3f3f3f3f3f3f3f3f;
+
+const int N = 1e6+7;
+int f[N],inv[N];
+ll binpow(ll a, ll b) {
+    ll ans = 1;
+    while(b) {
+        if (b&1) ans = ans * a % MOD;
+        a = a*a % MOD;
+        b /= 2;
+    }
+    return ans;
+}
+
+void prep() {
+    f[0] = 1;
+    for (int i = 1; i <= N; i++) {
+        f[i] = 1LL * f[i-1] * i % MOD;
+    }
+    inv[N] = binpow(f[N],MOD-2);
+    for (int i = N-1; i >= 1; i--) {
+        inv[i] = 1LL* inv[i+1] * (i+1) % MOD;
+    }
+}
+
+ll C(ll n, ll k) {
+    if (k > n) return 0;
+    return (1LL * f[n] * inv[k] % MOD) * inv[n-k] % MOD;
+}
+
+//https://wiki.vnoi.info/translate/he/Lucas-theorem
+ll lucas(ll n, ll k) {
+    if (k == 0) return 1;
+    if (k > n) return 0;
+    ll res = 1;
+    while(n > 0) {
+        res = 1LL * res * C(n % MOD, k % MOD) % MOD;
+        n /= MOD; k/= MOD;
+    }
+    return res;
+}
+
+signed main() {
+    cin.tie(nullptr)->sync_with_stdio(false);
+    if (fopen(name ".inp", "r")) {
+        freopen(name ".inp","r",stdin);
+        freopen(name ".out","w",stdout);
+    }
+    prep();
+    ll n,k;
+    cin >> n >> k;
+    cout << lucas(n,k);
+    cerr << "Time elapsed: " << TIME << "s. \n";
+    return 0;
+}
