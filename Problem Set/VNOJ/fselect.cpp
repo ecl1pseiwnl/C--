@@ -71,39 +71,29 @@ constexpr int IINF = 0x3f3f3f3f;
 constexpr ll LLINF = 0x3f3f3f3f3f3f3f3f;
 
 const int N = 2e5+7,lg = 24;
-int n,k,dp[N][lg], high[N], root;
-vi v[N];
-vector<pi> depth[N];
-pi order[N];
+int n,k,dp[2*N][lg], high[N], root, node[N], pos[N], cnt;
+vi v[N], g[N/2];
 
-void dfs(int u, int par) {
-    high[u] = high[par] + 1;
-    dp[u][0] = par;
-    FOR(i,1,lg-1) {
-        dp[u][i] = dp[dp[u][i-1]][i-1];
-    }
+void dfs(int u, int p) {
+    node[++cnt] = u;
+    pos[u] = cnt;
     for (auto it : v[u]) {
-        if (it == par) continue;
+        if (it == p) continue;
+        high[it] = high[u] + 1;
         dfs(it,u);
-
+        node[++cnt] = u;
     }
 }
 
+int cal(int x, int y) {
+    return (high[x] < high[y] ? x : y);
+}
+
 int lca(int x, int y) {
-    if (high[x] < high[y]) swap(x,y);
-    FORD(i,lg-1,0) {
-        if (high[dp[x][i]] >= high[y]) {
-            x = dp[x][i];
-        }
-    }
-    if (x == y) return x;
-    FORD(i,lg-1,0) {
-        if (dp[x][i] != dp[y][i]) {
-            x = dp[x][i];
-            y = dp[y][i];
-        }
-    }
-    return dp[x][0];
+    int nx = pos[x], ny = pos[y];
+    if (nx > ny) swap(nx,ny);
+    int k = 31 - __builtin_clz(ny-nx+1);
+    return cal(dp[nx][k],dp[ny-(1<<k)+1][k]);
 }
 
 ll calc(int x, int y) {
@@ -118,21 +108,31 @@ signed main() {
         cin >> x >> y;
         if (y == 0) {
             root = i;
-        } else {
-            v[i].pb(y);
-            v[y].pb(i);
         }
-        order[i] = {x,i};
+        v[y].pb(i);
+        v[i].pb(y);
+        g[x].pb(i);
     }
     dfs(root,0);
-    high[0] = -1;
-    FOR(i,1,n) {
-        depth[order[i].fi].pb({high[order[i].se],order[i].se});
+    FOR(i,1,cnt) {
+        dp[i][0] = node[i];
+    }
+    FOR(j,1,lg) {
+        for (int i = 1; i+(1<<j)-1 <= cnt; i++) {
+            dp[i][j] = cal(dp[i][j-1],dp[i+(1<<(j-1))][j-1]);
+        }
     }
     FOR(i,1,k) {
-        int x = max_element(all(depth[i])) - depth[i].begin();
-        debug(x,y,depth[i][x].se,depth[i][y].se);
-        cout << calc(depth[i][x].se,depth[i][y].se) << endl;
+        ll ans = 0, maxv = g[i][0];
+        for (auto it : g[i]) {
+            if (high[it] > high[maxv]) {
+                maxv = it;
+            }
+        }
+        for (auto it : g[i]) {
+            ans = max(ans,calc(it,maxv));
+        }
+        cout << ans << endl;
     }
     cerr << "\nTime elapsed: " << TIME << "s. \n";
     return 0;

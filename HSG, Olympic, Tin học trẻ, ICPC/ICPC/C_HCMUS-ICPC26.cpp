@@ -211,6 +211,7 @@ signed main() {
             cout << get(1,1,n,l,r) << endl;
         }
     }
+
     cerr << "\nTime elapsed: " << TIME << "s. \n";
     return 0;
 }
